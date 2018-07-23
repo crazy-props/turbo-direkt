@@ -14,7 +14,7 @@ export const initCars = () => (dispatch, getState) => {
         'value',
         (snapshot) => {
             (dispatch(
-                set(mapObjectToArray(snapshot.val()))
+                set(snapshot.val())
             ))
         }
     )
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
             const carsObject = action.carsValue
             return {
                 ...state,
-                cars: carsObject[carsObject.length -1]
+                cars: carsObject
             }
         default:
             return state

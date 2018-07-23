@@ -1,4 +1,3 @@
-
 export const mapObjectToArray = (obj) => (
     Object.entries(obj || {})
         .map(([key, value]) => (

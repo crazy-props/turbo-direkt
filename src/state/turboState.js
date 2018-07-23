@@ -14,8 +14,8 @@ export const initTurbo = () => (dispatch, getState) => {
         'value',
         (snapshot) => {
             (dispatch(
-                set(mapObjectToArray(snapshot.val()))
-            ))
+                set(snapshot.val()))
+            )
         }
     )
 }
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
             const turboObject = action.turboValue
             return {
                 ...state,
-                turbo: turboObject[turboObject.length -1]
+                turbo: turboObject
             }
         default:
             return state
