@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import AppBar from 'material-ui/AppBar';
+import AppBar from './../components/AppBar';
 
 class Dashboard extends Component {
     render() {

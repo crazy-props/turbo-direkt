@@ -1,9 +1,10 @@
 import {connect} from "react-redux";
-import React from 'react';
+import React, {Component} from 'react'
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
-import List from 'material-ui/List/List';
+import {List, ListItem} from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
 
 function handleClick() {
     alert('onClick triggered on the title component');
@@ -21,14 +22,14 @@ const buttonStyle = {
 
 const rightSection = (
     <div>
-        <List>
+      <List>
             <ListItem
                 disabled={true}
                 leftAvatar={
                     <Avatar src="images/uxceo-128.jpg" />
                 }
             >
-                Image Avatar
+                You are logged in
             </ListItem>
         </List>
         <FlatButton label="Logout" style={buttonStyle} onClick={handleClick}/>
