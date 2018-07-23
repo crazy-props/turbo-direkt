@@ -1,4 +1,6 @@
 import {db} from '../firebase'
+import {mapObjectToArray} from '../utils'
+
 
 const SET_CARS = 'exampleState/SET_CARS'
 
@@ -6,16 +8,6 @@ export const set = (carsValue) => ({
     type: SET_CARS,
     carsValue
 })
-
-export const mapObjectToArray = (obj) => (
-    Object.entries(obj || {})
-        .map(([key, value]) => (
-            typeof value === 'object' ?
-                { ...value, key }
-                :
-                { key, value }
-        ))
-)
 
 export const initCars = () => (dispatch, getState) => {
     db.ref(`/cars/`).on(

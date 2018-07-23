@@ -1,4 +1,5 @@
 import {db} from '../firebase'
+import {mapObjectToArray} from '../utils'
 
 const SET_TURBINES = 'exampleState/SET_TURBINES'
 
@@ -7,15 +8,6 @@ export const set = (turboValue) => ({
     turboValue
 })
 
-export const mapObjectToArray = (obj) => (
-    Object.entries(obj || {})
-        .map(([key, value]) => (
-            typeof value === 'object' ?
-                { ...value, key }
-                :
-                { key, value }
-        ))
-)
 
 export const initTurbo = () => (dispatch, getState) => {
     db.ref(`/turbo/`).on(
