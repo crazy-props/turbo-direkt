@@ -8,7 +8,9 @@ import App from './App';
 
 ReactDOM.render(
     <Provider store={store}>
+        <LoginForm>
         <App/>
+        </LoginForm>
     </Provider>,
     document.getElementById('root')
 )
