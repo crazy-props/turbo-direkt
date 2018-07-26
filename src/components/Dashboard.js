@@ -11,7 +11,7 @@ class Dashboard extends Component {
             <MuiThemeProvider>
                 <div className="App">
                     <AppBarMini/>
-
+<LoginForm/>
                 </div>
             </MuiThemeProvider>
         )
