@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-
+import {
+    Table,
+    TableBody,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
 
 class ListOfTurbines extends Component {
     render() {
@@ -8,41 +15,41 @@ class ListOfTurbines extends Component {
         return this.props.turbo === null ?
             <span>Loading .... </span>
             :
-            <table>
-                <thead>
-                    <tr>
-                        <th>Turbo OEM</th>
-                        <th>Compressor Wheel</th>
-                        <th>Turbine Wheel</th>
-                        <th>Bearing Housing</th>
-                        <th>Back Plate</th>
-                        <th>Heat Shield</th>
-                        <th>Actuator</th>
-                        <th>Noozles</th>
-                        <th>Gasket Kit</th>
-                        <th>Repair Kit</th>
-                        <th>KODE CHRA</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHeaderColumn>Turbo OEM</TableHeaderColumn>
+                        <TableHeaderColumn>Compressor Wheel</TableHeaderColumn>
+                        <TableHeaderColumn>Turbine Wheel</TableHeaderColumn>
+                        <TableHeaderColumn>Bearing Housing</TableHeaderColumn>
+                        <TableHeaderColumn>Back Plate</TableHeaderColumn>
+                        <TableHeaderColumn>Heat Shield</TableHeaderColumn>
+                        <TableHeaderColumn>Actuator</TableHeaderColumn>
+                        <TableHeaderColumn>Noozles</TableHeaderColumn>
+                        <TableHeaderColumn>Gasket Kit</TableHeaderColumn>
+                        <TableHeaderColumn>Repair Kit</TableHeaderColumn>
+                        <TableHeaderColumn>KODE CHRA</TableHeaderColumn>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
                     {this.props.turbo.map(
                         x =>
-                            <tr>
-                                <td>{x.turboOEM}</td>
-                                <td>{x.compressor_wheel}</td>
-                                <td>{x.turbine_wheel}</td>
-                                <td>{x.bearing_housing}</td>
-                                <td>{x.back_plate}</td>
-                                <td>{x.heat_shield}</td>
-                                <td>{x.nozzles}</td>
-                                <td>{x.actuator}</td>
-                                <td>{x.gasket_kit}</td>
-                                <td>{x.repair_kit}</td>
-                                <td>{x.KODE_CHRA}</td>
-                            </tr>
+                            <TableRow key={x.key}>
+                                <TableRowColumn>{x.turboOEM}</TableRowColumn>
+                                <TableRowColumn>{x.compressor_wheel}</TableRowColumn>
+                                <TableRowColumn>{x.turbine_wheel}</TableRowColumn>
+                                <TableRowColumn>{x.bearing_housing}</TableRowColumn>
+                                <TableRowColumn>{x.back_plate}</TableRowColumn>
+                                <TableRowColumn>{x.heat_shield}</TableRowColumn>
+                                <TableRowColumn>{x.nozzles}</TableRowColumn>
+                                <TableRowColumn>{x.actuator}</TableRowColumn>
+                                <TableRowColumn>{x.gasket_kit}</TableRowColumn>
+                                <TableRowColumn>{x.repair_kit}</TableRowColumn>
+                                <TableRowColumn>{x.KODE_CHRA}</TableRowColumn>
+                            </TableRow>
                     )}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
 
     }
 }
