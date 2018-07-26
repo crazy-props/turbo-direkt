@@ -1,13 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-
+import AppBarMini from "../miniappbar";
+import LoginForm from "../LoginForm";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import './../App.css';
 
 class Dashboard extends Component {
     render() {
         return (
-            <div>
-                this is dashboard
-            </div>
+            <MuiThemeProvider>
+                <div className="App">
+                    <AppBarMini/>
+                    <LoginForm/>
+                </div>
+            </MuiThemeProvider>
         )
     }
 }

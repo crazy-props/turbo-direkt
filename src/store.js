@@ -2,10 +2,15 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import turboState, {initTurbo} from './state/turboState'
 import carsState, {initCars} from './state/carsState'
+import createUser from './state/createUser'
+import forgotPassword from './state/forgotPassword'
+
 
 export const reducer = combineReducers({
     turboState,
-    carsState
+    carsState,
+    createUser,
+    forgotPassword
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
