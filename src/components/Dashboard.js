@@ -11,7 +11,7 @@ class Dashboard extends Component {
             <MuiThemeProvider>
                 <div className="App">
                     <AppBarMini/>
-<LoginForm/>
+                    <LoginForm/>
                 </div>
             </MuiThemeProvider>
         )
@@ -19,8 +19,7 @@ class Dashboard extends Component {
 }
 
 
-const mapStateToProps = state => ({
-})
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({})
 

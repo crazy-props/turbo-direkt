@@ -1,7 +1,16 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
+import _ from 'lodash';
 
 class ListOfCars extends Component {
+
+
+    sortNameUp() {
+        this.state.carsState.cars({
+            cars:
+                _.orderBy(this.props.cars, ['Mark'], ['asc', 'desc'])
+        })
+    }
     render() {
         return this.props.cars === null ?
             <span>Loading .... </span>
@@ -22,7 +31,7 @@ class ListOfCars extends Component {
                 {this.props.cars.map(
                     el =>
                         <tr>
-                            <td>{el.mark}</td>
+                            <td>{el.mark.sortNameUp}</td>
                             <td>{el.model}</td>
                             <td>{el.date}</td>
                             <td>{el.capacity}</td>
