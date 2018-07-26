@@ -10,7 +10,7 @@ export const set = (carsValue) => ({
 })
 
 export const initCars = () => (dispatch, getState) => {
-    db.ref(`/cars/`).on(
+    db.ref(`/car_model/`).on(
         'value',
         (snapshot) => {
             (dispatch(
@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
 
         case SET_CARS:
             const carsObject = action.carsValue
+            console.log(carsObject)
             return {
                 ...state,
                 cars: carsObject
