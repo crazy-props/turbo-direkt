@@ -1,17 +1,42 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 
-
 class ListOfCars extends Component {
     render() {
-        return (
-            <div>
-                {console.log(this.props.cars)}
-            </div>
-        )
-    }
-}
+        return this.props.cars === null ?
+            <span>Loading .... </span>
+            :
+            <table>
+                <thead>
+                <tr>
+                    <th>Mark</th>
+                    <th>Model</th>
+                    <th>Date</th>
+                    <th>Capacity</th>
+                    <th>No.</th>
+                    <th>Power</th>
+                    <th>Turbo OEM</th>
+                </tr>
+                </thead>
+                <tbody>
+                {this.props.cars.map(
+                    el =>
+                        <tr>
+                            <td>{el.mark}</td>
+                            <td>{el.model}</td>
+                            <td>{el.date}</td>
+                            <td>{el.capacity}</td>
+                            <td>{el.no}</td>
+                            <td>{el.power}</td>
+                            <td>{el.turbo_OEM}</td>
+                        </tr>
+                )}
+                </tbody>
+            </table>
 
+    }
+
+}
 
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
