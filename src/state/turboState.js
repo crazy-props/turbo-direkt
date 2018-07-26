@@ -21,7 +21,7 @@ export const initTurbo = () => (dispatch, getState) => {
 }
 
 const initialState = {
-    turbo: []
+    turbo: null
 }
 
 export default (state = initialState, action) => {

@@ -21,7 +21,7 @@ export const initCars = () => (dispatch, getState) => {
 }
 
 const initialState = {
-    cars: []
+    cars: null
 }
 
 export default (state = initialState, action) => {
