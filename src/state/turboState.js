@@ -1,5 +1,5 @@
-import {db} from '../firebase'
-import {mapObjectToArray} from '../utils'
+import { db } from '../firebase'
+import { mapObjectToArray } from '../utils'
 
 const SET_TURBINES = 'exampleState/SET_TURBINES'
 
@@ -14,7 +14,7 @@ export const initTurbo = () => (dispatch, getState) => {
         'value',
         (snapshot) => {
             (dispatch(
-                set(snapshot.val()))
+                set(mapObjectToArray(snapshot.val())))
             )
         }
     )

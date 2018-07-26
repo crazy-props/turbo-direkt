@@ -1,5 +1,5 @@
-import {db} from '../firebase'
-import {mapObjectToArray} from '../utils'
+import { db } from '../firebase'
+import { mapObjectToArray } from '../utils'
 
 
 const SET_CARS = 'exampleState/SET_CARS'
@@ -10,11 +10,11 @@ export const set = (carsValue) => ({
 })
 
 export const initCars = () => (dispatch, getState) => {
-    db.ref(`/cars/`).on(
+    db.ref(`/car_model/`).on(
         'value',
         (snapshot) => {
             (dispatch(
-                set(snapshot.val())
+                set(mapObjectToArray(snapshot.val()))
             ))
         }
     )
