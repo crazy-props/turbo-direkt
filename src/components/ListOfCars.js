@@ -37,18 +37,15 @@ class ListOfCars extends Component {
                             <td>{el.power}</td>
                             <td>
                                <tr>
-                                   <ol>
+
                                 { el.turbo_OEM && el.turbo_OEM.length?
                                     el.turbo_OEM.filter(function (a, b, c) {
                                     return c.indexOf(a) === b;
-                                    }).map(el=><li><SingleTurbine
-                                        el={el}/>
-
-
-
-                            </li>):
+                                    }).map(el=><a href="#"><SingleTurbine
+                                        el={el}/></a>
+                            ):
                                     el.turbo_OEM
-                                } </ol></tr>
+                                } </tr>
                             </td>
                         </tr>
                 )}
