@@ -1,0 +1,61 @@
+.App {
+}
+.tooltip{
+  display:inline-flex;
+justify-content: space-between;
+  margin-top: 0.80rem !important;
+  min-width: 20px;
+  font-size: 0.55rem;
+  padding-right: 2rem;
+  padding-left: 0rem;
+}
+
+
+
+.tooltip>button{
+  text-align: center;
+
+  font-size: 0.55rem;
+  padding: auto;
+  margin-top: 0;
+  margin-bottom: auto;
+
+}
+
+.autocomplete{
+  margin-left:50%
+}
+.autodraver{
+  margin-left:40%
+}
+
+.tooltip{
+ display:inline-flex;
+  justify-content: space-around;
+  margin-top: 0.80rem !important;
+  min-width: 20px;
+  font-size: 0.55rem;
+  padding-right: 2rem;
+  padding-left: 0rem;
+}
+.logintop{
+    background-image: url("./../src/img/turbo.jpg") ;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+
+}
+.insideformdiv{
+margin-left:20%;
+margin-right:20%}
+.ploginform{
+    cursor: pointer;
+    font-size: 0.60rem;
+}
+.registersection{
+    display: flex;
+    justify-content: space-evenly;
+}
+.ptoplogin{
+    font-size: 1rem;
+}
