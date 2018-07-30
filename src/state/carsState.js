@@ -14,7 +14,7 @@ export const initCars = () => (dispatch, getState) => {
         'value',
         (snapshot) => {
             (dispatch(
-                set(mapObjectToArray(snapshot.val()).sort((a,b)=> a.mark>b.mark))
+                set(mapObjectToArray(snapshot.val()))
                 ))
         }
     )
