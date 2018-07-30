@@ -3,9 +3,14 @@ import thunk from 'redux-thunk'
 import turboState, {initTurbo} from './state/turboState'
 import carsState, {initCars} from './state/carsState'
 import partsState, {myInit} from './state/partsState'
+import createUser from './state/createUser'
+import forgotPassword from './state/forgotPassword'
+
 
 export const reducer = combineReducers({
     turboState,
+    createUser,
+    forgotPassword,
     carsState,
     partsState
 })
