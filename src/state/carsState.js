@@ -29,7 +29,6 @@ export default (state = initialState, action) => {
 
         case SET_CARS:
             const carsObject = action.carsValue
-            console.log(carsObject)
             return {
                 ...state,
                 cars: carsObject

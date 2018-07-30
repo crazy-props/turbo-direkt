@@ -11,6 +11,7 @@ class ListOfParts extends Component {
                         <table>
                             <thead>
                             <tr>
+                                <th>group</th>
                                 <th>part</th>
                                 <th>amount</th>
                             </tr>
@@ -19,6 +20,9 @@ class ListOfParts extends Component {
                             {this.props.parts.map((part, index) => {
                                 return (
                                     <tr key={index}>
+                                        <td>
+                                            {part.group}
+                                        </td>
                                         <td>
                                             {part.part}
                                         </td>
