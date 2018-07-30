@@ -8,6 +8,7 @@ export const set = (turboValue) => ({
     turboValue
 })
 
+
 export const initTurbo = () => (dispatch, getState) => {
     db.ref(`/turbo/`).on(
         'value',
@@ -18,7 +19,7 @@ export const initTurbo = () => (dispatch, getState) => {
 }
 
 const initialState = {
-    turbo: []
+    turbo: null
 }
 
 export default (state = initialState, action) => {

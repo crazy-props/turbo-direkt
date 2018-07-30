@@ -1,4 +1,6 @@
-import {db} from '../firebase'
+import { db } from '../firebase'
+import { mapObjectToArray } from '../utils'
+
 
 const SET_CARS = 'exampleState/SET_CARS'
 
@@ -12,7 +14,7 @@ export const initCars = () => (dispatch, getState) => {
         'value',
         (snapshot) => {
             (dispatch(
-                set(snapshot.val())
+                set(mapObjectToArray(snapshot.val()))
             ))
         }
     )
@@ -27,6 +29,7 @@ export default (state = initialState, action) => {
 
         case SET_CARS:
             const carsObject = action.carsValue
+            console.log(carsObject)
             return {
                 ...state,
                 cars: carsObject
