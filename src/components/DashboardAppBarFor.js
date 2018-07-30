@@ -1,8 +1,8 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import TransitionsTooltips from "./tooltipforminiappbar";
-import logo from "./../src/img/logo.png"
-import AutoComplete from "./autocomplete";
+import TransitionsTooltips from "./AppBarToolTipFor";
+import logo from "../img/logo.png"
+import AutoComplete from "./AppbarAutocompleteSearch";
 
 function handleClick() {
     alert('Whaaaaaaaaaaazzzaaaaaa');

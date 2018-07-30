@@ -4,9 +4,9 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {red500,blue500} from 'material-ui/styles/colors';
-import logo from "./../src/img/logo.png";
-import CreateUser from "./CreateUser";
-import ForgotPass from "./ForgotPass";
+import logo from "../img/logo.png";
+import CreateUser from "./FormCreateNewUser";
+import ForgotPass from "./ForgotenPasswordByUser";
 
 const style = {
     height: "75%",
@@ -39,7 +39,7 @@ const style = {
 
 }
 
-class LoginForm extends Component {
+class FormLoginOnStartup extends Component {
     handleClick=()=>{alert("500")}
     state = {
         loggedin: false,
@@ -132,4 +132,4 @@ function mapStateToProps(state) {
     return {};
 }
 
-export default LoginForm;
+export default FormLoginOnStartup;

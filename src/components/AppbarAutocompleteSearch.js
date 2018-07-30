@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
-import initCars from './../src/state/carsState'
+import initCars from '../state/carsState'
 
 const styl={
     fontSize:"0.6rem",

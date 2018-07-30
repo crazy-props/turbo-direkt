@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addEmail, addPassword, addRetypedPassword, sendUserToDatabase} from "./../src/state/createUser";
+import {addEmail, addPassword, addRetypedPassword, sendUserToDatabase} from "../state/createUser";
 import Divider from '@material-ui/core/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {red500,blue500} from 'material-ui/styles/colors';
-import logo from "./../src/img/logo.png";
+import logo from "../img/logo.png";
 
 const style = {
     height: "75%",
@@ -40,7 +40,7 @@ const style = {
 }
 
 
-const CreateUser = (props) => (
+const FormCreateNewUser = (props) => (
 
     <div className="logintop">
         <br/>
@@ -111,4 +111,4 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUser)
+export default connect(mapStateToProps, mapDispatchToProps)(FormCreateNewUser)

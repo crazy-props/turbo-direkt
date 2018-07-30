@@ -5,7 +5,7 @@ import {store} from './store'
 
 import './index.css';
 import App from './App';
-import LoginForm from "./LoginForm";
+import FormLoginOnStartup from "./components/FormLoginOnStartup";
 
 ReactDOM.render(
     <Provider store={store}>
