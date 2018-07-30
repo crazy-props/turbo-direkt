@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import _ from 'lodash';
+import SingleTurbine from "./SingleTurbine";
+
 class ListOfCars extends Component {
 
     render() {
@@ -39,7 +41,11 @@ class ListOfCars extends Component {
                                 { el.turbo_OEM && el.turbo_OEM.length?
                                     el.turbo_OEM.filter(function (a, b, c) {
                                     return c.indexOf(a) === b;
-                                    }).map(el=><li><a href="{el}">{el}</a>
+                                    }).map(el=><li><SingleTurbine
+                                        el={el}/>
+
+
+
                             </li>):
                                     el.turbo_OEM
                                 } </ol></tr>
