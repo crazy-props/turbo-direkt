@@ -10,7 +10,7 @@ import forgotPassword from './state/forgotPassword'
 export const reducer = combineReducers({
     turboState,
     createUser,
-    forgotPassword
+    forgotPassword,
     carsState,
     partsState
 })
