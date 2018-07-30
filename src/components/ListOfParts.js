@@ -6,7 +6,33 @@ class ListOfParts extends Component {
     render() {
         return (
             <div>
-                {console.log(this.props.parts)}
+                {
+                    this.props.parts ?
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>part</th>
+                                <th>amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {this.props.parts.map((part, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>
+                                            {part.part}
+                                        </td>
+                                        <td>
+                                            {part.amount}
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                            }
+                            </tbody>
+                        </table>
+
+                        : "loading"}
             </div>
         )
     }
@@ -18,8 +44,7 @@ const mapStateToProps = state => ({
 
 })
 
-const mapDispatchToProps = dispatch => ({
-})
+const mapDispatchToProps = dispatch => ({})
 
 export default connect(
     mapStateToProps,
