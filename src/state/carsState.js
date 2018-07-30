@@ -10,18 +10,18 @@ export const set = (carsValue) => ({
 })
 
 export const initCars = () => (dispatch, getState) => {
-    db.ref(`/car_model/`).on(
+    db.ref(`/car_model/`).once(
         'value',
         (snapshot) => {
             (dispatch(
-                set(mapObjectToArray( snapshot.val()))
-            ))
+                set(mapObjectToArray(snapshot.val()).sort((a,b)=> a.mark>b.mark))
+                ))
         }
     )
 }
 
 const initialState = {
-    cars: []
+    cars: null
 }
 
 export default (state = initialState, action) => {
