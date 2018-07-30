@@ -4,7 +4,7 @@ export default class SingleTurbine extends Component {
     render() {
         return (
             <div>
-                    <ul><li>{this.props.el}</li></ul>
+                    <ul><li>/{this.props.el}//</li></ul>
             </div>
         )
     }

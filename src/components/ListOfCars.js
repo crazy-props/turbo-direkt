@@ -41,7 +41,7 @@ class ListOfCars extends Component {
                                 { el.turbo_OEM && el.turbo_OEM.length?
                                     el.turbo_OEM.filter(function (a, b, c) {
                                     return c.indexOf(a) === b;
-                                    }).map(el=><a href="#"><SingleTurbine
+                                    }).map(el=><a href="http://localhost:3000/turbines"><SingleTurbine
                                         el={el}/></a>
                             ):
                                     el.turbo_OEM
