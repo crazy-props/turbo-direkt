@@ -17,22 +17,7 @@ class ListOfParts extends Component {
                             </tr>
                             </thead>
                             <tbody>
-                            {this.props.parts.map((part, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>
-                                            {part.group}
-                                        </td>
-                                        <td>
-                                            {part.part}
-                                        </td>
-                                        <td>
-                                            {part.amount}
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                            }
+
                             </tbody>
                         </table>
 
