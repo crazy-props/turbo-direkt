@@ -1,20 +1,24 @@
-import {db} from '../firebase'
-import {mapObjectToArray} from '../utils'
+import {db} from "../firebase";
+import {mapObjectToArray} from "../utils";
 
 const GET_PARTS = "partsState/GET_PARTS"
 
-export const getParts = (AC) => ({
+export const getParts = (parts) => ({
     type: GET_PARTS,
-    AC
+    parts
 })
-export const getACParts = () => (getState, dispatch) => {
-    const turbines = getState().turboState.turbo
-    console.log(turbines)
+
+export const myInit = () => (dispatch, getState) => {
+    db.ref(`/parts/`).on(
+        'value',
+        (snapshot) => {
+            (dispatch(getParts(mapObjectToArray(snapshot.val())))
+            )
+        })
 }
 
-
 const initialState = {
-    AC_part: []
+    parts: null
 }
 
 export default (state = initialState, action) => {
@@ -22,7 +26,7 @@ export default (state = initialState, action) => {
         case GET_PARTS :
             return {
                 ...state,
-                AC_part: action.AC
+                parts: action.parts
             }
         default:
             return state

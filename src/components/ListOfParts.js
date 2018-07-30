@@ -2,11 +2,11 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 
 
-class ListOfTurbines extends Component {
+class ListOfParts extends Component {
     render() {
         return (
             <div>
-                {console.log(this.props.turbo)}
+                {console.log(this.props.parts)}
             </div>
         )
     }
@@ -14,7 +14,8 @@ class ListOfTurbines extends Component {
 
 
 const mapStateToProps = state => ({
-    turbo: state.turboState.turbo,
+    parts: state.partsState.parts,
+
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -23,4 +24,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ListOfTurbines)
+)(ListOfParts)

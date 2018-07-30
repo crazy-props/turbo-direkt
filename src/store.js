@@ -2,7 +2,7 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import turboState, {initTurbo} from './state/turboState'
 import carsState, {initCars} from './state/carsState'
-import partsState from './state/partsState'
+import partsState, {myInit} from './state/partsState'
 
 export const reducer = combineReducers({
     turboState,
@@ -22,3 +22,4 @@ export const store = createStore(
 
 store.dispatch(initTurbo())
 store.dispatch(initCars())
+store.dispatch(myInit())

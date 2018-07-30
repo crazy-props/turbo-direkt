@@ -1,6 +1,5 @@
 import {db} from '../firebase'
-import {mapObjectToArray} from '../utils'
-import {getACParts} from './partsState'
+import {mapObjectToArray} from "../utils";
 
 const SET_TURBINES = 'exampleState/SET_TURBINES'
 
@@ -9,17 +8,13 @@ export const set = (turboValue) => ({
     turboValue
 })
 
-
 export const initTurbo = () => (dispatch, getState) => {
     db.ref(`/turbo/`).on(
         'value',
         (snapshot) => {
-            (dispatch(
-                set(snapshot.val()))
+            (dispatch(set(mapObjectToArray(snapshot.val())))
             )
-        }, () => dispatch(getACParts())
-    );
-
+        })
 }
 
 const initialState = {
