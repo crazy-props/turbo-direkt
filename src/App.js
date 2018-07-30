@@ -20,7 +20,7 @@ class App extends Component {
                         />
 
                         <Route
-                            path={'/turbines'}g
+                            path={'/turbines'}
                             component={() => (
                                 <ListOfTurbines/>)}
                         />
