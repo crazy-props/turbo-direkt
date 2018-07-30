@@ -54,7 +54,8 @@ const mapStateToProps = state => ({
 	turbo: state.turboState.turbo,
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+})
 
 export default connect(
 	mapStateToProps,
