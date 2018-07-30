@@ -1,5 +1,5 @@
-import {db} from '../firebase'
-import {mapObjectToArray} from "../utils";
+import { db } from '../firebase'
+import { mapObjectToArray } from "../utils"
 
 const SET_TURBINES = 'exampleState/SET_TURBINES'
 
@@ -24,7 +24,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-
         case SET_TURBINES:
             const turboObject = action.turboValue
             return {

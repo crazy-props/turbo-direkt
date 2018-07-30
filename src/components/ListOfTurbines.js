@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import style from '../style'
 import { PartsColumn } from './ListOfTurbiness_SingleView'
 
-
 class ListOfTurbines extends Component {
 	render() {
 
@@ -45,10 +44,8 @@ class ListOfTurbines extends Component {
 					)}
 				</tbody>
 			</table>
-
 	}
 }
-
 
 const mapStateToProps = state => ({
 	turbo: state.turboState.turbo,

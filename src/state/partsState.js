@@ -1,5 +1,5 @@
-import {db} from "../firebase";
-import {mapObjectToArray} from "../utils";
+import { db } from "../firebase"
+import { mapObjectToArray } from "../utils"
 
 const GET_PARTS = "partsState/GET_PARTS"
 
@@ -23,7 +23,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_PARTS :
+        case GET_PARTS:
             return {
                 ...state,
                 parts: action.parts
