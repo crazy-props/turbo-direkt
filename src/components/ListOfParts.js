@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
+import {addAmount, subtractAmount} from '../state/partsState';
 
 
 class ListOfParts extends Component {
@@ -70,21 +71,24 @@ class ListOfParts extends Component {
                                         {arrayForHeadings[i]}
                                     </td>
                                 </tr>
-                                {this.props[`${stateElement}`].map((part, index) => {
+                                {this.props[`${stateElement}`].map((partInStateArray, index) => {
                                     return (
-                                        <tr id={`${part.part}`}
+                                        <tr id={`${partInStateArray.part}`}
                                             key={Math.random()}
                                             style={{display: this.state[`${stateElement}`]}}
                                         >
-                                            <td>{part.part}</td>
-                                            <td>
-                                                <button>-</button>
-                                            </td>
-                                            <td>{part.amount}</td>
+                                            <td>{partInStateArray.part}</td>
                                             <td>
                                                 <button
-                                                onClick={()=>console.log('aa')}
-                                                >+</button>
+                                                    onClick={() => this.props.subtractAmount(partInStateArray.part)}
+                                                >-</button>
+                                            </td>
+                                            <td>{partInStateArray.amount}</td>
+                                            <td>
+                                                <button
+                                                    onClick={() => this.props.addAmount(partInStateArray.part)}
+                                                >+
+                                                </button>
                                             </td>
                                         </tr>
                                     )
@@ -119,7 +123,10 @@ const mapStateToProps = state => ({
 
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+    addAmount: (objectToAdd) => dispatch(addAmount(objectToAdd)),
+    subtractAmount: (objectToSubtract) => dispatch(subtractAmount(objectToSubtract))
+    })
 
 export default connect(
     mapStateToProps,

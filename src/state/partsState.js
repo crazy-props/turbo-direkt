@@ -23,6 +23,36 @@ export const myInit = () => (dispatch, getState) => {
         })
 }
 
+export const addAmount = (objecter) => (dispatch, getState) => {
+    let findKey = getState().partsState.parts.find(x => {
+        if (x.part === objecter)
+            return x.key
+    })
+    let xAmount
+
+    let previousAmount = getState().partsState.parts.find(x => {
+        if (x.part === objecter)
+            return xAmount = x.amount
+    })
+    db.ref(`/parts/${findKey.key}/amount`).set(xAmount + 1)
+}
+
+export const subtractAmount = (objecter) => (dispatch, getState) => {
+    let findKey = getState().partsState.parts.find(x => {
+        if (x.part === objecter)
+            return x.key
+    })
+    let xAmount
+
+    let previousAmount = getState().partsState.parts.find(x => {
+        if (x.part === objecter)
+            return xAmount = x.amount
+    })
+
+        return db.ref(`/parts/${findKey.key}/amount`).set(xAmount - 1)
+
+}
+
 const initialState = {
     parts: null,
     actuators: null,
