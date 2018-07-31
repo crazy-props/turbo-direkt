@@ -30,6 +30,7 @@ class App extends Component {
                             component={() => (
                                 <ListOfCars/>)}
                         />
+
                         <Route
                             path={'/parts'}
                             component={() => (
@@ -37,7 +38,6 @@ class App extends Component {
                         />
 
                     </div>
-
                 </Router>
             </div>
         )

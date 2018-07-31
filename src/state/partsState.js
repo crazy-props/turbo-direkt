@@ -88,7 +88,6 @@ export default (state = initialState, action) => {
                 if (part.group === "turbine_wheel") {
                     turbine_wheel.push(part)
                 }
-
             })
             return {
                 ...state,
