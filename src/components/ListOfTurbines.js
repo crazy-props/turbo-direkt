@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import style from '../style'
-import { PartsColumn } from './ListOfTurbiness_SingleView'
+import PartsColumn from './ListOfTurbiness_SingleView'
 
 class ListOfTurbines extends Component {
 	render() {
-
-		return this.props.turbo === null ?
+		
+		return this.props.turbo ===null && this.props.part === null ?
 			<span>Loading .... </span>
 			:
 			<table>
@@ -30,7 +30,7 @@ class ListOfTurbines extends Component {
 						x =>
 							<tr style={style.table_body}>
 								<td>{x.turboOEM}</td>
-								<PartsColumn parts={x.compressor_wheel} />
+								<PartsColumn parts={x.compressor_wheel}  />
 								<PartsColumn parts={x.turbine_wheel} />
 								<PartsColumn parts={x.bearing_housing} />
 								<PartsColumn parts={x.back_plate} />
@@ -39,7 +39,7 @@ class ListOfTurbines extends Component {
 								<PartsColumn parts={x.actuator} />
 								<PartsColumn parts={x.gasket_kit} />
 								<PartsColumn parts={x.repair_kit} />
-								<td>{x.KODE_CHRA}</td>
+								<PartsColumn parts={x.KODE_CHRA} />
 							</tr>
 					)}
 				</tbody>
@@ -49,6 +49,7 @@ class ListOfTurbines extends Component {
 
 const mapStateToProps = state => ({
 	turbo: state.turboState.turbo,
+	part: state.partsState.parts,
 })
 
 const mapDispatchToProps = dispatch => ({

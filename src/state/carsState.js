@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case SET_CARS:
             const carsObject = action.carsValue
-            console.log(carsObject)
+            // console.log(carsObject)
             return {
                 ...state,
                 cars: carsObject

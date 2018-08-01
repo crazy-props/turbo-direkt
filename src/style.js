@@ -13,6 +13,6 @@ export default {
     table_body: {
         background: styleColors.standard,
         color: 'white',
-        fontSize: '14px'
+        fontSize: '12px'
     },
 }

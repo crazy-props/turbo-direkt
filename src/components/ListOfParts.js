@@ -6,7 +6,7 @@ class ListOfParts extends Component {
     render() {
         return (
             <div>
-                {console.log(this.props.parts)}
+                {/* {console.log(this.props.parts)} */}
             </div>
         )
     }
