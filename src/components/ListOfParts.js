@@ -5,6 +5,7 @@ import {addAmount, subtractAmount} from '../state/partsState';
 
 class ListOfParts extends Component {
     state = {
+        basicSearchInput: '',
         actuators: 'none',
         back_plates: 'none',
         bearing_housings: 'none',
@@ -51,6 +52,13 @@ class ListOfParts extends Component {
 
         return (
             <div>
+                <input
+                type={"text"}
+                value={this.state.basicSearchInput}
+                onChange={(event => this.setState({basicSearchInput: event.target.value}))}
+                >
+
+                </input>
                 {this.props.actuators ?
                     <table>
                         <thead>
@@ -72,6 +80,7 @@ class ListOfParts extends Component {
                                     </td>
                                 </tr>
                                 {this.props[`${stateElement}`].map((partInStateArray, index) => {
+                                    if(partInStateArray.part.includes(this.state.basicSearchInput))
                                     return (
                                         <tr id={`${partInStateArray.part}`}
                                             key={Math.random()}
