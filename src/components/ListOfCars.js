@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import _ from 'lodash';
 import SingleTurbine from "./SingleTurbine";
-
+import Spinner from "./spinner"
 class ListOfCars extends Component {
 
     render() {
@@ -10,7 +10,7 @@ class ListOfCars extends Component {
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'],['asc'])
         return this.props.cars === null ?
-            <span>Loading .... </span>
+            <Spinner/>
             :
             <table className="table table-striped">
                 <thead>
