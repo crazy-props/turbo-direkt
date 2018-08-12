@@ -30,7 +30,7 @@ export const addAmount = (objecter) => (dispatch, getState) => {
     })
     let xAmount
 
-    let previousAmount = getState().partsState.parts.find(x => {
+    getState().partsState.parts.find(x => {
         if (x.part === objecter)
             return xAmount = x.amount
     })
@@ -43,7 +43,7 @@ export const subtractAmount = (objecter) => (dispatch, getState) => {
             return x.key
     })
     let xAmount
-    let previousAmount = getState().partsState.parts.find(x => {
+    getState().partsState.parts.find(x => {
         if ((x.part === objecter) && (x.amount > 0))
             return xAmount = x.amount-1
             else return xAmount = 0

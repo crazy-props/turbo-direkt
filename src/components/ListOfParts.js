@@ -57,8 +57,8 @@ class ListOfParts extends Component {
                 value={this.state.basicSearchInput}
                 onChange={(event => this.setState({basicSearchInput: event.target.value}))}
                 >
-
                 </input>
+                <p><button>dodaj część</button></p>
                 {this.props.actuators ?
                     <table>
                         <thead>
