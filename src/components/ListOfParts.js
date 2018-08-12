@@ -1,7 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {addAmount, subtractAmount} from '../state/partsState';
-
+import {addAmount, subtractAmount, findKeyToDelete} from '../state/partsState';
+import AddPart from './AddPart'
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Row, Col} from 'react-grid-system';
+import Dialog from 'material-ui/Dialog';
 
 class ListOfParts extends Component {
     state = {
@@ -15,7 +19,8 @@ class ListOfParts extends Component {
         KODE_CHRAs: 'none',
         nozzles: 'none',
         repair_kits: 'none',
-        turbine_wheels: 'none'
+        turbine_wheels: 'none',
+        isDialogOpen: false
     }
 
     functionForToggler(statePart) {
@@ -27,7 +32,23 @@ class ListOfParts extends Component {
         }
     }
 
+    handleOpen() {
+        this.setState({isDialogOpen: true})
+    }
+
+    handleClose() {
+        this.setState({isDialogOpen: false})
+    }
+
     render() {
+        // const actions = [
+        //     <FlatButton
+        //         label="Ok"
+        //         primary={true}
+        //         onClick={() => this.handleClose()}
+        //     />,
+        // ];
+
         let myArrayForState = ['actuators',
             'back_plates',
             'bearing_housings',
@@ -52,13 +73,39 @@ class ListOfParts extends Component {
 
         return (
             <div>
-                <input
-                type={"text"}
-                value={this.state.basicSearchInput}
-                onChange={(event => this.setState({basicSearchInput: event.target.value}))}
-                >
-                </input>
-                <p><button>dodaj część</button></p>
+                <Row>
+                    <Col sm={6}>
+                        <TextField
+                            id={'idForTextField'}
+                            fullWidth={true}
+                            floatingLabelText={'Search for parts'}
+                            type={"text"}
+                            value={this.state.basicSearchInput}
+                            onChange={(event => {
+                                this.setState({basicSearchInput: event.target.value})
+                                console.log(this.props.findKeyToDelete(event.target.value))
+                            })}
+                        />
+                    </Col>
+                    <Col sm={6}>
+                        <RaisedButton
+                            style={{width: '50%', marginTop: '14px'}}
+                            onClick={() => this.handleOpen()}
+                        >
+                            dodaj część
+                        </RaisedButton>
+                    </Col>
+                </Row>
+                <div>
+                    <Dialog
+                        title="Dodaj nową część"
+                        // actions={actions}
+                        open={this.state.isDialogOpen}
+                        onRequestClose={() => this.handleClose()}
+                    >
+                        <AddPart/>
+                    </Dialog>
+                </div>
                 {this.props.actuators ?
                     <table>
                         <thead>
@@ -80,27 +127,28 @@ class ListOfParts extends Component {
                                     </td>
                                 </tr>
                                 {this.props[`${stateElement}`].map((partInStateArray, index) => {
-                                    if(partInStateArray.part.includes(this.state.basicSearchInput))
-                                    return (
-                                        <tr id={`${partInStateArray.part}`}
-                                            key={Math.random()}
-                                            style={{display: this.state[`${stateElement}`]}}
-                                        >
-                                            <td>{partInStateArray.part}</td>
-                                            <td>
-                                                <button
-                                                    onClick={() => this.props.subtractAmount(partInStateArray.part)}
-                                                >-</button>
-                                            </td>
-                                            <td>{partInStateArray.amount}</td>
-                                            <td>
-                                                <button
-                                                    onClick={() => this.props.addAmount(partInStateArray.part)}
-                                                >+
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    )
+                                    if (partInStateArray.part.includes(this.state.basicSearchInput))
+                                        return (
+                                            <tr id={`${partInStateArray.part}`}
+                                                key={Math.random()}
+                                                style={{display: this.state[`${stateElement}`]}}
+                                            >
+                                                <td>{partInStateArray.part}</td>
+                                                <td>
+                                                    <button
+                                                        onClick={() => this.props.subtractAmount(partInStateArray.part)}
+                                                    >-
+                                                    </button>
+                                                </td>
+                                                <td>{partInStateArray.amount}</td>
+                                                <td>
+                                                    <button
+                                                        onClick={() => this.props.addAmount(partInStateArray.part)}
+                                                    >+
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
                                 })
                                 }
                                 </tbody>
@@ -134,8 +182,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addAmount: (objectToAdd) => dispatch(addAmount(objectToAdd)),
-    subtractAmount: (objectToSubtract) => dispatch(subtractAmount(objectToSubtract))
-    })
+    subtractAmount: (objectToSubtract) => dispatch(subtractAmount(objectToSubtract)),
+    findKeyToDelete: (objectToFind) => dispatch(findKeyToDelete(objectToFind))
+})
 
 export default connect(
     mapStateToProps,
