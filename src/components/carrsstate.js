@@ -32,7 +32,7 @@ class Count extends React.Component {
         }
             this.updateSearch=this.updateSearch.bind(this)
     }
-    componentDidMount () {
+    componentDidUpdate (state) {
         // only update chart if the data has changed
         if (this.state.getDataAgain===true) {
             equal = (this.state.search);
