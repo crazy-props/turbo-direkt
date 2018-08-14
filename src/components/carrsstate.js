@@ -46,7 +46,9 @@ class Count extends React.Component {
         }
 
     }
-    updateSearch(){
+    updateSearch(event){
+        this.setState({search:event.target.value, getDataAgain:true
+        });
         this.forceUpdate()
     }
     Search(){
