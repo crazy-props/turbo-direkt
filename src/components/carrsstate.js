@@ -9,7 +9,7 @@ var content=[];
 function fckSort() {
     var carsRef = db.ref("car_model");
 
-    carsRef.orderByChild('mark').startAt(`${equal}`).limitToFirst(150).on('value', showData);
+    carsRef.orderByChild('mark').startAt(`${equal}`).limitToFirst(10).on('value', showData);
 
     function showData(items) {
 
@@ -31,18 +31,28 @@ class Count extends React.Component {
             getDataAgain:false
         }
             this.updateSearch=this.updateSearch.bind(this)
+        this.Search=this.Search.bind(this)
+
+
     }
     componentDidUpdate (state) {
         // only update chart if the data has changed
         if (this.state.getDataAgain===true) {
             equal = (this.state.search);
             fckSort();
+
+
         }
 
     }
     updateSearch(event){
         this.setState({search:event.target.value, getDataAgain:true
         });
+        this.forceUpdate()
+    }
+    Search(){
+
+        this.forceUpdate()
     }
 
     render() {
@@ -62,6 +72,7 @@ class Count extends React.Component {
                     <th className="filterable-cell">Turbo OEM</th>
                 </tr>
                 <input type='text' onChange={this.updateSearch} value={this.state.search}/>
+                <button onClick={this.Search}>Update</button>
                 </thead>
                 <tbody>
                 {filter.map((el) =>
