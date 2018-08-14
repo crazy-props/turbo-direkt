@@ -38,6 +38,7 @@ class Count extends React.Component {
     componentDidUpdate (state) {
         // only update chart if the data has changed
         if (this.state.getDataAgain===true) {
+            content=[];
             equal = (this.state.search);
             fckSort();
 
@@ -45,9 +46,7 @@ class Count extends React.Component {
         }
 
     }
-    updateSearch(event){
-        this.setState({search:event.target.value, getDataAgain:true
-        });
+    updateSearch(){
         this.forceUpdate()
     }
     Search(){
