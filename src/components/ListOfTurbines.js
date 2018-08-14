@@ -34,7 +34,7 @@ class ListOfTurbines extends Component {
 								<PartsColumn parts={x.turbine_wheel} />
 								<PartsColumn parts={x.bearing_housing} />
 								<PartsColumn parts={x.back_plate} />
-								<PartsColumn parts={x.heat_shiel} />
+								<PartsColumn parts={x.heat_shield} />
 								<PartsColumn parts={x.nozzles} />
 								<PartsColumn parts={x.actuator} />
 								<PartsColumn parts={x.gasket_kit} />
