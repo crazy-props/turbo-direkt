@@ -77,24 +77,45 @@
     position: fixed;
     top: 50%;
     left: 50%;
-
 }
 
 .spinnerImage {
 
     height: 5%;
     width: 5%;
-    animation: turboSpinner 1.3s infinite linear;
+    animation: turboSpinner 0.8s infinite;
 
 
 }
 @keyframes turboSpinner {
     from {
-        -webkit-transform: rotate(-360deg);
+        -webkit-transform: rotate(-279deg);
     }
     to {
-        -webkit-transform: rotate(359deg);
+        -webkit-transform: rotate(180deg);
     }
 }
 
+.loading {
+    background: inherit;
+    position: fixed;
+    top: 48.5%;
+    left: 52.5%;
+    animation: fadeInFromNone 0.5s ease-out;
+}
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
 
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}

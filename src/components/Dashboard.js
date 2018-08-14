@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import AppBarMini from "./DashboardAppBarFor";
 import './../App.css';
+import Count from "./carrsstate";
 
 class Dashboard extends Component {
     render() {
@@ -9,6 +10,7 @@ class Dashboard extends Component {
 
                 <div className="App">
                     <AppBarMini/>
+                    <Count/>
                 </div>
 
         )

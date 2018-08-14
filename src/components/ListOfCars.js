@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import _ from 'lodash';
 import SingleTurbine from "./SingleTurbine";
 import Spinner from "./spinner"
+import {fckSort} from "../firebase";
+
 class ListOfCars extends Component {
 
     render() {
@@ -25,8 +27,8 @@ class ListOfCars extends Component {
                 </tr>
                 </thead>
                 <tbody>
-
-                {cars.map(
+fckSort()
+              /*  {cars.map(
                     (el) =>
                         <tr>
                             <td>{el.mark}</td>
@@ -48,7 +50,9 @@ class ListOfCars extends Component {
                                 } </tr>
                             </td>
                         </tr>
-                )}
+                )}*/
+
+
                 </tbody>
             </table>
 
