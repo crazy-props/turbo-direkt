@@ -32,14 +32,14 @@ class Count extends React.Component {
         }
             this.updateSearch=this.updateSearch.bind(this)
     }
-    componentDidUpdate (prevProps, prevState) {
-    // only update chart if the data has changed
-    if (prevProps.getDataAgain !== this.props.getDataAgain) {
-        equal=(this.state.search);
-        fckSort();
-}
-}
+    componentDidMount () {
+        // only update chart if the data has changed
+        if (this.state.getDataAgain===true) {
+            equal = (this.state.search);
+            fckSort();
+        }
 
+    }
     updateSearch(event){
         this.setState({search:event.target.value, getDataAgain:true
         });
@@ -74,7 +74,6 @@ class Count extends React.Component {
                             <td>{el.power}</td>
                             <td>
                                 <tr>
-
                                     {el.turbo_OEM && el.turbo_OEM.length ?
                                         el.turbo_OEM.filter(function (a, b, c) {
                                             return c.indexOf(a) === b;
@@ -86,7 +85,6 @@ class Count extends React.Component {
                             </td>
                         </tr>
                     )
-
                 }
                 </tbody>
             </table>
