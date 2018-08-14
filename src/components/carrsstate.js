@@ -3,11 +3,13 @@ import {db} from '../firebase'
 import SingleTurbine from "./SingleTurbine";
 import Spinner from "./spinner"
 
+var equal="";
+
 var content=[];
 function fckSort() {
     var carsRef = db.ref("car_model");
 
-    carsRef.orderByChild('mark').limitToFirst(150).on('value', showData);
+    carsRef.orderByChild('mark').startAt(`${equal}`).limitToFirst(150).on('value', showData);
 
     function showData(items) {
 
@@ -20,23 +22,33 @@ function fckSort() {
     }
 }fckSort()
 
-
-
 class Count extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             list: content,
-            search:''}
+            search:'',
+            getDataAgain:false
+        }
             this.updateSearch=this.updateSearch.bind(this)
     }
+    componentDidUpdate (prevProps, prevState) {
+    // only update chart if the data has changed
+    if (prevProps.getDataAgain !== this.props.getDataAgain) {
+        fckSort();
+}
+}
+
     updateSearch(event){
-        this.setState({search:event.target.value
-        });console.log(this.state.search)
+        this.setState({search:event.target.value, getDataAgain:true
+        });
+        equal=(this.state.search);
+
     }
+
     render() {
-        let filter=this.state.list.filter(el=>el.mark.toLowerCase().indexOf(this.state.search)!==-1
-    ||el.turbo_OEM.toString().indexOf(this.state.search)!==-1
+        let filter=this.state.list.filter(el=>/*el.mark.toLowerCase().indexOf(this.state.search)!==-1
+    ||*/el.turbo_OEM.toString().indexOf(this.state.search)!==-1
         );
         return (
             <table className="table table-striped">
