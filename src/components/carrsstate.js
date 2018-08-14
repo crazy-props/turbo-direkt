@@ -4,7 +4,6 @@ import SingleTurbine from "./SingleTurbine";
 import Spinner from "./spinner"
 
 var equal="";
-
 var content=[];
 function fckSort() {
     var carsRef = db.ref("car_model");
@@ -42,17 +41,15 @@ class Count extends React.Component {
             equal = (this.state.search);
             fckSort();
 
-
         }
 
     }
     updateSearch(event){
         this.setState({search:event.target.value, getDataAgain:true
         });
-        this.forceUpdate()
+
     }
     Search(){
-
         this.forceUpdate()
     }
 
