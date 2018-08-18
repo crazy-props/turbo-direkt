@@ -77,7 +77,7 @@ const initialState = {
     KODE_CHRAs: null,
     nozzles: null,
     repair_kits: null,
-    turbine_wheels: null
+    turbine_wheels: null,
 }
 
 export default (state = initialState, action) => {
@@ -132,6 +132,7 @@ export default (state = initialState, action) => {
                 if (part.group === "turbine_wheel") {
                     turbine_wheel.push(part)
                 }
+
             })
             return {
                 ...state,
@@ -144,7 +145,8 @@ export default (state = initialState, action) => {
                 KODE_CHRAs: KODE_CHRA,
                 nozzles: nozzle,
                 repair_kits: repair_kit,
-                turbine_wheels: turbine_wheel
+                turbine_wheels: turbine_wheel,
+
             }
         default:
             return state

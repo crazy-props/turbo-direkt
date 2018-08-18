@@ -34,7 +34,6 @@ class AddPart extends Component {
 
 
     render() {
-
         return (
             <Container>
                 <Row>

@@ -7,7 +7,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './index.css';
 import App from './App';
-import FormLoginOnStartup from "./components/FormLoginOnStartup";
 
 ReactDOM.render(
     <MuiThemeProvider>
