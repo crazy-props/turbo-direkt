@@ -5,7 +5,7 @@ import carsState, {initCars} from './state/carsState'
 import partsState, {myInit} from './state/partsState'
 import createUser from './state/createUser'
 import forgotPassword from './state/forgotPassword'
-import shoppingListState, {initList} from './state/shoppingList'
+import shoppingListState from './state/shoppingList'
 
 
 export const reducer = combineReducers({
@@ -30,4 +30,3 @@ export const store = createStore(
 store.dispatch(initTurbo())
 store.dispatch(initCars())
 store.dispatch(myInit())
-store.dispatch(initList())//temporary -> put to shoppingList component when it's ready

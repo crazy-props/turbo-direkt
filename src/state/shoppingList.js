@@ -20,12 +20,18 @@ export const initList = () => (dispatch, getState) => {
 }
 
 export const addProductToShoppingList = (partsName) => (dispatch, getState) => {
-    let checkIfOnTheList = getState().shoppingListState.products.find(x => x.value === partsName)
-    console.log(checkIfOnTheList)
-    if(checkIfOnTheList === undefined){
+    if (getState().shoppingListState.product === null) {
         db.ref(`/shoppingList/`).push(partsName)
+    } else {
+        let checkIfOnTheList = getState().shoppingListState.products.find(x => x.value === partsName)
+        if (checkIfOnTheList === undefined) {
+            db.ref(`/shoppingList/`).push({value: partsName})
+        }
+        else {
+            console.log("such product is already on the list")
+        }
     }
-    else {console.log("such product is already on the list")}
+
 }
 
 export const removeProductFromShoppingList = (partsName) => (dispatch, getState) => {
@@ -33,24 +39,68 @@ export const removeProductFromShoppingList = (partsName) => (dispatch, getState)
         if (x.value === partsName)
             return x.key
     })
-    if(findKey !== undefined){
-    db.ref(`/shoppingList/${findKey.key}`).remove()
+    if (findKey !== undefined) {
+        db.ref(`/shoppingList/${findKey.key}`).remove()
     }
-    else{console.log("there's no such product on shopping list")}
+    else {
+        console.log("there's no such product on shopping list")
+    }
+}
+export const removeMultipleFromShoppingList = (partslist) => (dispatch, getState) => {
+    partslist.map(element => {
+        let findKey = getState().shoppingListState.products.find(x => {
+            if (x.value === element)
+                return x.key
+        })
+        if (findKey !== undefined) {
+            db.ref(`/shoppingList/${findKey.key}`).remove()
+        }
+    })
+
+}
+
+
+export const addToOrdered = (partsName) => (dispatch, getState) => {
+    let findKey = getState().shoppingListState.products.find(x => {
+        if (x.value === partsName)
+            return x.key
+    })
+    if (findKey !== undefined) {
+        db.ref(`/shoppingList/${findKey.key}`).set({value: partsName, ordered: true})
+    }
+    else {
+        console.log("there's no such product on shopping list")
+    }
 }
 
 
 const initialState = {
-    products: null
+    products: null,
+    ordered: null,
+    productsToOrder: null,
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
 
         case GET_SHOPPING_LIST:
+            let list = action.productsToBuy
+            let ordered = list.filter(product => {
+                if (product.ordered === true){
+                    return product
+                }
+            })
+            let toOrder = list.filter(product => {
+                if (product.ordered === undefined){
+                    return product
+                }
+            })
+            console.log('ordered', ordered, 'toOrder', toOrder)
             return {
                 ...state,
-                products: action.productsToBuy
+                products: action.productsToBuy,
+                ordered: ordered,
+                productsToOrder: toOrder
             }
         default:
             return state

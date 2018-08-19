@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {addAmount, subtractAmount, findKeyToDelete} from '../state/partsState';
-import {addProductToShoppingList} from '../state/shoppingList';
+import {addProductToShoppingList, initList} from '../state/shoppingList';
 import AddPart from './AddPart'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -11,17 +11,12 @@ import Dialog from 'material-ui/Dialog';
 class ListOfParts extends Component {
     state = {
         basicSearchInput: '',
-        actuators: 'none',
-        back_plates: 'none',
-        bearing_housings: 'none',
-        compressor_wheels: 'none',
-        gasket_kits: 'none',
-        heat_shields: 'none',
-        KODE_CHRAs: 'none',
-        nozzles: 'none',
-        repair_kits: 'none',
-        turbine_wheels: 'none',
         isDialogOpen: false
+    }
+    componentDidMount() {
+        if (this.props.products !== undefined) {
+            this.props.initList()
+        }
     }
 
     handleOpen() {
@@ -166,6 +161,7 @@ class ListOfParts extends Component {
 
 const mapStateToProps = state => ({
     parts: state.partsState.parts,
+    products: state.shoppingListState.products,
     actuators: state.partsState.actuators,
     back_plates: state.partsState.back_plates,
     bearing_housings: state.partsState.bearing_housings,
@@ -180,6 +176,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addAmount: (objectToAdd) => dispatch(addAmount(objectToAdd)),
+    initList: () => dispatch(initList()),
     subtractAmount: (objectToSubtract) => dispatch(subtractAmount(objectToSubtract)),
     findKeyToDelete: (objectToFind) => dispatch(findKeyToDelete(objectToFind)),
     addProductToShoppingList: (part) => dispatch(addProductToShoppingList(part)),
