@@ -190,7 +190,7 @@
 
 a{
     text-decoration: none;
-    color:red;
+    color:royalblue;
 }
 .turboList ul{
     list-style: none;
@@ -203,8 +203,8 @@ a{
     font-weight: normal;
     font-size: small;
     text-align: left;
-    table-layout: fixed;
-    border-collapse: collapse;
+    position: sticky;
+    top: 0;
 }
 .carsTableHead th{
     font-weight: lighter;
