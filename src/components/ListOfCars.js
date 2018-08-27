@@ -13,6 +13,7 @@ class ListOfCars extends Component {
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
         let filter = cars.filter(el => el.mark.toLowerCase().indexOf(this.state.searchTerm) !== -1||el.mark.indexOf(this.state.searchTerm) !== -1
+            ||el.turbo_OEM.toString().indexOf(this.state.search)!==-1
         );
         return filter === null ?
             <Spinner/>
