@@ -213,3 +213,11 @@ a{
 .lastTh{
     text-align: center;
 }
+.partsSearchRow2{
+    background: white;
+    -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+    position: fixed;
+    width: 102%;
+    top: 10%;
+}
