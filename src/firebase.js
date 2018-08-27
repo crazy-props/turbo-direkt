@@ -1,4 +1,4 @@
-// import firebase from 'firebase'
+import firebase from 'firebase'
 
 // Initialize Firebase
 const config = {
@@ -12,10 +12,5 @@ const config = {
 
 firebase.initializeApp(config)
 
-const auth = firebase.auth()
- const database = firebase.database()
- const db = firebase.database()
-
-
-
-db.ref('/car_model').on('value', s=>(console.log(s.val())))
+export const auth = firebase.auth()
+export const db = firebase.database()
