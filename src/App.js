@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import ListOfTurbines from './components/carrsstate'
+import ListOfTurbines from './components/ListOfTurbines'
 import ListOfCars from './components/ListOfCars'
 import ListOfParts from './components/ListOfParts'
 import Dashboard from './components/Dashboard'

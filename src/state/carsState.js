@@ -14,7 +14,7 @@ export const initCars = () => (dispatch, getState) => {
         (snapshot) => {
             (dispatch(
                 set(mapObjectToArray(snapshot.val()))
-                ))
+            ))
         }
     )
 }
