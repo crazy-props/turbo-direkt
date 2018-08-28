@@ -63,7 +63,6 @@ export default (state = initialState, action) => {
                 //
             }
             else {
-
                 return auth.createUserWithEmailAndPassword(state.email, state.password)
                     .catch(error => {
                         alert(error.message,error.code)

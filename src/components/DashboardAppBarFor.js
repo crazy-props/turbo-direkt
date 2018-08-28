@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import TransitionsTooltips from "./AppBarToolTipFor";
 import logo from "../img/logo.png"
-import AutoComplete from "./AppbarAutocompleteSearch";
+
 
 function handleClick() {
     alert('Whaaaaaaaaaaazzzaaaaaa');
@@ -25,7 +25,6 @@ const styles = {
 };
 const AppBarMini = () => (
     <AppBar
-        title={<AutoComplete/>}
         iconElementLeft={<div><img style={styles.logo}src={logo} onClick={handleClick}/></div>}
         iconElementRight={<TransitionsTooltips style={styles.tooltip}/>}
         style={styles.div}

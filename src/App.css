@@ -1,61 +1,224 @@
 .App {
 }
-.tooltip{
-  display:inline-flex;
-justify-content: space-between;
-  margin-top: 0.80rem !important;
-  min-width: 20px;
-  font-size: 0.55rem;
-  padding-right: 2rem;
-  padding-left: 0rem;
+
+.tooltip {
+    display: inline-flex;
+    justify-content: space-between;
+    margin-top: 0.80rem !important;
+    min-width: 20px;
+    font-size: 0.55rem;
+    padding-right: 2rem;
+    padding-left: 0rem;
 }
 
+.tooltip > button {
+    text-align: center;
 
-
-.tooltip>button{
-  text-align: center;
-
-  font-size: 0.55rem;
-  padding: auto;
-  margin-top: 0;
-  margin-bottom: auto;
+    font-size: 0.55rem;
+    padding: auto;
+    margin-top: 0;
+    margin-bottom: auto;
 
 }
 
-.autocomplete{
-  margin-left:50%
-}
-.autodraver{
-  margin-left:40%
+.autocomplete {
+    margin-left: 50%
 }
 
-.tooltip{
- display:inline-flex;
-  justify-content: space-around;
-  margin-top: 0.80rem !important;
-  min-width: 20px;
-  font-size: 0.55rem;
-  padding-right: 2rem;
-  padding-left: 0rem;
+.autodraver {
+    margin-left: 40%
 }
-.logintop{
-    background-image: url("./../src/img/turbo.jpg") ;
+
+.tooltip {
+    display: inline-flex;
+    justify-content: space-around;
+    margin-top: 0.80rem !important;
+    min-width: 20px;
+    font-size: 0.55rem;
+    padding-right: 2rem;
+    padding-left: 0rem;
+}
+
+.logintop {
+    background-image: url("./../src/img/turbo.jpg");
     background-size: cover;
     width: 100%;
     height: 100%;
 
 }
-.insideformdiv{
-margin-left:20%;
-margin-right:20%}
-.ploginform{
+
+.insideformdiv {
+    margin-left: 20%;
+    margin-right: 20%
+}
+
+.ploginform {
     cursor: pointer;
     font-size: 0.60rem;
 }
-.registersection{
+
+.registersection {
     display: flex;
     justify-content: space-evenly;
 }
-.ptoplogin{
+
+.ptoplogin {
     font-size: 1rem;
+}
+
+.spinnercontainer {
+    height: 100%;
+    width: 100%;
+
+}
+
+.spinner {
+    background: inherit;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
+.spinnerImage {
+
+    height: 5%;
+    width: 5%;
+    animation: turboSpinner 0.8s infinite;
+
+
+}
+@keyframes turboSpinner {
+    from {
+        -webkit-transform: rotate(-279deg);
+    }
+    to {
+        -webkit-transform: rotate(180deg);
+    }
+}
+
+.loading {
+    background: inherit;
+    position: fixed;
+    top: 48.5%;
+    left: 52.5%;
+    animation: fadeInFromNone 0.5s ease-out;
+}
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+.partsSearchRow{
+    background: white;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+.partsTableDiv{
+    margin-top: 100px;
+}
+
+.partsTable {
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto;
+}
+
+.partsTh, .partsTd {
+    text-align: left;
+    padding: 8px;
+}
+
+.partsTr:nth-child(even){background-color: #f2f2f2}
+
+.tdName{
+    width: 20%;
+
+}
+
+.tdAmount, .tdAdd, .tdSubtract{
+    width: 5%;
+    text-align: center;
+}
+
+.tdShoppingCart{
+    width: 10%
+}
+
+.partsButton {
+    background-color: #2196f3; /* Green */
+    border: none;
+    border-radius: 10%;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 2px 1px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.partsButton:hover {
+    box-shadow: 0 8px 11px 0 rgba(0,0,0,0.24),0 11px 30px 0 rgba(0,0,0,0.19);
+}
+
+.carsTable{
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto;
+    font-size: 14px;
+
+}
+.trOne:nth-child(even) {background: #FFF}
+.trOne:nth-child(odd) {background: #F2F2F2}
+.turboList{font-size: smaller}
+
+a{
+    text-decoration: none;
+    color:royalblue;
+}
+.turboList ul{
+    list-style: none;
+    text-decoration: none;
+    text-align: start;
+
+}
+.carsTableHead{
+   background-color: darkgrey;
+    font-weight: normal;
+    font-size: small;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+.carsTableHead th{
+    font-weight: lighter;
+
+}
+.lastTh{
+    text-align: center;
+}
+.partsSearchRow2{
+    background: white;
+    -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+    position: fixed;
+    width: 102%;
+    top: 10%;
 }
