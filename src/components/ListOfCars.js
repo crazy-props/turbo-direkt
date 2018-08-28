@@ -9,7 +9,6 @@ class ListOfCars extends Component {
     state = {
         searchTerm: '',
     }
-
     render() {
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
@@ -18,8 +17,6 @@ class ListOfCars extends Component {
                 car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
                 car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm) !== -1)
             )
-
-
         return filter === null ?
             <Spinner />
             : <div>

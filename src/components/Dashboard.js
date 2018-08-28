@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import AppBarMini from "./DashboardAppBarFor";
 import './../App.css';
-import Count from "./test";
 
 
 class Dashboard extends Component {
@@ -11,13 +10,12 @@ class Dashboard extends Component {
 
                 <div className="App">
                     <AppBarMini/>
-                    <Count/>
+
                 </div>
 
         )
     }
 }
-
 
 const mapStateToProps = state => ({})
 const mapDispatchToProps = dispatch => ({})
