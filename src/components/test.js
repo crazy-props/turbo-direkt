@@ -19,7 +19,6 @@ function fckSort() {
             content.push(child.val())
 
         })
-        console.log(content)
     }
 }fckSort()
 

@@ -14,6 +14,7 @@ class ListOfCars extends Component {
         cars = _.orderBy(cars, ['mark'], ['asc'])
         let filter = cars.filter(el => el.mark.toLowerCase().indexOf(this.state.searchTerm) !== -1||el.mark.indexOf(this.state.searchTerm) !== -1
         )|| cars.map(el=>el.turbo_OEM.filter(el=>el.toString().indexOf(this.state.searchTerm)!==-1))
+        console.log(_.find(cars,{ "turbo_OEM":['AR0110']}))
         return filter === null ?
             <Spinner/>
             : <div>
