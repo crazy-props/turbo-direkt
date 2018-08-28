@@ -3,6 +3,7 @@ import {mapObjectToArray} from "../utils";
 
 const GET_PARTS = "partsState/GET_PARTS"
 const DIVIDE_PARTS = "partsState/DIVIDE_PARTS"
+const NEW_PART = "partsState/NEW_PART"
 
 export const getParts = (parts) => ({
     type: GET_PARTS,
@@ -13,6 +14,7 @@ export const divideParts = (parts) => ({
     parts
 })
 
+
 export const myInit = () => (dispatch, getState) => {
     db.ref(`/parts/`).on(
         'value',
@@ -21,6 +23,47 @@ export const myInit = () => (dispatch, getState) => {
                     dispatch(divideParts(mapObjectToArray(snapshot.val())))
             )
         })
+}
+
+export const newPart = (partsName, partsGroup) => (dispatch, getState) => {
+    const newPart = {amount: 0, group: partsGroup, part: partsName}
+    db.ref('/parts/').push(newPart)
+    console.log(newPart)
+}
+
+export const findKeyToDelete = (object) => (dispatch, getState) => {
+    getState().partsState.parts.find(x => {
+        if (x.part === object)
+            console.log(x.key)
+    })
+}
+
+export const addAmount = (objecter) => (dispatch, getState) => {
+    let findKey = getState().partsState.parts.find(x => {
+        if (x.part === objecter)
+            return x.key
+    })
+    let xAmount
+
+    getState().partsState.parts.find(x => {
+        if (x.part === objecter)
+            return xAmount = x.amount
+    })
+    db.ref(`/parts/${findKey.key}/amount`).set(xAmount + 1)
+}
+
+export const subtractAmount = (objecter) => (dispatch, getState) => {
+    let findKey = getState().partsState.parts.find(x => {
+        if (x.part === objecter)
+            return x.key
+    })
+    let xAmount
+    getState().partsState.parts.find(x => {
+        if ((x.part === objecter) && (x.amount > 0))
+            return xAmount = x.amount-1
+        else return xAmount = 0
+    })
+    return db.ref(`/parts/${findKey.key}/amount`).set(xAmount)
 }
 
 const initialState = {
@@ -34,12 +77,13 @@ const initialState = {
     KODE_CHRAs: null,
     nozzles: null,
     repair_kits: null,
-    turbine_wheels: null
+    turbine_wheels: null,
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case GET_PARTS :
+            console.log(action.parts.length)
             return {
                 ...state,
                 parts: action.parts
@@ -101,7 +145,8 @@ export default (state = initialState, action) => {
                 KODE_CHRAs: KODE_CHRA,
                 nozzles: nozzle,
                 repair_kits: repair_kit,
-                turbine_wheels: turbine_wheel
+                turbine_wheels: turbine_wheel,
+
             }
         default:
             return state
