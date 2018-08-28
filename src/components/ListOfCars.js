@@ -16,7 +16,6 @@ class ListOfCars extends Component {
         const filter = cars
             .filter(car =>
                 car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
-                // car.turbo_OEM && <- only because yoou have inconsistent data in database!
                 car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm) !== -1)
             )
 
