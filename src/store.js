@@ -6,7 +6,7 @@ import partsState, {myInit} from './state/partsState'
 import authState, {logInByMailAndPass,initAuthUserSync,logOut} from './state/authState'
 import createUser from './state/createUser'
 import forgotPassword from './state/forgotPassword'
-
+import shoppingListState from './state/shoppingList'
 
 
 export const reducer = combineReducers({
@@ -16,6 +16,7 @@ export const reducer = combineReducers({
     forgotPassword,
     carsState,
     partsState,
+    shoppingListState
 
 
 })
