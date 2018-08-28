@@ -13,7 +13,7 @@ class ListOfCars extends Component {
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
         let filter = cars.filter(el => el.mark.toLowerCase().indexOf(this.state.searchTerm) !== -1||el.mark.indexOf(this.state.searchTerm) !== -1
-        )|| cars.filter(el=>el.turbo_OEM.includes(this.state.search.toString())!==-1)
+        )|| cars.map(el=>el.turbo_OEM.filter(el=>el.toString().indexOf(this.state.searchTerm)!==-1))
         return filter === null ?
             <Spinner/>
             : <div>
@@ -22,7 +22,7 @@ class ListOfCars extends Component {
                         <Row end={'xs'}>
                             <Col xs={6}>
                                 <TextField
-                                    style={{margin: 'auto'}}
+                                    style={{margin: 'auto', fontSize:"12px"}}
                                     fullWidth={true}
                                     id={'idForTextField'}
                                     floatingLabelText={'Search for cars or turbochargers'}
@@ -39,13 +39,13 @@ class ListOfCars extends Component {
                 <Row className={'partsTableDiv'}>
                     <table className="carsTable">
                         <thead className="carsTableHead">
-                            <th>Mark</th>
-                            <th>Model</th>
-                            <th>Date</th>
-                            <th>Capacity</th>
-                            <th>No.</th>
-                            <th>Power</th>
-                            <th className="lastTh">Turbo OEM</th>
+                            <td>Mark</td>
+                            <td>Model</td>
+                            <td>Date</td>
+                            <td>Capacity</td>
+                            <td>No.</td>
+                            <td>Power</td>
+                            <td className="lastTh">Turbo OEM</td>
                         </thead>
                         <tbody key={Math.random()}>
                         {filter && filter.length ? filter.map((el) =>
