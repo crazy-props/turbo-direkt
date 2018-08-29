@@ -10,7 +10,7 @@ export const set = (turboValue) => ({
 
 
 export const initTurbo = () => (dispatch, getState) => {
-    db.ref(`/turbo/`).limitToFirst(100).on(
+    db.ref(`/turbo/`)/*.limitToFirst(100)*/.on(
         'value',
         (snapshot) => {
             (dispatch(set(mapObjectToArray(snapshot.val())))
