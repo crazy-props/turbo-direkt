@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {
-    removeProductFromShoppingList, initList, addToOrdered,
+    removeProductFromShoppingList, addToOrdered,
     removeMultipleFromShoppingList
 } from '../state/shoppingList';
 
@@ -9,12 +9,6 @@ import {
 class ShoppingList extends Component {
     state = {
         listToRemove: []
-    }
-
-    componentDidMount() {
-        if (this.props.products !== undefined) {
-            this.props.initList()
-        }
     }
 
     removeAllSelected() {
@@ -135,7 +129,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     removeProductFromShoppingList: (part) => dispatch(removeProductFromShoppingList(part)),
-    initList: () => dispatch(initList()),
     addToOrdered: (prod) => dispatch(addToOrdered(prod)),
     removeMultipleFromShoppingList: (list) => dispatch(removeMultipleFromShoppingList(list)),
 })
