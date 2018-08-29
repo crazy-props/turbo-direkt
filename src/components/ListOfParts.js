@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {addAmount, subtractAmount, findKeyToDelete} from '../state/partsState';
+import {addAmount, subtractAmount} from '../state/partsState';
 import {addProductToShoppingList} from '../state/shoppingList';
 import AddPart from './AddPart'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Row, Col} from 'react-flexbox-grid';
 import Dialog from 'material-ui/Dialog';
 
 class ListOfParts extends Component {
@@ -59,10 +59,9 @@ class ListOfParts extends Component {
                                     floatingLabelText={'Search for parts'}
                                     type={"text"}
                                     value={this.state.basicSearchInput}
-                                    onChange={(event => {
+                                    onChange={event => {
                                         this.setState({basicSearchInput: event.target.value})
-                                        console.log(this.props.findKeyToDelete(event.target.value))
-                                    })}
+                                    }}
                                 />
                             </Col>
                         </Row>
@@ -89,7 +88,7 @@ class ListOfParts extends Component {
                     </Dialog>
                 </div>
                 <Row className={'partsTableDiv'}>
-                    {this.props.actuators ?
+                    {this.props.actuators.length ?
                         myArrayForState.map((stateElement, i) => {
                             return (
                                 <table className="partsTable">
@@ -172,7 +171,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     addAmount: (objectToAdd) => dispatch(addAmount(objectToAdd)),
     subtractAmount: (objectToSubtract) => dispatch(subtractAmount(objectToSubtract)),
-    findKeyToDelete: (objectToFind) => dispatch(findKeyToDelete(objectToFind)),
     addProductToShoppingList: (part) => dispatch(addProductToShoppingList(part)),
 })
 

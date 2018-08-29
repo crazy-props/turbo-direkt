@@ -95,7 +95,6 @@ export default (state = initialState, action) => {
                     return product
                 }
             })
-            console.log('ordered', ordered, 'toOrder', toOrder)
             return {
                 ...state,
                 products: action.productsToBuy,
