@@ -17,7 +17,6 @@ export const myInit = () => (dispatch, getState) => {
 export const newPart = (partsName, partsGroup) => (dispatch, getState) => {
     const newPart = {amount: 0, group: partsGroup, part: partsName}
     db.ref('/parts/').push(newPart)
-    console.log(newPart)
 }
 
 export const addAmount = (objecter) => (dispatch, getState) => {

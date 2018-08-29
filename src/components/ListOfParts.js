@@ -5,8 +5,9 @@ import {addProductToShoppingList} from '../state/shoppingList';
 import AddPart from './AddPart'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Row, Col} from 'react-flexbox-grid';
+import {Grid, Row, Col} from 'react-flexbox-grid';
 import Dialog from 'material-ui/Dialog';
+import Spinner from "./spinner";
 
 class ListOfParts extends Component {
     state = {
@@ -50,32 +51,27 @@ class ListOfParts extends Component {
             <div>
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
-                        <Row end={'xs'}>
-                            <Col xs={6}>
-                                <TextField
-                                    style={{margin: 'auto'}}
-                                    fullWidth={true}
-                                    id={'idForTextField'}
-                                    floatingLabelText={'Search for parts'}
-                                    type={"text"}
-                                    value={this.state.basicSearchInput}
-                                    onChange={event => {
-                                        this.setState({basicSearchInput: event.target.value})
-                                    }}
-                                />
-                            </Col>
-                        </Row>
+                        <TextField
+                            style={{margin: 'auto'}}
+                            fullWidth={true}
+                            id={'idForTextField'}
+                            floatingLabelText={'Search for parts'}
+                            type={"text"}
+                            value={this.state.basicSearchInput}
+                            onChange={event => {
+                                this.setState({basicSearchInput: event.target.value})
+                            }}
+                        />
+
                     </Col>
                     <Col xs>
-                        <Row start={'xs'} style={{padding: '3px'}}>
-                            <Col>
-                                <RaisedButton
-                                    onClick={() => this.handleOpen()}
-                                >
-                                    dodaj część
-                                </RaisedButton>
-                            </Col>
-                        </Row>
+
+                        <RaisedButton
+                            onClick={() => this.handleOpen()}
+                        >
+                            dodaj część
+                        </RaisedButton>
+
                     </Col>
                 </Row>
                 <div>
@@ -94,8 +90,8 @@ class ListOfParts extends Component {
                                 <table className="partsTable">
                                     <tbody key={Math.random()}>
                                     {this.props[`${stateElement}`].map((partInStateArray, index) => {
-                                        if ((partInStateArray.part.toLocaleLowerCase().includes(this.state.basicSearchInput.toLocaleLowerCase()))
-                                            || (partInStateArray.group.toLocaleLowerCase().includes(this.state.basicSearchInput.toLocaleLowerCase())))
+                                        if ((partInStateArray.part.toLowerCase().includes(this.state.basicSearchInput.toLowerCase()))
+                                            || (partInStateArray.group.toLowerCase().includes(this.state.basicSearchInput.toLowerCase())))
                                             return (
                                                 <tr id={`${partInStateArray.part}`}
                                                     key={Math.random()}
@@ -144,7 +140,8 @@ class ListOfParts extends Component {
                                 </table>
                             )
                         })
-                        : "loading"
+                        : <Spinner/>
+
                     }
                 </Row>
             </div>
