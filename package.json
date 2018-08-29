@@ -7,6 +7,7 @@
     "firebase": "^5.3.0",
     "lodash": "^4.17.10",
     "material-ui": "^0.20.2",
+    "material-ui-pagination": "^1.1.6",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-flexbox-grid": "^2.1.2",

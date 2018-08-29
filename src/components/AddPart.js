@@ -5,7 +5,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import {Container, Row, Col} from 'react-grid-system';
+import {Grid, Row, Col} from 'react-flexbox-grid';
 import {newPart} from "../state/partsState";
 
 
@@ -35,7 +35,7 @@ class AddPart extends Component {
 
     render() {
         return (
-            <Container>
+            <Grid>
                 <Row>
                     <TextField
                         floatingLabelText="Parts name"
@@ -67,7 +67,7 @@ class AddPart extends Component {
                     </RaisedButton>
 
                 </Row>
-            </Container>
+            </Grid>
         )
     }
 }
