@@ -6,7 +6,7 @@ import partsState, {myInit} from './state/partsState'
 import authState, {logInByMailAndPass,initAuthUserSync,logOut} from './state/authState'
 import createUser from './state/createUser'
 import forgotPassword from './state/forgotPassword'
-import shoppingListState from './state/shoppingList'
+import shoppingListState, {initList} from './state/shoppingList'
 
 
 export const reducer = combineReducers({
@@ -33,6 +33,7 @@ export const store = createStore(
 
 store.dispatch(initTurbo())
 store.dispatch(initCars())
+store.dispatch(initList())
 store.dispatch(myInit())
 store.dispatch(logInByMailAndPass())
 store.dispatch(initAuthUserSync())

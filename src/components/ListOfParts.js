@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {addAmount, subtractAmount, findKeyToDelete} from '../state/partsState';
-import {addProductToShoppingList, initList} from '../state/shoppingList';
+import {addProductToShoppingList} from '../state/shoppingList';
 import AddPart from './AddPart'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -12,11 +12,6 @@ class ListOfParts extends Component {
     state = {
         basicSearchInput: '',
         isDialogOpen: false
-    }
-    componentDidMount() {
-        if (this.props.products !== undefined) {
-            this.props.initList()
-        }
     }
 
     handleOpen() {
@@ -176,7 +171,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addAmount: (objectToAdd) => dispatch(addAmount(objectToAdd)),
-    initList: () => dispatch(initList()),
     subtractAmount: (objectToSubtract) => dispatch(subtractAmount(objectToSubtract)),
     findKeyToDelete: (objectToFind) => dispatch(findKeyToDelete(objectToFind)),
     addProductToShoppingList: (part) => dispatch(addProductToShoppingList(part)),
