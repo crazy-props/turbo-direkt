@@ -25,7 +25,7 @@ class ListOfTurbines extends Component {
    }
 
    // handleTurbineNameChangeChandler = debounce(() => (e, value) => this.setState({ turbineName: value }), 2000);//this function doesn't work with Material UI!
-   handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value })
+   handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
    render() {
 
