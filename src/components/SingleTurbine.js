@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
-
-export default class SingleTurbine extends Component {
+import {connect} from "react-redux";
+class SingleTurbine extends Component {
+    state={
+        element:this.props.el
+    }
     render() {
         return (
             <div>
@@ -9,3 +12,18 @@ export default class SingleTurbine extends Component {
         )
     }
 }
+
+
+
+
+const mapStateToProps = state => ({
+    turbo: state.turboState.turbo,
+})
+
+const mapDispatchToProps = dispatch => ({
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SingleTurbine)

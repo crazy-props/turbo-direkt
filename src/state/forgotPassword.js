@@ -7,6 +7,7 @@ export const sendRequestForPass = () => ({
     type: SENDREQUESTFORPASS,
 
 });
+
 export const addEmail = (email) => ({
     type: ADDEMAIL,
     email

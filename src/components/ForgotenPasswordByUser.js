@@ -48,7 +48,7 @@ const ForgotenPasswordByUser = (props) => (
         <Paper className="loginpaper" style={style} zDepth={3}>
             <br/>
             <div><img style={style.logo} src={logo}/></div>
-            <p className="ptoplogin">Create new user</p>
+            <p className="ptoplogin">Type your email to reset your password</p>
             <br/>
             <div className="insideformdiv">
                 <TextField
