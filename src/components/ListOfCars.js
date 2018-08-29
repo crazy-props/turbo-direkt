@@ -1,14 +1,38 @@
-import React, { Component } from 'react'
-import { connect } from "react-redux";
+import React, {Component} from 'react'
+import {connect} from "react-redux";
 import _ from 'lodash';
 import SingleTurbine from "./SingleTurbine";
 import Spinner from "./spinner"
-import TextField from 'material-ui/TextField';
-import { Row, Col } from 'react-flexbox-grid';
+import Pagination from 'material-ui-pagination'
+import {Row, Col} from 'react-flexbox-grid';
+
+
 class ListOfCars extends Component {
+
     state = {
         searchTerm: '',
+        ITEMS_PER_PAGE: 10,
+        currentPage: 0
+
+
     }
+
+    debounceEvent(...args) {
+        this.debouncedEvent = _.debounce(...args);
+        return e => {
+            e.persist();
+            return this.debouncedEvent(e);
+        };
+    }
+
+    handleSearch = (e) => {
+        this.setState({searchTerm: e.target.value});
+    }
+
+    componentWillUnmount() {
+        this.debouncedEvent.cancel();
+    }
+
     render() {
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
@@ -17,24 +41,24 @@ class ListOfCars extends Component {
                 car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
                 car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm) !== -1)
             )
+
+        const numberOfCars = filter && filter.length
+
         return filter === null ?
-            <Spinner />
+            <Spinner/>
             : <div>
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
                             <Col xs={6}>
-                                <TextField
-                                    style={{ margin: 'auto', fontSize: "12px" }}
-                                    fullWidth={true}
-                                    id={'idForTextField'}
-                                    floatingLabelText={'Search for cars or turbochargers'}
-                                    type={"text"}
-                                    value={this.state.searchTerm}
-                                    onChange={(event => {
-                                        this.setState({ searchTerm: event.target.value })
-                                    })}
-                                />
+                                <div className="group">
+                                    <input placeholder="search:turbo and cars" type="search"
+                                           onChange={this.debounceEvent(this.handleSearch, 800)}/>
+                                    <span className="highlight"></span>
+                                    <span className="bar"></span>
+
+                                </div>
+
                             </Col>
                         </Row>
                     </Col>
@@ -51,34 +75,49 @@ class ListOfCars extends Component {
                         <td className="lastTh">Turbo OEM</td>
                         </thead>
                         <tbody key={Math.random()}>
-                        {filter && filter.length ? filter.map((el) =>
-                            <tr className="trOne">
-                                <td>{el.mark}</td>
-                                <td>{el.model}</td>
-                                <td>{el.date}</td>
-                                <td>{el.capacity}</td>
-                                <td>{el.no}</td>
-                                <td>{el.power}</td>
-                                <td className="turboList">
-                                    {el.turbo_OEM && el.turbo_OEM.length ?
-                                        el.turbo_OEM.filter(function (a, b, c) {
-                                            return c.indexOf(a) === b;
-                                        }).map(el => <a
-                                            href="http://localhost:3000/turbines"><SingleTurbine
-                                            el={el} /></a>
-                                        ) :
-                                        el.turbo_OEM
-                                    }
-                                </td>
-                            </tr>
-                        ) : <Spinner />
+                        {filter && filter.length ? filter
+                            .filter((el, i) => (
+                                i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
+                                &&
+                                i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
+                            ))
+                            .map((el) =>
+                                <tr className="trOne">
+                                    <td>{el.mark}</td>
+                                    <td>{el.model}</td>
+                                    <td>{el.date}</td>
+                                    <td>{el.capacity}</td>
+                                    <td>{el.no}</td>
+                                    <td>{el.power}</td>
+                                    <td className="turboList">
+                                        {el.turbo_OEM && el.turbo_OEM.length ?
+                                            el.turbo_OEM.filter(function (a, b, c) {
+                                                return c.indexOf(a) === b;
+                                            }).map(el => <a
+                                                href="http://localhost:3000/turbines"><SingleTurbine
+                                                el={el}/></a>
+                                            ) :
+                                            el.turbo_OEM
+                                        }
+                                    </td>
+                                </tr>
+                            ) : <Spinner/>
                         }
                         </tbody>
                     </table>
                 </Row>
+                <div style={{textAlign: 'center'}}>
+                    <Pagination
+                        total={Math.ceil(numberOfCars / this.state.ITEMS_PER_PAGE)}
+                        current={this.state.currentPage + 1}
+                        display={10}
+                        onChange={newPage => this.setState({currentPage: newPage - 1})}
+                    />
+                </div>
             </div>
     }
 }
+
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
 })
