@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 class SingleTurbine extends Component {
+    state={
+        element:this.props.el
+    }
     render() {
         return (
             <div>
@@ -9,6 +12,9 @@ class SingleTurbine extends Component {
         )
     }
 }
+
+
+
 
 const mapStateToProps = state => ({
     turbo: state.turboState.turbo,

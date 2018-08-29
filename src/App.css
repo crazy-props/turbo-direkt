@@ -116,6 +116,24 @@
     from { opacity: 1.0; }
     to { opacity: 0.0; }
 }
+.loading3 {
+    background: inherit;
+    position: fixed;
+    top: 48.5%;
+    left: 37%;
+    -webkit-animation-name: scale;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    -webkit-animation-duration: 1.7s;
+}
+@keyframes scale {
+    from { opacity: 1.0; }
+    to { opacity: 0.0; }
+}
+
+
+
+
 .partsSearchRow{
     background: white;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
