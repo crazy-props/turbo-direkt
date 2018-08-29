@@ -4,13 +4,14 @@ const PartsColumn = props =>
     <td>
         <ul>
             {props.parts && props.parts.length ?
-                props.parts.map(x =>
+                props.parts.map(part =>
                     <li>
-                        {x}{`, `}
+                        {part}{`:`}
+                        <br />
                         {props.part && props.part.length ?
                             props.part
-                                .filter(z => z.part === x)
-                                .map(x => <span>{`amount: ${x.amount}`}</span>)
+                                .filter(z => z.part === part)
+                                .map(part => <span>{`amount: ${part.amount}`}</span>)
                             : ` Loading amount...`}
                     </li>)
                 : props.parts}

@@ -1,3 +1,5 @@
+// Temporary styling solution
+
 export const styleColors = {
     primary: 'rgb(97, 218, 251)',
     secondary: 'rgb(32, 35, 42)',
@@ -8,7 +10,7 @@ export default {
     table_head: {
         background: styleColors.secondary,
         color: styleColors.primary,
-        fontSize: '18px'
+        fontSize: '15px'
     },
     table_body: {
         background: styleColors.standard,

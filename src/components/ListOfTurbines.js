@@ -1,30 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Pagination from 'material-ui-pagination'
 import style from '../style'
 import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from './SearchInput'
-import Pagination from 'material-ui-pagination'
 
-// const debounce = (fn, delay) => {
-//    let timer = null;
-//    return function () {
-//       let context = this, args = arguments;
-//       clearTimeout(timer);
-//       timer = setTimeout(function () {
-//          fn.apply(context, args);
-//       }, delay);
-//    };
-// }
 class ListOfTurbines extends Component {
    state = {
       _listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA'],
       _parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
       turbineName: '',
-      ITEMS_PER_PAGE: 30,
-      currentPage: 0
+      ITEMS_PER_PAGE: 10,
+      currentPage: 0,
    }
 
-   // handleTurbineNameChangeChandler = debounce(() => (e, value) => this.setState({ turbineName: value }), 2000);//this function doesn't work with Material UI!
    handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
    render() {
@@ -35,19 +24,19 @@ class ListOfTurbines extends Component {
       const numberOfTurbines = listOfTurbines && listOfTurbines.length
 
       return this.props.turbo === null && this.props.part === null ?
-         <span>Loading .... </span>
+         <div style={{ textAlign: 'center' }}>Loading .... </div>
          :
          <div>
             <SearchInput
                handleTurbineNameChangeChandler={this.handleTurbineNameChangeChandler}
             />
-            <table>
+            <table style={{margin: 'auto'}}>
                <thead >
                   <tr style={style.table_head} >
                      {this.state._listOfParts.map(el => <th>{el}</th>)}
                   </tr>
                </thead>
-               <tbody >
+               <tbody style={style.table_body}>
                   {listOfTurbines
                      .filter((el, i) => (
                         i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
@@ -74,7 +63,6 @@ class ListOfTurbines extends Component {
          </div>
    }
 }
-
 const mapStateToProps = state => ({
    turbo: state.turboState.turbo,
    part: state.partsState.parts,
