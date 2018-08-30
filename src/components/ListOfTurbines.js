@@ -10,17 +10,21 @@ class ListOfTurbines extends Component {
       _listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA'],
       _parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
       turbineName: '',
+      // Pagination variables start: this variables are required for pagination view
       ITEMS_PER_PAGE: 10,
       currentPage: 0,
+      //Pagination variables end
    }
-
+   
+   // neutralise to currentPage is required for reapper to first side of results
    handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
    render() {
 
       const listOfTurbines = this.props.turbo && this.props.turbo
          .filter(nam => nam.turboOEM.toLowerCase().indexOf(this.state.turbineName.toLowerCase()) !== -1)
-
+      
+      //check to listOfTurbines is already update and asign array length to variable - reguired for pagination
       const numberOfTurbines = listOfTurbines && listOfTurbines.length
 
       return this.props.turbo === null && this.props.part === null ?
@@ -38,11 +42,13 @@ class ListOfTurbines extends Component {
                </thead>
                <tbody style={style.table_body}>
                   {listOfTurbines
+                  /*this block of code is responsible for pagination view:*/
                      .filter((el, i) => (
                         i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
                         &&
                         i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
                      ))
+                  /*this block of code mapping turbines state:*/
                      .map(
                         turbine =>
                            <tr>
@@ -52,6 +58,8 @@ class ListOfTurbines extends Component {
                      )}
                </tbody>
             </table>
+
+            {/*show pagination numbers ander the table*/}
             <div style={{ textAlign: 'center' }}>
                <Pagination
                   total={Math.ceil(numberOfTurbines / this.state.ITEMS_PER_PAGE)}

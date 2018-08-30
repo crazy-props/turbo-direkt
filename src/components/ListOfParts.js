@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 
-
 class ListOfParts extends Component {
     render() {
         return (
@@ -11,7 +10,6 @@ class ListOfParts extends Component {
         )
     }
 }
-
 
 const mapStateToProps = state => ({
     parts: state.partsState.parts,
