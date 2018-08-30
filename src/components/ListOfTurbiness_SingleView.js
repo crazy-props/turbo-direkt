@@ -10,7 +10,7 @@ const PartsColumn = props =>
                         <br />
                         {props.part && props.part.length ?
                             props.part
-                                .filter(z => z.part === part)
+                                .filter(turbo => turbo.part === part)
                                 .map(part => <span>{`amount: ${part.amount}`}</span>)
                             : ` Loading amount...`}
                     </li>)
