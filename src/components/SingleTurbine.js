@@ -6,13 +6,13 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import _ from 'lodash';
+
 const customContentStyle = {
     width: '100%',
     maxWidth: 'none',
-    Zindex:0
+
 };
 
 /**
@@ -46,6 +46,7 @@ class SingleTurbine extends React.Component {
         if (this.state.open === true)
             return (
                 <div >
+
                         <Dialog
                             title={`PARTS FOR TURBO OEM : ${props.turbine}`}
                             actions={actions}
@@ -63,7 +64,6 @@ class SingleTurbine extends React.Component {
                             .map(part => props.part.filter(x => x.part === part))
                                     //show results (part name + part amount)
                                     .map(x => x.map(val =>`${val.group.toUpperCase().replace(/_/, ' ')} - ${val.part}: ${val.amount}`)
-                                        .reduce((red, val)=>red.concat(val), [])
                             ).map(el=>
                                 <Table>
                                     <TableBody>

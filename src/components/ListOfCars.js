@@ -7,6 +7,7 @@ import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 
+
 class ListOfCars extends Component {
 
     state = {
@@ -46,6 +47,7 @@ class ListOfCars extends Component {
         return (filter === null ?
           <Spinner/>
             : <div>
+
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
@@ -63,6 +65,7 @@ class ListOfCars extends Component {
                     </Col>
                 </Row>
                 <Row className={'partsTableDiv'}>
+
                     <table className="carsTable">
                         <thead className="carsTableHead">
                         <td>Mark</td>
