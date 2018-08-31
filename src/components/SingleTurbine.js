@@ -63,7 +63,7 @@ class SingleTurbine extends React.Component {
                                     //get all values and compare to part state (value: part )
                                     .map(part => props.part.filter(x => x.part === part))
                                     //show results (part name + part amount)
-                                    .map(x => x.map(val => `$(val.group) - ${val.part}: ${val.amount}`)
+                                    .map(x => x.map(val =>`${val.group} - ${val.part}: ${val.amount}`)
                             ).map(el=>
                                 <Table>
                                     <TableBody>
