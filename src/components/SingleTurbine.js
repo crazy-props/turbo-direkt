@@ -47,7 +47,7 @@ class SingleTurbine extends React.Component {
             return (
                 <div >
                         <Dialog
-                            title={`TURBO OEM:${props.turbine}`}
+                            title={`PARTS FOR TURBO OEM : ${props.turbine}`}
                             actions={actions}
                             modal={true}
                             contentStyle={customContentStyle}
@@ -63,12 +63,12 @@ class SingleTurbine extends React.Component {
                                     //get all values and compare to part state (value: part )
                                     .map(part => props.part.filter(x => x.part === part))
                                     //show results (part name + part amount)
-                                    .map(x => x.map(val =>`${val.group} - ${val.part}: ${val.amount}`)
+                                    .map(x => x.map(val =>`${val.group.toUpperCase().replace(/_/, ' ')} - ${val.part}: ${val.amount}`)
                             ).map(el=>
                                 <Table>
                                     <TableBody>
                                         <TableRow>
-                                            <TableCell>{el}</TableCell>
+                                            <TableCell>{el[0]}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>)}
