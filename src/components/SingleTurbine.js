@@ -3,6 +3,13 @@ import {connect} from "react-redux"
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+
 
 const customContentStyle = {
     width: '100%',
@@ -48,7 +55,7 @@ class SingleTurbine extends React.Component {
                             contentStyle={customContentStyle}
                             open={this.state.open}
                         >
-                            {JSON.stringify(
+                            {
                                 Object.values(props.turbo.filter(turbo => turbo.turboOEM === props.turbine)[0])
                                 //discard id and turboOEM to arr
                                     .filter(x => typeof x !== 'string')
@@ -58,8 +65,15 @@ class SingleTurbine extends React.Component {
                                     //get all values and compare to part state (value: part )
                                     .map(part => props.part.filter(x => x.part === part))
                                     //show results (part name + part amount)
-                                    .map(x => x.map(val => `${val.part}: ${val.amount}`))
-                            )}
+                                    .map(x => x.map(val => `${val.part}: ${val.amount}`)
+                            ).map(el=>
+                                <Table>
+                                    <TableBody>
+                                        <TableRow>
+                                            <TableCell>{el}</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>)}
                         </Dialog>
                     </div>)
         else if (this.state.open === false)
@@ -87,3 +101,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SingleTurbine)
+
