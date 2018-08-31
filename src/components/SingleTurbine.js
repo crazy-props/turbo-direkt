@@ -53,15 +53,14 @@ class SingleTurbine extends React.Component {
                             contentStyle={customContentStyle}
                             open={this.state.open}
                         >
-                            {
-                                _.values(props.turbo.filter(turbo => turbo.turboOEM === props.turbine)[0])
+                            {_.values(props.turbo.filter(turbo => turbo.turboOEM === props.turbine)[0])
                                 //discard id and turboOEM to arr
                                     .filter(x => typeof x !== 'string')
                                     //create single array
                                     .reduce((red, val) => red
                                         .concat(val.reduce((red, val) => red.concat(val), [])), [])
                                     //get all values and compare to part state (value: part )
-                                    .map(part => props.part.filter(x => x.part === part))
+                            .map(part => props.part.filter(x => x.part === part))
                                     //show results (part name + part amount)
                                     .map(x => x.map(val =>`${val.group.toUpperCase().replace(/_/, ' ')} - ${val.part}: ${val.amount}`)
                                         .reduce((red, val)=>red.concat(val), [])
