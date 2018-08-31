@@ -7,8 +7,6 @@ import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 
-
-
 class ListOfCars extends Component {
 
     state = {
@@ -95,10 +93,8 @@ class ListOfCars extends Component {
                                         {el.turbo_OEM && el.turbo_OEM.length ?
                                             el.turbo_OEM.filter(function (a, b, c) {
                                                 return c.indexOf(a) === b;
-                                            }).map(el => <a
-                                                href="http://localhost:3000/turbines"><SingleTurbine
-                                                el={el}/></a>
-                                            ) :
+                                            }).map(el => <SingleTurbine
+                                                turbine={el}/>                                        ) :
                                             el.turbo_OEM
                                         }
                                     </td>
