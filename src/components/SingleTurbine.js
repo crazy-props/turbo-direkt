@@ -8,7 +8,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
+import _ from 'lodash';
 const customContentStyle = {
     width: '100%',
     maxWidth: 'none',
@@ -54,7 +54,7 @@ class SingleTurbine extends React.Component {
                             open={this.state.open}
                         >
                             {
-                                Object.values(props.turbo.filter(turbo => turbo.turboOEM === props.turbine)[0])
+                                _.values(props.turbo.filter(turbo => turbo.turboOEM === props.turbine)[0])
                                 //discard id and turboOEM to arr
                                     .filter(x => typeof x !== 'string')
                                     //create single array
@@ -64,11 +64,12 @@ class SingleTurbine extends React.Component {
                                     .map(part => props.part.filter(x => x.part === part))
                                     //show results (part name + part amount)
                                     .map(x => x.map(val =>`${val.group.toUpperCase().replace(/_/, ' ')} - ${val.part}: ${val.amount}`)
+                                        .reduce((red, val)=>red.concat(val), [])
                             ).map(el=>
                                 <Table>
                                     <TableBody>
                                         <TableRow>
-                                            <TableCell>{el[0]}</TableCell>
+                                            <TableCell>{el}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>)}
