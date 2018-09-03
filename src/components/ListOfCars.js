@@ -8,17 +8,14 @@ import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import {removeCarFromList} from "../state/carsState";
 import RaisedButton from 'material-ui/RaisedButton';
-import {removeProductFromShoppingList} from "../state/shoppingList";
 
 class ListOfCars extends Component {
-
     state = {
         searchTerm: '',
         ITEMS_PER_PAGE: 10,
         currentPage: 0
 
     }
-
     debounceEvent(...args) {
         this.debouncedEvent = _.debounce(...args);
         return e => {
