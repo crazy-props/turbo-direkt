@@ -17,6 +17,17 @@ export const initTurbo = () => (dispatch, getState) => {
             )
         })
 }
+export const removeTurboFromList = (turbine) => (dispatch, getState) => {
+    console.log(turbine)
+    db.ref(`/turbo/${turbine.key}`).remove()
+        .then(() =>
+            alert(`Delete succeeded. ${turbine.turboOEM}`)
+        )
+        .catch((error) =>
+            console.log("Delete failed: " + error.message)
+        )
+}
+
 
 const initialState = {
     turbo: null
