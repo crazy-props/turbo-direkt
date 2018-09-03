@@ -42,7 +42,15 @@ class HorizontalLinearStepper extends React.Component {
         stepIndex: 0,
         checked1:false,
         checked2:false,
-        checked3:false
+        checked3:false,
+        mark:"",
+        model:"",
+        date:"",
+        capacity:"",
+        factoryno:"",
+        power:"",
+        turbo:[]
+
     };
     updateCheck1() {
         this.setState((oldState) => {
@@ -71,7 +79,6 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
-
     handleNext = () => {
         const {stepIndex} = this.state;
         this.setState({
@@ -79,34 +86,45 @@ class HorizontalLinearStepper extends React.Component {
             finished: stepIndex >= 6,
         });
     };
-
     handlePrev = () => {
         const {stepIndex} = this.state;
         if (stepIndex > 0) {
             this.setState({stepIndex: stepIndex - 1});
         }
     };
-
-    getStepContent(stepIndex) {
-        switch (stepIndex) {
-            case 0:
-                return 'Type car mark';
-            case 1:
-                return 'Type car model';
-            case 2:
-                return 'Type model production date';
-            case 3:
-                return 'Type capacity';
-            case 4:
-                return 'Type factory No.';
-            case 5:
-                return 'Type horse power';
-            case 6:
-                return 'Type Turbo OEM';
-            default:
-                return 'Return';
-        }
+    handleForm = (e) => {
+        if (this.state.stepIndex === 1)
+            this.setState({mark: e.target.value});
+        else if (this.state.stepIndex === 2)
+            this.setState({model: e.target.value});
+        else if (this.state.stepIndex === 6)
+            this.setState({turbo: this.state.turbo.push(e.target.value)});
+        console.log(this.state.mark);
+        console.log(this.state.model);
+        console.log(this.state.turbo);
     }
+        getStepContent(stepIndex)
+        {
+            switch (stepIndex) {
+                case 0:
+                    return 'Type car mark';
+                case 1:
+                    return 'Type car model';
+                case 2:
+                    return 'Type model production date';
+                case 3:
+                    return 'Type capacity';
+                case 4:
+                    return 'Type factory No.';
+                case 5:
+                    return 'Type horse power';
+                case 6:
+                    return 'Type Turbo OEM';
+                default:
+                    return 'Return';
+            }
+        }
+
 
     render() {
         const {finished, stepIndex} = this.state;
@@ -133,7 +151,9 @@ class HorizontalLinearStepper extends React.Component {
                     onCheck={this.updateCheck3.bind(this)}
                     style={styles.checkbox}
                 />
-
+                {this.state.model}
+                {this.state.mark}
+                {this.state.turbo}
                 <div style={{width: '80%', maxWidth: 500, margin: 'auto'}}>
                     <Stepper style={styles.step} activeStep={stepIndex}>
                         <Step style={styles.step}>
@@ -175,9 +195,8 @@ class HorizontalLinearStepper extends React.Component {
                             <div>
                                 <p>{this.getStepContent(stepIndex)}</p>
                                 <div style={{marginTop: 12}}>
-                                    <TextField
-                                        hintText="Hint Text"
-                                        errorText="This field is required"
+                                    <input
+                                        onChange={this.state.handleForm}
                                     />
                                     <FlatButton
                                         label="Back"

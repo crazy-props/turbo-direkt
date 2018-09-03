@@ -82,7 +82,8 @@ class ListOfCarso extends Component {
         return (filter === null ?
             <Spinner/>
             : <div>
-                <InputForm/>
+                <InputForm
+                />
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
