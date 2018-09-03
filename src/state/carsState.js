@@ -20,12 +20,12 @@ export const initCars = () => (dispatch, getState) => {
 }
 export const removeCarFromList = (el) => (dispatch, getState) => {
         db.ref(`/car_model/${el.key}`).remove()
-            .then(function() {
+            .then(()=>
                 console.log("Delete succeeded.")
-            })
-            .catch(function(error) {
+            )
+            .catch((error)=>
         console.log("Delete failed: " + error.message)
-    });
+    );
 }
 const initialState = {
     cars: null

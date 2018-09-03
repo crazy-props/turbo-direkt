@@ -7,7 +7,7 @@ import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import {removeCarFromList} from "../state/carsState";
-import {subtractAmount} from "../state/partsState";
+import RaisedButton from 'material-ui/RaisedButton';
 import {removeProductFromShoppingList} from "../state/shoppingList";
 
 class ListOfCars extends Component {
@@ -77,6 +77,7 @@ class ListOfCars extends Component {
                         <td>No.</td>
                         <td>Power</td>
                         <td className="lastTh">Turbo OEM</td>
+                        <td></td>
                         </thead>
                         <tbody key={Math.random()}>
                         {
@@ -104,9 +105,9 @@ class ListOfCars extends Component {
                                         }
                                     </td>
                                     <td>
-                                        <button
-                                            onClick={removeCarFromList(el)}>usuń
-                                        </button>
+                                        <RaisedButton
+                                            onClick={removeCarFromList(el)}>Delete car
+                                        </RaisedButton>
                                     </td>
                                 </tr>
                             ) : this.state.searchTerm.length?<Error/>:<Spinner/>
