@@ -18,15 +18,47 @@ export const initCars = () => (dispatch, getState) => {
         }
     )
 }
-export const removeCarFromList = (el) => (dispatch, getState) => {
-        db.ref(`/car_model/${el.key}`).remove()
+export const addCarToList = (objecttodb) => (dispatch, getState) => {
+        db.ref(`/car_model/`).push(objecttodb)
             .then(()=>
-                console.log("Delete succeeded.")
+                console.log("Add succeeded.")
             )
             .catch((error)=>
-        console.log("Delete failed: " + error.message)
+        console.log(error.message)
     );
 }
+export const addProductToShoppingList = (partsName) => (dispatch, getState) => {
+    if (getState().shoppingListState.product === null) {
+        db.ref(`/shoppingList/`).push(partsName)
+    } else {
+        let checkIfOnTheList = getState().shoppingListState.products.find(x => x.value === partsName)
+        if (checkIfOnTheList === undefined) {
+            db.ref(`/shoppingList/`).push({value: partsName})
+        }
+        else {
+            console.log("such product is already on the list")
+        }
+    }
+
+}
+
+
+
+
+
+export const removeCarFromList = (el) => (dispatch, getState) => {
+    db.ref(`/car_model/${el.key}`).remove()
+        .then(()=>
+            console.log("Delete succeeded.")
+        )
+        .catch((error)=>
+            console.log("Delete failed: " + error.message)
+        );
+}
+
+
+
+
 const initialState = {
     cars: null
 }
