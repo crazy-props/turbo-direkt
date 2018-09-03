@@ -122,7 +122,6 @@ class HorizontalLinearStepper extends React.Component {
                     style={styles.checkbox}
                 />
 
-                this.state.checked?
                 <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
                     <Stepper activeStep={stepIndex}>
                         <Step>
