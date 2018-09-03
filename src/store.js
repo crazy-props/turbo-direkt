@@ -28,3 +28,4 @@ export const store = createStore(
 store.dispatch(initTurbo())
 store.dispatch(initCars())
 store.dispatch(myInit())
+

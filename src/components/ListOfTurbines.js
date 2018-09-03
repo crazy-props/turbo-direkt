@@ -7,10 +7,10 @@ import style from '../style'
 import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
-
+import CreteListOfParts from './CreteListOfParts'
 class ListOfTurbines extends Component {
     state = {
-        _listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA', 'feature'],
+        _listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA', 'Delete'],
         _parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
         turbineName: '',
         // Pagination variables start: this variables are required for pagination view
@@ -34,6 +34,8 @@ class ListOfTurbines extends Component {
             <div style={{ textAlign: 'center' }}>Loading .... </div>
             :
             <div>
+                {<CreteListOfParts />
+                }
                 <SearchInput
                     handleTurbineNameChangeChandler={this.handleTurbineNameChangeChandler}
                 />
