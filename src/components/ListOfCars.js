@@ -6,7 +6,9 @@ import Spinner from "./spinner"
 import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
-
+import {removeCarFromList} from "../state/carsState";
+import {subtractAmount} from "../state/partsState";
+import {removeProductFromShoppingList} from "../state/shoppingList";
 
 class ListOfCars extends Component {
 
@@ -85,7 +87,7 @@ class ListOfCars extends Component {
                                 i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
                             ))
                             .map((el) =>
-                                <tr className="trOne">
+                                <tr className="trOne" key={el.key}>
                                     <td>{el.mark}</td>
                                     <td>{el.model}</td>
                                     <td>{el.date}</td>
@@ -100,6 +102,11 @@ class ListOfCars extends Component {
                                                 turbine={el}/>                                        ) :
                                             el.turbo_OEM
                                         }
+                                    </td>
+                                    <td>
+                                        <button
+                                            onClick={removeCarFromList(el)}>usuń
+                                        </button>
                                     </td>
                                 </tr>
                             ) : this.state.searchTerm.length?<Error/>:<Spinner/>
@@ -122,7 +129,8 @@ class ListOfCars extends Component {
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
 })
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+    removeCarFromList: (el) => dispatch(removeCarFromList(el))})
 
 export default connect(
     mapStateToProps,
