@@ -1,4 +1,5 @@
 import React from 'react';
+import TextField from 'material-ui/TextField';
 import {
     Step,
     Stepper,
@@ -23,6 +24,9 @@ import VisibilityOff from 'material-ui/svg-icons/action/visibility-off';
     checkbox: {
         marginBottom: 16,
     },
+    step:{
+        fontSize:"1.4vh",
+    }
 };
 
 /**
@@ -72,7 +76,7 @@ class HorizontalLinearStepper extends React.Component {
         const {stepIndex} = this.state;
         this.setState({
             stepIndex: stepIndex + 1,
-            finished: stepIndex >= 2,
+            finished: stepIndex >= 6,
         });
     };
 
@@ -86,13 +90,21 @@ class HorizontalLinearStepper extends React.Component {
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
-                return 'Select campaign settings...';
+                return 'Type car mark';
             case 1:
-                return 'What is an ad group anyways?';
+                return 'Type car model';
             case 2:
-                return 'This is the bit I really care about!';
+                return 'Type model production date';
+            case 3:
+                return 'Type capacity';
+            case 4:
+                return 'Type factory No.';
+            case 5:
+                return 'Type horse power';
+            case 6:
+                return 'Type Turbo OEM';
             default:
-                return 'You\'re a long way from home sonny jim!';
+                return 'Return';
         }
     }
 
@@ -104,34 +116,46 @@ class HorizontalLinearStepper extends React.Component {
             this.state.checked1||this.state.checked2||this.state.checked3?
             <div>
                 <Checkbox
-                    label="Simple with controlled value"
+                    label="Add new car"
                     checked={this.state.checked1}
                     onCheck={this.updateCheck1.bind(this)}
                     style={styles.checkbox}
                 />
                 <Checkbox
-                    label="Simple with controlled value"
+                    label="Add new part"
                     checked={this.state.checked2}
                     onCheck={this.updateCheck2.bind(this)}
                     style={styles.checkbox}
                 />
                 <Checkbox
-                    label="Simple with controlled value"
+                    label="Add new turbo"
                     checked={this.state.checked3}
                     onCheck={this.updateCheck3.bind(this)}
                     style={styles.checkbox}
                 />
 
-                <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
-                    <Stepper activeStep={stepIndex}>
-                        <Step>
-                            <StepLabel>Select campaign settings</StepLabel>
+                <div style={{width: '80%', maxWidth: 500, margin: 'auto'}}>
+                    <Stepper style={styles.step} activeStep={stepIndex}>
+                        <Step style={styles.step}>
+                            <StepLabel style={styles.step} >Type car mark </StepLabel>
                         </Step>
                         <Step>
-                            <StepLabel>Create an ad group</StepLabel>
+                            <StepLabel style={styles.step}>Type car model</StepLabel>
                         </Step>
                         <Step>
-                            <StepLabel>Create an ad</StepLabel>
+                            <StepLabel style={styles.step}>Type model production date</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel style={styles.step}>Type capacity</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel style={styles.step}>Type factory No.</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel style={styles.step}>Type horse power</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel style={styles.step}>Type Turbo OEM</StepLabel>
                         </Step>
                     </Stepper>
                     <div style={contentStyle}>
@@ -151,6 +175,10 @@ class HorizontalLinearStepper extends React.Component {
                             <div>
                                 <p>{this.getStepContent(stepIndex)}</p>
                                 <div style={{marginTop: 12}}>
+                                    <TextField
+                                        hintText="Hint Text"
+                                        errorText="This field is required"
+                                    />
                                     <FlatButton
                                         label="Back"
                                         disabled={stepIndex === 0}
@@ -158,7 +186,7 @@ class HorizontalLinearStepper extends React.Component {
                                         style={{marginRight: 12}}
                                     />
                                     <RaisedButton
-                                        label={stepIndex === 2 ? 'Finish' : 'Next'}
+                                        label={stepIndex === 7 ? 'Finish' : 'Next'}
                                         primary={true}
                                         onClick={this.handleNext}
                                     />
@@ -170,19 +198,19 @@ class HorizontalLinearStepper extends React.Component {
             </div>:
                 <div>
                     <Checkbox
-                        label="Simple with controlled value"
+                        label="Add new car"
                         checked={this.state.checked1}
                         onCheck={this.updateCheck1.bind(this)}
                         style={styles.checkbox}
                     />
                     <Checkbox
-                        label="Simple with controlled value"
+                        label="Add new part"
                         checked={this.state.checked2}
                         onCheck={this.updateCheck2.bind(this)}
                         style={styles.checkbox}
                     />
                     <Checkbox
-                        label="Simple with controlled value"
+                        label="Add new turbo"
                         checked={this.state.checked3}
                         onCheck={this.updateCheck3.bind(this)}
                         style={styles.checkbox}
