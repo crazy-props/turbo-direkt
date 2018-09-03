@@ -36,14 +36,38 @@ class HorizontalLinearStepper extends React.Component {
     state = {
         finished: false,
         stepIndex: 0,
+        checked1:false,
+        checked2:false,
+        checked3:false
     };
-    updateCheck() {
+    updateCheck1() {
         this.setState((oldState) => {
             return {
-                checked: !oldState.checked,
+                checked1: !oldState.checked,
+                checked2: false,
+                checked3:false
             };
         });
     }
+    updateCheck2() {
+        this.setState((oldState) => {
+            return {
+                checked1:false,
+                checked2: !oldState.checked,
+                checked3:false
+            };
+        });
+    }
+    updateCheck3() {
+        this.setState((oldState) => {
+            return {
+                checked1: false,
+                checked2: false,
+                checked3:!oldState.checked
+            };
+        });
+    }
+
     handleNext = () => {
         const {stepIndex} = this.state;
         this.setState({
@@ -77,24 +101,24 @@ class HorizontalLinearStepper extends React.Component {
         const contentStyle = {margin: '0 16px'};
 
         return (
-            this.state.checked?
+            this.state.checked1||this.state.checked2||this.state.checked3?
             <div>
                 <Checkbox
                     label="Simple with controlled value"
-                    checked={this.state.checked}
-                    onCheck={this.updateCheck.bind(this)}
+                    checked={this.state.checked1}
+                    onCheck={this.updateCheck1.bind(this)}
                     style={styles.checkbox}
                 />
                 <Checkbox
                     label="Simple with controlled value"
-                    checked={this.state.checked}
-                    onCheck={this.updateCheck.bind(this)}
+                    checked={this.state.checked2}
+                    onCheck={this.updateCheck2.bind(this)}
                     style={styles.checkbox}
                 />
                 <Checkbox
                     label="Simple with controlled value"
-                    checked={this.state.checked}
-                    onCheck={this.updateCheck.bind(this)}
+                    checked={this.state.checked3}
+                    onCheck={this.updateCheck3.bind(this)}
                     style={styles.checkbox}
                 />
 
@@ -148,22 +172,23 @@ class HorizontalLinearStepper extends React.Component {
                 <div>
                     <Checkbox
                         label="Simple with controlled value"
-                        checked={this.state.checked}
-                        onCheck={this.updateCheck.bind(this)}
+                        checked={this.state.checked1}
+                        onCheck={this.updateCheck1.bind(this)}
                         style={styles.checkbox}
                     />
                     <Checkbox
                         label="Simple with controlled value"
-                        checked={this.state.checked}
-                        onCheck={this.updateCheck.bind(this)}
+                        checked={this.state.checked2}
+                        onCheck={this.updateCheck2.bind(this)}
                         style={styles.checkbox}
                     />
                     <Checkbox
                         label="Simple with controlled value"
-                        checked={this.state.checked}
-                        onCheck={this.updateCheck.bind(this)}
+                        checked={this.state.checked3}
+                        onCheck={this.updateCheck3.bind(this)}
                         style={styles.checkbox}
                     />
+
                 </div>
         );
     }
