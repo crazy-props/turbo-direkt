@@ -12,6 +12,7 @@ import Spinner from "./spinner"
 import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
+import InputForm from "./InputFormListofCars";
 
 
 const CustomTableCell = withStyles(theme => ({
@@ -81,6 +82,7 @@ class ListOfCarso extends Component {
         return (filter === null ?
             <Spinner/>
             : <div>
+                <InputForm/>
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
                         <Row end={'xs'}>

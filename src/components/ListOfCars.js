@@ -74,7 +74,7 @@ class ListOfCars extends Component {
                         <td>No.</td>
                         <td>Power</td>
                         <td className="lastTh">Turbo OEM</td>
-                        <td></td>
+                        <td>Remove form list</td>
                         </thead>
                         <tbody key={Math.random()}>
                         {
