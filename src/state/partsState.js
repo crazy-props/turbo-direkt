@@ -11,7 +11,7 @@ export const getParts = (parts) => ({
 export const myInit = () => (dispatch, getState) => {
     db.ref(`/parts/`).on(
         'value',
-        (snapshot) => dispatch(getParts(mapObjectToArray(snapshot.val()))))
+        (snapshot) => (dispatch(getParts(mapObjectToArray(snapshot.val())))))
 }
 
 export const newPart = (partsName, partsGroup) => (dispatch, getState) => {
@@ -49,16 +49,7 @@ export const subtractAmount = (objecter) => (dispatch, getState) => {
 
 const initialState = {
     parts: [],
-    actuators: [],
-    back_plates: [],
-    bearing_housings: [],
-    compressor_wheels: [],
-    gasket_kits: [],
-    heat_shields: [],
-    KODE_CHRAs: [],
-    nozzles: [],
-    repair_kits: [],
-    turbine_wheels: [],
+
 }
 
 export default (state = initialState, action) => {
@@ -66,17 +57,7 @@ export default (state = initialState, action) => {
         case GET_PARTS :
             return {
                 ...state,
-                parts: action.parts,
-                actuators: action.parts.filter(el => el.group ==="actuator"),
-                back_plates: action.parts.filter(el => el.group ==="back_plate"),
-                bearing_housings: action.parts.filter(el => el.group === "bearing_housing"),
-                compressor_wheels: action.parts.filter(el => el.group === "compressor_wheel"),
-                gasket_kist: action.parts.filter(el => el.group === "gasket_kit"),
-                heat_shields: action.parts.filter(el => el.group === "heat_shield"),
-                KODE_CHRAs: action.parts.filter(el => el.group === "KODE_CHRA"),
-                nozzles: action.parts.filter(el => el.group === "nozzle"),
-                repair_kits: action.parts.filter(el => el.group === "repair_kit"),
-                turbine_wheels: action.parts.filter(el => el.group === "turbine_wheel")
+                parts: action.parts
             }
 
         default:
