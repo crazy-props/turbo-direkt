@@ -41,7 +41,6 @@ class ShoppingList extends Component {
                                 </thead>
                                 <tbody>
                                 {this.props.productsToOrder.map(prod => {
-
                                     return (
                                         <tr>
                                             <td>{prod.value}</td>

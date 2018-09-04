@@ -1,22 +1,18 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {addAmount, subtractAmount, findKeyToDelete} from '../state/partsState';
-import {addProductToShoppingList, initList} from '../state/shoppingList';
+import {addAmount, subtractAmount} from '../state/partsState';
+import {addProductToShoppingList} from '../state/shoppingList';
 import AddPart from './AddPart'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Grid, Row, Col} from 'react-flexbox-grid';
 import Dialog from 'material-ui/Dialog';
+import Spinner from "./spinner";
 
 class ListOfParts extends Component {
     state = {
         basicSearchInput: '',
         isDialogOpen: false
-    }
-    componentDidMount() {
-        if (this.props.products !== undefined) {
-            this.props.initList()
-        }
     }
 
     handleOpen() {
@@ -55,33 +51,27 @@ class ListOfParts extends Component {
             <div>
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
-                        <Row end={'xs'}>
-                            <Col xs={6}>
-                                <TextField
-                                    style={{margin: 'auto'}}
-                                    fullWidth={true}
-                                    id={'idForTextField'}
-                                    floatingLabelText={'Search for parts'}
-                                    type={"text"}
-                                    value={this.state.basicSearchInput}
-                                    onChange={(event => {
-                                        this.setState({basicSearchInput: event.target.value})
-                                        console.log(this.props.findKeyToDelete(event.target.value))
-                                    })}
-                                />
-                            </Col>
-                        </Row>
+                        <TextField
+                            style={{margin: 'auto'}}
+                            fullWidth={true}
+                            id={'idForTextField'}
+                            floatingLabelText={'Search for parts'}
+                            type={"text"}
+                            value={this.state.basicSearchInput}
+                            onChange={event => {
+                                this.setState({basicSearchInput: event.target.value})
+                            }}
+                        />
+
                     </Col>
                     <Col xs>
-                        <Row start={'xs'} style={{padding: '3px'}}>
-                            <Col>
-                                <RaisedButton
-                                    onClick={() => this.handleOpen()}
-                                >
-                                    dodaj część
-                                </RaisedButton>
-                            </Col>
-                        </Row>
+
+                        <RaisedButton
+                            onClick={() => this.handleOpen()}
+                        >
+                            dodaj część
+                        </RaisedButton>
+
                     </Col>
                 </Row>
                 <div>
@@ -94,14 +84,14 @@ class ListOfParts extends Component {
                     </Dialog>
                 </div>
                 <Row className={'partsTableDiv'}>
-                    {this.props.actuators ?
+                    {this.props.actuators.length ?
                         myArrayForState.map((stateElement, i) => {
                             return (
                                 <table className="partsTable">
                                     <tbody key={Math.random()}>
                                     {this.props[`${stateElement}`].map((partInStateArray, index) => {
-                                        if ((partInStateArray.part.toLocaleLowerCase().includes(this.state.basicSearchInput.toLocaleLowerCase()))
-                                            || (partInStateArray.group.toLocaleLowerCase().includes(this.state.basicSearchInput.toLocaleLowerCase())))
+                                        if ((partInStateArray.part.toLowerCase().includes(this.state.basicSearchInput.toLowerCase()))
+                                            || (partInStateArray.group.toLowerCase().includes(this.state.basicSearchInput.toLowerCase())))
                                             return (
                                                 <tr id={`${partInStateArray.part}`}
                                                     key={Math.random()}
@@ -150,7 +140,8 @@ class ListOfParts extends Component {
                                 </table>
                             )
                         })
-                        : "loading"
+                        : <Spinner/>
+
                     }
                 </Row>
             </div>
@@ -176,9 +167,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     addAmount: (objectToAdd) => dispatch(addAmount(objectToAdd)),
-    initList: () => dispatch(initList()),
     subtractAmount: (objectToSubtract) => dispatch(subtractAmount(objectToSubtract)),
-    findKeyToDelete: (objectToFind) => dispatch(findKeyToDelete(objectToFind)),
     addProductToShoppingList: (part) => dispatch(addProductToShoppingList(part)),
 })
 
