@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import {connect} from "react-redux";
 import _ from 'lodash';
 import SingleTurbine from "./SingleTurbine";
-import Spinner from "./spinner"
+import Spinner from "./Spinner"
 import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
@@ -78,7 +78,6 @@ class ListOfCarso extends Component {
             )
 
         const numberOfCars = filter && filter.length
-
         return (filter === null ?
             <Spinner/>
             : <div>
@@ -93,9 +92,7 @@ class ListOfCarso extends Component {
                                            onChange={this.debounceEvent(this.handleSearch, 700)}/>
                                     <span className="highlight"/>
                                     <span className="bar"/>
-
                                 </div>
-
                             </Col>
                         </Row>
                     </Col>

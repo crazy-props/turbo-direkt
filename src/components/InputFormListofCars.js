@@ -9,18 +9,12 @@ import {connect} from "react-redux";
 import {
     Step,
     Stepper,
-    StepButton,
-    StepContent,
     StepLabel
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import Checkbox from 'material-ui/Checkbox';
 import {withStyles} from "@material-ui/core";
 import SingleTurbine from "./SingleTurbine";
-import {removeCarFromList} from "../state/carsState";
-
-
 
 
 
@@ -33,9 +27,8 @@ const CustomTableCell = withStyles(theme => ({
         fontSize: 14,
     },
 }))(TableCell);
-/**
- * A basic vertical non-linear implementation
- */const styles = {
+
+const styles = {
     block: {
         maxWidth: 250,
     },
@@ -47,14 +40,7 @@ const CustomTableCell = withStyles(theme => ({
     }
 };
 
-/**
- * Horizontal steppers are ideal when the contents of one step depend on an earlier step.
- * Avoid using long step names in horizontal steppers.
- *
- * Linear steppers require users to complete one step in order to move on to the next.
- */
 class HorizontalLinearStepper extends React.Component {
-
     state = {
         finished: false,
         stepIndex: 0,
@@ -67,11 +53,9 @@ class HorizontalLinearStepper extends React.Component {
         capacity: "",
         factoryno: "",
         power: "",
-        turbo: []
-
+        turbo: [],
+        input:""
     };
-
-
     updateCheck1() {
         this.setState((oldState) => {
             return {
@@ -80,6 +64,9 @@ class HorizontalLinearStepper extends React.Component {
                 checked3: false
             };
         });
+    }
+    cancelInput(){
+        this.refs.fieldName.value="";
     }
 
     updateCheck2() {
@@ -91,7 +78,6 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
-
     updateCheck3() {
         this.setState((oldState) => {
             return {
@@ -101,7 +87,6 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
-
     handleNext = () => {
         const {stepIndex} = this.state;
         this.setState({
@@ -134,7 +119,6 @@ class HorizontalLinearStepper extends React.Component {
         console.log(this.state.model);
         console.log(this.state.turbo);
     }
-
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
@@ -155,9 +139,6 @@ class HorizontalLinearStepper extends React.Component {
                 return 'Return';
         }
     }
-
-
-
     render() {
 const objecttodb={
     mark: this.state.mark,
@@ -171,23 +152,25 @@ const objecttodb={
 }
         const {finished, stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
-
         return (
             this.state.checked1 || this.state.checked2 || this.state.checked3 ?
                 <div>
                     <Checkbox
+                        disabled={this.state.stepIndex>0}
                         label="Add new car"
                         checked={this.state.checked1}
                         onCheck={this.updateCheck1.bind(this)}
                         style={styles.checkbox}
                     />
                     <Checkbox
+                        disabled={this.state.stepIndex>0}
                         label="Add new part"
                         checked={this.state.checked2}
                         onCheck={this.updateCheck2.bind(this)}
                         style={styles.checkbox}
                     />
                     <Checkbox
+                        disabled={this.state.stepIndex>0}
                         label="Add new turbo"
                         checked={this.state.checked3}
                         onCheck={this.updateCheck3.bind(this)}
@@ -257,31 +240,54 @@ const objecttodb={
                                             this.setState({stepIndex: 0, finished: false});
                                         }}
                                     >
-                                        Click here
-                                    </a> to reset the example.
+                                    </a>
+                                    <RaisedButton
+
+                                        label="Back"
+                                        disabled={stepIndex === 0}
+                                        style={{marginRight: 12}}
+                                        onClick={(event) => {
+                                            event.preventDefault();
+                                            this.setState({stepIndex: 0, finished: false, mark:'',model:'',capacity:'', date: "",factoryno: "", power: "",
+                                                turbo: []});
+                                        }}
+                                    />
+                                    <RaisedButton
+                                    disabled={stepIndex <6}
+                                    label={'Add to list'}
+                                    onClick={addCarToList(objecttodb)}
+                                    style={{marginRight: 12}}
+                                />
                                 </p>
                             ) : (
                                 <div>
                                     <p>{this.getStepContent(stepIndex)}</p>
                                     <div style={{marginTop: 12}}>
                                         <input
+                                            ref="fieldName"
+                                            type={stepIndex===3||stepIndex===5?"number":"text"}
                                             onChange={this.handleForm}
                                         />
-
-                                        <FlatButton
+                                        <RaisedButton
                                             label="Back"
                                             disabled={stepIndex === 0}
-                                            onClick={this.handlePrev}
+                                            onClick={()=>{ this.handlePrev();this.cancelInput()}}
                                             style={{marginRight: 12}}
                                         />
+
                                         <RaisedButton
                                             label={stepIndex === 7 ? 'Finish' : 'Next'}
                                             primary={true}
-                                            onClick={this.handleNext}
+                                            disabled={(
+                                                this.state.mark===''
+                                                || stepIndex===1 && this.state.model===""
+                                                ||stepIndex===3 && this.state.capacity===''
+                                                ||stepIndex===6 && this.state.turbo.length===0
+                                            )
+                                            }
+                                            onClick={()=>{ this.handleNext();this.cancelInput()}}
+                                            style={{marginRight: 12}}
                                         />
-                                        <button
-                                            onClick={addCarToList(objecttodb)}
-                                        >xxaDD</button>
                                     </div>
                                 </div>
                             )}
