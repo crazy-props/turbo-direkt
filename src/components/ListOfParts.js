@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Grid, Row, Col} from 'react-flexbox-grid';
 import Dialog from 'material-ui/Dialog';
-import Spinner from "./spinner";
+import Spinner from "./Spinner";
 
 class ListOfParts extends Component {
     state = {

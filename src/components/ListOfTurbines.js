@@ -30,9 +30,7 @@ class ListOfTurbines extends Component {
         //check to listOfTurbines is already update and asign array length to variable - reguired for pagination
         const numberOfTurbines = listOfTurbines && listOfTurbines.length
 
-        return this.props.turbo === null && this.props.part === null ?
-            <div style={{ textAlign: 'center' }}><Spinner /> </div>
-            :
+        return this.props.turbo !== null && this.props.part !== null ?
             <div>
                 {<CreteListOfParts />}
                 <SearchInput
@@ -40,35 +38,35 @@ class ListOfTurbines extends Component {
                 />
                 <table className="carsTable">
                     <thead className="carsTableHead">
-                    <tr>
-                        {this.state._listOfParts.map(el => <th>{el}</th>)}
-                    </tr>
+                        <tr>
+                            {this.state._listOfParts.map(el => <th>{el}</th>)}
+                        </tr>
                     </thead>
                     <tbody >
-                    {listOfTurbines
-                    /*this block of code is responsible for pagination view:*/
-                        .filter((el, i) => (
-                            i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
-                            &&
-                            i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
-                        ))
-                        /*this block of code mapping turbines state:*/
-                        .map(
-                            turbine =>
-                                <tr className="trOne" key={turbine.key}>
-                                    <td>{turbine.turboOEM}</td>
-                                    {this.state._parts.map(part => <PartsColumn parts={turbine[part]} />)}
-                                    <td>
-                                        {/* dispatched function has own refernce to turbine.key property*/}
-                                        <IconButton
-                                            tooltip="Delete"
-                                            onClick={() => this.props.removeTurboFromList(turbine)}
-                                        >
-                                            <Delete />
-                                        </IconButton>
-                                    </td>
-                                </tr>
-                        )}
+                        {listOfTurbines
+                            /*this block of code is responsible for pagination view:*/
+                            .filter((el, i) => (
+                                i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
+                                &&
+                                i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
+                            ))
+                            /*this block of code mapping turbines state:*/
+                            .map(
+                                turbine =>
+                                    <tr className="trOne" key={turbine.key}>
+                                        <td>{turbine.turboOEM}</td>
+                                        {this.state._parts.map(part => <PartsColumn parts={turbine[part]} />)}
+                                        <td>
+                                            {/* dispatched function has own refernce to turbine.key property*/}
+                                            <IconButton
+                                                tooltip="Delete"
+                                                onClick={() => this.props.removeTurboFromList(turbine)}
+                                            >
+                                                <Delete />
+                                            </IconButton>
+                                        </td>
+                                    </tr>
+                            )}
                     </tbody>
                 </table>
                 {/*show pagination numbers ander the table*/}
@@ -81,6 +79,9 @@ class ListOfTurbines extends Component {
                     />
                 </div>
             </div>
+            :
+            <div style={{ textAlign: 'center' }}><Spinner /> </div>
+
     }
 }
 const mapStateToProps = state => ({
@@ -89,7 +90,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    removeTurboFromList: (el) => dispatch(removeTurboFromList(el))
+    removeTurboFromList: (val) => dispatch(removeTurboFromList(val))
 })
 
 export default connect(
