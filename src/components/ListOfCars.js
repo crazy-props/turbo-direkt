@@ -2,22 +2,20 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import _ from 'lodash';
 import SingleTurbine from "./SingleTurbine";
-import Spinner from "./spinner"
+import Spinner from "./Spinner"
 import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
-
-
+import {removeCarFromList} from "../state/carsState";
+import RaisedButton from 'material-ui/RaisedButton';
 
 class ListOfCars extends Component {
-
     state = {
         searchTerm: '',
         ITEMS_PER_PAGE: 10,
         currentPage: 0
 
     }
-
     debounceEvent(...args) {
         this.debouncedEvent = _.debounce(...args);
         return e => {
@@ -48,6 +46,7 @@ class ListOfCars extends Component {
         return (filter === null ?
           <Spinner/>
             : <div>
+
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
@@ -65,6 +64,7 @@ class ListOfCars extends Component {
                     </Col>
                 </Row>
                 <Row className={'partsTableDiv'}>
+
                     <table className="carsTable">
                         <thead className="carsTableHead">
                         <td>Mark</td>
@@ -74,6 +74,7 @@ class ListOfCars extends Component {
                         <td>No.</td>
                         <td>Power</td>
                         <td className="lastTh">Turbo OEM</td>
+                        <td>Remove form list</td>
                         </thead>
                         <tbody key={Math.random()}>
                         {
@@ -84,7 +85,7 @@ class ListOfCars extends Component {
                                 i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
                             ))
                             .map((el) =>
-                                <tr className="trOne">
+                                <tr className="trOne" key={el.key}>
                                     <td>{el.mark}</td>
                                     <td>{el.model}</td>
                                     <td>{el.date}</td>
@@ -95,12 +96,15 @@ class ListOfCars extends Component {
                                         {el.turbo_OEM && el.turbo_OEM.length ?
                                             el.turbo_OEM.filter(function (a, b, c) {
                                                 return c.indexOf(a) === b;
-                                            }).map(el => <a
-                                                href="http://localhost:3000/turbines"><SingleTurbine
-                                                el={el}/></a>
-                                            ) :
+                                            }).map(el => <SingleTurbine
+                                                turbine={el}/>                                        ) :
                                             el.turbo_OEM
                                         }
+                                    </td>
+                                    <td>
+                                        <RaisedButton
+                                            onClick={removeCarFromList(el)}>Delete car
+                                        </RaisedButton>
                                     </td>
                                 </tr>
                             ) : this.state.searchTerm.length?<Error/>:<Spinner/>
@@ -123,7 +127,8 @@ class ListOfCars extends Component {
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
 })
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+    removeCarFromList: (el) => dispatch(removeCarFromList(el))})
 
 export default connect(
     mapStateToProps,

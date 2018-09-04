@@ -10,13 +10,24 @@ export const set = (turboValue) => ({
 
 
 export const initTurbo = () => (dispatch, getState) => {
-    db.ref(`/turbo/`).on(
+    db.ref(`/turbo/`)/*.limitToFirst(100)*/.on(
         'value',
         (snapshot) => {
             (dispatch(set(mapObjectToArray(snapshot.val())))
             )
         })
 }
+export const removeTurboFromList = (turbine) => (dispatch, getState) => {
+    console.log(turbine)
+    db.ref(`/turbo/${turbine.key}`).remove()
+        .then(() =>
+            alert(`Delete succeeded. ${turbine.turboOEM}`)
+        )
+        .catch((error) =>
+            console.log("Delete failed: " + error.message)
+        )
+}
+
 
 const initialState = {
     turbo: null

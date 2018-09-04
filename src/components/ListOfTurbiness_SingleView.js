@@ -1,16 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 const PartsColumn = props =>
-    <td>
+    <td className="turboList">
         <ul>
             {props.parts && props.parts.length ?
-                props.parts.map(x =>
+                props.parts.map(part =>
                     <li>
-                        {x}{`, `}
+                        {part}{`:`}
+                        <br />
                         {props.part && props.part.length ?
                             props.part
-                                .filter(z => z.part === x)
-                                .map(x => <span>{`amount: ${x.amount}`}</span>)
+                                .filter(turbo => turbo.part === part)
+                                .map(part => <span>{`amount: ${part.amount}`}</span>)
                             : ` Loading amount...`}
                     </li>)
                 : props.parts}

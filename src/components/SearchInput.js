@@ -1,7 +1,6 @@
 import React from 'react'
-
-import TextField from 'material-ui/TextField';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Grid, Row, Col } from 'react-flexbox-grid'
+import TextField from 'material-ui/TextField'
 
 const SearchInput = (props) =>
     <div>
@@ -9,7 +8,7 @@ const SearchInput = (props) =>
             <Row>
                 <Col xs={12} sm={12} md={12} lg={12} >
                     <div>
-                        <h3>Search Turbine:</h3>
+                        <span>{`Search Turbine: `}</span>
                         <TextField
                             onChange={props.handleTurbineNameChangeChandler }
                             hintText={'Turbine number:'}
