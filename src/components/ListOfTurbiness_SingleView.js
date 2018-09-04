@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 const PartsColumn = props =>
-    <td>
+    <td className="turboList">
         <ul>
             {props.parts && props.parts.length ?
                 props.parts.map(part =>

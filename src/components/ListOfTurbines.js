@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import Pagination from 'material-ui-pagination'
 import Delete from 'material-ui/svg-icons/action/delete'
 import IconButton from 'material-ui/IconButton'
-import style from '../style'
 import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
@@ -34,18 +33,17 @@ class ListOfTurbines extends Component {
             <div style={{ textAlign: 'center' }}>Loading .... </div>
             :
             <div>
-                {<CreteListOfParts />
-                }
+                {<CreteListOfParts />}
                 <SearchInput
                     handleTurbineNameChangeChandler={this.handleTurbineNameChangeChandler}
                 />
-                <table style={{ margin: 'auto' }}>
-                    <thead >
-                        <tr style={style.table_head} >
+                <table className="carsTable">
+                    <thead className="carsTableHead">
+                        <tr>
                             {this.state._listOfParts.map(el => <th>{el}</th>)}
                         </tr>
                     </thead>
-                    <tbody style={style.table_body}>
+                    <tbody >
                         {listOfTurbines
                             /*this block of code is responsible for pagination view:*/
                             .filter((el, i) => (
@@ -56,7 +54,7 @@ class ListOfTurbines extends Component {
                             /*this block of code mapping turbines state:*/
                             .map(
                                 turbine =>
-                                    <tr key={turbine.key}>
+                                    <tr className="trOne" key={turbine.key}>
                                         <td>{turbine.turboOEM}</td>
                                         {this.state._parts.map(part => <PartsColumn parts={turbine[part]} />)}
                                         <td>
