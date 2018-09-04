@@ -5,7 +5,7 @@ import {addProductToShoppingList, initList} from '../state/shoppingList';
 import AddPart from './AddPart'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Row, Col} from 'react-flexbox-grid';
 import Dialog from 'material-ui/Dialog';
 
 class ListOfParts extends Component {

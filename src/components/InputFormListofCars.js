@@ -15,7 +15,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Checkbox from 'material-ui/Checkbox';
 import {withStyles} from "@material-ui/core";
 import SingleTurbine from "./SingleTurbine";
-import AutoComplete from 'material-ui/AutoComplete';
+import AutoComplete from "material-ui/AutoComplete";
+
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -41,6 +42,7 @@ const styles = {
 
 class HorizontalLinearStepper extends React.Component {
     state = {
+        searchText: '',
         finished: false,
         stepIndex: 0,
         checked1: false,
@@ -53,8 +55,21 @@ class HorizontalLinearStepper extends React.Component {
         factoryno: "",
         power: "",
         turbo: [],
-        input:""
+        input: ""
     };
+
+
+    handleNewRequest = () => {
+        this.setState({
+            searchText: '',
+        });
+    };
+    handleUpdateInput = (searchText) => {
+        this.setState({
+            searchText: searchText,
+        });
+    };
+
     updateCheck1() {
         this.setState((oldState) => {
             return {
@@ -64,8 +79,9 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
-    cancelInput(){
-        this.refs.fieldName.value="";
+
+    cancelInput() {
+        this.refs.fieldName.value = "";
     }
 
     updateCheck2() {
@@ -77,6 +93,7 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
+
     updateCheck3() {
         this.setState((oldState) => {
             return {
@@ -86,6 +103,7 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
+
     handleNext = () => {
         const {stepIndex} = this.state;
         this.setState({
@@ -105,9 +123,9 @@ class HorizontalLinearStepper extends React.Component {
         else if (this.state.stepIndex === 1)
             this.setState({model: e.target.value});
         else if (this.state.stepIndex === 2)
-            this.setState({date: "from "+ e.target.value});
+            this.setState({date: "from " + e.target.value});
         else if (this.state.stepIndex === 3)
-            this.setState({capacity: e.target.value+" ccm"});
+            this.setState({capacity: e.target.value + " ccm"});
         else if (this.state.stepIndex === 4)
             this.setState({factoryno: e.target.value});
         else if (this.state.stepIndex === 5)
@@ -118,6 +136,7 @@ class HorizontalLinearStepper extends React.Component {
         console.log(this.state.model);
         console.log(this.state.turbo);
     }
+
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
@@ -138,38 +157,44 @@ class HorizontalLinearStepper extends React.Component {
                 return 'Return';
         }
     }
-    render() {
-const objecttodb={
-    mark: this.state.mark,
-    model: this.state.model,
-    date: this.state.date,
-    capacity: this.state.capacity,
-    no: this.state.factoryno,
-    power: this.state.power,
-    turbo_OEM: this.state.turbo
 
-}
+    render() {
+
+        const list = this.props.cars && this.props.cars.length ? this.props.cars.map(car => car.turbo_OEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
+            return c.indexOf(a) === b;
+        }) : ['waitnig'];
+
+        const objecttodb = {
+            mark: this.state.mark,
+            model: this.state.model,
+            date: this.state.date,
+            capacity: this.state.capacity,
+            no: this.state.factoryno,
+            power: this.state.power,
+            turbo_OEM: this.state.turbo
+
+        }
         const {finished, stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
         return (
             this.state.checked1 || this.state.checked2 || this.state.checked3 ?
                 <div>
                     <Checkbox
-                        disabled={this.state.stepIndex>0}
+                        disabled={this.state.stepIndex > 0}
                         label="Add new car"
                         checked={this.state.checked1}
                         onCheck={this.updateCheck1.bind(this)}
                         style={styles.checkbox}
                     />
                     <Checkbox
-                        disabled={this.state.stepIndex>0}
+                        disabled={this.state.stepIndex > 0}
                         label="Add new part"
                         checked={this.state.checked2}
                         onCheck={this.updateCheck2.bind(this)}
                         style={styles.checkbox}
                     />
                     <Checkbox
-                        disabled={this.state.stepIndex>0}
+                        disabled={this.state.stepIndex > 0}
                         label="Add new turbo"
                         checked={this.state.checked3}
                         onCheck={this.updateCheck3.bind(this)}
@@ -247,30 +272,49 @@ const objecttodb={
                                         style={{marginRight: 12}}
                                         onClick={(event) => {
                                             event.preventDefault();
-                                            this.setState({stepIndex: 0, finished: false, mark:'',model:'',capacity:'', date: "",factoryno: "", power: "",
-                                                turbo: []});
+                                            this.setState({
+                                                stepIndex: 0,
+                                                finished: false,
+                                                mark: '',
+                                                model: '',
+                                                capacity: '',
+                                                date: "",
+                                                factoryno: "",
+                                                power: "",
+                                                turbo: []
+                                            });
                                         }}
                                     />
                                     <RaisedButton
-                                    disabled={stepIndex <6}
-                                    label={'Add to list'}
-                                    onClick={addCarToList(objecttodb)}
-                                    style={{marginRight: 12}}
-                                />
+                                        disabled={stepIndex < 6}
+                                        label={'Add to list'}
+                                        onClick={addCarToList(objecttodb)}
+                                        style={{marginRight: 12}}
+                                    />
                                 </p>
                             ) : (
                                 <div>
                                     <p>{this.getStepContent(stepIndex)}</p>
-                                    <div style={{marginTop: 12}}>
+                                    <div style={{marginTop: 12}}>{stepIndex !== 6 ?
                                         <input
                                             ref="fieldName"
-                                            type={stepIndex===3||stepIndex===5?"number":"text"}
+                                            type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
                                             onChange={this.handleForm}
-                                        />
+                                        /> : <AutoComplete
+                                            searchText={this.state.searchText}
+                                            onUpdateInput={this.handleUpdateInput}
+                                            dataSource={list}
+                                            filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
+                                            openOnFocus={true}
+                                            onNewRequest={this.handleNewRequest}
+                                        />}
                                         <RaisedButton
                                             label="Back"
                                             disabled={stepIndex === 0}
-                                            onClick={()=>{ this.handlePrev();this.cancelInput()}}
+                                            onClick={() => {
+                                                this.handlePrev();
+                                                this.cancelInput()
+                                            }}
                                             style={{marginRight: 12}}
                                         />
 
@@ -278,14 +322,16 @@ const objecttodb={
                                             label={stepIndex === 7 ? 'Finish' : 'Next'}
                                             primary={true}
                                             disabled={(
-                                                this.state.mark===''
-                                                || stepIndex===1 && this.state.model===""
-                                                ||stepIndex===3 && this.state.capacity===''
-                                                ||stepIndex===6 && this.state.turbo.length===0
+                                                this.state.mark === ''
+                                                || stepIndex === 1 && this.state.model === ""
+                                                || stepIndex === 3 && this.state.capacity === ''
+                                                || stepIndex === 6 && this.state.turbo.length === 0
                                             )
-
                                             }
-                                            onClick={()=>{ this.handleNext();this.cancelInput()}}
+                                            onClick={() => {
+                                                this.handleNext();
+                                                this.cancelInput()
+                                            }}
                                             style={{marginRight: 12}}
                                         />
                                     </div>
@@ -323,6 +369,7 @@ const mapStateToProps = state => ({
     cars: state.carsState.cars,
 })
 const mapDispatchToProps = dispatch => ({
-    addCarToList: (objecttodb) => dispatch(addCarToList(objecttodb))})
+    addCarToList: (objecttodb) => dispatch(addCarToList(objecttodb))
+})
 
 export default HorizontalLinearStepper;

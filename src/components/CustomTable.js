@@ -13,6 +13,7 @@ import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import InputForm from "./InputFormListofCars";
+import Auto from "./Autocomplete";
 
 
 const CustomTableCell = withStyles(theme => ({
@@ -70,7 +71,6 @@ class ListOfCarso extends Component {
 
     render() {
         let cars = this.props.cars;
-        console.log(cars && cars.length?cars.map(car=>car.turbo_OEM).reduce((red,val)=>red.concat(val), []).map(el=>Object.assign(({}, {label : el}))) :'waitnig')
 
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
