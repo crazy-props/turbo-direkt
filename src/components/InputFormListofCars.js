@@ -284,6 +284,7 @@ const objecttodb={
                                                 ||stepIndex===3 && this.state.capacity===''
                                                 ||stepIndex===6 && this.state.turbo.length===0
                                             )
+
                                             }
                                             onClick={()=>{ this.handleNext();this.cancelInput()}}
                                             style={{marginRight: 12}}

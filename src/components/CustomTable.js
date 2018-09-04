@@ -13,8 +13,11 @@ import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import InputForm from "./InputFormListofCars";
+import AutoComplete from 'material-ui/AutoComplete';
 
-
+const colors = cars && cars.length?cars.map(car=>car.turbo_OEM).filter(function (a, b, c) {
+    return c.indexOf(a) === b;
+})
 const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: theme.palette.common.black,
@@ -70,13 +73,16 @@ class ListOfCarso extends Component {
 
     render() {
         let cars = this.props.cars;
+        console.log(cars && cars.length?cars.map(car=>car.turbo_OEM).reduce((red,val)=>red.concat(val), []).filter(function (a, b, c) {
+            return c.indexOf(a) === b;
+        }).map(el=>Object.assign(({}, {label : el}))) :'waitnig')
+
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
             .filter(car =>
                 car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
                 car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm) !== -1)
             )
-
         const numberOfCars = filter && filter.length
         return (filter === null ?
             <Spinner/>
@@ -161,3 +167,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(ListOfCarso)
+
