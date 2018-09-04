@@ -1,5 +1,5 @@
-import {db} from "../firebase";
-import {mapObjectToArray} from "../utils";
+import { db } from "../firebase";
+import { mapObjectToArray } from "../utils";
 
 const GET_PARTS = "partsState/GET_PARTS"
 
@@ -15,7 +15,7 @@ export const myInit = () => (dispatch, getState) => {
 }
 
 export const newPart = (partsName, partsGroup) => (dispatch, getState) => {
-    const newPart = {amount: 0, group: partsGroup, part: partsName}
+    const newPart = { amount: 0, group: partsGroup, part: partsName }
     db.ref('/parts/').push(newPart)
 }
 
@@ -59,7 +59,6 @@ export default (state = initialState, action) => {
                 ...state,
                 parts: action.parts
             }
-
         default:
             return state
     }
