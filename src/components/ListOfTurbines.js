@@ -29,8 +29,8 @@ class ListOfTurbines extends Component {
 
     render() {
 
-        const listOfTurbines = this.props.turbo && this.props.turbo
-            .filter(nam => nam.turboOEM.toLowerCase().indexOf(this.state.turbineName.toLowerCase()) !== -1)
+        const listOfTurbines = this.props.turbo && this.props.turbo.length ? this.props.turbo
+            .filter(nam => nam.turboOEM.toLowerCase().indexOf(this.state.turbineName.toLowerCase()) !== -1) : []
 
         const numberOfTurbines = listOfTurbines && listOfTurbines.length
 
