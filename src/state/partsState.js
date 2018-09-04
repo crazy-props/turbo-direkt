@@ -1,5 +1,5 @@
-import {db} from "../firebase";
-import {mapObjectToArray} from "../utils";
+import { db } from "../firebase";
+import { mapObjectToArray } from "../utils";
 
 const GET_PARTS = "partsState/GET_PARTS"
 const DIVIDE_PARTS = "partsState/DIVIDE_PARTS"
@@ -26,7 +26,7 @@ export const myInit = () => (dispatch, getState) => {
 }
 
 export const newPart = (partsName, partsGroup) => (dispatch, getState) => {
-    const newPart = {amount: 0, group: partsGroup, part: partsName}
+    const newPart = { amount: 0, group: partsGroup, part: partsName }
     db.ref('/parts/').push(newPart)
     console.log(newPart)
 }
@@ -60,7 +60,7 @@ export const subtractAmount = (objecter) => (dispatch, getState) => {
     let xAmount
     getState().partsState.parts.find(x => {
         if ((x.part === objecter) && (x.amount > 0))
-            return xAmount = x.amount-1
+            return xAmount = x.amount - 1
         else return xAmount = 0
     })
     return db.ref(`/parts/${findKey.key}/amount`).set(xAmount)
@@ -82,14 +82,14 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_PARTS :
+        case GET_PARTS:
             console.log(action.parts.length)
             return {
                 ...state,
                 parts: action.parts
             }
 
-        case DIVIDE_PARTS :
+        case DIVIDE_PARTS:
             let allParts = action.parts
             let actuator = []
             let back_plate = []
