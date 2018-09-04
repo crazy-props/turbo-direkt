@@ -7,6 +7,7 @@ import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
 import CreteListOfParts from './CreteListOfParts'
+import Spinner from './spinenr';
 class ListOfTurbines extends Component {
     state = {
         _listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA', 'Delete'],
@@ -30,7 +31,7 @@ class ListOfTurbines extends Component {
         const numberOfTurbines = listOfTurbines && listOfTurbines.length
 
         return this.props.turbo === null && this.props.part === null ?
-            <div style={{ textAlign: 'center' }}>Loading .... </div>
+            <div style={{ textAlign: 'center' }}><Spinner /> </div>
             :
             <div>
                 {<CreteListOfParts />}
