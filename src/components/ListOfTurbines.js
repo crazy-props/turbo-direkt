@@ -7,7 +7,7 @@ import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
 import CreteListOfParts from './CreteListOfParts'
-import Spinner from './spinenr';
+import Spinner from './spinner';
 class ListOfTurbines extends Component {
     state = {
         _listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA', 'Delete'],
@@ -24,8 +24,9 @@ class ListOfTurbines extends Component {
 
     render() {
 
-        const listOfTurbines = this.props.turbo && this.props.turbo
-            .filter(nam => nam.turboOEM.toLowerCase().indexOf(this.state.turbineName.toLowerCase()) !== -1)
+        const listOfTurbines = this.props.turbo && this.props.turbo.length ?
+            this.props.turbo.filter(nam => nam.turboOEM.toLowerCase().indexOf(this.state.turbineName.toLowerCase()) !== -1)
+            : []
 
         //check to listOfTurbines is already update and asign array length to variable - reguired for pagination
         const numberOfTurbines = listOfTurbines && listOfTurbines.length
@@ -71,7 +72,7 @@ class ListOfTurbines extends Component {
                             )}
                     </tbody>
                 </table>
-                {/*show pagination numbers ander the table*/}
+                {/*show pagination numbers under the table*/}
                 <div style={{ textAlign: 'center' }}>
                     <Pagination
                         total={Math.ceil(numberOfTurbines / this.state.ITEMS_PER_PAGE)}
