@@ -39,7 +39,8 @@ class ListOfCars extends Component {
         const filter = cars
             .filter(car =>
                 car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
-                car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm) !== -1)
+                car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1)
+                ||car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1
             )
 
         const numberOfCars = filter && filter.length
@@ -52,7 +53,7 @@ class ListOfCars extends Component {
                         <Row end={'xs'}>
                             <Col xs={6}>
                                 <div className="group">
-                                    <input placeholder="search:turbo and cars" type="search"
+                                    <input placeholder="Szukaj:pojazd,marka,turbina" type="search"
                                            onChange={this.debounceEvent(this.handleSearch, 700)}/>
                                     <span className="highlight"/>
                                     <span className="bar"/>

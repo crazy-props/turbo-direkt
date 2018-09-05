@@ -15,6 +15,7 @@ import {withStyles} from "@material-ui/core";
 import SingleTurbine from "./SingleTurbine";
 import CheckBoxes from "./CheckBoxes";
 import TableTop from "./TableTop";
+import AutoComplete from "material-ui/AutoComplete";
 const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: theme.palette.common.black,
@@ -34,6 +35,7 @@ const styles = {
 };
 class HorizontalLinearStepper extends React.Component {
     state = {
+        searchText: '',
         finished: false,
         stepIndex: 0,
         checked1: false,
@@ -47,6 +49,18 @@ class HorizontalLinearStepper extends React.Component {
         power: "",
         turbo: [],
     };
+    handleUpdateInput = (searchText) => {
+        this.setState({
+            searchText: searchText,turbo:[searchText]
+        });
+    };
+
+    handleNewRequest = () => {
+        this.setState({
+            searchText: '',
+        });
+    };
+
     updateCheck1() {
         this.setState((oldState) => {
             return {
@@ -100,7 +114,7 @@ class HorizontalLinearStepper extends React.Component {
             this.setState({power: e.target.value + ' HP'});
         else if (this.state.stepIndex === 6)
             this.setState({
-                turbo: [...this.state.turbo, e.target.value]});
+                turbo: [...this.state.turbo, this.state.searchText]});
     }
     getStepContent(stepIndex) {
         switch (stepIndex) {
@@ -127,7 +141,7 @@ class HorizontalLinearStepper extends React.Component {
         const list = this.props.cars && this.props.cars.length ? this.props.cars.map(car => car.turbo_OEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
             return c.indexOf(a) === b;
         }) : ['waitnig'];
-
+        console.log(this.state.searchText)
         const objecttodb = {
             mark: this.state.mark, model: this.state.model, date: this.state.date, capacity: this.state.capacity,
             no: this.state.factoryNo, power: this.state.power, turbo_OEM: this.state.turbo
@@ -154,7 +168,7 @@ class HorizontalLinearStepper extends React.Component {
                             <CustomTableCell>{this.state.model}</CustomTableCell>
                             <CustomTableCell>{this.state.date}</CustomTableCell>
                             <CustomTableCell>{this.state.capacity}</CustomTableCell>
-                            <CustomTableCell>{this.state.factoryno}</CustomTableCell>
+                            <CustomTableCell>{this.state.factoryNo}</CustomTableCell>
                             <CustomTableCell>{this.state.power}</CustomTableCell>
                             <CustomTableCell className="turboList">
                                 {this.state.turbo && this.state.turbo.length ?
@@ -219,12 +233,20 @@ class HorizontalLinearStepper extends React.Component {
                             ) : (
                                 <div>
                                     <p>{this.getStepContent(stepIndex)}</p>
-                                    <div style={{marginTop: 12}}>
+                                    <div style={{marginTop: 12}}>{stepIndex!==6?
                                         <input
                                             ref="fieldName"
                                             type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
                                             onChange={this.handleForm}
-                                        />
+                                        />:<AutoComplete
+                                            ref="fieldName"
+                                        floatingLabelText="Type 'peah', fuzzy search"
+                                        filter={AutoComplete.fuzzyFilter}
+                                        dataSource={list||['wggggaitnig']}
+                                        maxSearchResults={8}
+                                        onUpdateInput={this.handleUpdateInput}
+                                        onNewRequest={this.handleNewRequest}
+                                        />}
                                         <RaisedButton
                                             label="Wstecz"
                                             disabled={stepIndex === 0}
