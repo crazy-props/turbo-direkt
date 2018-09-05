@@ -18,7 +18,6 @@ class ListOfTurbines extends Component {
         currentPage: 0,
         //Pagination variables end
     }
-
     // neutralise to currentPage is required for reapper to first side of results
     handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
