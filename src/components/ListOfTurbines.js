@@ -7,7 +7,8 @@ import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
 import CreteListOfParts from './CreteListOfParts'
-import Spinner from './Spinner'
+
+
 class ListOfTurbines extends Component {
     state = {
         _listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA', 'Delete'],
@@ -36,6 +37,7 @@ class ListOfTurbines extends Component {
                     handleTurbineNameChangeChandler={this.handleTurbineNameChangeChandler}
                 />
                 <table className="carsTable">
+                <Spinner/>
                     <thead className="carsTableHead">
                         <tr>
                             {this.state._listOfParts.map(el => <th>{el}</th>)}
