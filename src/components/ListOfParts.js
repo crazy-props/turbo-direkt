@@ -5,13 +5,17 @@ import {addProductToShoppingList} from '../state/shoppingList';
 import AddPart from './AddPart'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Row, Col} from 'react-flexbox-grid';
 import Dialog from 'material-ui/Dialog';
-import Spinner from "./Spinner"
+import Pagination from "material-ui-pagination";
+import TR from './TR'
+
 class ListOfParts extends Component {
     state = {
         basicSearchInput: '',
-        isDialogOpen: false
+        isDialogOpen: false,
+        ITEMS_PER_PAGE: 10,
+        currentPage: 0
     }
 
     handleOpen() {
@@ -22,29 +26,26 @@ class ListOfParts extends Component {
         this.setState({isDialogOpen: false})
     }
 
-    render() {
-        let myArrayForState = ['actuators',
-            'back_plates',
-            'bearing_housings',
-            'compressor_wheels',
-            'gasket_kits',
-            'heat_shields',
-            'KODE_CHRAs',
-            'nozzles',
-            'repair_kits',
-            'turbine_wheels']
+    setStateForSearch(event) {
+        this.setState({basicSearchInput: event.target.value})
+    }
 
-        let arrayForHeadings = ['Actuator',
-            'Back plate',
-            'Bearing housing',
-            'Compressor wheel',
-            'Gasket kit',
-            'Heat shield',
-            'KODE CHRA',
-            'Nozzle',
-            'Repair kit',
-            'Turbine wheel'
+    render() {
+        let myArrayForState = ['actuator', 'back_plate', 'bearing_housing', 'compressor_wheel', 'gasket_kit', 'heat_shield', 'KODE_CHRA', 'nozzle', 'repair_kit', 'turbine_wheel']
+
+        let arrayForHeadings = ['Actuator', 'Back plate', 'Bearing housing', 'Compressor wheel', 'Gasket kit', 'Heat shield', 'KODE CHRA', 'Nozzle', 'Repair kit', 'Turbine wheel'
         ]
+
+        let parts = this.props.parts;
+        const filter = parts
+            .filter(part => {
+                    return (part.part.toLowerCase().includes(this.state.basicSearchInput.toLowerCase()))
+                        || (part.group.toLowerCase().includes(this.state.basicSearchInput.toLowerCase()))
+                }
+            )
+
+        const numberOfParts = filter && filter.length
+        console.log(filter)
 
         return (
             <div>
@@ -55,11 +56,9 @@ class ListOfParts extends Component {
                             fullWidth={true}
                             id={'idForTextField'}
                             floatingLabelText={'Search for parts'}
-                            type={"text"}
+                            type={"search"}
                             value={this.state.basicSearchInput}
-                            onChange={event => {
-                                this.setState({basicSearchInput: event.target.value})
-                            }}
+                            onChange={event => this.setStateForSearch(event)}
                         />
 
                     </Col>
@@ -83,66 +82,35 @@ class ListOfParts extends Component {
                     </Dialog>
                 </div>
                 <Row className={'partsTableDiv'}>
-                    {this.props.actuators.length ?
-                        myArrayForState.map((stateElement, i) => {
-                            return (
-                                <table className="partsTable">
-                                    <tbody key={Math.random()}>
-                                    {this.props[`${stateElement}`].map((partInStateArray, index) => {
-                                        if ((partInStateArray.part.toLowerCase().includes(this.state.basicSearchInput.toLowerCase()))
-                                            || (partInStateArray.group.toLowerCase().includes(this.state.basicSearchInput.toLowerCase())))
-                                            return (
-                                                <tr id={`${partInStateArray.part}`}
-                                                    key={Math.random()}
-                                                    className="partsTr"
-                                                >
-                                                    <td className="partsTd tdName">{arrayForHeadings[i]} {partInStateArray.part}</td>
-                                                    <td className="partsTd tdSubtract">
-                                                        <button
-                                                            className={'partsButton'}
-                                                            onClick={() => this.props.subtractAmount(partInStateArray.part)}
-                                                        >-
-                                                        </button>
-                                                    </td>
-                                                    <td className="partsTd tdAmount">{partInStateArray.amount}</td>
-                                                    <td className="partsTd tdAdd">
-                                                        <button
-                                                            className={'partsButton'}
-                                                            onClick={() => this.props.addAmount(partInStateArray.part)}
-                                                        >+
-                                                        </button>
-                                                    </td>
-                                                    <td className="partsTd tdShoppingCart">
-                                                        <button
-                                                            className={'partsButton partsAddToShoppingListButton'}
-                                                            onClick={() => this.props.addProductToShoppingList(partInStateArray.part)}
-                                                        >
-                                                            <svg id="search-icon" className="search-icon"
-                                                                 style={{margin: 'auto'}}
-                                                                 height="20"
-                                                                 viewBox="0 0 576 512"
-                                                            >
-                                                                <title>dodaj do listy zakupów</title>
-                                                                <path
-                                                                    d='M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z'/>
-                                                            </svg>
-
-                                                        </button>
-                                                    </td>
-
-                                                </tr>
-                                            )
-                                    })
-                                    }
-                                    </tbody>
-
-                                </table>
+                    <table className="partsTable">
+                        <tbody>
+                        {filter && filter.length ?
+                            filter.filter((el, i) => {
+                                return (i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
+                                    &&
+                                    i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1))
+                            }).map((partInStateArray, index) =>
+                                <TR
+                                    partInStateArray={partInStateArray}
+                                    index={index}
+                                    myArrayForState={myArrayForState}
+                                    arrayForHeadings={arrayForHeadings}
+                                />
                             )
-                        })
-                        : <Spinner/>
+                            : 'loading'
+                        }
+                        </tbody>
 
-                    }
+                    </table>
                 </Row>
+                <div style={{textAlign: 'center'}}>
+                    <Pagination
+                        total={Math.ceil(numberOfParts / this.state.ITEMS_PER_PAGE)}
+                        current={this.state.currentPage + 1}
+                        display={10}
+                        onChange={newPage => this.setState({currentPage: newPage - 1})}
+                    />
+                </div>
             </div>
         )
     }
@@ -152,16 +120,6 @@ class ListOfParts extends Component {
 const mapStateToProps = state => ({
     parts: state.partsState.parts,
     products: state.shoppingListState.products,
-    actuators: state.partsState.actuators,
-    back_plates: state.partsState.back_plates,
-    bearing_housings: state.partsState.bearing_housings,
-    compressor_wheels: state.partsState.compressor_wheels,
-    gasket_kits: state.partsState.gasket_kits,
-    heat_shields: state.partsState.heat_shields,
-    KODE_CHRAs: state.partsState.KODE_CHRAs,
-    nozzles: state.partsState.nozzles,
-    repair_kits: state.partsState.repair_kits,
-    turbine_wheels: state.partsState.turbine_wheels
 })
 
 const mapDispatchToProps = dispatch => ({
