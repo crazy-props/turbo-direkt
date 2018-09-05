@@ -15,6 +15,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {withStyles} from "@material-ui/core";
 import SingleTurbine from "./SingleTurbine";
 import CheckBoxes from "./CheckBoxes";
+import TableTop from "./TableTop";
 const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: theme.palette.common.black,
@@ -47,7 +48,6 @@ class HorizontalLinearStepper extends React.Component {
         power: "",
         turbo: [],
     };
-
     updateCheck1() {
         this.setState((oldState) => {
             return {
@@ -108,9 +108,7 @@ class HorizontalLinearStepper extends React.Component {
         else if (this.state.stepIndex === 6)
             this.setState({
                 turbo: [...this.state.turbo, e.target.value]});
-        console.log(this.state.turbo);
     }
-
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
@@ -144,7 +142,7 @@ class HorizontalLinearStepper extends React.Component {
         const {finished, stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
         return (
-            this.state.checked1 || this.state.checked2 || this.state.checked3 ?
+            this.state.checked1?
                 <div>
                     <CheckBoxes
                     stepIndex={this.state.stepIndex}
@@ -156,15 +154,7 @@ class HorizontalLinearStepper extends React.Component {
                     onCheck3={this.updateCheck3.bind(this)}
                     />
                    <Table/>
-                    <TableHead>
-                        <CustomTableCell>Mark</CustomTableCell>
-                        <CustomTableCell>Model</CustomTableCell>
-                        <CustomTableCell>Date</CustomTableCell>
-                        <CustomTableCell>Capacity</CustomTableCell>
-                        <CustomTableCell>No.</CustomTableCell>
-                        <CustomTableCell>Power</CustomTableCell>
-                        <CustomTableCell>Turbo OEM</CustomTableCell>
-                    </TableHead>
+                    <TableTop/>
                     <TableBody>
                         <TableRow style={styles.row}>
                             <CustomTableCell component="th" scope="row">{this.state.mark}</CustomTableCell>
@@ -301,7 +291,6 @@ class HorizontalLinearStepper extends React.Component {
         );
     }
 }
-
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
 })

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,6 +13,9 @@ import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import InputForm from "./InputFormListofCars";
+import {removeCarFromList} from "../state/carsState";
+import RaisedButton from "material-ui/RaisedButton";
+import TableTop from "./TableTop";
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -31,15 +34,14 @@ const styles = ({
         overflowX: 'auto',
     },
     table: {
-        minWidth: 700,
-    },
+        margin:'auto',
+        width: '100%'},
     row: {
         '&:nth-of-type(odd)': {
             backgroundColor: "gray",
         },
     },
 });
-
 
 
 class ListOfCarso extends Component {
@@ -60,7 +62,7 @@ class ListOfCarso extends Component {
     }
 
     handleSearch = (e) => {
-        this.setState({searchTerm: e.target.value,currentPage:0});
+        this.setState({searchTerm: e.target.value, currentPage: 0});
     }
 
     componentWillUnmount() {
@@ -99,44 +101,40 @@ class ListOfCarso extends Component {
                 </Row>
                 <Row className={'partsTableDiv'}>
                     <Table style={styles.table}>
-                        <TableHead>
-                        <CustomTableCell>Mark</CustomTableCell>
-                        <CustomTableCell>Model</CustomTableCell>
-                        <CustomTableCell>Date</CustomTableCell>
-                        <CustomTableCell>Capacity</CustomTableCell>
-                        <CustomTableCell>No.</CustomTableCell>
-                        <CustomTableCell>Power</CustomTableCell>
-                        <CustomTableCell>Turbo OEM</CustomTableCell>
-                        </TableHead>
+                        <TableTop/>
                         <TableBody>
-                        {
-                            filter && filter.length ? filter
-                                .filter((el, i) => (
-                                    i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
-                                    &&
-                                    i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
-                                ))
-                                .map((el) =>
-                                    <TableRow style={styles.row}>
-                                        <CustomTableCell component="th" scope="row">{el.mark}</CustomTableCell>
-                                        <CustomTableCell>{el.model}</CustomTableCell>
-                                        <CustomTableCell>{el.date}</CustomTableCell>
-                                        <CustomTableCell>{el.capacity}</CustomTableCell>
-                                        <CustomTableCell>{el.no}</CustomTableCell>
-                                        <CustomTableCell>{el.power}</CustomTableCell>
-                                        <CustomTableCell className="turboList">
-                                            {el.turbo_OEM && el.turbo_OEM.length ?
-                                                el.turbo_OEM.filter(function (a, b, c) {
-                                                    return c.indexOf(a) === b;
-                                                }).map(el => <SingleTurbine
-                                                    turbine={el}/>
-                                                ) :
-                                                el.turbo_OEM
-                                            }
-                                        </CustomTableCell>
-                                    </TableRow>
-                                ) : this.state.searchTerm.length?<Error/>:<Spinner/>
-                        }
+                            {
+                                filter && filter.length ? filter
+                                    .filter((el, i) => (
+                                        i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
+                                        &&
+                                        i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
+                                    ))
+                                    .map((el) =>
+                                        <TableRow style={styles.row}>
+                                            <CustomTableCell component="th" scope="row">{el.mark}</CustomTableCell>
+                                            <CustomTableCell>{el.model}</CustomTableCell>
+                                            <CustomTableCell>{el.date}</CustomTableCell>
+                                            <CustomTableCell>{el.capacity}</CustomTableCell>
+                                            <CustomTableCell>{el.no}</CustomTableCell>
+                                            <CustomTableCell>{el.power}</CustomTableCell>
+                                            <CustomTableCell className="turboList">
+                                                {el.turbo_OEM && el.turbo_OEM.length ?
+                                                    el.turbo_OEM.filter(function (a, b, c) {
+                                                        return c.indexOf(a) === b;
+                                                    }).map(el => <SingleTurbine
+                                                        turbine={el}/>) :
+                                                    el.turbo_OEM
+                                                }
+                                            </CustomTableCell>
+                                            <CustomTableCell>
+                                                <RaisedButton
+                                                    onClick={removeCarFromList(el)}>Delete car
+                                                </RaisedButton>
+                                            </CustomTableCell>
+                                        </TableRow>
+                                    ) : this.state.searchTerm.length ? <Error/> : <Spinner/>
+                            }
                         </TableBody>
                     </Table>
                 </Row>
@@ -156,7 +154,9 @@ const mapStateToProps = state => ({
     cars: state.carsState.cars,
     part: state.partsState.parts,
 })
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+    removeCarFromList: (el) => dispatch(removeCarFromList(el))
+})
 
 export default connect(
     mapStateToProps,

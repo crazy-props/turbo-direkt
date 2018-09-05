@@ -8,6 +8,7 @@ import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import {removeCarFromList} from "../state/carsState";
 import RaisedButton from 'material-ui/RaisedButton';
+import TableTop from "./TableTop";
 
 class ListOfCars extends Component {
     state = {
@@ -64,18 +65,8 @@ class ListOfCars extends Component {
                     </Col>
                 </Row>
                 <Row className={'partsTableDiv'}>
-
                     <table className="carsTable">
-                        <thead className="carsTableHead">
-                        <td>Mark</td>
-                        <td>Model</td>
-                        <td>Date</td>
-                        <td>Capacity</td>
-                        <td>No.</td>
-                        <td>Power</td>
-                        <td className="lastTh">Turbo OEM</td>
-                        <td>Remove form list</td>
-                        </thead>
+                       <TableTop/>
                         <tbody key={Math.random()}>
                         {
                             filter && filter.length ? filter
