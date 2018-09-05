@@ -198,7 +198,7 @@ class HorizontalLinearStepper extends React.Component {
                                 <StepLabel style={styles.step}>POJEMNOŚĆ</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel style={styles.step}>OZNACZENIE FABRYCZNE</StepLabel>
+                                <StepLabel style={styles.step}>FABRYCZNE</StepLabel>
                             </Step>
                             <Step>
                                 <StepLabel style={styles.step}>MOC</StepLabel>
@@ -245,7 +245,7 @@ class HorizontalLinearStepper extends React.Component {
                                         dataSource={list||['wggggaitnig']}
                                         maxSearchResults={8}
                                         onUpdateInput={this.handleUpdateInput}
-                                        onNewRequest={this.handleNewRequest}
+                                        onNewRequest={()=>{this.handleNewRequest();this.cancelInput()}}
                                         />}
                                         <RaisedButton
                                             label="Wstecz"
