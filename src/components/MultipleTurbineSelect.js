@@ -3,23 +3,10 @@ import { connect } from 'react-redux'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem';
 
-const persons = [
-    { value: 0, name: 'Oliver Hansen' },
-    { value: 1, name: 'Van Henry' },
-    { value: 2, name: 'April Tucker' },
-    { value: 3, name: 'Ralph Hubbard' },
-    { value: 4, name: 'Omar Alexander' },
-    { value: 5, name: 'Carlos Abbott' },
-    { value: 6, name: 'Miriam Wagner' },
-    { value: 7, name: 'Bradley Wilkerson' },
-    { value: 8, name: 'Virginia Andrews' },
-    { value: 9, name: 'Kelly Snyder' },
-];
-
 /**
  * The rendering of selected items can be customized by providing a `selectionRenderer`.
  */
-class SelectFieldExampleSelectionRenderer extends Component {
+class MultipleTurbineSelect extends Component {
     state = {
         values: [],
     };
@@ -31,24 +18,23 @@ class SelectFieldExampleSelectionRenderer extends Component {
             case 0:
                 return '';
             case 1:
-                return this.props.turbo.turboOEM;
+                return this.props.part.part;
             default:
-                return `${values.map(x=>x)}`;
+                return `${values.map(x => x)}`;
         }
     }
 
-    menuItems(persons) {
-        return persons.filter(part => part.group === 'actuator').map((person) => (
+    menuItems(parts) {
+        return parts.filter(part => part.group === 'actuator').sort((part1, part2) => part1.part - part2.part).map((parts) => (
             <MenuItem
-                key={person.part}
+                key={parts.part}
                 insetChildren={true}
-                checked={this.state.values.indexOf(person.part) > -1}
-                value={person.part}
-                primaryText={person.part}
+                checked={this.state.values.indexOf(parts.part) > -1}
+                value={parts.part}
+                primaryText={parts.part}
             />
         ));
     }
-    filter = this.props.turbo && this.props.turbo.length ? this.props.turbo.map(x => x.turboOEM).filter((val, idx, arr) => arr.indexOf(val) !== idx).map(x => { Object.assign({}, { turboOEM: x }) }) : []
 
     render() {
         console.log(this.state)
@@ -56,7 +42,7 @@ class SelectFieldExampleSelectionRenderer extends Component {
         return (
             <SelectField
                 multiple={true}
-                hintText="Select a name"
+                hintText="Zaznacz części"
                 value={this.state.values}
                 onChange={this.handleChange}
                 selectionRenderer={this.selectionRenderer}
@@ -68,7 +54,6 @@ class SelectFieldExampleSelectionRenderer extends Component {
 }
 
 const mapStateToProps = state => ({
-    turbo: state.turboState.turbo,
     part: state.partsState.parts,
 })
 
@@ -79,4 +64,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SelectFieldExampleSelectionRenderer)
+)(MultipleTurbineSelect)
