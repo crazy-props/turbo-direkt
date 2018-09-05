@@ -14,7 +14,6 @@ import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import InputForm from "./InputFormListofCars";
 
-
 const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: theme.palette.common.black,
@@ -155,6 +154,7 @@ class ListOfCarso extends Component {
 
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
+    part: state.partsState.parts,
 })
 const mapDispatchToProps = dispatch => ({})
 
