@@ -51,12 +51,13 @@ class HorizontalLinearStepper extends React.Component {
     };
     handleUpdateInput = (searchText) => {
         this.setState({
-            searchText: searchText,turbo:[searchText]
+            searchText: searchText,//turbo:this.state.turbo.concat([searchText])
         });
     };
 
     handleNewRequest = () => {
         this.setState({
+            turbo:this.state.turbo.concat([this.state.searchText]),
             searchText: '',
         });
     };
@@ -114,7 +115,7 @@ class HorizontalLinearStepper extends React.Component {
             this.setState({power: e.target.value + ' HP'});
         else if (this.state.stepIndex === 6)
             this.setState({
-                turbo: [...this.state.turbo, this.state.searchText]});
+                turbo: [...this.state.turbo]});
     }
     getStepContent(stepIndex) {
         switch (stepIndex) {
@@ -240,12 +241,12 @@ class HorizontalLinearStepper extends React.Component {
                                             onChange={this.handleForm}
                                         />:<AutoComplete
                                             ref="fieldName"
-                                        floatingLabelText="Type 'peah', fuzzy search"
+                                        floatingLabelText="Dodaj numer turbiny"
                                         filter={AutoComplete.fuzzyFilter}
-                                        dataSource={list||['wggggaitnig']}
+                                        dataSource={list||['Coś nie działą w database']}
                                         maxSearchResults={8}
                                         onUpdateInput={this.handleUpdateInput}
-                                        onNewRequest={()=>{this.handleNewRequest();this.cancelInput()}}
+                                        onNewRequest={()=>{this.handleNewRequest()}}
                                         />}
                                         <RaisedButton
                                             label="Wstecz"
