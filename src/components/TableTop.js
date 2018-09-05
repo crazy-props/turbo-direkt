@@ -2,12 +2,12 @@ import React from "react";
 
 const TableTop = () => (
     <thead className="carsTableHead">
-    <td>Mark</td>
+    <td> Marka</td>
     <td>Model</td>
-    <td>Date</td>
-    <td>Capacity</td>
-    <td>No.</td>
-    <td>Power</td>
+    <td>Data</td>
+    <td>Pojemność</td>
+    <td>Oznaczenie fabryczne</td>
+    <td>Moc</td>
     <td className="lastTh">Turbo OEM</td>
     <td></td>
     </thead>

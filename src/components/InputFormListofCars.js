@@ -2,7 +2,6 @@ import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {addCarToList} from "../state/carsState";
 import {connect} from "react-redux";
@@ -51,27 +50,21 @@ class HorizontalLinearStepper extends React.Component {
     updateCheck1() {
         this.setState((oldState) => {
             return {
-                checked1: !oldState.checked,
-                checked2: false,
-                checked3: false
+                checked1: !oldState.checked, checked2: false, checked3: false
             };
         });
     }
     updateCheck2() {
         this.setState((oldState) => {
             return {
-                checked1: false,
-                checked2: !oldState.checked,
-                checked3: false
+                checked1: false, checked2: !oldState.checked, checked3: false
             };
         });
     }
     updateCheck3() {
         this.setState((oldState) => {
             return {
-                checked1: false,
-                checked2: false,
-                checked3: !oldState.checked
+                checked1: false, checked2: false, checked3: !oldState.checked
             };
         });
     }
@@ -112,19 +105,19 @@ class HorizontalLinearStepper extends React.Component {
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
-                return 'Type car mark';
+                return 'Dodaj markę pojazdu (pole wymagane):';
             case 1:
-                return 'Type car model';
+                return 'Dodaj model (pole wymagane):';
             case 2:
-                return 'Type model production date';
+                return 'Dodaj datę produkcji:';
             case 3:
-                return 'Type capacity';
+                return 'Dodaj pojemność (pole wymagane):';
             case 4:
-                return 'Type factory No.';
+                return 'Dodaj oznaczenie fabryczne:';
             case 5:
-                return 'Type horse power';
+                return 'Dodaj moc pojazdu:';
             case 6:
-                return 'Type Turbo OEM';
+                return 'Dodaj numer turbiny (pole wymagane):';
             default:
                 return 'Return';
         }
@@ -179,32 +172,32 @@ class HorizontalLinearStepper extends React.Component {
                     <div style={{width: '80%', maxWidth: 500, margin: 'auto'}}>
                         <Stepper style={styles.step} activeStep={stepIndex}>
                             <Step style={styles.step}>
-                                <StepLabel style={styles.step}>Type car mark </StepLabel>
+                                <StepLabel style={styles.step}>MARKA POJAZDU </StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel style={styles.step}>Type car model</StepLabel>
+                                <StepLabel style={styles.step}>MODEL</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel style={styles.step}>Type model production date</StepLabel>
+                                <StepLabel style={styles.step}>DATA PRODUKCJI</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel style={styles.step}>Type capacity</StepLabel>
+                                <StepLabel style={styles.step}>POJEMNOŚĆ</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel style={styles.step}>Type factory No.</StepLabel>
+                                <StepLabel style={styles.step}>OZNACZENIE FABRYCZNE</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel style={styles.step}>Type horse power</StepLabel>
+                                <StepLabel style={styles.step}>MOC</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel style={styles.step}>Type Turbo OEM</StepLabel>
+                                <StepLabel style={styles.step}>TURBO OEM</StepLabel>
                             </Step>
                         </Stepper>
                         <div style={contentStyle}>
                             {finished ? (
                                 <p>
                                     <RaisedButton
-                                        label="Back"
+                                        label="Wstecz"
                                         disabled={stepIndex === 0}
                                         style={{marginRight: 12}}
                                         onClick={(event) => {
@@ -218,7 +211,7 @@ class HorizontalLinearStepper extends React.Component {
                                     />
                                     <RaisedButton
                                         disabled={stepIndex < 6}
-                                        label={'Add to list'}
+                                        label={'Dodaj pojazd'}
                                         onClick={addCarToList(objecttodb)}
                                         style={{marginRight: 12}}
                                     />
@@ -233,7 +226,7 @@ class HorizontalLinearStepper extends React.Component {
                                             onChange={this.handleForm}
                                         />
                                         <RaisedButton
-                                            label="Back"
+                                            label="Wstecz"
                                             disabled={stepIndex === 0}
                                             onClick={() => {
                                                 this.handlePrev();
@@ -242,7 +235,7 @@ class HorizontalLinearStepper extends React.Component {
                                             style={{marginRight: 12}}
                                         />
                                         <RaisedButton
-                                            label={stepIndex === 7 ? 'Finish' : 'Next'}
+                                            label={stepIndex === 7 ? 'Zakończ' : 'Dalej'}
                                             primary={true}
                                             disabled={(
                                                 this.state.mark === ''
@@ -258,7 +251,7 @@ class HorizontalLinearStepper extends React.Component {
                                             style={{marginRight: 12}}
                                         />
                                         <RaisedButton
-                                            label="Cancel"
+                                            label="Anuluj"
                                             disabled={stepIndex === 0}
                                             style={{marginRight: 12}}
                                             onClick={(event) => {

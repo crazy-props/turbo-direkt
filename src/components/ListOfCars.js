@@ -47,7 +47,6 @@ class ListOfCars extends Component {
         return (filter === null ?
           <Spinner/>
             : <div>
-
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
@@ -57,9 +56,7 @@ class ListOfCars extends Component {
                                            onChange={this.debounceEvent(this.handleSearch, 700)}/>
                                     <span className="highlight"/>
                                     <span className="bar"/>
-
                                 </div>
-
                             </Col>
                         </Row>
                     </Col>
@@ -94,7 +91,7 @@ class ListOfCars extends Component {
                                     </td>
                                     <td>
                                         <RaisedButton
-                                            onClick={removeCarFromList(el)}>Delete car
+                                            onClick={removeCarFromList(el)}>Usuń
                                         </RaisedButton>
                                     </td>
                                 </tr>

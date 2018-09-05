@@ -12,21 +12,21 @@ const CheckBoxes = (props) => (
         <div>
             <Checkbox
                 disabled={props.stepIndex > 0}
-                label="Add new car"
+                label="Dodaj pojazd"
                 checked={props.checked1}
                 onCheck={props.onCheck1}
                 style={styles.checkbox}
             />
             <Checkbox
                 disabled={props.stepIndex > 0}
-                label="Add new part"
+                label="Dodaj część"
                 checked={props.checked2}
                 onCheck={props.onCheck2}
                 style={styles.checkbox}
             />
             <Checkbox
                 disabled={props.stepIndex > 0}
-                label="Add new turbo"
+                label="Dodaj turbine"
                 checked={props.checked3}
                 onCheck={props.onCheck3}
                 style={styles.checkbox}
