@@ -7,7 +7,7 @@ import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
 import CreteListOfParts from './CreteListOfParts'
-import Spinner from './Spinner';
+import Spinner from './Spinner'
 class ListOfTurbines extends Component {
     state = {
         _listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA', 'Delete'],
