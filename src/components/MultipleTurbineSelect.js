@@ -33,18 +33,18 @@ class SelectFieldExampleSelectionRenderer extends Component {
             case 1:
                 return this.props.turbo.turboOEM;
             default:
-                return `${values.length} names selected`;
+                return `${values.map(x=>x)}`;
         }
     }
 
     menuItems(persons) {
-        return persons.map((person) => (
+        return persons.filter(part => part.group === 'actuator').map((person) => (
             <MenuItem
-                key={person.turboOEM}
+                key={person.part}
                 insetChildren={true}
-                checked={this.state.values.indexOf(person.turboOEM) > -1}
-                value={person.turboOEM}
-                primaryText={person.turboOEM}
+                checked={this.state.values.indexOf(person.part) > -1}
+                value={person.part}
+                primaryText={person.part}
             />
         ));
     }
@@ -61,7 +61,7 @@ class SelectFieldExampleSelectionRenderer extends Component {
                 onChange={this.handleChange}
                 selectionRenderer={this.selectionRenderer}
             >
-                {this.menuItems(this.props.turbo)}
+                {this.menuItems(this.props.part)}
             </SelectField>
         );
     }

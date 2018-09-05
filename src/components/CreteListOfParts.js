@@ -6,7 +6,7 @@ import SelectField from 'material-ui/SelectField'
 import TextField from 'material-ui/TextField'
 import { Card, CardHeader, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
-import Spinner from './spinner'
+import Spinner from './Spinner'
 
 /**
  * With the `maxHeight` property set, the Select Field will be scrollable
@@ -44,6 +44,7 @@ class CreateListOfParts extends Component {
 	addPartToList = () => this.state.push.turboOEM.length > 0 ? this.props.addTurboToList(this.state.push) : alert(`Add turbo name idiot!`)
 	render() {
 		console.log(JSON.stringify(this.state.push))
+
 		return (this.props.part && this.props.part.length ?
 			<Card>
 				<CardHeader
@@ -88,7 +89,7 @@ class CreateListOfParts extends Component {
 				</CardText>
 
 			</Card>
-			: <Spinner />
+			: 'load'
 
 		)
 	}

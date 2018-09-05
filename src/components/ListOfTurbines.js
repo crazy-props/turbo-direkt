@@ -7,7 +7,8 @@ import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
 import CreteListOfParts from './CreteListOfParts'
-
+import Spinner from './Spinner'
+import MultipleTurbineSelect from './MultipleTurbineSelect';
 
 class ListOfTurbines extends Component {
     state = {
@@ -32,12 +33,11 @@ class ListOfTurbines extends Component {
 
         return this.props.turbo !== null && this.props.part !== null ?
             <div>
-                {<CreteListOfParts />}
+                {<MultipleTurbineSelect />}
                 <SearchInput
                     handleTurbineNameChangeChandler={this.handleTurbineNameChangeChandler}
                 />
                 <table className="carsTable">
-                <Spinner/>
                     <thead className="carsTableHead">
                         <tr>
                             {this.state._listOfParts.map(el => <th>{el}</th>)}
@@ -81,7 +81,7 @@ class ListOfTurbines extends Component {
                 </div>
             </div>
             :
-            <div style={{ textAlign: 'center' }}><Spinner /> </div>
+            <Spinner />
 
     }
 }
