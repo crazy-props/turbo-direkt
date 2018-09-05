@@ -8,7 +8,6 @@ import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
 import CreteListOfParts from './CreteListOfParts'
 import Spinner from './Spinner'
-import MultipleTurbineSelect from './MultipleTurbineSelect';
 
 class ListOfTurbines extends Component {
 	state = {
@@ -36,7 +35,7 @@ class ListOfTurbines extends Component {
 
 		return this.props.turbo !== null && this.props.part !== null ?
 			<div>
-				{<MultipleTurbineSelect />}
+				{<CreteListOfParts />}
 				<SearchInput
 					handleTurbineNameChangeChandler={this.handleTurbineNameChangeChandler}
 				/>
