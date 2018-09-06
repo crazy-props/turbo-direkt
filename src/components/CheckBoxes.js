@@ -26,7 +26,7 @@ const CheckBoxes = (props) => (
             />
             <Checkbox
                 disabled={props.stepIndex > 0}
-                label="Dodaj turbine"
+                label="Dodaj turbinę"
                 checked={props.checked3}
                 onCheck={props.onCheck3}
                 style={styles.checkbox}

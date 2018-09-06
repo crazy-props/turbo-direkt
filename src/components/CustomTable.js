@@ -129,7 +129,7 @@ class ListOfCarso extends Component {
                                             </CustomTableCell>
                                             <CustomTableCell>
                                                 <RaisedButton
-                                                    onClick={removeCarFromList(el)}>Delete car
+                                                    onClick={removeCarFromList(el)}>USUŃ
                                                 </RaisedButton>
                                             </CustomTableCell>
                                         </TableRow>

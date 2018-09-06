@@ -222,7 +222,7 @@ class HorizontalLinearStepper extends React.Component {
                                 <StepLabel style={styles.step}>POJEMNOŚĆ</StepLabel>
                             </Step>
                             <Step>
-                                <StepLabel style={styles.step}>FABRYCZNE</StepLabel>
+                                <StepLabel style={styles.step}>OZN.FABRYCZNE</StepLabel>
                             </Step>
                             <Step>
                                 <StepLabel style={styles.step}>MOC</StepLabel>
@@ -263,10 +263,12 @@ class HorizontalLinearStepper extends React.Component {
                                             type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
                                             onChange={this.handleForm}
                                         /> : <AutoComplete
+                                            onKeyDown={"disabled"}
+                                            type={"search"}
                                             ref="fieldName"
                                             floatingLabelText="Dodaj numer turbiny"
                                             dataSource={list || ['Problem ze strukturą danych. Skontaktuj się z administratorem']}
-                                            maxSearchResults={8}
+                                            maxSearchResults={9}
                                             onUpdateInput={this.handleUpdateInput}
                                             onNewRequest={() => {
                                                 this.handleNewRequest()
