@@ -16,6 +16,8 @@ import SingleTurbine from "./SingleTurbine";
 import CheckBoxes from "./CheckBoxes";
 import TableTop from "./TableTop";
 import AutoComplete from "material-ui/AutoComplete";
+import Chip from 'material-ui/Chip';
+
 const CustomTableCell = withStyles(theme => ({
     head: {
         backgroundColor: theme.palette.common.black,
@@ -31,8 +33,12 @@ const styles = {
     },
     step: {
         fontSize: "1.4vh",
-    }
-};
+    },
+    chip: {
+        margin: 4,
+    },
+}
+
 class HorizontalLinearStepper extends React.Component {
     state = {
         searchText: '',
@@ -57,10 +63,14 @@ class HorizontalLinearStepper extends React.Component {
 
     handleNewRequest = () => {
         this.setState({
-            turbo:this.state.turbo.concat([this.state.searchText]),
+            turbo: this.state.turbo.concat([this.state.searchText]),
             searchText: '',
         });
     };
+    removeTurbo = (name) => {
+        this.setState({turbo: this.state.turbo.filter(el => el !== name)});
+    }
+
 
     updateCheck1() {
         this.setState((oldState) => {
@@ -69,6 +79,7 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
+
     updateCheck2() {
         this.setState((oldState) => {
             return {
@@ -76,6 +87,7 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
+
     updateCheck3() {
         this.setState((oldState) => {
             return {
@@ -83,6 +95,7 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
+
     cancelInput() {
         this.refs.fieldName.value = "";
     }
@@ -115,8 +128,10 @@ class HorizontalLinearStepper extends React.Component {
             this.setState({power: e.target.value + ' HP'});
         else if (this.state.stepIndex === 6)
             this.setState({
-                turbo: [...this.state.turbo]});
+                turbo: [...this.state.turbo]
+            });
     }
+
     getStepContent(stepIndex) {
         switch (stepIndex) {
             case 0:
@@ -150,18 +165,18 @@ class HorizontalLinearStepper extends React.Component {
         const {finished, stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
         return (
-            this.state.checked1?
+            this.state.checked1 ?
                 <div>
                     <CheckBoxes
-                    stepIndex={this.state.stepIndex}
-                    checked1={this.state.checked1}
-                    checked2={this.state.checked2}
-                    checked3={this.state.checked3}
-                    onCheck1={this.updateCheck1.bind(this)}
-                    onCheck2={this.updateCheck2.bind(this)}
-                    onCheck3={this.updateCheck3.bind(this)}
+                        stepIndex={this.state.stepIndex}
+                        checked1={this.state.checked1}
+                        checked2={this.state.checked2}
+                        checked3={this.state.checked3}
+                        onCheck1={this.updateCheck1.bind(this)}
+                        onCheck2={this.updateCheck2.bind(this)}
+                        onCheck3={this.updateCheck3.bind(this)}
                     />
-                   <Table/>
+                    <Table/>
                     <TableTop/>
                     <TableBody>
                         <TableRow style={styles.row}>
@@ -175,8 +190,16 @@ class HorizontalLinearStepper extends React.Component {
                                 {this.state.turbo && this.state.turbo.length ?
                                     this.state.turbo.filter(function (a, b, c) {
                                         return c.indexOf(a) === b;
-                                    }).map(el => <SingleTurbine
-                                        turbine={el}/>
+                                    }).map(el =>
+                                        <Chip
+                                            key={el}
+                                            onRequestDelete={() => {
+                                                this.removeTurbo(el)
+                                            }}
+                                            style={styles.chip}
+                                        >
+                                            {el}
+                                        </Chip>
                                     ) :
                                     this.state.turbo
                                 }
@@ -234,19 +257,20 @@ class HorizontalLinearStepper extends React.Component {
                             ) : (
                                 <div>
                                     <p>{this.getStepContent(stepIndex)}</p>
-                                    <div style={{marginTop: 12}}>{stepIndex!==6?
+                                    <div style={{marginTop: 12}}>{stepIndex !== 6 ?
                                         <input
                                             ref="fieldName"
                                             type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
                                             onChange={this.handleForm}
-                                        />:<AutoComplete
+                                        /> : <AutoComplete
                                             ref="fieldName"
-                                        floatingLabelText="Dodaj numer turbiny"
-                                        filter={AutoComplete.fuzzyFilter}
-                                        dataSource={list||['Coś nie działą w database']}
-                                        maxSearchResults={8}
-                                        onUpdateInput={this.handleUpdateInput}
-                                        onNewRequest={()=>{this.handleNewRequest()}}
+                                            floatingLabelText="Dodaj numer turbiny"
+                                            dataSource={list || ['Problem ze strukturą danych. Skontaktuj się z administratorem']}
+                                            maxSearchResults={8}
+                                            onUpdateInput={this.handleUpdateInput}
+                                            onNewRequest={() => {
+                                                this.handleNewRequest()
+                                            }}
                                         />}
                                         <RaisedButton
                                             label="Wstecz"
@@ -307,6 +331,7 @@ class HorizontalLinearStepper extends React.Component {
         );
     }
 }
+
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
 })
