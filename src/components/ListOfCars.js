@@ -87,8 +87,7 @@ class ListOfCars extends Component {
                                                 return c.indexOf(a) === b;
                                             }).map(el => <SingleTurbine
                                                 turbine={el}/>                                        ) :
-                                            el.turbo_OEM
-                                        }
+                                            el.turbo_OEM}
                                     </td>
                                     <td>
                                         <RaisedButton

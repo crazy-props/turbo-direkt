@@ -12,35 +12,20 @@ import {
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import {withStyles} from "@material-ui/core";
-import SingleTurbine from "./SingleTurbine";
 import CheckBoxes from "./CheckBoxes";
 import TableTop from "./TableTop";
 import AutoComplete from "material-ui/AutoComplete";
 import Chip from 'material-ui/Chip';
 
 const CustomTableCell = withStyles(theme => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
+    head: {backgroundColor: theme.palette.common.black, color: theme.palette.common.white,},
+    body: {fontSize: 14,},}))(TableCell);
 const styles = {
-    block: {
-        maxWidth: 250,
-    },
-    step: {
-        fontSize: "1.4vh",
-    },
-    chip: {
-        margin: 4,
-    },
-}
+    block: {maxWidth: 250,}, step: {fontSize: "1.4vh",}, chip: {margin: 4,},}
 
 class HorizontalLinearStepper extends React.Component {
     state = {
+        stepper:["MARKA","MODEL","DATA PRODUKCJI","POJEMNOŚĆ","OZN.FABRYCZNE","MOC","TURBO OEM"],
         searchText: '',
         finished: false,
         stepIndex: 0,
@@ -56,21 +41,20 @@ class HorizontalLinearStepper extends React.Component {
         turbo: [],
     };
     handleUpdateInput = (searchText) => {
+
         this.setState({
-            searchText: searchText,//turbo:this.state.turbo.concat([searchText])
+            searchText: searchText,
         });
     };
-
     handleNewRequest = () => {
         this.setState({
             turbo: this.state.turbo.concat([this.state.searchText]),
-            searchText: '',
+
         });
     };
     removeTurbo = (name) => {
         this.setState({turbo: this.state.turbo.filter(el => el !== name)});
     }
-
 
     updateCheck1() {
         this.setState((oldState) => {
@@ -79,7 +63,6 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
-
     updateCheck2() {
         this.setState((oldState) => {
             return {
@@ -87,7 +70,6 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
-
     updateCheck3() {
         this.setState((oldState) => {
             return {
@@ -95,7 +77,6 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
-
     cancelInput() {
         this.refs.fieldName.value = "";
     }
@@ -154,9 +135,9 @@ class HorizontalLinearStepper extends React.Component {
     }
 
     render() {
-        const list = this.props.cars && this.props.cars.length ? this.props.cars.map(car => car.turbo_OEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
+        const list = this.props.cars && this.props.cars.map(car => car.turbo_OEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
             return c.indexOf(a) === b;
-        }) : ['waitnig'];
+        })
         console.log(this.state.searchText)
         const objecttodb = {
             mark: this.state.mark, model: this.state.model, date: this.state.date, capacity: this.state.capacity,
@@ -209,27 +190,7 @@ class HorizontalLinearStepper extends React.Component {
                     <Table/>
                     <div style={{width: '80%', maxWidth: 500, margin: 'auto'}}>
                         <Stepper style={styles.step} activeStep={stepIndex}>
-                            <Step style={styles.step}>
-                                <StepLabel style={styles.step}>MARKA POJAZDU </StepLabel>
-                            </Step>
-                            <Step>
-                                <StepLabel style={styles.step}>MODEL</StepLabel>
-                            </Step>
-                            <Step>
-                                <StepLabel style={styles.step}>DATA PRODUKCJI</StepLabel>
-                            </Step>
-                            <Step>
-                                <StepLabel style={styles.step}>POJEMNOŚĆ</StepLabel>
-                            </Step>
-                            <Step>
-                                <StepLabel style={styles.step}>OZN.FABRYCZNE</StepLabel>
-                            </Step>
-                            <Step>
-                                <StepLabel style={styles.step}>MOC</StepLabel>
-                            </Step>
-                            <Step>
-                                <StepLabel style={styles.step}>TURBO OEM</StepLabel>
-                            </Step>
+                            {this.state.stepper.map(el=><Step><StepLabel>{el}</StepLabel></Step>)}
                         </Stepper>
                         <div style={contentStyle}>
                             {finished ? (
@@ -263,55 +224,46 @@ class HorizontalLinearStepper extends React.Component {
                                             type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
                                             onChange={this.handleForm}
                                         /> : <AutoComplete
-                                            onKeyDown={"disabled"}
-                                            type={"search"}
+                                            filter={AutoComplete.caseInsensitiveFilter}
+                                            menuStyle={styles.step}
+                                            onKeyDown={"disabled"} type={"search"}
                                             ref="fieldName"
-                                            floatingLabelText="Dodaj numer turbiny"
-                                            dataSource={list || ['Problem ze strukturą danych. Skontaktuj się z administratorem']}
-                                            maxSearchResults={9}
+                                            dataSource={list || ['Problem ze strukturą danych.']}
+                                            maxSearchResults={6}
                                             onUpdateInput={this.handleUpdateInput}
                                             onNewRequest={() => {
                                                 this.handleNewRequest()
                                             }}
                                         />}
-                                        <RaisedButton
-                                            label="Wstecz"
-                                            disabled={stepIndex === 0}
-                                            onClick={() => {
-                                                this.handlePrev();
-                                                this.cancelInput()
-                                            }}
-                                            style={{marginRight: 12}}
-                                        />
-                                        <RaisedButton
-                                            label={stepIndex === 7 ? 'Zakończ' : 'Dalej'}
-                                            primary={true}
-                                            disabled={(
-                                                this.state.mark === ''
-                                                || stepIndex === 1 && this.state.model === ""
-                                                || stepIndex === 3 && this.state.capacity === ''
-                                                || stepIndex === 6 && this.state.turbo.length === 0
-                                            )
-                                            }
-                                            onClick={() => {
-                                                this.handleNext();
-                                                this.cancelInput()
-                                            }}
-                                            style={{marginRight: 12}}
-                                        />
-                                        <RaisedButton
-                                            label="Anuluj"
-                                            disabled={stepIndex === 0}
-                                            style={{marginRight: 12}}
-                                            onClick={(event) => {
-                                                event.preventDefault();
-                                                this.setState({
-                                                    stepIndex: 0, finished: false, mark: '', model: '',
-                                                    capacity: '', date: "", factoryNo: "", power: "",
-                                                    turbo: []
-                                                });
-                                            }}
-                                        />
+                                        <p>
+                                            <RaisedButton
+                                                label="Wstecz" disabled={stepIndex === 0}
+                                                onClick={() => {this.handlePrev();this.cancelInput()}}
+                                                style={{marginRight: 12}}
+                                            />
+                                            <RaisedButton
+                                                label={stepIndex === 7 ? 'Zakończ' : 'Dalej'}
+                                                primary={true}
+                                                disabled={(
+                                                    this.state.mark === ''
+                                                    || stepIndex === 1 && this.state.model === ""
+                                                    || stepIndex === 3 && this.state.capacity === ''
+                                                    || stepIndex === 6 && this.state.turbo.length === 0)}
+                                                onClick={() => {this.handleNext();this.cancelInput()}}
+                                                style={{marginRight: 12}}
+                                            />
+                                            <RaisedButton
+                                                label="Anuluj"
+                                                disabled={stepIndex === 0}
+                                                style={{marginRight: 12}}
+                                                onClick={(event) => {event.preventDefault();
+                                                    this.setState({
+                                                        stepIndex: 0, finished: false, mark: '', model: '',
+                                                        capacity: '', date: "", factoryNo: "", power: "", turbo: []
+                                                    });
+                                                }}
+                                            />
+                                        </p>
                                     </div>
                                 </div>
                             )}
@@ -333,14 +285,9 @@ class HorizontalLinearStepper extends React.Component {
         );
     }
 }
-
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
 })
-const mapDispatchToProps = dispatch => ({
-    addCarToList: (objecttodb) => dispatch(addCarToList(objecttodb))
-})
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
 )(HorizontalLinearStepper)

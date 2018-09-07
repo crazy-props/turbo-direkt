@@ -76,7 +76,8 @@ class ListOfCarso extends Component {
         const filter = cars
             .filter(car =>
                 car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
-                car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm) !== -1)
+                car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1)
+                ||car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1
             )
 
         const numberOfCars = filter && filter.length
@@ -149,7 +150,6 @@ class ListOfCarso extends Component {
             </div>)
     }
 }
-
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
     part: state.partsState.parts,
