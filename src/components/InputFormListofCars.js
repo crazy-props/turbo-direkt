@@ -196,7 +196,7 @@ class HorizontalLinearStepper extends React.Component {
                             {finished ? (
                                 <p>
                                     <RaisedButton
-                                        label="Wstecz"
+                                        label="Anuluj"
                                         disabled={stepIndex === 0}
                                         style={{marginRight: 12}}
                                         onClick={(event) => {
