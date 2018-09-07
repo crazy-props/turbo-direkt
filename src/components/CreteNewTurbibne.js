@@ -1,8 +1,8 @@
 import React from 'react';
-import { Step, Stepper, StepLabel, } from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
+import { Step, Stepper, StepLabel, } from 'material-ui/Stepper'
+import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
+import TextField from 'material-ui/TextField'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 import { connect } from 'react-redux'
@@ -40,16 +40,20 @@ class HorizontalLinearStepper extends React.Component {
 		this.setState({
 			stepIndex: stepIndex + 1,
 			finished: stepIndex >= 2,
-		});
-	};
+		})
+	}
 
 	handlePrev = () => {
 		const { stepIndex } = this.state;
 		if (stepIndex > 0) {
-			this.setState({ stepIndex: stepIndex - 1 });
+			this.setState({ stepIndex: stepIndex - 1 })
 		}
-	};
+	}
 
+	/**
+	* 'handleChange' function is require to mapping all state _parts to each value handle function. 
+	* Name value is convert to object key property. 
+	*/
 	handleChange = name => (event, index, value) => {
 		this.setState({ push: { ...this.state.push, [name]: value } })
 	}
@@ -72,7 +76,7 @@ class HorizontalLinearStepper extends React.Component {
 			case 0:
 				return (
 					<div>
-						<h3>{`Podaj nazwę tworzonej turbiny: `}</h3>
+						<h3>{`Wpisz nazwę tworzonej turbiny: `}</h3>
 						<TextField
 							hintText="turboOem"
 							onChange={this.textChangeHandler}
@@ -132,16 +136,16 @@ class HorizontalLinearStepper extends React.Component {
 			case 2:
 				return (
 					<div>
-						<RaisedButton secondary={true} onClick={this.addPartToList}> Add</RaisedButton>
+						<RaisedButton secondary={true} onClick={this.addPartToList}> Zatwierdź </RaisedButton>
 					</div>);
 			default:
-				return 'You\'re a long way from home sonny jim!';
+				return console.log('Problem with getStepContent function ');
 		}
 	}
 
 	render() {
-		const { finished, stepIndex } = this.state;
-		const contentStyle = { margin: '0 16px' };
+		const { finished, stepIndex } = this.state
+		const contentStyle = { margin: '0 16px' }
 
 		return (
 			<div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
@@ -166,21 +170,21 @@ class HorizontalLinearStepper extends React.Component {
 									this.setState({ stepIndex: 0, finished: false });
 								}}
 							>
-								Click here
-              </a> to reset the example.
+								Dodaj kolejną turbinę
+              </a> .
             </p>
 					) : (
 							<div>
 								<p>{this.getStepContent(stepIndex)}</p>
 								<div style={{ marginTop: 12 }}>
 									<FlatButton
-										label="Back"
+										label="Wstecz"
 										disabled={stepIndex === 0}
 										onClick={this.handlePrev}
 										style={{ marginRight: 12 }}
 									/>
 									<RaisedButton
-										label={stepIndex === 2 ? 'Finish' : 'Next'}
+										label={stepIndex === 2 ? 'Koniec' : 'Dalej'}
 										primary={true}
 										onClick={this.handleNext}
 									/>
