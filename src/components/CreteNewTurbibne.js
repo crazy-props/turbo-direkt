@@ -185,6 +185,7 @@ class HorizontalLinearStepper extends React.Component {
 									/>
 									<RaisedButton
 										label={stepIndex === 2 ? 'Koniec' : 'Dalej'}
+										disabled={this.state.push.turboOEM.length === 0}
 										primary={true}
 										onClick={this.handleNext}
 									/>
