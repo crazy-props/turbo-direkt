@@ -9,6 +9,8 @@ import {List} from 'material-ui/List';
 import ToOrder from "./ToOrder";
 import HeadersForOrderedList from "./HeadersForOrderedList";
 import AwaitingForDelivery from "./AwaitingForDelivery";
+import AppBar from 'material-ui/AppBar';
+
 
 
 class ShoppingList extends Component {
@@ -21,7 +23,10 @@ class ShoppingList extends Component {
         return (
             <div style={{display: 'flex'}}>
                 <div style={{width: '50%', paddingLeft: '10%'}}>
-                    <h2 style={{margin: 'auto', textAlign: 'center'}}>Do zamówienia</h2>
+                    <AppBar
+                        title="Do zamówienia"
+                        showMenuIconButton={false}
+                    />
                     {this.props.productsToOrder ?
                         <div>
                             <List>
@@ -38,8 +43,11 @@ class ShoppingList extends Component {
                         :
                         'loading'}
                 </div>
-                <div style={{width: '50%', paddingRight: '10%'}}>
-                    <h2 style={{margin: 'auto', textAlign: 'center'}}>Oczekują na dostawę</h2>
+                <div style={{width: '50%', paddingRight: '10%', marginLeft: '10px'}}>
+                    <AppBar
+                        title="Oczekujące na dostawę"
+                        showMenuIconButton={false}
+                    />
                     {this.props.ordered ?
                         <div>
                             <HeadersForOrderedList

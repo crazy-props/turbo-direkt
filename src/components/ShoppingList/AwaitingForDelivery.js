@@ -2,10 +2,11 @@ import React, {Component} from "react";
 import IconButton from "material-ui/IconButton";
 import Remove from "material-ui/svg-icons/action/delete";
 import AddToStorage from "material-ui/svg-icons/content/add-circle";
+import SubtractFromStorage from "material-ui/svg-icons/content/remove-circle";
 import {ListItem} from "material-ui/List";
 import {removeMultipleFromShoppingList} from "../../state/shoppingList";
 import connect from "react-redux/es/connect/connect";
-import {addAmount} from "../../state/partsState";
+import {addAmount, subtractAmount} from "../../state/partsState";
 
 
 class AwaitingForDelivery extends Component {
@@ -38,6 +39,10 @@ class AwaitingForDelivery extends Component {
                                     onClick={() => this.props.removeProductFromShoppingList(this.props.prod.value)}>
                             <Remove/>
                         </IconButton>
+                        <IconButton tooltip="odejmij ilość w magazynie"
+                                    onClick={() => this.props.subtractAmount(zmienna.part, zmienna.group)}>
+                            <SubtractFromStorage/>
+                        </IconButton>
                         {zmienna.amount}
                         <IconButton tooltip="zmień ilość w magazynie"
                                     onClick={() => this.props.addAmount(zmienna.part, zmienna.group)}>
@@ -58,6 +63,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+    subtractAmount: (objectToSubtract, objectsGroup) => dispatch(subtractAmount(objectToSubtract, objectsGroup)),
     addAmount: (objectToAdd, groupOfObject) => dispatch(addAmount(objectToAdd, groupOfObject)),
     removeMultipleFromShoppingList: (list) => dispatch(removeMultipleFromShoppingList(list)),
 })
