@@ -15,7 +15,7 @@ import Spinner from './Spinner'
 class CreateListOfParts extends Component {
 	state = {
 		_parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
-		push: {
+		dataToUpdate: {
 			turboOEM: '',
 			compressor_wheel: [],
 			turbine_wheel: [],
@@ -36,12 +36,12 @@ class CreateListOfParts extends Component {
 	*/
 
 	handleChange = name => (event, index, value) => {
-		this.setState({ push: { ...this.state.push, [name]: value } })
+		this.setState({ dataToUpdate: { ...this.state.dataToUpdate, [name]: value } })
 	}
 
-	textChangeHandler = (e, value) => this.setState({ push: { ...this.state.push, turboOEM: value } })
-
-	addPartToList = () => this.state.push.turboOEM.length > 0 ? this.props.addTurboToList(this.state.push) : alert(`Add turbo name idiot!`)
+	textChangeHandler = (e, value) => this.setState({ dataToUpdate: { ...this.state.dataToUpdate, turboOEM: value } })
+	/*Check is  */
+	addPartToList = () => this.props.addTurboToList(this.state.dataToUpdate)
 
 	selectionRenderer = (values) => {
 		switch (values.length) {
@@ -52,7 +52,7 @@ class CreateListOfParts extends Component {
 		}
 	}
 	render() {
-		console.log(JSON.stringify(this.state.push))
+		console.log(JSON.stringify(this.state.dataToUpdate))
 
 		return (this.props.part && this.props.part.length ?
 			<Card>
@@ -68,7 +68,7 @@ class CreateListOfParts extends Component {
 						hintText="turboOem"
 						onChange={this.textChangeHandler}
 					/>
-					<div> {`Nazwa turbiny: ${this.state.push.turboOEM}`} </div>
+					<div> {`Nazwa turbiny: ${this.state.dataToUpdate.turboOEM}`} </div>
 					<hr /><br />
 					{this.state._parts.map(singlePart =>
 						<div>
@@ -77,7 +77,7 @@ class CreateListOfParts extends Component {
 								key={singlePart}
 								multiple={true}
 								hintText='Zaznacz część'
-								value={this.state.push[singlePart]}
+								value={this.state.dataToUpdate[singlePart]}
 								onChange={this.handleChange(singlePart)}
 								selectionRenderer={this.selectionRenderer}
 							>
@@ -89,7 +89,7 @@ class CreateListOfParts extends Component {
 											<MenuItem
 												key={part.part}
 												insetChildren={true}
-												checked={this.state.push[singlePart].indexOf(part.part) > -1}
+												checked={this.state.dataToUpdate[singlePart].indexOf(part.part) > -1}
 												value={part.part}
 												primaryText={part.part}
 											/>)
@@ -97,8 +97,8 @@ class CreateListOfParts extends Component {
 							</SelectField>
 							<div>
 								{'Wybrane części: '}
-								{this.state.push[singlePart] && this.state.push[singlePart].length > 0 ?
-									this.state.push[singlePart].map(x => <span>{x} </span>)
+								{this.state.dataToUpdate[singlePart] && this.state.dataToUpdate[singlePart].length > 0 ?
+									this.state.dataToUpdate[singlePart].map(x => <span>{x} </span>)
 									:
 									`--------`}
 								<hr /><br />
