@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import ListOfTurbines from './components/ListOfTurbines'
 import ListOfCars from './components/ListOfCars'
-import ListOfParts from './components/ListOfParts'
+import ListOfParts from './components/PartsList/ListOfParts'
 import Dashboard from './components/Dashboard'
-import ShoppingList from './components/ShoppingList'
+import ShoppingList from './components/ShoppingList/ShoppingList'
 
 
 class App extends Component {

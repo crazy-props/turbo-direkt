@@ -1,21 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {addAmount, subtractAmount} from '../state/partsState';
-import {addProductToShoppingList} from '../state/shoppingList';
-import AddPart from './AddPart'
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import {addAmount, subtractAmount, searchParts, myInit} from '../../state/partsState';
+import {addProductToShoppingList} from '../../state/shoppingList';
+import AddPart from '../AddPart'
+import IconButton from 'material-ui/IconButton';
 import {Row, Col} from 'react-flexbox-grid';
 import Dialog from 'material-ui/Dialog';
 import Pagination from "material-ui-pagination";
 import TR from './TR'
+import Partsearch from './Partsearch'
+import Backspace from 'material-ui/svg-icons/content/backspace';
+import AddPartIcon from 'material-ui/svg-icons/image/add-to-photos'
+
 
 class ListOfParts extends Component {
     state = {
-        basicSearchInput: '',
         isDialogOpen: false,
         ITEMS_PER_PAGE: 10,
-        currentPage: 0
+        currentPage: 0,
+
     }
 
     handleOpen() {
@@ -26,49 +29,50 @@ class ListOfParts extends Component {
         this.setState({isDialogOpen: false})
     }
 
-    setStateForSearch(event) {
-        this.setState({basicSearchInput: event.target.value})
+    compare(a, b) {
+        if (a.part < b.part)
+            return -1;
+        if (a.part > b.part)
+            return 1;
+        return 0;
     }
 
     render() {
+
         let myArrayForState = ['actuator', 'back_plate', 'bearing_housing', 'compressor_wheel', 'gasket_kit', 'heat_shield', 'KODE_CHRA', 'nozzle', 'repair_kit', 'turbine_wheel']
 
         let arrayForHeadings = ['Actuator', 'Back plate', 'Bearing housing', 'Compressor wheel', 'Gasket kit', 'Heat shield', 'KODE CHRA', 'Nozzle', 'Repair kit', 'Turbine wheel'
         ]
-
         let parts = this.props.parts;
         const filter = parts
+            .sort(this.compare)
             .filter(part => {
-                    return (part.part.toLowerCase().includes(this.state.basicSearchInput.toLowerCase()))
-                        || (part.group.toLowerCase().includes(this.state.basicSearchInput.toLowerCase()))
+                    return (part.part.toLowerCase().includes(this.props.searchState.toLowerCase()))
+                        || (part.group.toLowerCase().includes(this.props.searchState.toLowerCase()))
                 }
             )
 
         const numberOfParts = filter && filter.length
-        console.log(filter)
-
         return (
             <div>
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
-                        <TextField
-                            style={{margin: 'auto'}}
-                            fullWidth={true}
-                            id={'idForTextField'}
-                            floatingLabelText={'Search for parts'}
-                            type={"search"}
-                            value={this.state.basicSearchInput}
-                            onChange={event => this.setStateForSearch(event)}
-                        />
-
+                        <Partsearch/>
+                    </Col>
+                    <Col xs={1}>
+                        <IconButton tooltip="czyść filtr"
+                                    onClick={() => this.props.searchParts('')}
+                        >
+                            <Backspace/>
+                        </IconButton>
                     </Col>
                     <Col xs>
-
-                        <RaisedButton
+                        <IconButton
                             onClick={() => this.handleOpen()}
+                            tooltip="dodaj nową część"
                         >
-                            dodaj część
-                        </RaisedButton>
+                            <AddPartIcon/>
+                        </IconButton>
 
                     </Col>
                 </Row>
@@ -91,13 +95,17 @@ class ListOfParts extends Component {
                                     i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1))
                             }).map((partInStateArray, index) =>
                                 <TR
+                                    key={Math.random()}
                                     partInStateArray={partInStateArray}
                                     index={index}
                                     myArrayForState={myArrayForState}
                                     arrayForHeadings={arrayForHeadings}
+                                    addAmount={this.props.addAmount}
+                                    subtractAmount={this.props.subtractAmount}
+                                    addToShoppingList={this.props.addProductToShoppingList}
                                 />
                             )
-                            : 'loading'
+                            : 'szukam części...'
                         }
                         </tbody>
 
@@ -120,12 +128,14 @@ class ListOfParts extends Component {
 const mapStateToProps = state => ({
     parts: state.partsState.parts,
     products: state.shoppingListState.products,
+    searchState: state.partsState.search,
 })
 
 const mapDispatchToProps = dispatch => ({
-    addAmount: (objectToAdd) => dispatch(addAmount(objectToAdd)),
-    subtractAmount: (objectToSubtract) => dispatch(subtractAmount(objectToSubtract)),
-    addProductToShoppingList: (part) => dispatch(addProductToShoppingList(part)),
+    addAmount: (objectToAdd, groupOfObject) => dispatch(addAmount(objectToAdd, groupOfObject)),
+    subtractAmount: (objectToSubtract, objectsGroup) => dispatch(subtractAmount(objectToSubtract, objectsGroup)),
+    addProductToShoppingList: (part, group) => dispatch(addProductToShoppingList(part, group)),
+    searchParts: (value) => dispatch(searchParts(value)),
 })
 
 export default connect(

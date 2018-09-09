@@ -19,13 +19,13 @@ export const initList = () => (dispatch, getState) => {
         })
 }
 
-export const addProductToShoppingList = (partsName) => (dispatch, getState) => {
+export const addProductToShoppingList = (partsName, partsGroup) => (dispatch, getState) => {
     if (getState().shoppingListState.product === null) {
-        db.ref(`/shoppingList/`).push(partsName)
+        db.ref(`/shoppingList/`).push({value: partsName, group: partsGroup})
     } else {
         let checkIfOnTheList = getState().shoppingListState.products.find(x => x.value === partsName)
         if (checkIfOnTheList === undefined) {
-            db.ref(`/shoppingList/`).push({value: partsName})
+            db.ref(`/shoppingList/`).push({value: partsName, group: partsGroup})
         }
         else {
             console.log("such product is already on the list")
@@ -60,13 +60,13 @@ export const removeMultipleFromShoppingList = (partslist) => (dispatch, getState
 }
 
 
-export const addToOrdered = (partsName) => (dispatch, getState) => {
+export const addToOrdered = (partsName, partsGroup) => (dispatch, getState) => {
     let findKey = getState().shoppingListState.products.find(x => {
         if (x.value === partsName)
             return x.key
     })
     if (findKey !== undefined) {
-        db.ref(`/shoppingList/${findKey.key}`).set({value: partsName, ordered: true})
+        db.ref(`/shoppingList/${findKey.key}`).set({value: partsName, ordered: true, group: partsGroup})
     }
     else {
         console.log("there's no such product on shopping list")
