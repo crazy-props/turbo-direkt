@@ -56,7 +56,14 @@ class CreteNewTurbine extends React.Component {
 
 	textChangeHandler = (e, value) => this.setState({ dataToUpdate: { ...this.state.dataToUpdate, turboOEM: value } })
 
-	addPartToList = () => this.state.dataToUpdate.turboOEM.length > 0 ? this.props.addTurboToList(this.state.dataToUpdate) : alert(`Add turbo name idiot!`)
+	addPartToList = () => this.props.addTurboToList(this.state.dataToUpdate)
+	/**
+	 * 'handleRequestPartsDelete' function take to two argument: 
+	 * first is the name of parts array, second is the index of each parts on the array. 
+	 */
+	handleRequestPartsDelete = (part, idx) => {
+		this.setState({ dataToUpdate: { ...this.state.dataToUpdate, [part]: this.state.dataToUpdate[part].filter((part, ind) => ind !== idx) } })
+	}
 
 	selectionRenderer = (values) => {
 		switch (values.length) {
@@ -133,9 +140,7 @@ class CreteNewTurbine extends React.Component {
 				return console.log('Problem with getStepContent function ');
 		}
 	}
-	handleRequestPartsDelete = (part, idx) => {
-		alert(JSON.stringify(this.state.dataToUpdate[part][idx]))
-	}
+
 	render() {
 		const contentStyle = { margin: '0 16px' }
 
