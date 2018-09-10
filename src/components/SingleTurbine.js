@@ -15,10 +15,6 @@ const customContentStyle = {
 
 };
 
-/**
- * The dialog width has been set to occupy the full width of browser through the `contentStyle` property.
- */
-
 class SingleTurbine extends React.Component {
     state = {
         open: false,
@@ -46,9 +42,8 @@ class SingleTurbine extends React.Component {
         if (this.state.open === true)
             return (
                 <div key={Math.random()}>
-
                         <Dialog
-                            title={`PARTS FOR TURBO OEM : ${props.turbine}`}
+                            title={`CZĘŚCI TURBO OEM : ${props.turbine}`}
                             actions={actions}
                             modal={true}
                             contentStyle={customContentStyle}
@@ -68,7 +63,7 @@ class SingleTurbine extends React.Component {
                                 <Table>
                                     <TableBody>
                                         <TableRow key={Math.random()}>
-                                            <TableCell>{el}</TableCell>
+                                            <TableCell key={el}>{el}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>)}

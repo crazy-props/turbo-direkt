@@ -68,10 +68,8 @@ class ListOfCarso extends Component {
     componentWillUnmount() {
         this.debouncedEvent.cancel();
     }
-
     render() {
         let cars = this.props.cars;
-
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
             .filter(car =>
@@ -79,7 +77,6 @@ class ListOfCarso extends Component {
                 car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1)
                 ||car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1
             )
-
         const numberOfCars = filter && filter.length
         return (filter === null ?
             <Spinner/>
@@ -118,11 +115,11 @@ class ListOfCarso extends Component {
                                         <td>{el.capacity}</td>
                                         <td>{el.no}</td>
                                         <td>{el.power}</td>
-                                        <td className="turboList">
+                                        <td className="turboList" key={Math.random()}>
                                             {el.turbo_OEM && el.turbo_OEM.length ?
                                                 el.turbo_OEM.filter(function (a, b, c) {
                                                     return c.indexOf(a) === b;
-                                                }).map(el => <SingleTurbine
+                                                }).map(el => <SingleTurbine key={el}
                                                     turbine={el}/>                                        ) :
                                                 el.turbo_OEM}
                                         </td>
@@ -132,7 +129,7 @@ class ListOfCarso extends Component {
                                             </RaisedButton>
                                         </td>
                                     </tr>
-                                ) :<tr> {this.state.searchTerm.length?<Error/>:<Spinner/>}</tr>
+                                ) :<tr><td>{this.state.searchTerm.length?<Error/>:<Spinner/>}</td></tr>
                         }
                         </tbody>
                     </table>

@@ -94,7 +94,7 @@ class ListOfCars extends Component {
                                         </RaisedButton>
                                     </td>
                                 </tr>
-                            ) : <tr>{this.state.searchTerm.length?<Error/>:<Spinner/>}</tr>
+                            ) : <tr><td>{this.state.searchTerm.length?<Error/>:<Spinner/>}</td></tr>
                         }
                         </tbody>
                     </table>
