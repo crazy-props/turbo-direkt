@@ -7,8 +7,10 @@ import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 import { connect } from 'react-redux'
 import { addTurboToList } from '../state/turboState'
-import { Card, CardHeader, CardText } from 'material-ui/Card'
+import { Tabs, Tab } from 'material-ui/Tabs';
+import Slider from 'material-ui/Slider';
 import TableWithCreatingTurbine from './CreteNewTurbinr_Table';
+
 
 class CreteNewTurbine extends React.Component {
 
@@ -89,50 +91,45 @@ class CreteNewTurbine extends React.Component {
 					</div>);
 			case 1:
 				return (
-					<div>
+					<Tabs >
 						{this.state._parts.map((singlePart, idx) =>
-							<Card>
-								<CardHeader
-									title={this.state._listOfParts[idx]}
-									actAsExpander={true}
-									showExpandableButton={true}
-								/>
-								<CardText expandable={true}>
-									<SelectField
-										key={singlePart}
-										multiple={true}
-										hintText='Zaznacz część'
-										value={this.state.dataToUpdate[singlePart]}
-										onChange={this.handleChange(singlePart)}
-										selectionRenderer={this.selectionRenderer}
-									>
-										{
-											this.props.part
-												.filter(part =>
-													part.group === singlePart)
-												/*sort objects in array*/
-												.sort((prev, next) => (prev.part > next.part) ? 1 : ((next.part > prev.part) ? -1 : 0))
-												.map(part =>
-													<MenuItem
-														key={part.part}
-														insetChildren={true}
-														checked={this.state.dataToUpdate[singlePart].indexOf(part.part) > -1}
-														value={part.part}
-														primaryText={part.part}
-													/>)
-										}
-									</SelectField>
-									<div>
-										{'Wybrane części: '}
-										{this.state.dataToUpdate[singlePart] && this.state.dataToUpdate[singlePart].length > 0 ?
-											this.state.dataToUpdate[singlePart].map(x => <span>{x} </span>)
-											:
-											`--------`}
-									</div>
-								</CardText>
-							</Card>
+							<Tab label={this.state._listOfParts[idx]} style={{ fontSize: 10, whiteSpace: 'pre-line' }}>
+								<h2>{this.state._listOfParts[idx]}</h2>
+								<SelectField
+									key={singlePart}
+									multiple={true}
+									hintText='Zaznacz część'
+									value={this.state.dataToUpdate[singlePart]}
+									onChange={this.handleChange(singlePart)}
+									selectionRenderer={this.selectionRenderer}
+								>
+									{
+										this.props.part
+											.filter(part =>
+												part.group === singlePart)
+											/*sort objects in array*/
+											.sort((prev, next) => (prev.part > next.part) ? 1 : ((next.part > prev.part) ? -1 : 0))
+											.map(part =>
+												<MenuItem
+													key={part.part}
+													insetChildren={true}
+													checked={this.state.dataToUpdate[singlePart].indexOf(part.part) > -1}
+													value={part.part}
+													primaryText={part.part}
+												/>)
+									}
+								</SelectField>
+								<div>
+									{'Wybrane części: '}
+									{this.state.dataToUpdate[singlePart] && this.state.dataToUpdate[singlePart].length > 0 ?
+										this.state.dataToUpdate[singlePart].map(x => <span>{x} </span>)
+										:
+										`--------`}
+
+								</div>
+							</Tab>
 						)}
-					</div>)
+					</Tabs>)
 					;
 			case 2:
 				return (
@@ -153,7 +150,8 @@ class CreteNewTurbine extends React.Component {
 					creatingTurbine={this.state.dataToUpdate}
 					handleRequestPartsDelete={this.handleRequestPartsDelete}
 				/>
-				<div style={{ width: '100%', maxWidth: 700, margin: 'auto' }}>
+
+				<div style={{ width: '100%', maxWidth: 900, margin: 'auto' }}>
 					<Stepper activeStep={this.state.stepIndex}>
 						<Step>
 							<StepLabel>Dodaj nazwę turbiny</StepLabel>
