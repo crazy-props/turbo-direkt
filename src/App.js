@@ -12,7 +12,6 @@ class App extends Component {
             <div>
                 <Router>
                     <div>
-
                         <Route
                             exact path={'/'}
                             component={() => (

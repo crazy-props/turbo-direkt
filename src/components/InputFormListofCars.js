@@ -144,7 +144,6 @@ class HorizontalLinearStepper extends React.Component {
         const list = this.props.cars && this.props.cars.map(car => car.turbo_OEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
             return c.indexOf(a) === b;
         })
-        console.log(this.state.searchText)
         const objecttodb = {
             mark: this.state.mark, model: this.state.model, date: this.state.date, capacity: this.state.capacity,
             no: this.state.factoryNo, power: this.state.power, turbo_OEM: this.state.turbo
@@ -167,7 +166,7 @@ class HorizontalLinearStepper extends React.Component {
                     <Row className={'partsTableDiv'}>
                         <table className="carsTable">
                             <TableTop/>
-                            <TableBody>
+                            <TableBody key={Math.random()}>
                                 <TableRow style={styles.row}>
                                     <CustomTableCell component="th" scope="row">{this.state.mark}</CustomTableCell>
                                     <CustomTableCell>{this.state.model}</CustomTableCell>
@@ -199,7 +198,7 @@ class HorizontalLinearStepper extends React.Component {
                     </Row>
                     <div style={{width: '80%', maxWidth: 500, margin: 'auto'}}>
                         <Stepper style={styles.step} activeStep={stepIndex}>
-                            {this.state.stepper.map(el => <Step><StepLabel>{el}</StepLabel></Step>)}
+                            {this.state.stepper.map(el => <Step key={el}><StepLabel>{el}</StepLabel></Step>)}
                         </Stepper>
                         <div style={contentStyle}>
                             {finished ? (
@@ -280,6 +279,8 @@ class HorizontalLinearStepper extends React.Component {
                                                 }}
                                             />
                                         </p>
+                                        <br/>
+                                        <br/>
                                     </div>
                                 </div>
                             )}

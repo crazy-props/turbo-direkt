@@ -36,7 +36,7 @@ class SingleTurbine extends React.Component {
     render() {
         const actions = [
             <FlatButton
-                label="Cancel"
+                label="Zamknij"
                 primary={true}
                 onClick={this.handleClose}
             />,
@@ -45,7 +45,7 @@ class SingleTurbine extends React.Component {
         const props = this.props
         if (this.state.open === true)
             return (
-                <div >
+                <div key={Math.random()}>
 
                         <Dialog
                             title={`PARTS FOR TURBO OEM : ${props.turbine}`}
@@ -67,7 +67,7 @@ class SingleTurbine extends React.Component {
                             ).map(el=>
                                 <Table>
                                     <TableBody>
-                                        <TableRow>
+                                        <TableRow key={Math.random()}>
                                             <TableCell>{el}</TableCell>
                                         </TableRow>
                                     </TableBody>

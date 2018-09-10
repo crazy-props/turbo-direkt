@@ -90,10 +90,9 @@ class ListOfCarso extends Component {
                     <Col xs={6}>
                         <Row end={'xs'}>
                             <Col xs={6}>
-                                <div className="group">
-                                    <input placeholder="search:turbo and cars" type="search"
+                                <div className="group2">
+                                    <input placeholder="Wyszukaj:samochód, model lub turbo" type="search"
                                            onChange={this.debounceEvent(this.handleSearch, 700)}/>
-                                    <span className="highlight"/>
                                     <span className="bar"/>
                                 </div>
                             </Col>
@@ -133,7 +132,7 @@ class ListOfCarso extends Component {
                                             </RaisedButton>
                                         </td>
                                     </tr>
-                                ) : this.state.searchTerm.length?<Error/>:<Spinner/>
+                                ) :<tr> {this.state.searchTerm.length?<Error/>:<Spinner/>}</tr>
                         }
                         </tbody>
                     </table>

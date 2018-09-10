@@ -55,7 +55,6 @@ class ListOfCars extends Component {
                                 <div className="group">
                                     <input placeholder="Szukaj:pojazd,marka,turbina" type="search"
                                            onChange={this.debounceEvent(this.handleSearch, 700)}/>
-                                    <span className="highlight"/>
                                     <span className="bar"/>
                                 </div>
                             </Col>
@@ -85,7 +84,7 @@ class ListOfCars extends Component {
                                         {el.turbo_OEM && el.turbo_OEM.length ?
                                             el.turbo_OEM.filter(function (a, b, c) {
                                                 return c.indexOf(a) === b;
-                                            }).map(el => <SingleTurbine
+                                            }).map(el => <SingleTurbine key={el}
                                                 turbine={el}/>                                        ) :
                                             el.turbo_OEM}
                                     </td>
@@ -95,7 +94,7 @@ class ListOfCars extends Component {
                                         </RaisedButton>
                                     </td>
                                 </tr>
-                            ) : this.state.searchTerm.length?<Error/>:<Spinner/>
+                            ) : <tr>{this.state.searchTerm.length?<Error/>:<Spinner/>}</tr>
                         }
                         </tbody>
                     </table>

@@ -8,8 +8,7 @@ class Spinner extends Component {
         return (
             <div className="spinnercontainer">
                 <div className="spinner"><img className="spinnerImage" src={spinner}/></div>
-                <br/>
-                <p className="loading">Loading<p className="loading2">...</p></p>
+                <div className="loading2">Loading...</div>
             </div>
         );
     }
