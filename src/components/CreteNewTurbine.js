@@ -16,6 +16,7 @@ class CreteNewTurbine extends React.Component {
 		finished: false,
 		stepIndex: 0,
 		_parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
+		_listOfParts: ['Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA'],
 		dataToUpdate: {
 			turboOEM: '',
 			compressor_wheel: [],
@@ -89,10 +90,10 @@ class CreteNewTurbine extends React.Component {
 			case 1:
 				return (
 					<div>
-						{this.state._parts.map(singlePart =>
+						{this.state._parts.map((singlePart, idx) =>
 							<Card>
 								<CardHeader
-									title={singlePart}
+									title={this.state._listOfParts[idx]}
 									actAsExpander={true}
 									showExpandableButton={true}
 								/>
@@ -109,6 +110,8 @@ class CreteNewTurbine extends React.Component {
 											this.props.part
 												.filter(part =>
 													part.group === singlePart)
+												/*sort objects in array*/
+												.sort((prev, next) => (prev.part > next.part) ? 1 : ((next.part > prev.part) ? -1 : 0))
 												.map(part =>
 													<MenuItem
 														key={part.part}

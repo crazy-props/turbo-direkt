@@ -15,6 +15,7 @@ import Spinner from './Spinner'
 class CreateListOfParts extends Component {
 	state = {
 		_parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
+		_listOfParts: ['Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA'],
 		dataToUpdate: {
 			turboOEM: '',
 			compressor_wheel: [],

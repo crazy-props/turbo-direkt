@@ -26,7 +26,6 @@ const TableWithCreatingTurbine = (props) => {
                                 props.creatingTurbine[part].map((singlePart, idx) =>
                                     < Chip
                                         onRequestDelete={()=>props.handleRequestPartsDelete(part, idx)}
-                                        //onClick={handleClick}
                                         style={styles.chip}
                                     >
                                         {singlePart}
