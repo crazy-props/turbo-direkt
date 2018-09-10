@@ -16,16 +16,19 @@ import CheckBoxes from "./CheckBoxes";
 import TableTop from "./TableTop";
 import AutoComplete from "material-ui/AutoComplete";
 import Chip from 'material-ui/Chip';
+import {Row} from "react-flexbox-grid";
 
 const CustomTableCell = withStyles(theme => ({
     head: {backgroundColor: theme.palette.common.black, color: theme.palette.common.white,},
-    body: {fontSize: 14,},}))(TableCell);
+    body: {fontSize: 14,},
+}))(TableCell);
 const styles = {
-    block: {maxWidth: 250,}, step: {fontSize: "1.4vh",}, chip: {margin: 4,},}
+    block: {maxWidth: 250,}, step: {fontSize: "1.4vh",}, chip: {margin: 4,},
+}
 
 class HorizontalLinearStepper extends React.Component {
     state = {
-        stepper:["MARKA","MODEL","DATA PRODUKCJI","POJEMNOŚĆ","OZN.FABRYCZNE","MOC","TURBO OEM"],
+        stepper: ["MARKA", "MODEL", "DATA PRODUKCJI", "POJEMNOŚĆ", "OZN.FABRYCZNE", "MOC", "TURBO OEM"],
         searchText: '',
         finished: false,
         stepIndex: 0,
@@ -63,6 +66,7 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
+
     updateCheck2() {
         this.setState((oldState) => {
             return {
@@ -70,6 +74,7 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
+
     updateCheck3() {
         this.setState((oldState) => {
             return {
@@ -77,6 +82,7 @@ class HorizontalLinearStepper extends React.Component {
             };
         });
     }
+
     cancelInput() {
         this.refs.fieldName.value = "";
     }
@@ -148,6 +154,7 @@ class HorizontalLinearStepper extends React.Component {
         return (
             this.state.checked1 ?
                 <div>
+
                     <CheckBoxes
                         stepIndex={this.state.stepIndex}
                         checked1={this.state.checked1}
@@ -157,40 +164,42 @@ class HorizontalLinearStepper extends React.Component {
                         onCheck2={this.updateCheck2.bind(this)}
                         onCheck3={this.updateCheck3.bind(this)}
                     />
-                    <Table/>
-                    <TableTop/>
-                    <TableBody>
-                        <TableRow style={styles.row}>
-                            <CustomTableCell component="th" scope="row">{this.state.mark}</CustomTableCell>
-                            <CustomTableCell>{this.state.model}</CustomTableCell>
-                            <CustomTableCell>{this.state.date}</CustomTableCell>
-                            <CustomTableCell>{this.state.capacity}</CustomTableCell>
-                            <CustomTableCell>{this.state.factoryNo}</CustomTableCell>
-                            <CustomTableCell>{this.state.power}</CustomTableCell>
-                            <CustomTableCell className="turboList">
-                                {this.state.turbo && this.state.turbo.length ?
-                                    this.state.turbo.filter(function (a, b, c) {
-                                        return c.indexOf(a) === b;
-                                    }).map(el =>
-                                        <Chip
-                                            key={el}
-                                            onRequestDelete={() => {
-                                                this.removeTurbo(el)
-                                            }}
-                                            style={styles.chip}
-                                        >
-                                            {el}
-                                        </Chip>
-                                    ) :
-                                    this.state.turbo
-                                }
-                            </CustomTableCell>
-                        </TableRow>
-                    </TableBody>
-                    <Table/>
+                    <Row className={'partsTableDiv'}>
+                        <table className="carsTable">
+                            <TableTop/>
+                            <TableBody>
+                                <TableRow style={styles.row}>
+                                    <CustomTableCell component="th" scope="row">{this.state.mark}</CustomTableCell>
+                                    <CustomTableCell>{this.state.model}</CustomTableCell>
+                                    <CustomTableCell>{this.state.date}</CustomTableCell>
+                                    <CustomTableCell>{this.state.capacity}</CustomTableCell>
+                                    <CustomTableCell>{this.state.factoryNo}</CustomTableCell>
+                                    <CustomTableCell>{this.state.power}</CustomTableCell>
+                                    <CustomTableCell className="turboList">
+                                        {this.state.turbo && this.state.turbo.length ?
+                                            this.state.turbo.filter(function (a, b, c) {
+                                                return c.indexOf(a) === b;
+                                            }).map(el =>
+                                                <Chip
+                                                    key={el}
+                                                    onRequestDelete={() => {
+                                                        this.removeTurbo(el)
+                                                    }}
+                                                    style={styles.chip}
+                                                >
+                                                    {el}
+                                                </Chip>
+                                            ) :
+                                            this.state.turbo
+                                        }
+                                    </CustomTableCell>
+                                </TableRow>
+                            </TableBody>
+                        </table>
+                    </Row>
                     <div style={{width: '80%', maxWidth: 500, margin: 'auto'}}>
                         <Stepper style={styles.step} activeStep={stepIndex}>
-                            {this.state.stepper.map(el=><Step><StepLabel>{el}</StepLabel></Step>)}
+                            {this.state.stepper.map(el => <Step><StepLabel>{el}</StepLabel></Step>)}
                         </Stepper>
                         <div style={contentStyle}>
                             {finished ? (
@@ -238,7 +247,10 @@ class HorizontalLinearStepper extends React.Component {
                                         <p>
                                             <RaisedButton
                                                 label="Wstecz" disabled={stepIndex === 0}
-                                                onClick={() => {this.handlePrev();this.cancelInput()}}
+                                                onClick={() => {
+                                                    this.handlePrev();
+                                                    this.cancelInput()
+                                                }}
                                                 style={{marginRight: 12}}
                                             />
                                             <RaisedButton
@@ -249,14 +261,18 @@ class HorizontalLinearStepper extends React.Component {
                                                     || stepIndex === 1 && this.state.model === ""
                                                     || stepIndex === 3 && this.state.capacity === ''
                                                     || stepIndex === 6 && this.state.turbo.length === 0)}
-                                                onClick={() => {this.handleNext();this.cancelInput()}}
+                                                onClick={() => {
+                                                    this.handleNext();
+                                                    this.cancelInput()
+                                                }}
                                                 style={{marginRight: 12}}
                                             />
                                             <RaisedButton
                                                 label="Anuluj"
                                                 disabled={stepIndex === 0}
                                                 style={{marginRight: 12}}
-                                                onClick={(event) => {event.preventDefault();
+                                                onClick={(event) => {
+                                                    event.preventDefault();
                                                     this.setState({
                                                         stepIndex: 0, finished: false, mark: '', model: '',
                                                         capacity: '', date: "", factoryNo: "", power: "", turbo: []
@@ -285,6 +301,7 @@ class HorizontalLinearStepper extends React.Component {
         );
     }
 }
+
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
 })

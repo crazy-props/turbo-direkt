@@ -86,7 +86,7 @@ class ListOfCarso extends Component {
             : <div>
                 <InputForm
                 />
-                <Row middle={'xs'} className={'partsSearchRow'}>
+                <Row middle={'xs'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
                             <Col xs={6}>
@@ -101,43 +101,42 @@ class ListOfCarso extends Component {
                     </Col>
                 </Row>
                 <Row className={'partsTableDiv'}>
-                    <Table style={styles.table}>
+                    <table className="carsTable">
                         <TableTop/>
-                        <TableBody>
-                            {
-                                filter && filter.length ? filter
-                                    .filter((el, i) => (
-                                        i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
-                                        &&
-                                        i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
-                                    ))
-                                    .map((el) =>
-                                        <TableRow style={styles.row}>
-                                            <CustomTableCell component="th" scope="row">{el.mark}</CustomTableCell>
-                                            <CustomTableCell>{el.model}</CustomTableCell>
-                                            <CustomTableCell>{el.date}</CustomTableCell>
-                                            <CustomTableCell>{el.capacity}</CustomTableCell>
-                                            <CustomTableCell>{el.no}</CustomTableCell>
-                                            <CustomTableCell>{el.power}</CustomTableCell>
-                                            <CustomTableCell className="turboList">
-                                                {el.turbo_OEM && el.turbo_OEM.length ?
-                                                    el.turbo_OEM.filter(function (a, b, c) {
-                                                        return c.indexOf(a) === b;
-                                                    }).map(el => <SingleTurbine
-                                                        turbine={el}/>) :
-                                                    el.turbo_OEM
-                                                }
-                                            </CustomTableCell>
-                                            <CustomTableCell>
-                                                <RaisedButton
-                                                    onClick={removeCarFromList(el)}>USUŃ
-                                                </RaisedButton>
-                                            </CustomTableCell>
-                                        </TableRow>
-                                    ) : this.state.searchTerm.length ? <Error/> : <Spinner/>
-                            }
-                        </TableBody>
-                    </Table>
+                        <tbody key={Math.random()}>
+                        {
+                            filter && filter.length ? filter
+                                .filter((el, i) => (
+                                    i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
+                                    &&
+                                    i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
+                                ))
+                                .map((el) =>
+                                    <tr className="trOne" key={el.key}>
+                                        <td>{el.mark}</td>
+                                        <td>{el.model}</td>
+                                        <td>{el.date}</td>
+                                        <td>{el.capacity}</td>
+                                        <td>{el.no}</td>
+                                        <td>{el.power}</td>
+                                        <td className="turboList">
+                                            {el.turbo_OEM && el.turbo_OEM.length ?
+                                                el.turbo_OEM.filter(function (a, b, c) {
+                                                    return c.indexOf(a) === b;
+                                                }).map(el => <SingleTurbine
+                                                    turbine={el}/>                                        ) :
+                                                el.turbo_OEM}
+                                        </td>
+                                        <td>
+                                            <RaisedButton
+                                                onClick={removeCarFromList(el)}>Usuń
+                                            </RaisedButton>
+                                        </td>
+                                    </tr>
+                                ) : this.state.searchTerm.length?<Error/>:<Spinner/>
+                        }
+                        </tbody>
+                    </table>
                 </Row>
                 <div style={{textAlign: 'center'}}>
                     <Pagination
