@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import { connect } from 'react-redux'
 import ListOfTurbines from './components/ListOfTurbines'
 import ListOfCars from './components/ListOfCars'
 import ListOfParts from './components/PartsList/ListOfParts'
 import Dashboard from './components/Dashboard'
 import ShoppingList from './components/ShoppingList/ShoppingList'
+import AppBarMini from "./components/DashboardAppBarFor";
+import {logOut} from "./state/authState";
 
 
 class App extends Component {
@@ -13,7 +16,7 @@ class App extends Component {
             <div>
                 <Router>
                     <div>
-
+                        <AppBarMini logOutButton={this.props.logOut}/>
                         <Route
                             exact path={'/'}
                             component={Dashboard}
@@ -32,6 +35,7 @@ class App extends Component {
                         <Route
                             path={'/parts'}
                             component={ListOfParts}
+                            parts={this.props.partState}
                         />
                         <Route
                             path={'/shopping-list'}
@@ -45,4 +49,13 @@ class App extends Component {
     }
 }
 
-export default App
+
+export default connect(
+    state => ({
+
+    }),
+    dispatch => ({
+        logOut: () => dispatch(logOut())
+
+    })
+)(App)

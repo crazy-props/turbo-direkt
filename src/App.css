@@ -137,10 +137,6 @@
 .partsSearchRow{
     background: white;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000
 }
 .partsTableDiv{
     margin-top: 100px;
@@ -230,14 +226,7 @@ a{
 .lastTh{
     text-align: center;
 }
-.partsSearchRow2{
-    background: white;
-    -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
-    position: fixed;
-    width: 102%;
-    top: 10%;
-}
+
 .group 			  {
     position:relative;
     margin-bottom:45px;
@@ -307,13 +296,7 @@ input:focus ~ .highlight {
     from { background:#5264AE; }
     to 	{ width:0; background:transparent; }
 }
-.partsSearchRow{
-    background: white;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
-    position: fixed;
-    width: 100%;
-    top: 0;
-}
+
 .partsTableDiv{
     margin-top: 100px;
 }

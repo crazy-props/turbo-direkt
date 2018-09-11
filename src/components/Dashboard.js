@@ -3,13 +3,14 @@ import {connect} from "react-redux";
 import AppBarMini from "./DashboardAppBarFor";
 import './../App.css';
 import ListOfCarso from "./CustomTable";
+import {logOut} from "../state/authState";
 
 class Dashboard extends Component {
     render() {
         return (
 
                 <div className="App">
-                    <AppBarMini/>
+                    <AppBarMini logOutButton={this.props.logOut}/>
                     <ListOfCarso/>
 
                 </div>
@@ -19,7 +20,9 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({})
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+    logOut: () => dispatch(logOut())
+})
 
 export default connect(
     mapStateToProps,

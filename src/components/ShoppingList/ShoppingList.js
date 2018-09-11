@@ -20,6 +20,7 @@ class ShoppingList extends Component {
 
 
     render() {
+
         return (
             <div style={{display: 'flex'}}>
                 <div style={{width: '50%', paddingLeft: '10%'}}>

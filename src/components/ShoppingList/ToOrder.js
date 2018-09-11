@@ -7,9 +7,15 @@ import Divider from "material-ui/Divider";
 
 
 const ToOrder = (props) => {
+    let myArrayForState = ['actuator', 'back_plate', 'bearing_housing', 'compressor_wheel', 'gasket_kit', 'heat_shield', 'KODE_CHRA', 'nozzle', 'repair_kit', 'turbine_wheel']
+
+    let arrayForHeadings = ['Actuator', 'Back plate', 'Bearing housing', 'Compressor wheel', 'Gasket kit', 'Heat shield', 'KODE CHRA', 'Nozzle', 'Repair kit', 'Turbine wheel'
+    ]
+    let partsGroup = arrayForHeadings[myArrayForState.indexOf(props.product.group)]
+
     return (
         <ListItem key={Math.random()}>
-            {props.product.group} {props.product.value}
+            {partsGroup} {props.product.value}
 
             <IconButton tooltip="usuń z koszyka"
                         onClick={() => props.removeProductFromShoppingList(props.product.value)}>

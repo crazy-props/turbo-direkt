@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {addAmount, subtractAmount, searchParts, myInit} from '../../state/partsState';
 import {addProductToShoppingList} from '../../state/shoppingList';
-import AddPart from '../AddPart'
+import AddPart from './AddPart'
 import IconButton from 'material-ui/IconButton';
 import {Row, Col} from 'react-flexbox-grid';
 import Dialog from 'material-ui/Dialog';

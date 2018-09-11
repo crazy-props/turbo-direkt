@@ -17,6 +17,12 @@ class AwaitingForDelivery extends Component {
                 return {el}
             }
         })
+        let myArrayForState = ['actuator', 'back_plate', 'bearing_housing', 'compressor_wheel', 'gasket_kit', 'heat_shield', 'KODE_CHRA', 'nozzle', 'repair_kit', 'turbine_wheel']
+
+        let arrayForHeadings = ['Actuator', 'Back plate', 'Bearing housing', 'Compressor wheel', 'Gasket kit', 'Heat shield', 'KODE CHRA', 'Nozzle', 'Repair kit', 'Turbine wheel'
+        ]
+        let partsGroup = arrayForHeadings[myArrayForState.indexOf(this.props.prod.group)]
+
         return (
             <ListItem>
                 {zmienna ?
@@ -34,7 +40,7 @@ class AwaitingForDelivery extends Component {
                                }}
                         />
 
-                        {this.props.prod.group} {this.props.prod.value}
+                        {partsGroup} {this.props.prod.value}
                         <IconButton tooltip="usuń z listy zamówionych"
                                     onClick={() => this.props.removeProductFromShoppingList(this.props.prod.value)}>
                             <Remove/>

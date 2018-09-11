@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import {Grid, Row, Col} from 'react-flexbox-grid';
-import {newPart} from "../state/partsState";
+import {newPart} from "../../state/partsState";
 
 
 class AddPart extends Component {

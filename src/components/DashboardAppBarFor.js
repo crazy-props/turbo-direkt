@@ -7,26 +7,29 @@ import logo from "../img/logo.png"
 function handleClick() {
     alert('Whaaaaaaaaaaazzzaaaaaa');
 }
+
 const styles = {
     title: {
         cursor: 'pointer',
-        marginLeft:"10rem"
+        marginLeft: "10rem"
     },
     logo: {
-        height:"4rem",
+        height: "4rem",
         width: "4rem",
-        marginLeft:"4rem"
+        marginLeft: "4rem"
 
     },
-    div:{
-        marginTop:"1px"
+    div: {
+        margin: 'auto',
+        marginBottom: '5%',
+        position: "sticky"
     }
 
 };
-const AppBarMini = () => (
+const AppBarMini = (props) => (
     <AppBar
-        iconElementLeft={<div><img style={styles.logo}src={logo} onClick={handleClick}/></div>}
-        iconElementRight={<TransitionsTooltips style={styles.tooltip}/>}
+        iconElementLeft={<div><img style={styles.logo} src={logo} onClick={handleClick}/></div>}
+        iconElementRight={<TransitionsTooltips style={styles.tooltip} logOutButton={props.logOutButton}/>}
         style={styles.div}
 
     />
