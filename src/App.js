@@ -16,31 +16,26 @@ class App extends Component {
 
                         <Route
                             exact path={'/'}
-                            component={() => (
-                                <Dashboard/>)}
+                            component={Dashboard}
                         />
 
                         <Route
                             path={'/turbines'}
-                            component={() => (
-                                <ListOfTurbines/>)}
+                            component={ListOfTurbines}
                         />
 
                         <Route
                             path={'/cars'}
-                            component={() => (
-                                <ListOfCars/>)}
+                            component={ListOfCars}
                         />
 
                         <Route
                             path={'/parts'}
-                            component={() => (
-                                <ListOfParts/>)}
+                            component={ListOfParts}
                         />
                         <Route
                             path={'/shopping-list'}
-                            component={() => (
-                                <ShoppingList/>)}
+                            component={ShoppingList}
                         />
 
                     </div>
