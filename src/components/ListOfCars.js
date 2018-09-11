@@ -38,9 +38,9 @@ class ListOfCars extends Component {
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
             .filter(car =>
-                car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
-                car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1)
-                ||car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1
+                (car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1) ||
+                (car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1) )
+                ||(car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1)
             )
 
         const numberOfCars = filter && filter.length

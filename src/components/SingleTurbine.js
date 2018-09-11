@@ -61,7 +61,7 @@ class SingleTurbine extends React.Component {
                                     .map(x => x.map(val =>`${val.group.toUpperCase().replace(/_/, ' ')} - ${val.part}: ${val.amount}`)
                             ).map(el=>
                                 <Table>
-                                    <TableBody>
+                                    <TableBody key={Math.random()}>
                                         <TableRow key={Math.random()}>
                                             <TableCell key={el}>{el}</TableCell>
                                         </TableRow>

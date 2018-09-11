@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import spinner from "../img/spinner.png";
-import logo from "../img/logo.png";
-
 
 class Spinner extends Component {
     render() {
@@ -13,5 +11,4 @@ class Spinner extends Component {
         );
     }
 }
-
 export default Spinner;

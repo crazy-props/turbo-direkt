@@ -9,8 +9,6 @@ import CreateUser from "./FormCreateNewUser";
 import ForgotPass from "./ForgotenPasswordByUser";
 import {logInByMailAndPass} from '../state/authState';
 import {connect} from 'react-redux';
-import {initAuthUserSync} from "../state/authState";
-import {auth, db} from "../firebase";
 
 const style = {
     height: "75%",
@@ -62,12 +60,11 @@ class FormLoginOnStartup extends Component {
     ).catch(e => alert('Something went wrong!'))*/
 
     onLogInEmailChange = (event) => {
-        this.setState({logInEmail: event.target.value})
-    console.log(this.state.logInEmail)}
+        this.setState({logInEmail: event.target.value})}
 
     onLogInPasswordChange = (event) => {
         this.setState({logInPassword: event.target.value})
-    console.log(this.state.logInPassword)}
+    }
 
     updateCheck = () => {
         this.setState((oldState) => {
@@ -92,7 +89,7 @@ class FormLoginOnStartup extends Component {
                     <br/>
                     <Paper className="loginpaper" style={style} zDepth={3}>
                         <br/>
-                        <div><img style={style.logo} src={logo}/></div>
+                        <div><img alt={"turbo direct logo"}style={style.logo} src={logo}/></div>
                         <p className="ptoplogin">Account Login</p>
                         <br/>
                         <br/>

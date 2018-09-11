@@ -1,10 +1,4 @@
 import React, {Component} from 'react';
-import {withStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import {connect} from "react-redux";
 import _ from 'lodash';
 import SingleTurbine from "./SingleTurbine";
@@ -16,33 +10,6 @@ import InputForm from "./InputFormListofCars";
 import {removeCarFromList} from "../state/carsState";
 import RaisedButton from "material-ui/RaisedButton";
 import TableTop from "./TableTop";
-
-const CustomTableCell = withStyles(theme => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const styles = ({
-    root: {
-        width: '100%',
-        marginTop: "40px",
-        overflowX: 'auto',
-    },
-    table: {
-        margin:'auto',
-        width: '100%'},
-    row: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: "gray",
-        },
-    },
-});
-
 
 class ListOfCarso extends Component {
 
@@ -73,9 +40,9 @@ class ListOfCarso extends Component {
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
             .filter(car =>
-                car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
-                car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1)
-                ||car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1
+                (car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1) ||
+                (car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1))
+                ||(car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1)
             )
         const numberOfCars = filter && filter.length
         return (filter === null ?

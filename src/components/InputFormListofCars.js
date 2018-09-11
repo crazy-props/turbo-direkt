@@ -1,5 +1,4 @@
 import React from 'react';
-import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
@@ -93,6 +92,7 @@ class HorizontalLinearStepper extends React.Component {
             stepIndex: stepIndex + 1,
             finished: stepIndex >= 6,
         });
+
     };
     handlePrev = () => {
         const {stepIndex} = this.state;
@@ -202,7 +202,7 @@ class HorizontalLinearStepper extends React.Component {
                         </Stepper>
                         <div style={contentStyle}>
                             {finished ? (
-                                <p>
+                                <section>
                                     <RaisedButton
                                         label="Anuluj"
                                         disabled={stepIndex === 0}
@@ -222,19 +222,20 @@ class HorizontalLinearStepper extends React.Component {
                                         onClick={addCarToList(objecttodb)}
                                         style={{marginRight: 12}}
                                     />
-                                </p>
+                                </section>
                             ) : (
                                 <div>
-                                    <p>{this.getStepContent(stepIndex)}</p>
-                                    <div style={{marginTop: 12}}>{stepIndex !== 6 ?
+                                    <div>{this.getStepContent(stepIndex)}</div>
+                                    <span style={{marginTop: 12}}>{stepIndex !== 6 ?
                                         <input
                                             ref="fieldName"
                                             type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
                                             onChange={this.handleForm}
                                         /> : <AutoComplete
+                                            floatingLabelText={"Szukaj"}
                                             filter={AutoComplete.caseInsensitiveFilter}
                                             menuStyle={styles.step}
-                                            onKeyDown={"disabled"} type={"search"}
+                                            type={"search"}
                                             ref="fieldName"
                                             dataSource={list || ['Problem ze strukturą danych.']}
                                             maxSearchResults={6}
@@ -243,7 +244,7 @@ class HorizontalLinearStepper extends React.Component {
                                                 this.handleNewRequest()
                                             }}
                                         />}
-                                        <p>
+                                        <section>
                                             <RaisedButton
                                                 label="Wstecz" disabled={stepIndex === 0}
                                                 onClick={() => {
@@ -256,10 +257,10 @@ class HorizontalLinearStepper extends React.Component {
                                                 label={stepIndex === 7 ? 'Zakończ' : 'Dalej'}
                                                 primary={true}
                                                 disabled={(
-                                                    this.state.mark === ''
-                                                    || stepIndex === 1 && this.state.model === ""
-                                                    || stepIndex === 3 && this.state.capacity === ''
-                                                    || stepIndex === 6 && this.state.turbo.length === 0)}
+                                                    (this.state.mark === '')
+                                                    || (stepIndex === 1 && this.state.model === "")
+                                                    || (stepIndex === 3 && this.state.capacity === '')
+                                                    || (stepIndex === 6 && this.state.turbo.length === 0))}
                                                 onClick={() => {
                                                     this.handleNext();
                                                     this.cancelInput()
@@ -278,10 +279,9 @@ class HorizontalLinearStepper extends React.Component {
                                                     });
                                                 }}
                                             />
-                                        </p>
+                                        </section>
                                         <br/>
-                                        <br/>
-                                    </div>
+                                    </span>
                                 </div>
                             )}
                         </div>
