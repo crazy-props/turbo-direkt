@@ -10,7 +10,6 @@ class Dashboard extends Component {
         return (
 
                 <div className="App">
-                    <AppBarMini logOutButton={this.props.logOut}/>
                     <ListOfCarso/>
 
                 </div>

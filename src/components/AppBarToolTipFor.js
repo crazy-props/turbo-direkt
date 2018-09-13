@@ -30,7 +30,7 @@ import {ToolbarSeparator} from 'material-ui/Toolbar';
                 </Tooltip>
             </Link>
             <Tooltip TransitionComponent={Zoom} title="Wyloguj">
-                <Button onClick={props.logOutButton}>LogOut</Button>
+                <Button onClick={props.logOutButton}>Wyloguj</Button>
             </Tooltip>
             <br/>
         </div>
