@@ -13,33 +13,34 @@ import Spinner from './Spinner'
  * if the number of items causes the height to exceed this limit.
  */
 class CreateListOfParts extends Component {
-    state = {
-        _parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
-        push: {
-            turboOEM: '',
-            compressor_wheel: [],
-            turbine_wheel: [],
-            bearing_housing: [],
-            back_plate: [],
-            heat_shield: [],
-            nozzles: [],
-            actuator: [],
-            gasket_kit: [],
-            repair_kit: [],
-            KODE_CHRA: [],
-        }
-    };
+	state = {
+		_parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
+		push: {
+			turboOEM: '',
+			compressor_wheel: [],
+			turbine_wheel: [],
+			bearing_housing: [],
+			back_plate: [],
+			heat_shield: [],
+			nozzles: [],
+			actuator: [],
+			gasket_kit: [],
+			repair_kit: [],
+			KODE_CHRA: [],
+		}
+	};
 
-    /**
-     * 'handleChange' function is require to mapping all state _parts to each value handle function.
-     * Name value is convert to object key property.
-     */
+	/**
+	* 'handleChange' function is require to mapping all state _parts to each value handle function. 
+	* Name value is convert to object key property. 
+	*/
 
     handleChange = name => (event, index, value) => {
         this.setState({ push: { ...this.state.push, [name]: value } })
     }
 
-    textChangeHandler = (e, value) => this.setState({ push: { ...this.state.push, turboOEM: value } })
+
+	textChangeHandler = (e, value) => this.setState({ push: { ...this.state.push, turboOEM: value } })
 
     addPartToList = () => this.state.push.turboOEM.length > 0 ? this.props.addTurboToList(this.state.push) : alert(`Add turbo name idiot!`)
 
@@ -113,17 +114,19 @@ class CreateListOfParts extends Component {
 
     )
     }
+
 }
 
 const mapStateToProps = state => ({
-    part: state.partsState.parts,
+	part: state.partsState.parts,
 })
 
 const mapDispatchToProps = dispatch => ({
     addTurboToList: (el) => dispatch(addTurboToList(el))
+
 })
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(CreateListOfParts)

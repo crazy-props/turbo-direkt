@@ -4,6 +4,7 @@ import ListOfTurbines from './components/ListOfTurbines'
 import ListOfCars from './components/ListOfCars'
 import ListOfParts from './components/ListOfParts'
 import Dashboard from './components/Dashboard'
+import ShoppingList from './components/ShoppingList'
 
 
 class App extends Component {
@@ -29,14 +30,19 @@ class App extends Component {
                             component={() => (
                                 <ListOfCars/>)}
                         />
+
                         <Route
                             path={'/parts'}
                             component={() => (
                                 <ListOfParts/>)}
                         />
+                        <Route
+                            path={'/shopping-list'}
+                            component={() => (
+                                <ShoppingList/>)}
+                        />
 
                     </div>
-
                 </Router>
             </div>
         )

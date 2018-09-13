@@ -17,8 +17,6 @@ export const reducer = combineReducers({
     carsState,
     partsState,
     shoppingListState
-
-
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

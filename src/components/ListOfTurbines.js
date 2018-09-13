@@ -92,15 +92,16 @@ class ListOfTurbines extends Component {
 
 }
 const mapStateToProps = state => ({
-    turbo: state.turboState.turbo,
-    part: state.partsState.parts,
+	turbo: state.turboState.turbo,
+	part: state.partsState.parts,
 })
 
 const mapDispatchToProps = dispatch => ({
     removeTurboFromList: (val) => dispatch(removeTurboFromList(val))
+
 })
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(ListOfTurbines)
