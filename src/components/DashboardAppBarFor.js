@@ -4,9 +4,6 @@ import TransitionsTooltips from "./AppBarToolTipFor";
 import logo from "../img/logo.png"
 
 
-function handleClick() {
-    alert('Whaaaaaaaaaaazzzaaaaaa');
-}
 
 const styles = {
     title: {

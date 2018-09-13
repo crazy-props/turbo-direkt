@@ -37,4 +37,7 @@ import {ToolbarSeparator} from 'material-ui/Toolbar';
     );
 }
 
-export default TransitionsTooltips;
+
+
+export default TransitionsTooltips
+

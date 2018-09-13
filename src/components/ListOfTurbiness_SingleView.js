@@ -4,14 +4,14 @@ const PartsColumn = props =>
     <td className="turboList">
         <ul>
             {props.parts && props.parts.length ?
-                props.parts.map(part =>
-                    <li>
+                props.parts.map((part) =>
+                    <li key={part}>
                         {part}{`:`}
                         <br />
                         {props.part && props.part.length ?
                             props.part
                                 .filter(turbo => turbo.part === part)
-                                .map(part => <span>{`amount: ${part.amount}`}</span>)
+                                .map(part => <span key={part.part}>{`amount: ${part.amount}`}</span>)
                             : ` Loading amount...`}
                     </li>)
                 : props.parts}

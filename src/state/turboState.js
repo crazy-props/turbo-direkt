@@ -28,6 +28,15 @@ export const removeTurboFromList = (turbine) => (dispatch, getState) => {
         )
 }
 
+export const addTurboToList = (objecttodb) => (dispatch, getState) => {
+    db.ref(`/turbo/`).push(objecttodb)
+        .then(()=>
+            console.log("Add succeeded.")
+        )
+        .catch((error)=>
+            console.log(error.message)
+        );
+}
 
 const initialState = {
     turbo: null
