@@ -207,8 +207,8 @@ class HorizontalLinearStepper extends React.Component {
                                         label="Anuluj"
                                         disabled={stepIndex === 0}
                                         style={{marginRight: 12}}
-                                        onClick={(event) => {
-                                            event.preventDefault();
+                                        onClick={() => {
+
                                             this.setState({
                                                 stepIndex: 0, finished: false, mark: '', model: '',
                                                 capacity: '', date: "", factoryNo: "", power: "",
