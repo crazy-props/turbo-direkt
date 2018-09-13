@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import AppBarMini from "./DashboardAppBarFor";
 import './../App.css';
 import ListOfCarso from "./CustomTable";
 import {logOut} from "../state/authState";

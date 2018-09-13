@@ -49,10 +49,12 @@ class HorizontalLinearStepper extends React.Component {
         });
     };
     handleNewRequest = () => {
-        this.setState({
-            turbo: this.state.turbo.concat([this.state.searchText]),
+        if (this.props.turbines.filter(el => el.turboOEM === this.state.searchText).length > 0) {
+            this.setState({
+                turbo: this.state.turbo.concat([this.state.searchText]),
 
-        });
+            });
+        }
     };
     removeTurbo = (name) => {
         this.setState({turbo: this.state.turbo.filter(el => el !== name)});
@@ -240,9 +242,9 @@ class HorizontalLinearStepper extends React.Component {
                                             dataSource={list || ['Problem ze strukturą danych.']}
                                             maxSearchResults={6}
                                             onUpdateInput={this.handleUpdateInput}
-                                            onNewRequest={() => {
-                                                this.handleNewRequest()
-                                            }}
+                                            onNewRequest={
+                                                this.handleNewRequest
+                                            }
                                         />}
                                         <section>
                                             <RaisedButton
@@ -305,6 +307,7 @@ class HorizontalLinearStepper extends React.Component {
 
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
+    turbines: state.turboState.turbo
 })
 export default connect(
     mapStateToProps,

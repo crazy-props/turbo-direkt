@@ -25,7 +25,7 @@ const styles = {
 };
 const AppBarMini = (props) => (
     <AppBar
-        iconElementLeft={<div><img style={styles.logo} src={logo} onClick={handleClick}/></div>}
+        iconElementLeft={<div><img style={styles.logo} src={logo}/></div>}
         iconElementRight={<TransitionsTooltips style={styles.tooltip} logOutButton={props.logOutButton}/>}
         style={styles.div}
 
