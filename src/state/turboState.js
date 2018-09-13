@@ -34,8 +34,8 @@ export const addTurboToList = (objecttodb) => (dispatch, getState) => {
             console.log("Add succeeded.")
         )
         .catch((error)=>
-    console.log(error.message)
-);
+            console.log(error.message)
+        );
 }
 
 const initialState = {

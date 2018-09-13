@@ -8,6 +8,7 @@ import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import {removeCarFromList} from "../state/carsState";
 import RaisedButton from 'material-ui/RaisedButton';
+import TableTop from "./TableTop";
 
 class ListOfCars extends Component {
     state = {
@@ -37,8 +38,9 @@ class ListOfCars extends Component {
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
             .filter(car =>
-                car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
-                car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm) !== -1)
+                (car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1) ||
+                (car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1) )
+                ||(car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1)
             )
 
         const numberOfCars = filter && filter.length
@@ -46,36 +48,22 @@ class ListOfCars extends Component {
         return (filter === null ?
           <Spinner/>
             : <div>
-
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
                             <Col xs={6}>
                                 <div className="group">
-                                    <input placeholder="search:turbo and cars" type="search"
+                                    <input placeholder="Szukaj:pojazd,marka,turbina" type="search"
                                            onChange={this.debounceEvent(this.handleSearch, 700)}/>
-                                    <span className="highlight"/>
                                     <span className="bar"/>
-
                                 </div>
-
                             </Col>
                         </Row>
                     </Col>
                 </Row>
                 <Row className={'partsTableDiv'}>
-
                     <table className="carsTable">
-                        <thead className="carsTableHead">
-                        <td>Mark</td>
-                        <td>Model</td>
-                        <td>Date</td>
-                        <td>Capacity</td>
-                        <td>No.</td>
-                        <td>Power</td>
-                        <td className="lastTh">Turbo OEM</td>
-                        <td>Remove form list</td>
-                        </thead>
+                       <TableTop/>
                         <tbody key={Math.random()}>
                         {
                             filter && filter.length ? filter
@@ -96,18 +84,17 @@ class ListOfCars extends Component {
                                         {el.turbo_OEM && el.turbo_OEM.length ?
                                             el.turbo_OEM.filter(function (a, b, c) {
                                                 return c.indexOf(a) === b;
-                                            }).map(el => <SingleTurbine
+                                            }).map(el => <SingleTurbine key={el}
                                                 turbine={el}/>                                        ) :
-                                            el.turbo_OEM
-                                        }
+                                            el.turbo_OEM}
                                     </td>
                                     <td>
                                         <RaisedButton
-                                            onClick={removeCarFromList(el)}>Delete car
+                                            onClick={removeCarFromList(el)}>Usuń
                                         </RaisedButton>
                                     </td>
                                 </tr>
-                            ) : this.state.searchTerm.length?<Error/>:<Spinner/>
+                            ) : <tr><td>{this.state.searchTerm.length?<Error/>:<Spinner/>}</td></tr>
                         }
                         </tbody>
                     </table>
