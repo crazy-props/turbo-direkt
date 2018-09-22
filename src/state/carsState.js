@@ -43,9 +43,6 @@ export const addProductToShoppingList = (partsName) => (dispatch, getState) => {
 }
 
 
-
-
-
 export const removeCarFromList = (el) => (dispatch, getState) => {
     db.ref(`/car_model/${el.key}`).remove()
         .then(()=>

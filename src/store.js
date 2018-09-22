@@ -16,7 +16,7 @@ export const reducer = combineReducers({
     forgotPassword,
     carsState,
     partsState,
-    shoppingListState
+    shoppingListState,
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import './../App.css';
-import ListOfCarso from "./CustomTable";
+import ListOfCars from "./CustomTable";
 import {logOut} from "../state/authState";
 
 class Dashboard extends Component {
@@ -9,7 +9,7 @@ class Dashboard extends Component {
         return (
 
                 <div className="App">
-                    <ListOfCarso/>
+                    <ListOfCars/>
 
                 </div>
 

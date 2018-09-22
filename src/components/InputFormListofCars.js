@@ -41,9 +41,20 @@ class HorizontalLinearStepper extends React.Component {
         factoryNo: "",
         power: "",
         turbo: [],
+        list: [],
+        marks: []
     };
-    handleUpdateInput = (searchText) => {
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.turbines) {
+            this.setState({list: nextProps.turbines.map(el => el.turboOEM).sort()})
+        }
+        if (nextProps.cars) {
+            this.setState({marks: nextProps.cars.map(el => el.mark).sort()})
+        }
+    }
+
+    handleUpdateInput = (searchText) => {
         this.setState({
             searchText: searchText,
         });
@@ -55,6 +66,13 @@ class HorizontalLinearStepper extends React.Component {
 
             });
         }
+        console.log(this.state)
+    };
+    handleMarkRequest = () => {
+        this.setState({
+            mark: this.state.searchText,
+
+        });
     };
     removeTurbo = (name) => {
         this.setState({turbo: this.state.turbo.filter(el => el !== name)});
@@ -84,78 +102,53 @@ class HorizontalLinearStepper extends React.Component {
         });
     }
 
-    cancelInput() {
-        this.refs.fieldName.value = "";
-    }
-
-    handleNext = () => {
+    handleNext = (currentStepIndex) => {
         const {stepIndex} = this.state;
-        this.setState({
-            stepIndex: stepIndex + 1,
-            finished: stepIndex >= 6,
-        });
 
+        if (currentStepIndex < 6) {
+            const inputsForNoDisplay = document.getElementsByClassName('step')
+            inputsForNoDisplay.item(currentStepIndex + 1).style.display = 'block'
+            inputsForNoDisplay.item(currentStepIndex).style.display = 'none'
+            this.setState({
+                stepIndex: stepIndex + 1,
+                finished: stepIndex >= 6,
+            })
+        } else {
+            this.setState({
+                stepIndex: stepIndex + 1,
+                finished: stepIndex >= 6,
+            })
+        }
     };
-    handlePrev = () => {
+    handlePrev = (currentStepIndex) => {
+        const inputsForNoDisplay = document.getElementsByClassName('step')
+        inputsForNoDisplay.item(currentStepIndex - 1).style.display = 'block'
+        inputsForNoDisplay.item(currentStepIndex).style.display = 'none'
         const {stepIndex} = this.state;
         if (stepIndex > 0) {
             this.setState({stepIndex: stepIndex - 1});
         }
     };
-    handleForm = (e) => {
-        if (this.state.stepIndex === 0)
-            this.setState({mark: e.target.value});
-        else if (this.state.stepIndex === 1)
-            this.setState({model: e.target.value});
-        else if (this.state.stepIndex === 2)
-            this.setState({date: "from " + e.target.value});
-        else if (this.state.stepIndex === 3)
-            this.setState({capacity: e.target.value + " ccm"});
-        else if (this.state.stepIndex === 4)
-            this.setState({factoryNo: e.target.value});
-        else if (this.state.stepIndex === 5)
-            this.setState({power: e.target.value + ' HP'});
-        else if (this.state.stepIndex === 6)
-            this.setState({
-                turbo: [...this.state.turbo]
-            });
-    }
-
-    getStepContent(stepIndex) {
-        switch (stepIndex) {
-            case 0:
-                return 'Dodaj markę pojazdu (pole wymagane):';
-            case 1:
-                return 'Dodaj model (pole wymagane):';
-            case 2:
-                return 'Dodaj datę produkcji:';
-            case 3:
-                return 'Dodaj pojemność (pole wymagane):';
-            case 4:
-                return 'Dodaj oznaczenie fabryczne:';
-            case 5:
-                return 'Dodaj moc pojazdu:';
-            case 6:
-                return 'Dodaj numer turbiny (pole wymagane):';
-            default:
-                return 'Return';
-        }
-    }
 
     render() {
-        const list = this.props.cars && this.props.cars.map(car => car.turbo_OEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
-            return c.indexOf(a) === b;
-        })
         const objecttodb = {
             mark: this.state.mark, model: this.state.model, date: this.state.date, capacity: this.state.capacity,
             no: this.state.factoryNo, power: this.state.power, turbo_OEM: this.state.turbo
         }
         const {finished, stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
+        const getStepContent = [
+            'Dodaj markę pojazdu (pole wymagane):',
+            'Dodaj model (pole wymagane):',
+            'Dodaj datę produkcji:',
+            'Dodaj pojemność (pole wymagane):',
+            'Dodaj oznaczenie fabryczne:',
+            'Dodaj moc pojazdu:',
+            'Dodaj numer turbiny (pole wymagane):'
+        ]
         return (
             this.state.checked1 ?
                 <div>
-
                     <CheckBoxes
                         stepIndex={this.state.stepIndex}
                         checked1={this.state.checked1}
@@ -227,63 +220,94 @@ class HorizontalLinearStepper extends React.Component {
                                 </section>
                             ) : (
                                 <div>
-                                    <div>{this.getStepContent(stepIndex)}</div>
-                                    <span style={{marginTop: 12}}>{stepIndex !== 6 ?
-                                        <input
-                                            ref="fieldName"
-                                            type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
-                                            onChange={this.handleForm}
-                                        /> : <AutoComplete
+                                    <div>{getStepContent[stepIndex]}</div>
+                                    <div className={'step'}
+                                         style={{display: 'block'}}
+                                    >
+                                        <AutoComplete
                                             floatingLabelText={"Szukaj"}
                                             filter={AutoComplete.caseInsensitiveFilter}
                                             menuStyle={styles.step}
                                             type={"search"}
-                                            ref="fieldName"
-                                            dataSource={list || ['Problem ze strukturą danych.']}
+                                            dataSource={this.state.marks || ['Problem ze strukturą danych.']}
+                                            maxSearchResults={1}
+                                            onUpdateInput={this.handleUpdateInput}
+                                            onNewRequest={
+                                                this.handleMarkRequest
+                                            }
+                                        />
+                                    </div>
+                                    <input
+                                        className={'step'}
+                                        value={this.state.model}
+                                        onChange={(ev) => this.setState({model: ev.target.value})}
+                                    />
+                                    <input
+                                        className={'step'}
+                                        value={this.state.date}
+                                        onChange={(ev) => this.setState({date: ev.target.value})}
+                                    />
+                                    <input
+                                        className={'step'}
+                                        value={this.state.capacity}
+                                        onChange={(ev) => this.setState({capacity: ev.target.value})}
+                                    />
+                                    <input
+                                        className={'step'}
+                                        value={this.state.factoryNo}
+                                        onChange={(ev) => this.setState({factoryNo: ev.target.value})}
+                                    />
+                                    <input
+                                        className={'step'}
+                                        value={this.state.power}
+                                        onChange={(ev) => this.setState({power: ev.target.value})}
+                                    />
+                                    <div className={'step'}>
+                                        <AutoComplete
+                                            floatingLabelText={"Szukaj"}
+                                            filter={AutoComplete.caseInsensitiveFilter}
+                                            menuStyle={styles.step}
+                                            type={"search"}
+                                            dataSource={this.state.list || ['Problem ze strukturą danych.']}
                                             maxSearchResults={6}
                                             onUpdateInput={this.handleUpdateInput}
                                             onNewRequest={
                                                 this.handleNewRequest
                                             }
-                                        />}
-                                        <section>
-                                            <RaisedButton
-                                                label="Wstecz" disabled={stepIndex === 0}
-                                                onClick={() => {
-                                                    this.handlePrev();
-                                                    this.cancelInput()
-                                                }}
-                                                style={{marginRight: 12}}
-                                            />
-                                            <RaisedButton
-                                                label={stepIndex === 7 ? 'Zakończ' : 'Dalej'}
-                                                primary={true}
-                                                disabled={(
-                                                    (this.state.mark === '')
-                                                    || (stepIndex === 1 && this.state.model === "")
-                                                    || (stepIndex === 3 && this.state.capacity === '')
-                                                    || (stepIndex === 6 && this.state.turbo.length === 0))}
-                                                onClick={() => {
-                                                    this.handleNext();
-                                                    this.cancelInput()
-                                                }}
-                                                style={{marginRight: 12}}
-                                            />
-                                            <RaisedButton
-                                                label="Anuluj"
-                                                disabled={stepIndex === 0}
-                                                style={{marginRight: 12}}
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                    this.setState({
-                                                        stepIndex: 0, finished: false, mark: '', model: '',
-                                                        capacity: '', date: "", factoryNo: "", power: "", turbo: []
-                                                    });
-                                                }}
-                                            />
-                                        </section>
-                                        <br/>
-                                    </span>
+                                        />
+                                    </div>
+                                    <section>
+                                        <RaisedButton
+                                            label="Wstecz" disabled={stepIndex === 0}
+                                            onClick={() => {
+                                                this.handlePrev(stepIndex);
+                                            }}
+                                            style={{marginRight: 12}}
+                                        />
+                                        <RaisedButton
+                                            label={stepIndex === 7 ? 'Zakończ' : 'Dalej'}
+                                            primary={true}
+                                            onClick={() => {
+                                                this.handleNext(stepIndex);
+                                            }}
+                                            style={{marginRight: 12}}
+                                        />
+                                        <RaisedButton
+                                            label="Anuluj"
+                                            disabled={stepIndex === 0}
+                                            style={{marginRight: 12}}
+                                            onClick={(event) => {
+                                                event.preventDefault();
+                                                this.setState({
+                                                    stepIndex: 0, finished: false, mark: '', model: '',
+                                                    capacity: '', date: "", factoryNo: "", power: "", turbo: []
+                                                });
+                                                const inputsForNoDisplay = Array.from(document.getElementsByClassName('step'))
+                                                inputsForNoDisplay.map((el, i) => i > 0 ? el.style.display = 'none' : el.style.display = 'block')
+                                            }}
+                                        />
+                                    </section>
+                                    <br/>
                                 </div>
                             )}
                         </div>
@@ -309,6 +333,7 @@ const mapStateToProps = state => ({
     cars: state.carsState.cars,
     turbines: state.turboState.turbo
 })
+
 export default connect(
-    mapStateToProps,
+    mapStateToProps
 )(HorizontalLinearStepper)
