@@ -1,16 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {addAmount, subtractAmount, searchParts, myInit} from '../../state/partsState';
+import {addAmount, subtractAmount, searchParts} from '../../state/partsState';
 import {addProductToShoppingList} from '../../state/shoppingList';
-import AddPart from './AddPart'
 import IconButton from 'material-ui/IconButton';
 import {Row, Col} from 'react-flexbox-grid';
-import Dialog from 'material-ui/Dialog';
 import Pagination from "material-ui-pagination";
 import TR from './TR'
 import Partsearch from './Partsearch'
 import Backspace from 'material-ui/svg-icons/content/backspace';
-import AddPartIcon from 'material-ui/svg-icons/image/add-to-photos'
 
 
 class ListOfParts extends Component {
@@ -19,14 +16,6 @@ class ListOfParts extends Component {
         ITEMS_PER_PAGE: 10,
         currentPage: 0,
 
-    }
-
-    handleOpen() {
-        this.setState({isDialogOpen: true})
-    }
-
-    handleClose() {
-        this.setState({isDialogOpen: false})
     }
 
     compare(a, b) {
@@ -66,25 +55,7 @@ class ListOfParts extends Component {
                             <Backspace/>
                         </IconButton>
                     </Col>
-                    <Col xs>
-                        <IconButton
-                            onClick={() => this.handleOpen()}
-                            tooltip="dodaj nową część"
-                        >
-                            <AddPartIcon/>
-                        </IconButton>
-
-                    </Col>
                 </Row>
-                <div>
-                    <Dialog
-                        title="Dodaj nową część"
-                        open={this.state.isDialogOpen}
-                        onRequestClose={() => this.handleClose()}
-                    >
-                        <AddPart/>
-                    </Dialog>
-                </div>
                 <Row className={'partsTableDiv'}>
                     <table className="partsTable">
                         <tbody>

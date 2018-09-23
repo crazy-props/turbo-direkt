@@ -1,9 +1,8 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import TransitionsTooltips from "./AppBarToolTipFor";
-import logo from "../img/logo.png"
-
-
+import TransitionsTooltips from "../Common/AppBarToolTipFor";
+import logo from "../../img/logo.png"
+import {Link} from 'react-router-dom'
 
 const styles = {
     title: {
@@ -25,7 +24,13 @@ const styles = {
 };
 const AppBarMini = (props) => (
     <AppBar
-        iconElementLeft={<div><img style={styles.logo} src={logo}/></div>}
+        iconElementLeft={
+            <Link to={'/'}>
+                <div>
+                    <img style={styles.logo} src={logo}/>
+                </div>
+            </Link>
+        }
         iconElementRight={<TransitionsTooltips style={styles.tooltip} logOutButton={props.logOutButton}/>}
         style={styles.div}
 

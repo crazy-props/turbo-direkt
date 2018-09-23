@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import './../App.css';
-import ListOfCars from "./CustomTable";
-import {logOut} from "../state/authState";
+import '../../App.css';
+import ListOfCars from "../CustomTable";
+import {logOut} from "../../state/authState";
 
 class Dashboard extends Component {
     render() {

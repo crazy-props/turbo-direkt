@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import ListOfTurbines from './components/ListOfTurbines'
 import ListOfCars from './components/ListOfCars'
 import ListOfParts from './components/PartsList/ListOfParts'
-import Dashboard from './components/Dashboard'
+import Dashboard from './components/Common/Dashboard'
 import ShoppingList from './components/ShoppingList/ShoppingList'
-import AppBarMini from "./components/DashboardAppBarFor";
+import AppBarMini from "./components/Auth/DashboardAppBarFor";
 import {logOut} from "./state/authState";
 
 

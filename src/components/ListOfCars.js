@@ -5,7 +5,7 @@ import SingleTurbine from "./SingleTurbine";
 import Spinner from "./Spinner"
 import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
-import Error from "./Error";
+import Error from "./Common/Error";
 import {removeCarFromList} from "../state/carsState";
 import RaisedButton from 'material-ui/RaisedButton';
 import TableTop from "./TableTop";

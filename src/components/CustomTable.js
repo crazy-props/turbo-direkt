@@ -5,8 +5,8 @@ import SingleTurbine from "./SingleTurbine";
 import Spinner from "./Spinner"
 import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
-import Error from "./Error";
-import InputForm from "./InputFormListofCars";
+import Error from "./Common/Error";
+import InputForm from "./AddComponents/CheckboxSectionComponent";
 import {removeCarFromList} from "../state/carsState";
 import RaisedButton from "material-ui/RaisedButton";
 import TableTop from "./TableTop";
@@ -35,6 +35,7 @@ class ListOfCarso extends Component {
     componentWillUnmount() {
         this.debouncedEvent.cancel();
     }
+
     render() {
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
@@ -42,7 +43,7 @@ class ListOfCarso extends Component {
             .filter(car =>
                 (car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1) ||
                 (car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1))
-                ||(car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1)
+                || (car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1)
             )
         const numberOfCars = filter && filter.length
         return (filter === null ?
@@ -87,7 +88,7 @@ class ListOfCarso extends Component {
                                                 el.turbo_OEM.filter(function (a, b, c) {
                                                     return c.indexOf(a) === b;
                                                 }).map(el => <SingleTurbine key={el}
-                                                    turbine={el}/>                                        ) :
+                                                                            turbine={el}/>) :
                                                 el.turbo_OEM}
                                         </td>
                                         <td>
@@ -96,7 +97,9 @@ class ListOfCarso extends Component {
                                             </RaisedButton>
                                         </td>
                                     </tr>
-                                ) :<tr><td>{this.state.searchTerm.length?<Error/>:<Spinner/>}</td></tr>
+                                ) : <tr>
+                                <td>{this.state.searchTerm.length ? <Error/> : <Spinner/>}</td>
+                            </tr>
                         }
                         </tbody>
                     </table>
@@ -112,6 +115,7 @@ class ListOfCarso extends Component {
             </div>)
     }
 }
+
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
     part: state.partsState.parts,
