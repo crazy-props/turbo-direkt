@@ -166,6 +166,7 @@ class AddCarInputsAndButtons extends React.Component {
                                     primary={true}
                                     onClick={() => {
                                         stepIndex === 0 ? (this.handleMarkRequest(), this.handleNext(stepIndex))
+                                            : ((stepIndex === 6) && (this.state.turbo.length < 1)) ? alert('dodajTurbinę')
                                             : this.handleNext(stepIndex);
                                     }}
                                     style={{marginRight: 12}}

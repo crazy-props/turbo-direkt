@@ -54,13 +54,14 @@ class FormLoginOnStartup extends Component {
 
     }
 
-/*  logInByEmailAndPassword = () => auth.signInWithEmailAndPassword(
-        this.state.logInEmail,
-        this.state.logInPassword
-    ).catch(e => alert('Something went wrong!'))*/
+    /*  logInByEmailAndPassword = () => auth.signInWithEmailAndPassword(
+            this.state.logInEmail,
+            this.state.logInPassword
+        ).catch(e => alert('Something went wrong!'))*/
 
     onLogInEmailChange = (event) => {
-        this.setState({logInEmail: event.target.value})}
+        this.setState({logInEmail: event.target.value})
+    }
 
     onLogInPasswordChange = (event) => {
         this.setState({logInPassword: event.target.value})
@@ -89,7 +90,7 @@ class FormLoginOnStartup extends Component {
                     <br/>
                     <Paper className="loginpaper" style={style} zDepth={3}>
                         <br/>
-                        <div><img alt={"turbo direct logo"}style={style.logo} src={logo}/></div>
+                        <div><img alt={"turbo direct logo"} style={style.logo} src={logo}/></div>
                         <p className="ptoplogin">Account Login</p>
                         <br/>
                         <br/>
@@ -103,6 +104,7 @@ class FormLoginOnStartup extends Component {
                                 floatingLabelStyle={style.floatingLabelStyle}
                                 floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                                 onChange={this.onLogInEmailChange}
+
                             />
                         </div>
                         <div className="insideformdiv">
@@ -114,6 +116,9 @@ class FormLoginOnStartup extends Component {
                                 floatingLabelStyle={style.floatingLabelStyle}
                                 floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                                 onChange={this.onLogInPasswordChange}
+                                onKeyDown={(event) => {
+                                    event.key === "Enter" ? this.props.logInByEmailAndPassword(this.state.logInEmail, this.state.logInPassword) : null
+                                }}
                             />
                         </div>
 
@@ -162,11 +167,10 @@ class FormLoginOnStartup extends Component {
 }
 
 
-
 const mapDispatchToProps = dispatch => ({
 
     logInByEmailAndPassword: (email, password) => dispatch(logInByMailAndPass(email, password))
 })
 
-export default connect( null,mapDispatchToProps)(FormLoginOnStartup);
+export default connect(null, mapDispatchToProps)(FormLoginOnStartup);
 
