@@ -15,7 +15,7 @@ const AddPartInputs = (props) => {
                     type={"search"}
                     dataSource={props.stater.groups || ['Problem ze strukturą danych.']}
                     maxSearchResults={3}
-                    onUpdateInput={props.handleUpdateInput}
+                    onUpdateInput={props.handleUpdateGroupInput}
                     onNewRequest={props.handleGroupRequest}
                 />
             </div>
@@ -28,7 +28,7 @@ const AddPartInputs = (props) => {
                     type={"search"}
                     dataSource={props.stater.parts || ['Problem ze strukturą danych.']}
                     maxSearchResults={6}
-                    onUpdateInput={props.handleUpdateInput}
+                    onUpdateInput={props.handleUpdatePartInput}
                     onNewRequest={props.handlePartRequest}
                 />
             </div>

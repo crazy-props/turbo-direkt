@@ -9,13 +9,14 @@ const styles = {
     block: {maxWidth: 250,}, step: {fontSize: "1.4vh"}, chip: {margin: '4'}
 }
 
-const myArrayForState = ['actuator', 'back_plate', 'bearing_housing', 'compressor_wheel', 'gasket_kit', 'heat_shield', 'KODE_CHRA', 'nozzle', 'repair_kit', 'turbine_wheel']
-const arrayForHeadings = ['Actuator', 'Back plate', 'Bearing housing', 'Compressor wheel', 'Gasket kit', 'Heat shield', 'KODE CHRA', 'Nozzle', 'Repair kit', 'Turbine wheel']
+const myArrayForState = ['actuator', 'back_plate', 'bearing_housing', 'compressor_wheel', 'gasket_kit', 'heat_shield', 'KODE_CHRA', 'nozzle', 'repair_kit', 'turbine_wheel', 'inne']
+const arrayForHeadings = ['Actuator', 'Back plate', 'Bearing housing', 'Compressor wheel', 'Gasket kit', 'Heat shield', 'KODE CHRA', 'Nozzle', 'Repair kit', 'Turbine wheel', 'Inne']
 
 class AddPart extends React.Component {
     state = {
         stepper: ['GRUPA', 'CZĘŚĆ', "POTWIERDZENIE"],
-        searchText: '',
+        searchTextGroup: '',
+        searchTextPart: '',
         finished: false,
         stepIndex: 0,
         group: '',
@@ -28,20 +29,24 @@ class AddPart extends React.Component {
         this.setState({parts: this.props.parts.map(el => el.part)})
     }
 
-
-    handleUpdateInput = (searchText) => {
+    handleUpdateGroupInput = (searchText) => {
         this.setState({
-            searchText: searchText,
+            searchTextGroup: searchText,
+        });
+    };
+    handleUpdatePartInput = (searchText) => {
+        this.setState({
+            searchTextPart: searchText,
         });
     };
     handleGroupRequest = () => {
         this.setState({
-            group: this.state.searchText
+            group: this.state.searchTextGroup
         });
     };
     handlePartRequest = () => {
         this.setState({
-            part: this.state.searchText
+            part: this.state.searchTextPart
         });
     };
 
@@ -128,7 +133,8 @@ class AddPart extends React.Component {
                             <div>{getStepContent[stepIndex]}</div>
                             <AddPartInputs
                                 stater={this.state}
-                                handleUpdateInput={this.handleUpdateInput}
+                                handleUpdateGroupInput={this.handleUpdateGroupInput}
+                                handleUpdatePartInput={this.handleUpdatePartInput}
                                 handlePrev={this.handlePrev}
                                 handleNext={this.handleNext}
                                 handleGroupRequest={this.handleGroupRequest}

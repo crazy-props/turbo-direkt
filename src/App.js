@@ -17,6 +17,7 @@ class App extends Component {
                 <Router>
                     <div>
                         <AppBarMini logOutButton={this.props.logOut}/>
+
                         <Route
                             exact path={'/'}
                             component={Dashboard}

@@ -1,76 +1,41 @@
 import React from 'react';
 import {connect} from "react-redux";
-import CheckBoxes from "../Common/CheckBoxes";
 import AddCarInputsAndButtons from "./AddCarInputsAndButtons";
 import AddPart from './AddPart'
-
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 class CheckboxSectionComponent extends React.Component {
     state = {
-        finished: false,
-        stepIndex: 0,
-        checked1: false,
-        checked2: false,
-        checked3: false,
+        stepIndex: 0
     };
 
-    removeTurbo = (name) => {
-        this.setState({turbo: this.state.turbo.filter(el => el !== name)});
-    }
-
-    updateCheck1() {
-        this.setState((oldState) => {
-            return {
-                checked1: !oldState.checked, checked2: false, checked3: false
-            };
-        });
-    }
-
-    updateCheck2() {
-        this.setState((oldState) => {
-            return {
-                checked1: false, checked2: !oldState.checked, checked3: false
-            };
-        });
-    }
-
-    updateCheck3() {
-        this.setState((oldState) => {
-            return {
-                checked1: false, checked2: false, checked3: !oldState.checked
-            };
-        });
-    };
-    showCheckboxes = () => {
-        return <CheckBoxes
-            stepIndex={this.state.stepIndex}
-            checked1={this.state.checked1}
-            checked2={this.state.checked2}
-            checked3={this.state.checked3}
-            onCheck1={this.updateCheck1.bind(this)}
-            onCheck2={this.updateCheck2.bind(this)}
-            onCheck3={this.updateCheck3.bind(this)}
-        />
-    }
 
     render() {
         return (
-            this.state.checked1 ?
-                <div>
-                    {this.showCheckboxes()}
-                    <AddCarInputsAndButtons
-                    stepIndex={this.state.stepIndex}/>
-                </div>
-                : this.state.checked2 ?
-                <div>
-                    {this.showCheckboxes()}
-                    <AddPart/>
-                </div>
-
-                :
-                <div>
-                    {this.showCheckboxes()}
-                </div>
+            <div>
+                {this.props.turbines && this.props.cars && this.props.turbines.length && this.props.cars.length
+                    ?
+                    <Tabs>
+                        <Tab label="Dodaj samochód">
+                            <div>
+                                <AddCarInputsAndButtons
+                                    stepIndex={this.state.stepIndex}/>
+                            </div>
+                        </Tab>
+                        <Tab label="Dodaj Część">
+                            <div>
+                                <AddPart/>
+                            </div>
+                        </Tab>
+                        <Tab
+                            label="Dodaj Turbinę"
+                        >
+                        </Tab>
+                    </Tabs>
+                    :
+                    'loading'
+                }
+            </div>
         );
     }
 }
