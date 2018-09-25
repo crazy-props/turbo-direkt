@@ -10,14 +10,16 @@ import {removeCarFromList} from "../state/carsState";
 import TableTop from "./TableTop";
 import Delete from 'material-ui/svg-icons/action/delete'
 import IconButton from 'material-ui/IconButton'
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 class ListOfCars extends Component {
     state = {
         searchTerm: '',
         ITEMS_PER_PAGE: 10,
-        currentPage: 0
-
-    }
+        currentPage: 0,
+        open: false,
+    };
     debounceEvent(...args) {
         this.debouncedEvent = _.debounce(...args);
         return e => {
@@ -25,7 +27,12 @@ class ListOfCars extends Component {
             return this.debouncedEvent(e);
         };
     }
-
+    handleOpen = () => {this.setState({open: true});};
+    handleDelete = (el) => {
+        this.props.removeCarFromList(el);
+        this.setState({open: false});
+    };
+    handleClose = () => {this.setState({open: false})};
     handleSearch = (e) => {
         this.setState({searchTerm: e.target.value,currentPage:0});
     }
@@ -35,6 +42,19 @@ class ListOfCars extends Component {
     }
 
     render() {
+        const actions = [
+            <FlatButton
+                label="Anuluj"
+                primary={true}
+                onClick={()=>this.handleClose()}
+            />,
+            <FlatButton
+                label="Usuń"
+                primary={true}
+                keyboardFocused={true}
+                onClick={(el)=>this.handleDelete(el)}
+            />,
+        ];
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
@@ -92,8 +112,17 @@ class ListOfCars extends Component {
                                     <td>
                                         <IconButton
                                             tooltip="Usuń"
-                                            onClick={removeCarFromList(el)}
+                                            onClick={this.handleOpen}
                                         >
+                                            <Dialog
+                                                title="Usuwanie samochodu z listy"
+                                                actions={actions}
+                                                modal={true}
+                                                open={this.state.open}
+                                                onRequestClose={()=>this.handleDelete(el)}
+                                            >
+                                                Wybierz anuluj aby powrócić do listy lub usuń aby usunąć pojazd z listy.
+                                            </Dialog>
                                             <Delete />
                                         </IconButton>
                                     </td>

@@ -34,7 +34,7 @@ class ListOfCarso extends Component {
         this.props.removeCarFromList(el);
         this.setState({open: false});
     };
-    handleClose = () => {this.setState({open: false});};
+    handleClose = () => {this.setState({open: false})};
     handleSearch = (e) => {this.setState({searchTerm: e.target.value, currentPage: 0});};
 
     componentWillUnmount() {
@@ -66,8 +66,7 @@ class ListOfCarso extends Component {
         return (filter === null ?
             <Spinner/>
             : <div>
-                <InputForm
-                />
+                <InputForm/>
                 <Row middle={'xs'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
