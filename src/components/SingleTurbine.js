@@ -19,16 +19,8 @@ class SingleTurbine extends React.Component {
     state = {
         open: false,
     };
-
-    handleOpen = () => {
-        this.setState({open: true});
-
-    };
-
-    handleClose = () => {
-        this.setState({open: false});
-    };
-
+    handleOpen = () => {this.setState({open: true});};
+    handleClose = () => {this.setState({open: false});};
     render() {
         const actions = [
             <FlatButton
@@ -36,7 +28,6 @@ class SingleTurbine extends React.Component {
                 primary={true}
                 onClick={this.handleClose}
             />,
-
         ];
         const props = this.props
         if (this.state.open === true)
@@ -94,4 +85,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SingleTurbine)
-

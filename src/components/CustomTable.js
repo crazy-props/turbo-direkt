@@ -11,16 +11,17 @@ import {removeCarFromList} from "../state/carsState";
 import TableTop from "./TableTop";
 import IconButton from "material-ui/IconButton";
 import Delete from "material-ui/svg-icons/action/delete";
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 class ListOfCarso extends Component {
 
     state = {
         searchTerm: '',
         ITEMS_PER_PAGE: 10,
-        currentPage: 0
-
-    }
-
+        currentPage: 0,
+        open: false,
+    };
     debounceEvent(...args) {
         this.debouncedEvent = _.debounce(...args);
         return e => {
@@ -28,15 +29,31 @@ class ListOfCarso extends Component {
             return this.debouncedEvent(e);
         };
     }
-
-    handleSearch = (e) => {
-        this.setState({searchTerm: e.target.value, currentPage: 0});
-    }
+    handleOpen = () => {this.setState({open: true});};
+    handleDelete = (el) => {
+        this.props.removeCarFromList(el);
+        this.setState({open: false});
+    };
+    handleClose = () => {this.setState({open: false});};
+    handleSearch = (e) => {this.setState({searchTerm: e.target.value, currentPage: 0});};
 
     componentWillUnmount() {
         this.debouncedEvent.cancel();
     }
     render() {
+        const actions = [
+            <FlatButton
+                label="Anuluj"
+                primary={true}
+                onClick={()=>this.handleClose()}
+            />,
+            <FlatButton
+                label="Usuń"
+                primary={true}
+                keyboardFocused={true}
+                onClick={(el)=>this.handleDelete(el)}
+            />,
+        ];
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
@@ -88,14 +105,23 @@ class ListOfCarso extends Component {
                                                 el.turbo_OEM.filter(function (a, b, c) {
                                                     return c.indexOf(a) === b;
                                                 }).map(el => <SingleTurbine key={el}
-                                                    turbine={el}/>                                        ) :
-                                                el.turbo_OEM}
+                                                    turbine={el}/>)
+                                                : el.turbo_OEM}
                                         </td>
                                         <td>
                                             <IconButton
                                                 tooltip="Usuń"
-                                                onClick={removeCarFromList(el)}
+                                                onClick={this.handleOpen}
                                             >
+                                                <Dialog
+                                                title="Usuwanie samochodu z listy"
+                                                actions={actions}
+                                                modal={true}
+                                                open={this.state.open}
+                                                onRequestClose={()=>this.handleDelete(el)}
+                                            >
+                                               Wybierz anuluj aby powrócić do listy lub usuń aby usunąć pojazd z listy.
+                                            </Dialog>
                                                 <Delete />
                                             </IconButton>
                                         </td>
@@ -119,10 +145,10 @@ class ListOfCarso extends Component {
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
     part: state.partsState.parts,
-})
+});
 const mapDispatchToProps = dispatch => ({
     removeCarFromList: (el) => dispatch(removeCarFromList(el))
-})
+});
 
 export default connect(
     mapStateToProps,
