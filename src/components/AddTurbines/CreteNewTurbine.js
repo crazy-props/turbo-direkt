@@ -6,11 +6,10 @@ import TextField from 'material-ui/TextField'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 import { connect } from 'react-redux'
-import { addTurboToList } from '../state/turboState'
+import { addTurboToList } from '../../state/turboState'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import Slider from 'material-ui/Slider';
 import TableWithCreatingTurbine from './CreteNewTurbinr_Table';
-
 
 class CreteNewTurbine extends React.Component {
 
@@ -32,7 +31,7 @@ class CreteNewTurbine extends React.Component {
 			repair_kit: [],
 			KODE_CHRA: [],
 		}
-	};
+	}
 
 	handleNext = () => {
 		const { stepIndex } = this.state;

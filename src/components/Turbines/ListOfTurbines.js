@@ -4,12 +4,12 @@ import Pagination from 'material-ui-pagination'
 import Delete from 'material-ui/svg-icons/action/delete'
 import IconButton from 'material-ui/IconButton'
 import PartsColumn from './ListOfTurbiness_SingleView'
-import SearchInput from './SearchInput'
-import { removeTurboFromList } from '../state/turboState'
-import CreteListOfParts from './CreteListOfParts'
+import SearchInput from '../SearchInput'
+import { removeTurboFromList } from '../../state/turboState'
+import CreteListOfParts from '../CreteListOfParts'
 
-import Spinner from './Spinner'
-import CreteNewTurbine from './CreteNewTurbine';
+import Spinner from '../Spinner'
+import CreteNewTurbine from '../AddTurbines/CreteNewTurbine';
 
 class ListOfTurbines extends Component {
 	state = {
@@ -23,15 +23,15 @@ class ListOfTurbines extends Component {
 	}
 	/* neutralise to currentPage is required for reapper to first side of results*/
 	handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
-	
-render() {
+
+	render() {
 		/*filter all turboOEM names, get only alphanumeric and lower case characters on the each single name value*/
 		const listOfTurbines = this.props.turbo && this.props.turbo
+			.sort((prev, next) => (prev.turboOEM > next.turboOEM) ? 1 : ((next.turboOEM > prev.turboOEM) ? -1 : 0))
 			.filter(nam => nam.turboOEM
 				.toLowerCase()
 				.replace(/\W|_/gi, '')
 				.indexOf(this.state.turbineName.toLowerCase()) !== -1)
-
 
 		/*check to listOfTurbines is already update and asign array length to variable - reguired for pagination */
 		const numberOfTurbines = listOfTurbines && listOfTurbines.length
@@ -89,7 +89,6 @@ render() {
 			:
 			<Spinner />
 	}
-
 }
 const mapStateToProps = state => ({
 	turbo: state.turboState.turbo,
