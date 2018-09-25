@@ -10,6 +10,7 @@ import CreteListOfParts from '../CreteListOfParts'
 
 import Spinner from '../Spinner'
 import CreteNewTurbine from '../AddTurbines/CreteNewTurbine';
+import DialogExampleSimple from './DeleteDialog';
 
 class ListOfTurbines extends Component {
 	state = {
@@ -19,11 +20,18 @@ class ListOfTurbines extends Component {
 		/* Pagination variables start: this variables are required for pagination view*/
 		ITEMS_PER_PAGE: 10,
 		currentPage: 0,
+		dialogOpen: false,
 		/*Pagination variables end*/
+
 	}
 	/* neutralise to currentPage is required for reapper to first side of results*/
 	handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
+	handleDialogOpen = () => {this.setState({ dialogOpen: true }); console.log(this.state.dialogOpen)}
+
+	handleDialogClose = () => this.setState({ dialogOpen: false })
+
+	handleDialogDelete = (el) => {this.handleDialogClose; this.props.removeTurboFromList(el) }
 	render() {
 		/*filter all turboOEM names, get only alphanumeric and lower case characters on the each single name value*/
 		const listOfTurbines = this.props.turbo && this.props.turbo
@@ -67,10 +75,16 @@ class ListOfTurbines extends Component {
 											{/* dispatched function has own refernce to turbine.key property*/}
 											<IconButton
 												tooltip="Usuń"
-												onClick={() => this.props.removeTurboFromList(turbine)}
+												onClick={this.handleDialogOpen/*this.props.removeTurboFromList(turbine)*/}
+												label="Dialog"
 											>
 												<Delete />
 											</IconButton>
+											<DialogExampleSimple
+												stateDialog={this.state.dialogOpen}
+												handleClose={this.handleDialogClose}
+												handleDelete={()=>this.handleDialogDelete(turbine)}
+											/>
 										</td>
 									</tr>
 							)}
