@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton'
 
 
 export default class DialogExampleSimple extends React.Component {
-    
+
 
     render() {
         const actions = [
@@ -15,14 +15,13 @@ export default class DialogExampleSimple extends React.Component {
             />,
             <FlatButton
                 label="Usuń"
-                primary={true}
+                secondary={true}
                 keyboardFocused={true}
                 onClick={this.props.handleDelete}
             />,
         ]
 
         return (
-
             <Dialog
                 title="Czy na pewno chcesz usunąć element z listy?"
                 actions={actions}
@@ -31,8 +30,7 @@ export default class DialogExampleSimple extends React.Component {
                 onRequestClose={this.props.handleClose}
             >
                 Wybierz "Usuń" aby usunąć element z listy lub "Anuluj" aby powrócić do listy.
-        </Dialog>
-
-        );
+            </Dialog>
+        )
     }
 }

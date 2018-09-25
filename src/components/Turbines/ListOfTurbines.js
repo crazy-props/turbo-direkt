@@ -27,11 +27,11 @@ class ListOfTurbines extends Component {
 	/* neutralise to currentPage is required for reapper to first side of results*/
 	handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
-	handleDialogOpen = () => {this.setState({ dialogOpen: true }); console.log(this.state.dialogOpen)}
+	handleDialogOpen = () => { this.setState({ dialogOpen: true }); console.log(this.state.dialogOpen) }
 
 	handleDialogClose = () => this.setState({ dialogOpen: false })
 
-	handleDialogDelete = (el) => {this.handleDialogClose; this.props.removeTurboFromList(el) }
+	handleDialogDelete = (el) => { this.handleDialogClose; this.props.removeTurboFromList(el) }
 	render() {
 		/*filter all turboOEM names, get only alphanumeric and lower case characters on the each single name value*/
 		const listOfTurbines = this.props.turbo && this.props.turbo
@@ -83,7 +83,8 @@ class ListOfTurbines extends Component {
 											<DialogExampleSimple
 												stateDialog={this.state.dialogOpen}
 												handleClose={this.handleDialogClose}
-												handleDelete={()=>this.handleDialogDelete(turbine)}
+												/*turbine name dont have key 'id' because dispatched function (removeTurboFromList) has inside own id property */
+												handleDelete={() => this.handleDialogDelete(turbine)}
 											/>
 										</td>
 									</tr>
