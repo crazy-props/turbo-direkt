@@ -117,7 +117,7 @@ class HorizontalLinearStepper extends React.Component {
             this.setState({
                 turbo: [...this.state.turbo]
             });
-    }
+    };
 
     getStepContent(stepIndex) {
         switch (stepIndex) {
@@ -139,9 +139,8 @@ class HorizontalLinearStepper extends React.Component {
                 return 'Return';
         }
     }
-
     render() {
-        const list = this.props.cars && this.props.cars.map(car => car.turbo_OEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
+        const list = this.props.turbo && this.props.turbo.map(turbo => turbo.turboOEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
             return c.indexOf(a) === b;
         })
         const objecttodb = {
@@ -153,7 +152,6 @@ class HorizontalLinearStepper extends React.Component {
         return (
             this.state.checked1 ?
                 <div>
-
                     <CheckBoxes
                         stepIndex={this.state.stepIndex}
                         checked1={this.state.checked1}
@@ -304,8 +302,8 @@ class HorizontalLinearStepper extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    cars: state.carsState.cars,
-})
+    turbo: state.turboState.turbo,
+});
 export default connect(
     mapStateToProps,
 )(HorizontalLinearStepper)
