@@ -30,10 +30,6 @@ class ListOfCarso extends Component {
         };
     }
     handleOpen = () => {this.setState({open: true});};
-    handleDelete = (el) => {
-        this.props.removeCarFromList(el);
-        this.setState({open: false});
-    };
     handleClose = () => {this.setState({open: false})};
     handleSearch = (e) => {this.setState({searchTerm: e.target.value, currentPage: 0});};
 
@@ -41,19 +37,6 @@ class ListOfCarso extends Component {
         this.debouncedEvent.cancel();
     }
     render() {
-        const actions = [
-            <FlatButton
-                label="Anuluj"
-                primary={true}
-                onClick={()=>this.handleClose()}
-            />,
-            <FlatButton
-                label="Usuń"
-                primary={true}
-                keyboardFocused={true}
-                onClick={(el)=>this.handleDelete(el)}
-            />,
-        ];
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
@@ -61,7 +44,7 @@ class ListOfCarso extends Component {
                 (car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1) ||
                 (car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1))
                 ||(car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1)
-            )
+            );
         const numberOfCars = filter && filter.length
         return (filter === null ?
             <Spinner/>
@@ -114,10 +97,20 @@ class ListOfCarso extends Component {
                                             >
                                                 <Dialog
                                                 title="Usuwanie samochodu z listy"
-                                                actions={actions}
+                                                actions={[
+                                                    <FlatButton
+                                                    label="Usuń"
+                                                    primary={true}
+                                                    keyboardFocused={true}
+                                                    onClick={removeCarFromList(el)}
+                                                    />, <FlatButton
+                                                    label="Anuluj"
+                                                    primary={true}
+                                                    onClick={()=>this.handleClose()}
+                                                    />]}
                                                 modal={true}
                                                 open={this.state.open}
-                                                onRequestClose={()=>this.handleDelete(el)}
+
                                             >
                                                Wybierz anuluj aby powrócić do listy lub usuń aby usunąć pojazd z listy.
                                             </Dialog>
