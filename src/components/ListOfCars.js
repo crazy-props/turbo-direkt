@@ -7,8 +7,9 @@ import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import {removeCarFromList} from "../state/carsState";
-import RaisedButton from 'material-ui/RaisedButton';
 import TableTop from "./TableTop";
+import Delete from 'material-ui/svg-icons/action/delete'
+import IconButton from 'material-ui/IconButton'
 
 class ListOfCars extends Component {
     state = {
@@ -89,9 +90,12 @@ class ListOfCars extends Component {
                                             el.turbo_OEM}
                                     </td>
                                     <td>
-                                        <RaisedButton
-                                            onClick={removeCarFromList(el)}>Usuń
-                                        </RaisedButton>
+                                        <IconButton
+                                            tooltip="Usuń"
+                                            onClick={removeCarFromList(el)}
+                                        >
+                                            <Delete />
+                                        </IconButton>
                                     </td>
                                 </tr>
                             ) : <tr><td>{this.state.searchTerm.length?<Error/>:<Spinner/>}</td></tr>

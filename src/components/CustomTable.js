@@ -8,8 +8,9 @@ import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import InputForm from "./InputFormListofCars";
 import {removeCarFromList} from "../state/carsState";
-import RaisedButton from "material-ui/RaisedButton";
 import TableTop from "./TableTop";
+import IconButton from "material-ui/IconButton";
+import Delete from "material-ui/svg-icons/action/delete";
 
 class ListOfCarso extends Component {
 
@@ -91,9 +92,12 @@ class ListOfCarso extends Component {
                                                 el.turbo_OEM}
                                         </td>
                                         <td>
-                                            <RaisedButton
-                                                onClick={removeCarFromList(el)}>Usuń
-                                            </RaisedButton>
+                                            <IconButton
+                                                tooltip="Usuń"
+                                                onClick={removeCarFromList(el)}
+                                            >
+                                                <Delete />
+                                            </IconButton>
                                         </td>
                                     </tr>
                                 ) :<tr><td>{this.state.searchTerm.length?<Error/>:<Spinner/>}</td></tr>
