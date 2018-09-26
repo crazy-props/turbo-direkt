@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import AppBarMini from "./DashboardAppBarFor";
 import './../App.css';
 import ListOfCarso from "./CustomTable";
-import AppFooter from "./AppFooter";
+import AppFooter from "./AppFooter/AppFooter";
 
 class Dashboard extends Component {
     render() {

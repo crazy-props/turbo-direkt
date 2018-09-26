@@ -3,6 +3,7 @@ const styles={
    copyRight:{
         fontSize: "1.2vh",
         fontFamily: 'Lato',
+       cursor:"pointer"
     }
 };
 const AppFooterColumnThree = () => {

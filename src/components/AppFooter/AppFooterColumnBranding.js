@@ -1,5 +1,5 @@
 import React from 'react';
-import branding from "../img/branding.png";
+import branding from "../../img/branding.png";
 
 const styles = {
     brandinglogo: {

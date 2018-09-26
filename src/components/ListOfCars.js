@@ -90,7 +90,7 @@ class ListOfCars extends Component {
                                     </td>
                                     <td>
                                         <RaisedButton
-                                            onClick={removeCarFromList(el)}>Usuń
+                                            onClick={()=>{removeCarFromList(el),console.log(el)}}>Usuń
                                         </RaisedButton>
                                     </td>
                                 </tr>
