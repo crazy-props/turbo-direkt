@@ -21,15 +21,16 @@ class ListOfTurbines extends Component {
 
 		/*Pagination variables end*/
 		dialogOpen: false,
+		currentDialogElem: false,
 	}
 	/* neutralise to currentPage is required for reapper to first side of results*/
 	handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
-	handleDialogOpen = () => { this.setState({ dialogOpen: true }) }
+	handleDialogOpen = (turbine) => {console.log(turbine); this.setState({ dialogOpen: true, currentDialogElem: turbine }) }
 
 	handleDialogClose = () => this.setState({ dialogOpen: false })
 
-	handleDialogDelete = (el) => { this.handleDialogClose; this.props.removeTurboFromList(el); console.log('Deleted: ', el) }
+	handleDialogDelete = (el) => { this.handleDialogClose; this.props.removeTurboFromList(el); console.log('Deleted: ', el.turboOEM, el.key) }
 	render() {
 		/*filter all turboOEM names, get only alphanumeric and lower case characters on the each single name value*/
 		const listOfTurbines = this.props.turbo && this.props.turbo
@@ -73,20 +74,12 @@ class ListOfTurbines extends Component {
 											{/* dispatched function has own refernce to turbine.key property*/}
 											<IconButton
 												tooltip={`Usuń ${turbine.turboOEM}`}
-												onClick={this.handleDialogOpen/*this.props.removeTurboFromList(turbine)*/}
+												onClick={()=>{ this.handleDialogOpen(turbine) } /*this.props.removeTurboFromList(turbine)*/}
 												label={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
 											>
 												<Delete />
 											</IconButton>
 										</td>
-										<DeleteDialog
-											title={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
-											stateDialog={this.state.dialogOpen}
-											handleClose={this.handleDialogClose}
-											/*dispatched function has own refernce to turbine.key property*/
-											handleDelete={() => this.handleDialogDelete(turbine)}
-											turbineName={turbine.turboOEM}
-										/>
 									</tr>
 							)}
 					</tbody>
@@ -100,6 +93,14 @@ class ListOfTurbines extends Component {
 						onChange={newPage => this.setState({ currentPage: newPage - 1 })}
 					/>
 				</div>
+				<DeleteDialog
+					title={`Czy na pewno chcesz usunąć turbinę ${this.state.currentDialogElem ? this.state.currentDialogElem.turboOEM : ''} z listy?`}
+					stateDialog={this.state.dialogOpen}
+					handleClose={this.handleDialogClose}
+					/*dispatched function has own refernce to turbine.key property*/
+					handleDelete={() => this.handleDialogDelete(this.state.currentDialogElem)}
+					turbineName={this.state.currentDialogElem ? this.state.currentDialogElem.turboOEM : ''}
+					/>
 			</div>
 			:
 			<Spinner />

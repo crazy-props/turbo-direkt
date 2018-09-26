@@ -3,7 +3,6 @@ import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
 
 export default class DeleteDialog extends React.Component {
-
     render() {
         const actions = [
             <RaisedButton
