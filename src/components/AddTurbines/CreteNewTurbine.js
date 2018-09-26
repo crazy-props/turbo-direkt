@@ -7,9 +7,9 @@ import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 import { connect } from 'react-redux'
 import { addTurboToList } from '../../state/turboState'
-import { Tabs, Tab } from 'material-ui/Tabs';
-import Slider from 'material-ui/Slider';
-import TableWithCreatingTurbine from './CreteNewTurbinr_Table';
+import { Tabs, Tab } from 'material-ui/Tabs'
+import Slider from 'material-ui/Slider'
+import TableWithCreatingTurbine from './CreteNewTurbinr_Table'
 
 class CreteNewTurbine extends React.Component {
 
@@ -35,10 +35,7 @@ class CreteNewTurbine extends React.Component {
 
 	handleNext = () => {
 		const { stepIndex } = this.state;
-		this.setState({
-			stepIndex: stepIndex + 1,
-			finished: stepIndex >= 2,
-		})
+		this.setState({ stepIndex: stepIndex + 1, finished: stepIndex >= 2, })
 	}
 
 	handlePrev = () => {
@@ -85,6 +82,7 @@ class CreteNewTurbine extends React.Component {
 						<TextField
 							hintText="turboOem"
 							onChange={this.textChangeHandler}
+							defaultValue={this.state.dataToUpdate.turboOEM}
 						/>
 						<div> {`Nazwa turbiny: ${this.state.dataToUpdate.turboOEM}`} </div>
 					</div>);
@@ -123,7 +121,7 @@ class CreteNewTurbine extends React.Component {
 									{this.state.dataToUpdate[singlePart] && this.state.dataToUpdate[singlePart].length > 0 ?
 										this.state.dataToUpdate[singlePart].map(x => <span>{x} </span>)
 										:
-										`--------`}
+										`-----------`}
 
 								</div>
 							</Tab>
