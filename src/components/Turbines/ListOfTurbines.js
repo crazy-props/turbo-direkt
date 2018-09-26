@@ -6,8 +6,6 @@ import IconButton from 'material-ui/IconButton'
 import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from '../SearchInput'
 import { removeTurboFromList } from '../../state/turboState'
-import CreteListOfParts from '../CreteListOfParts'
-
 import Spinner from '../Spinner'
 import CreteNewTurbine from '../AddTurbines/CreteNewTurbine';
 import DialogExampleSimple from './DeleteDialog';

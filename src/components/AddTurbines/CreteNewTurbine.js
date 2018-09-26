@@ -150,7 +150,7 @@ class CreteNewTurbine extends React.Component {
 					handleRequestPartsDelete={this.handleRequestPartsDelete}
 				/>
 
-				<div style={{ width: '100%', maxWidth: 900, margin: 'auto' }}>
+				<div style={{ width: '100%', maxWidth: 1240, margin: 'auto' }}>
 					<Stepper activeStep={this.state.stepIndex}>
 						<Step>
 							<StepLabel>Dodaj nazwę turbiny</StepLabel>
