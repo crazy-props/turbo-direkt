@@ -18,7 +18,6 @@ export const initTurbo = () => (dispatch, getState) => {
         })
 }
 export const removeTurboFromList = (turbine) => (dispatch, getState) => {
-    console.log(turbine)
     db.ref(`/turbo/${turbine.key}`).remove()
         .then(() =>
             alert(`Delete succeeded. ${turbine.turboOEM}`)
@@ -30,12 +29,12 @@ export const removeTurboFromList = (turbine) => (dispatch, getState) => {
 
 export const addTurboToList = (objecttodb) => (dispatch, getState) => {
     db.ref(`/turbo/`).push(objecttodb)
-        .then(()=>
+        .then(() =>
             console.log("Add succeeded.")
         )
-        .catch((error)=>
-    console.log(error.message)
-);
+        .catch((error) =>
+            console.log(error.message)
+        );
 }
 
 const initialState = {

@@ -7,8 +7,8 @@ import PartsColumn from './ListOfTurbiness_SingleView'
 import SearchInput from '../SearchInput'
 import { removeTurboFromList } from '../../state/turboState'
 import Spinner from '../Spinner'
-import CreteNewTurbine from '../AddTurbines/CreteNewTurbine';
-import DialogExampleSimple from './DeleteDialog';
+import CreteNewTurbine from '../AddTurbines/CreteNewTurbine'
+import DeleteDialog from './DeleteDialog'
 
 class ListOfTurbines extends Component {
 	state = {
@@ -18,18 +18,18 @@ class ListOfTurbines extends Component {
 		/* Pagination variables start: this variables are required for pagination view*/
 		ITEMS_PER_PAGE: 10,
 		currentPage: 0,
-		dialogOpen: false,
-		/*Pagination variables end*/
 
+		/*Pagination variables end*/
+		dialogOpen: false,
 	}
 	/* neutralise to currentPage is required for reapper to first side of results*/
 	handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
-	handleDialogOpen = () => { this.setState({ dialogOpen: true }); console.log(this.state.dialogOpen) }
+	handleDialogOpen = () => { this.setState({ dialogOpen: true }) }
 
 	handleDialogClose = () => this.setState({ dialogOpen: false })
 
-	handleDialogDelete = (el) => { this.handleDialogClose; this.props.removeTurboFromList(el) }
+	handleDialogDelete = (el) => { this.handleDialogClose; this.props.removeTurboFromList(el); console.log('Deleted: ', el) }
 	render() {
 		/*filter all turboOEM names, get only alphanumeric and lower case characters on the each single name value*/
 		const listOfTurbines = this.props.turbo && this.props.turbo
@@ -72,19 +72,21 @@ class ListOfTurbines extends Component {
 										<td>
 											{/* dispatched function has own refernce to turbine.key property*/}
 											<IconButton
-												tooltip="Usuń"
+												tooltip={`Usuń ${turbine.turboOEM}`}
 												onClick={this.handleDialogOpen/*this.props.removeTurboFromList(turbine)*/}
-												label="Dialog"
+												label={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
 											>
 												<Delete />
 											</IconButton>
-											<DialogExampleSimple
-												stateDialog={this.state.dialogOpen}
-												handleClose={this.handleDialogClose}
-												/*turbine name dont have key 'id' because dispatched function (removeTurboFromList) has inside own id property */
-												handleDelete={() => this.handleDialogDelete(turbine)}
-											/>
 										</td>
+										<DeleteDialog
+											title={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
+											stateDialog={this.state.dialogOpen}
+											handleClose={this.handleDialogClose}
+											/*dispatched function has own refernce to turbine.key property*/
+											handleDelete={() => this.handleDialogDelete(turbine)}
+											turbineName={turbine.turboOEM}
+										/>
 									</tr>
 							)}
 					</tbody>

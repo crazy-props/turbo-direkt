@@ -9,7 +9,7 @@ const TableWithCreatingTurbine = (props) => {
             margin: 4,
         },
     }
-    console.log(props.creatingTurbine)
+
     return (
         <table className="carsTable">
             <thead className="carsTableHead">

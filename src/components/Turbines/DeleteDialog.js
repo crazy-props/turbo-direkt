@@ -1,19 +1,17 @@
 import React from 'react'
 import Dialog from 'material-ui/Dialog'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 
-
-export default class DialogExampleSimple extends React.Component {
-
+export default class DeleteDialog extends React.Component {
 
     render() {
         const actions = [
-            <FlatButton
+            <RaisedButton
                 label="Anuluj"
                 primary={true}
                 onClick={this.props.handleClose}
             />,
-            <FlatButton
+            <RaisedButton
                 label="Usuń"
                 secondary={true}
                 keyboardFocused={true}
@@ -23,7 +21,7 @@ export default class DialogExampleSimple extends React.Component {
 
         return (
             <Dialog
-                title="Czy na pewno chcesz usunąć element z listy?"
+                title={this.props.title}
                 actions={actions}
                 modal={true}
                 open={this.props.stateDialog}
