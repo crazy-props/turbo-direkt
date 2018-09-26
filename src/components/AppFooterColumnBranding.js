@@ -1,11 +1,14 @@
 import React from 'react';
 import branding from "../img/branding.png";
-import {ListItem} from "material-ui/List";
 
 const styles = {
-    branding: {
+    brandinglogo: {
+        marginLeft: "0.9rem",
+        cursor:"pointer"
 
-        marginLeft: "1rem",
+    },
+    brandingtext: {
+        marginLeft: "2.8rem",
         cursor:"pointer"
 
     },
@@ -15,10 +18,10 @@ const AppFooterColumnBranding = () => {
     return (
         <div>
             <br/>
-        <div><img alt={"turbo direct branding"} style={styles.branding} src={branding} href="http://www.turbodirekt.at/" target="blank"/></div>
+        <div><img alt={"turbo direct branding"} style={styles.brandinglogo} src={branding} href="http://www.turbodirekt.at/" target="blank"/></div>
             <br/>
             <br/>
-            <figure style={styles.branding}>
+            <figure style={styles.brandingtext}>
                 Kloc Autoteile e.U. - Handel mit Kfz-Teilen
                 Hirschstettnerstr. 19-21,, 1220 Wien
             </figure>

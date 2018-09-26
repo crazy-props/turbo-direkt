@@ -42,6 +42,7 @@ function AppFooterGrid(props) {
                                 </Grid>
                             </Grid>
                         </Grid>
+                        <br/>
                         <Grid item xs={12}>
                             <AppFooterColumnThree/>
                         </Grid>
