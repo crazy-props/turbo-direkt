@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import AppBarMini from "./DashboardAppBarFor";
+import AppBarMini from "./AppBar/DashboardAppBarFor";
 import './../App.css';
-import ListOfCarso from "./CustomTable";
+import ListOfCarso from "./Cars/CustomTable";
+import AppFooter from "./AppFooter/AppFooter";
 
 class Dashboard extends Component {
     render() {
@@ -11,7 +12,7 @@ class Dashboard extends Component {
                 <div className="App">
                     <AppBarMini/>
                     <ListOfCarso/>
-
+                    <AppFooter/>
                 </div>
 
         )
