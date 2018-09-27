@@ -15,40 +15,26 @@ const customContentStyle = {
 
 };
 
-/**
- * The dialog width has been set to occupy the full width of browser through the `contentStyle` property.
- */
-
 class SingleTurbine extends React.Component {
     state = {
         open: false,
     };
-
-    handleOpen = () => {
-        this.setState({open: true});
-
-    };
-
-    handleClose = () => {
-        this.setState({open: false});
-    };
-
+    handleOpen = () => {this.setState({open: true});};
+    handleClose = () => {this.setState({open: false});};
     render() {
         const actions = [
             <FlatButton
-                label="Cancel"
+                label="Zamknij"
                 primary={true}
                 onClick={this.handleClose}
             />,
-
         ];
         const props = this.props
         if (this.state.open === true)
             return (
-                <div >
-
+                <div key={Math.random()}>
                         <Dialog
-                            title={`PARTS FOR TURBO OEM : ${props.turbine}`}
+                            title={`CZĘŚCI TURBO OEM : ${props.turbine}`}
                             actions={actions}
                             modal={true}
                             contentStyle={customContentStyle}
@@ -66,9 +52,9 @@ class SingleTurbine extends React.Component {
                                     .map(x => x.map(val =>`${val.group.toUpperCase().replace(/_/, ' ')} - ${val.part}: ${val.amount}`)
                             ).map(el=>
                                 <Table>
-                                    <TableBody>
-                                        <TableRow>
-                                            <TableCell>{el}</TableCell>
+                                    <TableBody key={Math.random()}>
+                                        <TableRow key={Math.random()}>
+                                            <TableCell key={el}>{el}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>)}
@@ -99,4 +85,3 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(SingleTurbine)
-

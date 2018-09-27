@@ -6,7 +6,7 @@ import SelectField from 'material-ui/SelectField'
 import TextField from 'material-ui/TextField'
 import { Card, CardHeader, CardText } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
-import Spinner from './Spinner'
+import Spinner from './Utils/Spinner'
 
 /**
  * With the `maxHeight` property set, the Select Field will be scrollable
@@ -109,8 +109,8 @@ class CreateListOfParts extends Component {
 					<RaisedButton secondary={true} onClick={this.addPartToList}> Add</RaisedButton>
 				</CardText>
 
-			</Card>
-			: <Spinner />
+        </Card>
+    : <Spinner />
 
 		)
 	}

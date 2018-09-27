@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-
 import {Grid, Row, Col} from 'react-flexbox-grid';
 import {newPart} from "../state/partsState";
 

@@ -1,4 +1,4 @@
-import {auth, db} from "../firebase";
+import {auth} from "../firebase";
 
 const LOGIN = "authState/LOGIN";
 const LOGOUT = "authState/LOGOUT"
