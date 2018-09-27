@@ -5,6 +5,9 @@ import ListOfCars from './components/Cars/ListOfCars'
 import ListOfParts from './components/ListOfParts'
 import Dashboard from './components/Dashboard'
 import ShoppingList from './components/ShoppingList'
+import AppFooter from "./components/AppFooter/AppFooter";
+import AppBarMini from "./components/AppBar/AppBarMini";
+import InputForm from "./components/Cars/InputFormListofCars";
 
 
 class App extends Component {
@@ -13,6 +16,8 @@ class App extends Component {
             <div>
                 <Router>
                     <div>
+                        <AppBarMini/>
+                        <InputForm/>
                         <Route
                             exact path={'/'}
                             component={() => (
@@ -41,7 +46,7 @@ class App extends Component {
                             component={() => (
                                 <ShoppingList/>)}
                         />
-
+                        <AppFooter/>
                     </div>
                 </Router>
             </div>
