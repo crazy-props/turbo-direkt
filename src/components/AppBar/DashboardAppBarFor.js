@@ -1,7 +1,7 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import TransitionsTooltips from "./AppBarToolTipFor";
-import logo from "../img/logo.png"
+import logo from "../../img/logo.png"
 
 
 function handleClick() {

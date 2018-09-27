@@ -4,7 +4,7 @@ import {Provider} from 'react-redux'
 import {store} from './store'
 import './index.css';
 import App from './App';
-import Auth from "./components/Auth.js";
+import Auth from "./components/Auth/Auth.js";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 

@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addEmail, addPassword, addRetypedPassword, sendUserToDatabase} from "../state/createUser";
+import {addEmail, addPassword, addRetypedPassword, sendUserToDatabase} from "../../state/createUser";
 import Divider from '@material-ui/core/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {red500,blue500} from 'material-ui/styles/colors';
-import logo from "../img/logo.png";
+import logo from "../../img/logo.png";
 
 const style = {
     height: "75%",

@@ -4,10 +4,10 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {red500, blue500} from 'material-ui/styles/colors';
-import logo from "../img/logo.png";
+import logo from "../../img/logo.png";
 import CreateUser from "./FormCreateNewUser";
 import ForgotPass from "./ForgotenPasswordByUser";
-import {logInByMailAndPass} from '../state/authState';
+import {logInByMailAndPass} from '../../state/authState';
 import {connect} from 'react-redux';
 
 const style = {

@@ -8,7 +8,7 @@ import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../state/turboState'
 import CreteListOfParts from './CreteListOfParts'
 
-import Spinner from './Spinner'
+import Spinner from './Utils/Spinner'
 import VerticalLinearStepper from './CreteNewTurbibne';
 
 class ListOfTurbines extends Component {

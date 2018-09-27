@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import Zoom from '@material-ui/core/Zoom';
 import {ToolbarSeparator} from 'material-ui/Toolbar';
-import {logOut} from "../state/authState";
+import {logOut} from "../../state/authState";
 
 function TransitionsTooltips() {
     return (

@@ -2,7 +2,7 @@ import React from 'react';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import {addCarToList} from "../state/carsState";
+import {addCarToList} from "../../state/carsState";
 import {connect} from "react-redux";
 import {
     Step,
@@ -11,7 +11,7 @@ import {
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import {withStyles} from "@material-ui/core";
-import CheckBoxes from "./CheckBoxes";
+import CheckBoxes from "../Utils/CheckBoxes";
 import TableTop from "./TableTop";
 import AutoComplete from "material-ui/AutoComplete";
 import Chip from 'material-ui/Chip';
