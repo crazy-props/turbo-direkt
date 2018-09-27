@@ -61,7 +61,7 @@ export const removeCarFromList = (el) => (dispatch, getState) => {
 
 const initialState = {
     cars: null
-}
+};
 export default (state = initialState, action) => {
     switch (action.type) {
 
