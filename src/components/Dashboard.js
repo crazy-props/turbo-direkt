@@ -13,7 +13,6 @@ class Dashboard extends Component {
                     <AppBarMini/>
                     <ListOfCarso/>
                     <AppFooter/>
-
                 </div>
 
         )

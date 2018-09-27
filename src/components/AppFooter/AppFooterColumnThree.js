@@ -2,9 +2,10 @@ import React from 'react';
 import Divider from 'material-ui/Divider';
 const styles={
    copyRight:{
-        fontSize: "1.2vh",
+        fontSize: "1.1vh",
         fontFamily: 'Lato',
-       cursor:"none"
+       cursor:"none",
+       color:'darkgrey'
     }
 };
 const AppFooterColumnThree = () => {

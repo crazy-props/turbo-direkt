@@ -18,6 +18,8 @@ const styles = theme => ({
         padding: theme.spacing.unit * 4,
         textAlign: 'center',
        color: theme.palette.text.primary,
+        position:"sticky-bottom"
+
 
     },
 });

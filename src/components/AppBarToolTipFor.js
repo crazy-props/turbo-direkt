@@ -5,8 +5,6 @@ import Zoom from '@material-ui/core/Zoom';
 import {ToolbarSeparator} from 'material-ui/Toolbar';
 import {logOut} from "../state/authState";
 
-
-
 function TransitionsTooltips() {
     return (
         <div className="tooltip">
