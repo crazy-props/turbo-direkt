@@ -2,11 +2,9 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import TransitionsTooltips from "./AppBarToolTipFor";
 import logo from "../../img/logo.png"
+import {Link} from 'react-router-dom'
 
 
-function handleClick() {
-    alert('Whaaaaaaaaaaazzzaaaaaa');
-}
 const styles = {
     title: {
         cursor: 'pointer',
@@ -25,7 +23,13 @@ const styles = {
 };
 const AppBarMini = () => (
     <AppBar
-        iconElementLeft={<div><img alt={"turbo direct logo"} style={styles.logo}src={logo} onClick={handleClick}/></div>}
+        iconElementLeft={
+            <Link to={'/'}>
+                <div>
+                    <img style={styles.logo} src={logo}/>
+                </div>
+            </Link>
+        }
         iconElementRight={<TransitionsTooltips style={styles.tooltip}/>}
         style={styles.div}
 

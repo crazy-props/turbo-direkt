@@ -4,29 +4,34 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Zoom from '@material-ui/core/Zoom';
 import {ToolbarSeparator} from 'material-ui/Toolbar';
 import {logOut} from "../../state/authState";
+import {Link} from 'react-router-dom'
 
 function TransitionsTooltips() {
     return (
         <div className="tooltip">
             <ToolbarSeparator />
-            <Tooltip TransitionComponent={Zoom} title="Parts on magazine">
+            <Link to={'/parts'}>
+            <Tooltip TransitionComponent={Zoom} title="Części na magazynie">
                 <Button>Magazyn</Button>
             </Tooltip>
-
-            <Tooltip TransitionComponent={Zoom} title="Open turbochargers table">
+            </Link>
+            <Link to={'/turbines'}>
+            <Tooltip TransitionComponent={Zoom} title="Katalog-TurboOEM">
                 <Button>Turbiny</Button>
             </Tooltip>
-
-            <Tooltip TransitionComponent={Zoom} title="Open cars and models">
+            </Link>
+            <Link to={'/cars'}>
+            <Tooltip TransitionComponent={Zoom} title="Katalog-Samochody">
                 <Button>Samochody</Button>
             </Tooltip>
-
-            <Tooltip TransitionComponent={Zoom} title="My orders">
+            </Link>
+            <Link to={'/shopping-list'}>
+            <Tooltip TransitionComponent={Zoom} title="Lista zakupów">
                 <Button>Lista zamówień</Button>
             </Tooltip>
-            <Tooltip TransitionComponent={Zoom} title="My orders">
+            </Link>
                 <Button onClick={logOut()}>Wylogowanie</Button>
-            </Tooltip>
+
             <br/>
         </div>
     );
