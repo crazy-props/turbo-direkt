@@ -48,7 +48,7 @@ const FormCreateNewUser = (props) => (
         <Paper className="loginpaper" style={style} zDepth={3}>
             <br/>
             <div><img alt={"user logo"}style={style.logo} src={logo}/></div>
-            <p className="ptoplogin">Create new user</p>
+            <p className="ptoplogin">Utworz nowe konto</p>
             <br/>
             <br/>
             <Divider className="insideformdivider" style={style.insideformdivider}/>
@@ -56,7 +56,7 @@ const FormCreateNewUser = (props) => (
                 <TextField
                     name={"email"}
                     onChange={props.onCreateEmailHandler}
-                    floatingLabelText="Type your email"
+                    floatingLabelText="Podaj email"
                     floatingLabelStyle={style.floatingLabelStyle}
                     floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                 />
@@ -66,7 +66,7 @@ const FormCreateNewUser = (props) => (
                     onChange={props.onCreatePasswordHandler}
                     type={'password'}
                     name={"password"}
-                    floatingLabelText="Type your password"
+                    floatingLabelText="Podaj hasło"
                     floatingLabelStyle={style.floatingLabelStyle}
                     floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                 />
@@ -74,7 +74,7 @@ const FormCreateNewUser = (props) => (
                     onChange={props.onCreateRetypedPasswordHandler}
                     name={"retypedpassword"}
                     type={'password'}
-                    floatingLabelText="Retype your password"
+                    floatingLabelText="Wpisz hasło ponownie"
                     floatingLabelStyle={style.floatingLabelStyle}
                     floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                 />
@@ -84,7 +84,7 @@ const FormCreateNewUser = (props) => (
             <br/>
 
             <div className="insideformdiv">
-                <RaisedButton label="Register" onClick={()=> (props.sendUser(),props.updateCheck())} fullWidth={true} primary={true} style={style.button}/>
+                <RaisedButton label="Zarejestruj" onClick={()=> (props.sendUser(),props.updateCheck())} fullWidth={true} primary={true} style={style.button}/>
             </div>
             <br/>
             <br/>

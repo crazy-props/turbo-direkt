@@ -7,16 +7,39 @@ import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
 import Error from "./Error";
 import {removeCarFromList} from "../state/carsState";
-import RaisedButton from 'material-ui/RaisedButton';
 import TableTop from "./TableTop";
+import IconButton from "material-ui/IconButton";
+import Delete from "material-ui/svg-icons/action/delete";
+import DeleteDialog from './Turbines/DeleteDialog'
+import Snackbar from 'material-ui/Snackbar';
 
 class ListOfCars extends Component {
     state = {
         searchTerm: '',
         ITEMS_PER_PAGE: 10,
-        currentPage: 0
+        currentPage: 0,
+        open: false,
+        snackopen:false,
+        dialogValue: false,
+    };
+    handleClick = () => {
+        this.setState({
+            open: true,
+        });
+    };
 
-    }
+    handleRequestClose = () => {
+        this.setState({
+            snackopen: false,
+        });
+    };
+    handleOpen = (car) => {
+        this.setState({open: true, dialogValue: car,snackopen:false});
+    };
+    handleDialogClose  = () => {
+        this.setState({open: false})
+
+    };
     debounceEvent(...args) {
         this.debouncedEvent = _.debounce(...args);
         return e => {
@@ -24,15 +47,13 @@ class ListOfCars extends Component {
             return this.debouncedEvent(e);
         };
     }
-
+    handleDialogDelete =(el)=> {this.handleDialogClose; this.props.removeCarFromList(el);};
     handleSearch = (e) => {
         this.setState({searchTerm: e.target.value,currentPage:0});
-    }
-
+    };
     componentWillUnmount() {
         this.debouncedEvent.cancel();
     }
-
     render() {
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
@@ -89,9 +110,12 @@ class ListOfCars extends Component {
                                             el.turbo_OEM}
                                     </td>
                                     <td>
-                                        <RaisedButton
-                                            onClick={()=>{removeCarFromList(el),console.log(el)}}>Usuń
-                                        </RaisedButton>
+                                        <IconButton key={el}
+                                                    tooltip="Usuń"
+                                                    onClick={() => this.handleOpen(el)}
+                                        >
+                                            <Delete/>
+                                        </IconButton>
                                     </td>
                                 </tr>
                             ) : <tr><td>{this.state.searchTerm.length?<Error/>:<Spinner/>}</td></tr>
@@ -107,16 +131,30 @@ class ListOfCars extends Component {
                         onChange={newPage => this.setState({currentPage: newPage - 1})}
                     />
                 </div>
+                <DeleteDialog
+                    state={this.state.snackopen}
+                    title={`Czy na pewno chcesz usunąć samochód ${this.state.dialogValue ? this.state.dialogValue.mark : ''} z listy?`}
+                    stateDialog={this.state.open}
+                    handleClose={this.handleDialogClose}
+                    /*dispatched function has own reference to turbine.key property*/
+                    handleDelete={() => {this.handleDialogDelete(this.state.dialogValue);
+                    }}
+                    carName={this.state.dialogValue ? this.state.dialogValue.turboOEM : ''}
+                />
+                <Snackbar
+                    open={this.state.snackopen}
+                    message="Usunieto"
+                    autoHideDuration={3000}
+                    onRequestClose={this.handleRequestClose}
+                />
             </div>)
     }
 }
-
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
-})
+});
 const mapDispatchToProps = dispatch => ({
     removeCarFromList: (el) => dispatch(removeCarFromList(el))})
-
 export default connect(
     mapStateToProps,
     mapDispatchToProps

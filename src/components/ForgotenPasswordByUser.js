@@ -48,7 +48,7 @@ const ForgotenPasswordByUser = (props) => (
         <Paper className="loginpaper" style={style} zDepth={3}>
             <br/>
             <div><img alt ={"user logo"}style={style.logo} src={logo}/></div>
-            <p className="ptoplogin">Type your email to reset your password</p>
+            <p className="ptoplogin">Podaj swoj email aby zresetować hasło</p>
             <br/>
             <div className="insideformdiv">
                 <TextField
@@ -62,7 +62,7 @@ const ForgotenPasswordByUser = (props) => (
             <Divider className="insideformdivider" style={style.insideformdivider}/>
             <br/>
             <div className="insideformdiv">
-                <RaisedButton label="Send" onClick={()=> (props.sendPass(),props.getPassword())} fullWidth={true} primary={true} style={style.button}/>
+                <RaisedButton label="Wyślij" onClick={()=> (props.sendPass(),props.getPassword())} fullWidth={true} primary={true} style={style.button}/>
             </div>
             <br/>
             <br/>
