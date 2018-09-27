@@ -4,11 +4,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import {addCarToList} from "../../state/carsState";
 import {connect} from "react-redux";
-import {
-    Step,
-    Stepper,
-    StepLabel
-} from 'material-ui/Stepper';
+import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import {withStyles} from "@material-ui/core";
 import CheckBoxes from "../Utils/CheckBoxes";
@@ -25,11 +21,11 @@ const CustomTableCell = withStyles(theme => ({
 }))(TableCell);
 const styles = {
     block: {maxWidth: 250,}, step: {fontSize: "1.4vh",}, chip: {margin: 4,},
-}
+};
 
 class HorizontalLinearStepper extends React.Component {
     state = {
-        stepper: ["MARKA", "MODEL", "DATA PRODUKCJI", "POJEMNOŚĆ", "OZN.FABRYCZNE", "MOC", "TURBO OEM"],
+        stepper: ["MARKA", "MODEL", "DATA PRODUKCJI", "POJEMNOŚĆ", "OZN.FABR.", "MOC", "TURBO"],
         searchText: '',
         finished: false,
         stepIndex: 0,
@@ -141,7 +137,6 @@ class HorizontalLinearStepper extends React.Component {
                 return 'Return';
         }
     }
-
     render() {
         const list = this.props.turbo && this.props.turbo.map(turbo => turbo.turboOEM).reduce((red, val) => red.concat(val), []).filter(function (a, b, c) {
             return c.indexOf(a) === b;
@@ -149,7 +144,7 @@ class HorizontalLinearStepper extends React.Component {
         const objecttodb = {
             mark: this.state.mark, model: this.state.model, date: this.state.date, capacity: this.state.capacity,
             no: this.state.factoryNo, power: this.state.power, turbo_OEM: this.state.turbo
-        }
+        };
         const {finished, stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
 
@@ -289,9 +284,32 @@ class HorizontalLinearStepper extends React.Component {
                 </div>
             </div>)
         } else if (this.state.checked2) {
-            return  <AddPart/>
+            return  <div>
+                    <CheckBoxes
+                        stepIndex={this.state.stepIndex}
+                        checked1={this.state.checked1}
+                        checked2={this.state.checked2}
+                        checked3={this.state.checked3}
+                        onCheck1={this.updateCheck1.bind(this)}
+                        onCheck2={this.updateCheck2.bind(this)}
+                        onCheck3={this.updateCheck3.bind(this)}
+                    />
+                <AddPart/>
+                </div>
+
         } else if (this.state.checked3) {
-            return <CreteNewTurbine/>
+            return  <div>
+                <CheckBoxes
+                    stepIndex={this.state.stepIndex}
+                    checked1={this.state.checked1}
+                    checked2={this.state.checked2}
+                    checked3={this.state.checked3}
+                    onCheck1={this.updateCheck1.bind(this)}
+                    onCheck2={this.updateCheck2.bind(this)}
+                    onCheck3={this.updateCheck3.bind(this)}
+                />
+            <CreteNewTurbine/>
+            </div>
         } else {
             return <div>
                 <CheckBoxes

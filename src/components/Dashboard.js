@@ -4,6 +4,7 @@ import AppBarMini from "./AppBar/DashboardAppBarFor";
 import './../App.css';
 import ListOfCarso from "./Cars/CustomTable";
 import AppFooter from "./AppFooter/AppFooter";
+import InputForm from "./Cars/InputFormListofCars";
 
 class Dashboard extends Component {
     render() {
@@ -11,7 +12,7 @@ class Dashboard extends Component {
 
                 <div className="App">
                     <AppBarMini/>
-                    <ListOfCarso/>
+                    <InputForm/>
                     <AppFooter/>
                 </div>
 
