@@ -1,8 +1,9 @@
 import React from 'react'
 import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
-
+import Snackbar from 'material-ui/Snackbar'
 export default class DeleteDialog extends React.Component {
+
     render() {
         const actions = [
             <RaisedButton

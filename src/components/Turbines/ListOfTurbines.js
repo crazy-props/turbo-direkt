@@ -9,6 +9,7 @@ import { removeTurboFromList } from '../../state/turboState'
 import Spinner from '../Spinner'
 import CreteNewTurbine from '../AddTurbines/CreteNewTurbine'
 import DeleteDialog from './DeleteDialog'
+import Snackbar from 'material-ui/Snackbar'
 
 class ListOfTurbines extends Component {
 	state = {
@@ -18,20 +19,26 @@ class ListOfTurbines extends Component {
 		/* Pagination variables start: this variables are required for pagination view*/
 		ITEMS_PER_PAGE: 10,
 		currentPage: 0,
-
 		/*Pagination variables end*/
 		dialogOpen: false,
 		currentDialogElem: false,
+		snackbarOpen: false,
 	}
 	/* neutralise to currentPage is required for reapper to first side of results*/
 	handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
-	handleDialogOpen = (turbine) => {console.log(turbine); this.setState({ dialogOpen: true, currentDialogElem: turbine }) }
+	handleDialogOpen = (turbine) => { this.setState({ dialogOpen: true, currentDialogElem: turbine }) }
 
-	handleDialogClose = () => this.setState({ dialogOpen: false })
+	handleDialogClose = () => this.setState({ dialogOpen: false, snackbarOpen: true })
 
-	handleDialogDelete = (el) => { this.handleDialogClose; this.props.removeTurboFromList(el); console.log('Deleted: ', el.turboOEM, el.key) }
+	handleSnackbarOpen = () => { this.setState({ snackbarOpen: true }) }
+
+	handleSnackbarClose = () => this.setState({ snackarOpen: false })
+
+	handleDialogDelete = (el) => { this.handleDialogClose(); this.props.removeTurboFromList(el); }
+	
 	render() {
+		console.log(this.props);
 		/*filter all turboOEM names, get only alphanumeric and lower case characters on the each single name value*/
 		const listOfTurbines = this.props.turbo && this.props.turbo
 			.sort((prev, next) => (prev.turboOEM > next.turboOEM) ? 1 : ((next.turboOEM > prev.turboOEM) ? -1 : 0))
@@ -42,7 +49,7 @@ class ListOfTurbines extends Component {
 
 		/*check to listOfTurbines is already update and asign array length to variable - reguired for pagination */
 		const numberOfTurbines = listOfTurbines && listOfTurbines.length
-
+		
 		return this.props.turbo !== null && this.props.part !== null ?
 			<div>
 				{<CreteNewTurbine />}
@@ -74,7 +81,7 @@ class ListOfTurbines extends Component {
 											{/* dispatched function has own refernce to turbine.key property*/}
 											<IconButton
 												tooltip={`Usuń ${turbine.turboOEM}`}
-												onClick={()=>{ this.handleDialogOpen(turbine) } /*this.props.removeTurboFromList(turbine)*/}
+												onClick={() => { this.handleDialogOpen(turbine) }}
 												label={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
 											>
 												<Delete />
@@ -100,7 +107,13 @@ class ListOfTurbines extends Component {
 					/*dispatched function has own refernce to turbine.key property*/
 					handleDelete={() => this.handleDialogDelete(this.state.currentDialogElem)}
 					turbineName={this.state.currentDialogElem ? this.state.currentDialogElem.turboOEM : ''}
-					/>
+				/>
+				
+				<Snackbar
+					open={this.props.elem}
+					message={`Turbina ${this.state.currentDialogElem.turboOEM} została usunięta.`}
+					
+				/>
 			</div>
 			:
 			<Spinner />
@@ -108,6 +121,7 @@ class ListOfTurbines extends Component {
 }
 const mapStateToProps = state => ({
 	turbo: state.turboState.turbo,
+	elem: state.turboState.elem,
 	part: state.partsState.parts,
 })
 
