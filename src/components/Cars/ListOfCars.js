@@ -69,11 +69,11 @@ class ListOfCars extends Component {
         return (filter === null ?
           <Spinner/>
             : <div>
-                <Row middle={'xs'} className={'partsSearchRow'}>
-                    <Col xs={6}>
-                        <Row end={'xs'}>
-                            <Col xs={6}>
-                                <div className="group">
+                <Row middle={'xs'}>
+                    <Col>
+                        <Row>
+                            <Col>
+                                <div className="group2">
                                     <input placeholder="Szukaj:pojazd,marka,turbina" type="search"
                                            onChange={this.debounceEvent(this.handleSearch, 700)}/>
                                     <span className="bar"/>
