@@ -1,12 +1,11 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid/Grid";
-import Paper from "@material-ui/core/Paper/Paper";
+import Paper from 'material-ui/Paper';
 import {withStyles} from '@material-ui/core/styles';
 import AppFooterColumnBranding from "./AppFooterColumnBranding";
 import AppFooterColumnOne from "./AppFooterColumnOne"
 import AppFooterColumnThree from "./AppFooterColumnThree";
 import AppFooterColumnTwo from "./AppFooterColumnTwo"
-
 
 const styles = theme => ({
     root: {
@@ -18,7 +17,8 @@ const styles = theme => ({
     paper: {
         padding: theme.spacing.unit * 4,
         textAlign: 'center',
-        color: theme.palette.text.secondary,
+       color: theme.palette.text.primary,
+
     },
 });
 
@@ -27,7 +27,7 @@ function AppFooterGrid(props) {
     {
         return (
             <div className={classes.root}>
-                <Paper className={classes.paper}>
+                <Paper className={classes.paper} zDepth={3} rounded={false}>
                     <Grid container spacing={24}>
                         <Grid item xs={12}>
                             <Grid container spacing={24}>
@@ -48,7 +48,6 @@ function AppFooterGrid(props) {
                         </Grid>
                     </Grid>
                 </Paper>
-
             </div>
         );
     }

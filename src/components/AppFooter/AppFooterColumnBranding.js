@@ -23,7 +23,7 @@ const AppFooterColumnBranding = () => {
             <br/>
             <figure style={styles.brandingtext}>
                 Kloc Autoteile e.U. - Handel mit Kfz-Teilen
-                Hirschstettnerstr. 19-21,, 1220 Wien
+                Hirschstettnerstr. 19-21, 1220 Wien
             </figure>
         </div>
     );
