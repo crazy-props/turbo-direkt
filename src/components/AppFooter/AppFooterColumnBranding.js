@@ -4,12 +4,12 @@ import branding from "../../img/branding.png";
 const styles = {
     brandinglogo: {
         marginLeft: "0.9rem",
-        cursor:"pointer"
+        cursor: "pointer"
 
     },
     brandingtext: {
         marginLeft: "2.8rem",
-        cursor:"pointer"
+        cursor: "pointer"
 
     },
 };
@@ -17,10 +17,10 @@ const styles = {
 const AppFooterColumnBranding = () => {
     return (
         <div>
-            <br/>
-        <div><img alt={"turbo direct branding"} style={styles.brandinglogo} src={branding} href="http://www.turbodirekt.at/" target="blank"/></div>
-            <br/>
-            <br/>
+            <br />
+            <div><img alt={"turbo direct branding"} style={styles.brandinglogo} src={branding} href="http://www.turbodirekt.at/" target="blank" /></div>
+            <br />
+            <br />
             <figure style={styles.brandingtext}>
                 Kloc Autoteile e.U. - Handel mit Kfz-Teilen
                 Hirschstettnerstr. 19-21, 1220 Wien
@@ -29,4 +29,4 @@ const AppFooterColumnBranding = () => {
     );
 };
 
-export default AppFooterColumnBranding ;
+export default AppFooterColumnBranding;

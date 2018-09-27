@@ -2,10 +2,10 @@ import React from 'react';
 import AppFooterGrid from "./AppFooterGrid"
 
 function AppFooter() {
-            return (
-                <div>
-                    <AppFooterGrid/>
-                </div>
-            );
+    return (
+        <div>
+            <AppFooterGrid />
+        </div>
+    );
 }
-export default(AppFooter);
+export default (AppFooter);

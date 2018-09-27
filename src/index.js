@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import Auth from "./components/Auth/Auth.js";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AppBarMini from './components/AppBar/DashboardAppBarFor';
 
 
 ReactDOM.render(

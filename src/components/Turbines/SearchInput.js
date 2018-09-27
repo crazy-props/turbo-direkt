@@ -8,10 +8,10 @@ const SearchInput = (props) =>
          <Row>
             <Col xs={12} sm={12} md={12} lg={12} >
                <div>
-                  <span>{`Search Turbine: `}</span>
+                  <span>{`Wyszukaj turbinę z listy: `}</span>
                   <TextField
                      onChange={props.handleTurbineNameChangeChandler }
-                     hintText={'Turbine number:'}
+                     hintText={'Wprowadź numer turbiny'}
                      type={'search'}
                   />
                </div>

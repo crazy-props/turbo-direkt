@@ -2,22 +2,22 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import TransitionsTooltips from "./AppBarToolTipFor";
 import logo from "../../img/logo.png"
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const styles = {
     title: {
         cursor: 'pointer',
-        marginLeft:"10rem"
+        marginLeft: "10rem"
     },
     logo: {
-        height:"4rem",
+        height: "4rem",
         width: "4rem",
-        marginLeft:"4rem"
+        marginLeft: "4rem"
 
     },
-    div:{
-        marginTop:"1px"
+    div: {
+        marginTop: "1px"
     }
 
 };
@@ -26,11 +26,11 @@ const AppBarMini = () => (
         iconElementLeft={
             <Link to={'/'}>
                 <div>
-                    <img style={styles.logo} src={logo}/>
+                    <img style={styles.logo} src={logo} />
                 </div>
             </Link>
         }
-        iconElementRight={<TransitionsTooltips style={styles.tooltip}/>}
+        iconElementRight={<TransitionsTooltips style={styles.tooltip} />}
         style={styles.div}
 
     />

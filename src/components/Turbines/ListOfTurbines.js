@@ -10,6 +10,7 @@ import Spinner from '../Utils/Spinner'
 import CreteNewTurbine from '../AddTurbines/CreteNewTurbine'
 import DeleteDialog from './DeleteDialog'
 import Snackbar from 'material-ui/Snackbar'
+import Container from '../../UI/Container';
 
 class ListOfTurbines extends Component {
 	state = {
@@ -36,7 +37,7 @@ class ListOfTurbines extends Component {
 	handleSnackbarClose = () => this.setState({ snackarOpen: false })
 
 	handleDialogDelete = (el) => { this.handleDialogClose(); this.props.removeTurboFromList(el); }
-	
+
 	render() {
 		console.log(this.props);
 		/*filter all turboOEM names, get only alphanumeric and lower case characters on the each single name value*/
@@ -49,57 +50,61 @@ class ListOfTurbines extends Component {
 
 		/*check to listOfTurbines is already update and asign array length to variable - reguired for pagination */
 		const numberOfTurbines = listOfTurbines && listOfTurbines.length
-		
+
 		return this.props.turbo !== null && this.props.part !== null ?
 			<div>
-				{<CreteNewTurbine />}
-				<SearchInput
-					handleTurbineNameChangeChandler={this.handleTurbineNameChangeChandler}
-				/>
-				<table className="carsTable">
-					<thead className="carsTableHead">
-						<tr>
-							{/*header table values*/
-								this.state._listOfParts.map((el, idx) => <th key={idx}>{el}</th>)}
-						</tr>
-					</thead>
-					<tbody >
-						{listOfTurbines
-							/*this block of code is responsible for pagination view:*/
-							.filter((el, i) => (
-								i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
-								&&
-								i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
-							))
-							/*this block of code mapping turbines state:*/
-							.map(
-								turbine =>
-									<tr className="trOne" key={turbine.key}>
-										<td>{turbine.turboOEM}</td>
-										{this.state._parts.map((part, idx) => <PartsColumn key={idx} parts={turbine[part]} />)}
-										<td>
-											{/* dispatched function has own refernce to turbine.key property*/}
-											<IconButton
-												tooltip={`Usuń ${turbine.turboOEM}`}
-												onClick={() => { this.handleDialogOpen(turbine) }}
-												label={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
-											>
-												<Delete />
-											</IconButton>
-										</td>
-									</tr>
-							)}
-					</tbody>
-				</table>
-				{/*show pagination numbers under the table*/}
-				<div style={{ textAlign: 'center' }}>
-					<Pagination
-						total={Math.ceil(numberOfTurbines / this.state.ITEMS_PER_PAGE)}
-						current={this.state.currentPage + 1}
-						display={10}
-						onChange={newPage => this.setState({ currentPage: newPage - 1 })}
+				<Container >
+					<SearchInput
+						handleTurbineNameChangeChandler={this.handleTurbineNameChangeChandler}
 					/>
-				</div>
+				</Container>
+				<Container>
+					<table className="carsTable">
+						<thead className="carsTableHead">
+							<tr>
+								{/*header table values*/
+									this.state._listOfParts.map((el, idx) => <th key={idx}>{el}</th>)}
+							</tr>
+						</thead>
+						<tbody >
+							{listOfTurbines
+								/*this block of code is responsible for pagination view:*/
+								.filter((el, i) => (
+									i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
+									&&
+									i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1)
+								))
+								/*this block of code mapping turbines state:*/
+								.map(
+									turbine =>
+										<tr className="trOne" key={turbine.key}>
+											<td>{turbine.turboOEM}</td>
+											{this.state._parts.map((part, idx) => <PartsColumn key={idx} parts={turbine[part]} />)}
+											<td>
+												{/* dispatched function has own refernce to turbine.key property*/}
+												<IconButton
+													tooltip={`Usuń ${turbine.turboOEM}`}
+													onClick={() => { this.handleDialogOpen(turbine) }}
+													label={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
+												>
+													<Delete />
+												</IconButton>
+											</td>
+										</tr>
+								)}
+						</tbody>
+					</table>
+
+					{/*show pagination numbers under the table*/}
+					<div style={{ textAlign: 'center' }}>
+						<Pagination
+							total={Math.ceil(numberOfTurbines / this.state.ITEMS_PER_PAGE)}
+							current={this.state.currentPage + 1}
+							display={10}
+							onChange={newPage => this.setState({ currentPage: newPage - 1 })}
+						/>
+					</div>
+				</ Container>
 				<DeleteDialog
 					title={`Czy na pewno chcesz usunąć turbinę ${this.state.currentDialogElem ? this.state.currentDialogElem.turboOEM : ''} z listy?`}
 					stateDialog={this.state.dialogOpen}
@@ -108,11 +113,11 @@ class ListOfTurbines extends Component {
 					handleDelete={() => this.handleDialogDelete(this.state.currentDialogElem)}
 					turbineName={this.state.currentDialogElem ? this.state.currentDialogElem.turboOEM : ''}
 				/>
-				
+
 				<Snackbar
-					open={this.props.elem}
+					open={this.props.isSnackbarOpen}
 					message={`Turbina ${this.state.currentDialogElem.turboOEM} została usunięta.`}
-					
+
 				/>
 			</div>
 			:
@@ -121,7 +126,7 @@ class ListOfTurbines extends Component {
 }
 const mapStateToProps = state => ({
 	turbo: state.turboState.turbo,
-	elem: state.turboState.elem,
+	elem: state.turboState.isSnackbarOpen,
 	part: state.partsState.parts,
 })
 

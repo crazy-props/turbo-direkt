@@ -12,16 +12,16 @@ export const set = (turboValue) => ({
 
 export const deleteElem = () => ({
     type: DELETE_TURBINES,
-    elem: true,
+    isSnackbarOpen: true,
 })
 
 const initialState = {
     turbo: null,
-    elem: false,
+    isSnackbarOpen: false,
 }
 const closeSnack = () => ({
     type: CLOSE_SNACK,
-    elem: true,
+    isSnackbarOpen: true,
 })
 
 export default (state = initialState, action) => {
@@ -37,12 +37,12 @@ export default (state = initialState, action) => {
         case DELETE_TURBINES:
             return {
                 ...state,
-                elem: true,
+                isSnackbarOpen: true,
             }
         case CLOSE_SNACK:
             return {
                 ...state,
-                elem: false
+                isSnackbarOpen: false
             }
         default:
             return state

@@ -12,6 +12,7 @@ import IconButton from "material-ui/IconButton";
 import Delete from "material-ui/svg-icons/action/delete";
 import DeleteDialog from '../Utils/DeleteDialog'
 import Snackbar from 'material-ui/Snackbar';
+import Container from '../../UI/Container';
 
 class ListOfCars extends Component {
     state = {
@@ -68,8 +69,8 @@ class ListOfCars extends Component {
 
         return (filter === null ?
           <Spinner/>
-            : <div>
-                <Row middle={'xs'} className={'partsSearchRow'}>
+            : <Container>
+                <Row middle={'xs'} className={''}>
                     <Col xs={6}>
                         <Row end={'xs'}>
                             <Col xs={6}>
@@ -147,7 +148,7 @@ class ListOfCars extends Component {
                     autoHideDuration={3000}
                     onRequestClose={this.handleRequestClose}
                 />
-            </div>)
+            </Container>)
     }
 }
 const mapStateToProps = state => ({
