@@ -1,7 +1,7 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import TransitionsTooltips from "./AppBarToolTipFor";
-import logo from "../img/logo.png"
+import logo from "../../img/logo.png"
 
 
 function handleClick() {
@@ -25,7 +25,7 @@ const styles = {
 };
 const AppBarMini = () => (
     <AppBar
-        iconElementLeft={<div><img style={styles.logo}src={logo} onClick={handleClick}/></div>}
+        iconElementLeft={<div><img alt={"turbo direct logo"} style={styles.logo}src={logo} onClick={handleClick}/></div>}
         iconElementRight={<TransitionsTooltips style={styles.tooltip}/>}
         style={styles.div}
 

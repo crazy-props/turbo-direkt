@@ -1,4 +1,5 @@
 .App {
+
 }
 
 .tooltip {
@@ -96,17 +97,11 @@
     }
 }
 
-.loading {
-    background: inherit;
-    position: fixed;
-    top: 48.5%;
-    left: 52.5%;
-}
 .loading2 {
     background: inherit;
     position: fixed;
-    top: 48.5%;
-    left: 55.8%;
+    top: 50.5%;
+    left: 52.8%;
     -webkit-animation-name: blinker2;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
@@ -116,23 +111,6 @@
     from { opacity: 1.0; }
     to { opacity: 0.0; }
 }
-.loading3 {
-    background: inherit;
-    position: fixed;
-    top: 48.5%;
-    left: 37%;
-    -webkit-animation-name: scale;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
-    -webkit-animation-duration: 1.7s;
-}
-@keyframes scale {
-    from { opacity: 1.0; }
-    to { opacity: 0.0; }
-}
-
-
-
 
 .partsSearchRow{
     background: white;
@@ -238,12 +216,14 @@ a{
     width: 102%;
     top: 10%;
 }
-.group 			  {
+.group2 			  {
+    margin-left:51%;
     position:relative;
-    margin-bottom:45px;
+
+
 }
 input 				{
-    font-size:12px;
+    font-size:13px;
     padding:10px 10px 10px 5px;
     display:block;
     width:300px;
@@ -270,30 +250,10 @@ input:focus 		{ outline:none; }
 .bar:after {
     right:50%;
 }
-
 /* active state */
 input:focus ~ .bar:before, input:focus ~ .bar:after {
     width:50%;
 }
-
-/* HIGHLIGHTER ================================== */
-.highlight {
-    position:absolute;
-    height:60%;
-    width:100px;
-    top:25%;
-    left:0;
-    pointer-events:none;
-    opacity:0.5;
-}
-
-/* active state */
-input:focus ~ .highlight {
-    -webkit-animation:inputHighlighter 0.3s ease;
-    -moz-animation:inputHighlighter 0.3s ease;
-    animation:inputHighlighter 0.3s ease;
-}
-
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
     from { background:#5264AE; }

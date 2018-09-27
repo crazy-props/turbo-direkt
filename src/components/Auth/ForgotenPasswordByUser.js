@@ -4,9 +4,9 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {red500,blue500} from 'material-ui/styles/colors';
-import logo from "../img/logo.png";
+import logo from "../../img/logo.png";
 import {connect} from 'react-redux'
-import {addEmail,sendRequestForPass} from "../state/forgotPassword";
+import {addEmail,sendRequestForPass} from "../../state/forgotPassword";
 
 
 const style = {
@@ -47,8 +47,8 @@ const ForgotenPasswordByUser = (props) => (
         <br/>
         <Paper className="loginpaper" style={style} zDepth={3}>
             <br/>
-            <div><img style={style.logo} src={logo}/></div>
-            <p className="ptoplogin">Type your email to reset your password</p>
+            <div><img alt ={"user logo"}style={style.logo} src={logo}/></div>
+            <p className="ptoplogin">Podaj swoj email aby zresetować hasło</p>
             <br/>
             <div className="insideformdiv">
                 <TextField
@@ -62,7 +62,7 @@ const ForgotenPasswordByUser = (props) => (
             <Divider className="insideformdivider" style={style.insideformdivider}/>
             <br/>
             <div className="insideformdiv">
-                <RaisedButton label="Send" onClick={()=> (props.sendPass(),props.getPassword())} fullWidth={true} primary={true} style={style.button}/>
+                <RaisedButton label="Wyślij" onClick={()=> (props.sendPass(),props.getPassword())} fullWidth={true} primary={true} style={style.button}/>
             </div>
             <br/>
             <br/>

@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import turboState, {initTurbo} from './state/turboState'
 import carsState, {initCars,} from './state/carsState'
 import partsState, {myInit} from './state/partsState'
-import authState, {logInByMailAndPass,initAuthUserSync,logOut} from './state/authState'
+import authState, {logInByMailAndPass,initAuthUserSync} from './state/authState'
 import createUser from './state/createUser'
 import forgotPassword from './state/forgotPassword'
 import shoppingListState, {initList} from './state/shoppingList'
@@ -35,4 +35,3 @@ store.dispatch(initList())
 store.dispatch(myInit())
 store.dispatch(logInByMailAndPass())
 store.dispatch(initAuthUserSync())
-//store.dispatch(logOut())

@@ -42,7 +42,8 @@ export const subtractAmount = (objecter) => (dispatch, getState) => {
     getState().partsState.parts.find(x => {
         if ((x.part === objecter) && (x.amount > 0))
             return xAmount = x.amount-1
-            else return xAmount = 0
+        else return xAmount = 0
+
     })
         return db.ref(`/parts/${findKey.key}/amount`).set(xAmount)
 }

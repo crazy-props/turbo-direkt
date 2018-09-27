@@ -2,20 +2,44 @@ import React, {Component} from 'react'
 import {connect} from "react-redux";
 import _ from 'lodash';
 import SingleTurbine from "./SingleTurbine";
-import Spinner from "./Spinner"
+import Spinner from "../Utils/Spinner"
 import Pagination from 'material-ui-pagination'
 import {Row, Col} from 'react-flexbox-grid';
-import Error from "./Error";
-import {removeCarFromList} from "../state/carsState";
-import RaisedButton from 'material-ui/RaisedButton';
+import Error from "../Utils/Error";
+import {removeCarFromList} from "../../state/carsState";
+import TableTop from "./TableTop";
+import IconButton from "material-ui/IconButton";
+import Delete from "material-ui/svg-icons/action/delete";
+import DeleteDialog from '../Utils/DeleteDialog'
+import Snackbar from 'material-ui/Snackbar';
 
 class ListOfCars extends Component {
     state = {
         searchTerm: '',
         ITEMS_PER_PAGE: 10,
-        currentPage: 0
+        currentPage: 0,
+        open: false,
+        snackopen:false,
+        dialogValue: false,
+    };
+    handleClick = () => {
+        this.setState({
+            open: true,
+        });
+    };
 
-    }
+    handleRequestClose = () => {
+        this.setState({
+            snackopen: false,
+        });
+    };
+    handleOpen = (car) => {
+        this.setState({open: true, dialogValue: car,snackopen:false});
+    };
+    handleDialogClose  = () => {
+        this.setState({open: false})
+
+    };
     debounceEvent(...args) {
         this.debouncedEvent = _.debounce(...args);
         return e => {
@@ -23,22 +47,21 @@ class ListOfCars extends Component {
             return this.debouncedEvent(e);
         };
     }
-
+    handleDialogDelete =(el)=> {this.handleDialogClose; this.props.removeCarFromList(el);};
     handleSearch = (e) => {
         this.setState({searchTerm: e.target.value,currentPage:0});
-    }
-
+    };
     componentWillUnmount() {
         this.debouncedEvent.cancel();
     }
-
     render() {
         let cars = this.props.cars;
         cars = _.orderBy(cars, ['mark'], ['asc'])
         const filter = cars
             .filter(car =>
-                car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1 ||
-                car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm) !== -1)
+                (car.mark.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1) ||
+                (car.turbo_OEM && car.turbo_OEM.find(turbo => turbo.toString().indexOf(this.state.searchTerm.toUpperCase()) !== -1) )
+                ||(car.model.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) !== -1)
             )
 
         const numberOfCars = filter && filter.length
@@ -46,36 +69,22 @@ class ListOfCars extends Component {
         return (filter === null ?
           <Spinner/>
             : <div>
-
                 <Row middle={'xs'} className={'partsSearchRow'}>
                     <Col xs={6}>
                         <Row end={'xs'}>
                             <Col xs={6}>
                                 <div className="group">
-                                    <input placeholder="search:turbo and cars" type="search"
+                                    <input placeholder="Szukaj:pojazd,marka,turbina" type="search"
                                            onChange={this.debounceEvent(this.handleSearch, 700)}/>
-                                    <span className="highlight"/>
                                     <span className="bar"/>
-
                                 </div>
-
                             </Col>
                         </Row>
                     </Col>
                 </Row>
                 <Row className={'partsTableDiv'}>
-
                     <table className="carsTable">
-                        <thead className="carsTableHead">
-                        <td>Mark</td>
-                        <td>Model</td>
-                        <td>Date</td>
-                        <td>Capacity</td>
-                        <td>No.</td>
-                        <td>Power</td>
-                        <td className="lastTh">Turbo OEM</td>
-                        <td>Remove form list</td>
-                        </thead>
+                       <TableTop/>
                         <tbody key={Math.random()}>
                         {
                             filter && filter.length ? filter
@@ -96,18 +105,20 @@ class ListOfCars extends Component {
                                         {el.turbo_OEM && el.turbo_OEM.length ?
                                             el.turbo_OEM.filter(function (a, b, c) {
                                                 return c.indexOf(a) === b;
-                                            }).map(el => <SingleTurbine
+                                            }).map(el => <SingleTurbine key={el}
                                                 turbine={el}/>                                        ) :
-                                            el.turbo_OEM
-                                        }
+                                            el.turbo_OEM}
                                     </td>
                                     <td>
-                                        <RaisedButton
-                                            onClick={removeCarFromList(el)}>Delete car
-                                        </RaisedButton>
+                                        <IconButton key={el}
+                                                    tooltip="Usuń"
+                                                    onClick={() => this.handleOpen(el)}
+                                        >
+                                            <Delete/>
+                                        </IconButton>
                                     </td>
                                 </tr>
-                            ) : this.state.searchTerm.length?<Error/>:<Spinner/>
+                            ) : <tr><td>{this.state.searchTerm.length?<Error/>:<Spinner/>}</td></tr>
                         }
                         </tbody>
                     </table>
@@ -120,16 +131,30 @@ class ListOfCars extends Component {
                         onChange={newPage => this.setState({currentPage: newPage - 1})}
                     />
                 </div>
+                <DeleteDialog
+                    state={this.state.snackopen}
+                    title={`Czy na pewno chcesz usunąć samochód ${this.state.dialogValue ? this.state.dialogValue.mark : ''} z listy?`}
+                    stateDialog={this.state.open}
+                    handleClose={this.handleDialogClose}
+                    /*dispatched function has own reference to turbine.key property*/
+                    handleDelete={() => {this.handleDialogDelete(this.state.dialogValue);
+                    }}
+                    carName={this.state.dialogValue ? this.state.dialogValue.turboOEM : ''}
+                />
+                <Snackbar
+                    open={this.state.snackopen}
+                    message="Usunieto"
+                    autoHideDuration={3000}
+                    onRequestClose={this.handleRequestClose}
+                />
             </div>)
     }
 }
-
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
-})
+});
 const mapDispatchToProps = dispatch => ({
     removeCarFromList: (el) => dispatch(removeCarFromList(el))})
-
 export default connect(
     mapStateToProps,
     mapDispatchToProps

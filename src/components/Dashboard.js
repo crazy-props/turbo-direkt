@@ -1,16 +1,20 @@
-import React, { Component } from 'react'
-import { connect } from "react-redux";
-import AppBarMini from "./DashboardAppBarFor";
+import React, {Component} from 'react'
+import {connect} from "react-redux";
+import AppBarMini from "./AppBar/DashboardAppBarFor";
 import './../App.css';
-import ListOfCarso from "./CustomTable";
+import ListOfCarso from "./Cars/CustomTable";
+import AppFooter from "./AppFooter/AppFooter";
 
 class Dashboard extends Component {
     render() {
         return (
-            <div className="App">
-                <AppBarMini />
-                <ListOfCarso />
-            </div>
+
+                <div className="App">
+                    <AppBarMini/>
+                    <ListOfCarso/>
+                    <AppFooter/>
+                </div>
+
         )
     }
 }

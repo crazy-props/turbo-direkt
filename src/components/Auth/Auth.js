@@ -1,9 +1,7 @@
 import React from 'react'
-import { initAuthUserSync} from "../state/authState"
-import {loginUser} from "../state/authState"
 import { connect } from 'react-redux'
 import FormLoginOnStartup from "./FormLoginOnStartup"
-import {logInByMailAndPass} from "../state/authState";
+import {logInByMailAndPass} from "../../state/authState";
 
 class Auth extends React.Component {
     render() {

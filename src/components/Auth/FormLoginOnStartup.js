@@ -4,13 +4,11 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {red500, blue500} from 'material-ui/styles/colors';
-import logo from "../img/logo.png";
+import logo from "../../img/logo.png";
 import CreateUser from "./FormCreateNewUser";
 import ForgotPass from "./ForgotenPasswordByUser";
-import {logInByMailAndPass} from '../state/authState';
+import {logInByMailAndPass} from '../../state/authState';
 import {connect} from 'react-redux';
-import {initAuthUserSync} from "../state/authState";
-import {auth, db} from "../firebase";
 
 const style = {
     height: "75%",
@@ -62,12 +60,11 @@ class FormLoginOnStartup extends Component {
     ).catch(e => alert('Something went wrong!'))*/
 
     onLogInEmailChange = (event) => {
-        this.setState({logInEmail: event.target.value})
-    console.log(this.state.logInEmail)}
+        this.setState({logInEmail: event.target.value})}
 
     onLogInPasswordChange = (event) => {
         this.setState({logInPassword: event.target.value})
-    console.log(this.state.logInPassword)}
+    }
 
     updateCheck = () => {
         this.setState((oldState) => {
@@ -92,8 +89,8 @@ class FormLoginOnStartup extends Component {
                     <br/>
                     <Paper className="loginpaper" style={style} zDepth={3}>
                         <br/>
-                        <div><img style={style.logo} src={logo}/></div>
-                        <p className="ptoplogin">Account Login</p>
+                        <div><img alt={"turbo direct logo"}style={style.logo} src={logo}/></div>
+                        <p className="ptoplogin">Logowanie</p>
                         <br/>
                         <br/>
                         <Divider className="insideformdivider" style={style.insideformdivider}/>
@@ -102,7 +99,7 @@ class FormLoginOnStartup extends Component {
                                 value={this.state.value}
                                 name={'email'}
                                 type={'email'}
-                                floatingLabelText="Type your email"
+                                floatingLabelText="Wpisz email"
                                 floatingLabelStyle={style.floatingLabelStyle}
                                 floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                                 onChange={this.onLogInEmailChange}
@@ -113,7 +110,7 @@ class FormLoginOnStartup extends Component {
                                 value={this.state.value}
                                 type={'password'}
                                 name={"password"}
-                                floatingLabelText="Type your password"
+                                floatingLabelText="Wpisz hasło"
                                 floatingLabelStyle={style.floatingLabelStyle}
                                 floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                                 onChange={this.onLogInPasswordChange}
@@ -124,7 +121,7 @@ class FormLoginOnStartup extends Component {
                         <br/>
                         <br/>
                         <div className="insideformdiv">
-                            <RaisedButton label="Login" fullWidth={true} primary={true} style={style.button}
+                            <RaisedButton label="Zaloguj" fullWidth={true} primary={true} style={style.button}
                                           onClick={() => this.props.logInByEmailAndPassword(this.state.logInEmail, this.state.logInPassword)}
 
                             />
@@ -134,8 +131,8 @@ class FormLoginOnStartup extends Component {
                         <div>
                             <Divider className="insideformdivider" style={style.insideformdivider}/>
                             <div className="registersection">
-                                <p className="ploginform" onClick={this.getPassword}>Forgot password?</p>
-                                <p className="ploginform" onClick={this.updateCheck}>Register new?</p>
+                                <p className="ploginform" onClick={this.getPassword}>Zapomniałeś hasła?</p>
+                                <p className="ploginform" onClick={this.updateCheck}>Nowy użytkownik?</p>
                             </div>
                         </div>
                         <br/>
