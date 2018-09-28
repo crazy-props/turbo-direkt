@@ -1,5 +1,10 @@
 .App {
+    background-image: url("./img/turbo-tuning.jpg");
+}
 
+.router {
+    /* background: url("./img/turbo-tuning.jpg") no-repeat; */
+    background-size: cover;
 }
 
 .tooltip {
@@ -12,14 +17,12 @@
     padding-left: 0rem;
 }
 
-.tooltip > button {
+.tooltip>button {
     text-align: center;
-
     font-size: 0.55rem;
     padding: auto;
     margin-top: 0;
     margin-bottom: auto;
-
 }
 
 .autocomplete {
@@ -45,7 +48,6 @@
     background-size: cover;
     width: 100%;
     height: 100%;
-
 }
 
 .insideformdiv {
@@ -70,7 +72,6 @@
 .spinnercontainer {
     height: 100%;
     width: 100%;
-
 }
 
 .spinner {
@@ -81,13 +82,11 @@
 }
 
 .spinnerImage {
-
     height: 5%;
     width: 5%;
     animation: turboSpinner 0.8s infinite;
-
-
 }
+
 @keyframes turboSpinner {
     from {
         -webkit-transform: rotate(-279deg);
@@ -107,12 +106,17 @@
     -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
     -webkit-animation-duration: 1.7s;
 }
+
 @keyframes blinker2 {
-    from { opacity: 1.0; }
-    to { opacity: 0.0; }
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
 }
 
-.partsSearchRow{
+.partsSearchRow {
     background: white;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
     position: fixed;
@@ -120,9 +124,6 @@
     top: 0;
     z-index: 1000
 }
-.partsTableDiv{
-    margin-top: 100px;
-}
 
 .partsTable {
     border-collapse: collapse;
@@ -130,29 +131,34 @@
     margin: auto;
 }
 
-.partsTh, .partsTd {
+.partsTh,
+.partsTd {
     text-align: left;
     padding: 8px;
 }
 
-.partsTr:nth-child(even){background-color: #f2f2f2}
-
-.tdName{
-    width: 20%;
-
+.partsTr:nth-child(even) {
+    background-color: #f2f2f2
 }
 
-.tdAmount, .tdAdd, .tdSubtract{
+.tdName {
+    width: 20%;
+}
+
+.tdAmount,
+.tdAdd,
+.tdSubtract {
     width: 5%;
     text-align: center;
 }
 
-.tdShoppingCart{
+.tdShoppingCart {
     width: 10%
 }
 
 .partsButton {
-    background-color: #2196f3; /* Green */
+    background-color: #b88181;
+    /* Green */
     border: none;
     border-radius: 10%;
     color: white;
@@ -167,48 +173,58 @@
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-
 .partsButton:hover {
-    box-shadow: 0 8px 11px 0 rgba(0,0,0,0.24),0 11px 30px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 8px 11px 0 rgba(0, 0, 0, 0.24), 0 11px 30px 0 rgba(0, 0, 0, 0.19);
 }
 
-.carsTable{
+.carsTable {
     border-collapse: collapse;
     width: 80%;
     margin: auto;
     font-size: 14px;
-
 }
-.trOne:nth-child(even) {background: #FFF}
-.trOne:nth-child(odd) {background: #F2F2F2}
-.turboList{font-size: smaller}
 
-a{
+.trOne:nth-child(even) {
+    background: #FFF
+}
+
+.trOne:nth-child(odd) {
+    background: #F2F2F2
+}
+
+.turboList {
+    font-size: smaller
+}
+
+a {
     text-decoration: none;
-    color:royalblue;
+    color: royalblue;
 }
-.turboList ul{
+
+.turboList ul {
     list-style: none;
     text-decoration: none;
     text-align: start;
-
 }
-.carsTableHead{
-   background-color: darkgrey;
+
+.carsTableHead {
+    background-color: darkgrey;
     font-weight: normal;
     font-size: small;
     text-align: left;
     position: sticky;
     top: 0;
 }
-.carsTableHead th{
-    font-weight: lighter;
 
+.carsTableHead th {
+    font-weight: lighter;
 }
-.lastTh{
+
+.lastTh {
     text-align: center;
 }
-.partsSearchRow2{
+
+.partsSearchRow2 {
     background: white;
     -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
@@ -216,68 +232,97 @@ a{
     width: 102%;
     top: 10%;
 }
-.group2 			  {
-    padding-top: 25%;
-    margin-left:40%;
-    position:relative;
 
+.group2 {
+    margin: auto;
+    position: relative;
+}
 
+input {
+    font-size: 13px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #757575;
+}
 
+input:focus {
+    outline: none;
 }
-input 				{
-    font-size:13px;
-    padding:10px 10px 10px 5px;
-    display:block;
-    width:300px;
-    border:none;
-    border-bottom:1px solid #757575;
-}
-input:focus 		{ outline:none; }
 
-.bar 	{ position:relative; display:block; width:300px; }
-.bar:before, .bar:after 	{
-    content:'';
-    height:1px;
-    width:0;
-    bottom:0.5px;
-    position:absolute;
-    background:royalblue;
-    transition:0.2s ease all;
-    -moz-transition:0.2s ease all;
-    -webkit-transition:0.2s ease all;
+.bar {
+    position: relative;
+    display: block;
+    width: 300px;
 }
-.bar:before {
-    left:50%;
-}
+
+.bar:before,
 .bar:after {
-    right:50%;
+    content: '';
+    height: 1px;
+    width: 0;
+    bottom: 0.5px;
+    position: absolute;
+    background: royalblue;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
 }
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
 /* active state */
-input:focus ~ .bar:before, input:focus ~ .bar:after {
-    width:50%;
+
+input:focus~.bar:before,
+input:focus~.bar:after {
+    width: 50%;
 }
+
 /* ANIMATIONS ================ */
+
 @-webkit-keyframes inputHighlighter {
-    from { background:#5264AE; }
-    to 	{ width:0; background:transparent; }
+    from {
+        background: #5264AE;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
 }
+
 @-moz-keyframes inputHighlighter {
-    from { background:#5264AE; }
-    to 	{ width:0; background:transparent; }
+    from {
+        background: #5264AE;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
 }
+
 @keyframes inputHighlighter {
-    from { background:#5264AE; }
-    to 	{ width:0; background:transparent; }
+    from {
+        background: #5264AE;
+    }
+    to {
+        width: 0;
+        background: transparent;
+    }
 }
-.partsSearchRow{
+
+.partsSearchRow {
     background: white;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
     position: fixed;
     width: 100%;
     top: 0;
-}
-.partsTableDiv{
-    margin-top: 100px;
 }
 
 .partsTable {
@@ -286,44 +331,27 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
     margin: auto;
 }
 
-.partsTh, .partsTd {
+.partsTh,
+.partsTd {
     text-align: left;
     padding: 8px;
 }
 
-.partsTr:nth-child(even){background-color: #f2f2f2}
-
-.tdName{
-    width: 20%;
-
+.partsTr:nth-child(even) {
+    background-color: #f2f2f2
 }
 
-.tdAmount, .tdAdd, .tdSubtract{
+.tdName {
+    width: 20%;
+}
+
+.tdAmount,
+.tdAdd,
+.tdSubtract {
     width: 5%;
     text-align: center;
 }
 
-.tdShoppingCart{
-    width: 10%
-}
-
-.partsButton {
-    background-color: #2196f3; /* Green */
-    border: none;
-    border-radius: 10%;
-    color: white;
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 2px 1px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-
-.partsButton:hover {
-    box-shadow: 0 8px 11px 0 rgba(0,0,0,0.24),0 11px 30px 0 rgba(0,0,0,0.19);
+.tdShoppingCart {
+    width: 10%;
 }

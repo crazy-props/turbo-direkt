@@ -9,7 +9,8 @@ const styles = {
     },
     brandingtext: {
         marginLeft: "2.8rem",
-        cursor:"pointer"
+        cursor:"pointer",
+        fontSize: "0.9rem"
 
     },
 };

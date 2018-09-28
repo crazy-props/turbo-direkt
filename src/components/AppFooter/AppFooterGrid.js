@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid/Grid";
 import Paper from 'material-ui/Paper';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import AppFooterColumnBranding from "./AppFooterColumnBranding";
 import AppFooterColumnOne from "./AppFooterColumnOne"
 import AppFooterColumnThree from "./AppFooterColumnThree";
@@ -10,43 +10,43 @@ import AppFooterColumnTwo from "./AppFooterColumnTwo"
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        marginTop:"5%",
+        marginTop: "1rem",
         marginBottom: "-3%",
+
 
     },
     paper: {
         padding: theme.spacing.unit * 4,
         textAlign: 'center',
-       color: theme.palette.text.primary,
-        position:"sticky-bottom"
-
-
+        color: theme.palette.text.primary,
+        position: "sticky-bottom",
+        backgroundColor: "#f7f7f7"
     },
 });
 
 function AppFooterGrid(props) {
-    const {classes} = props;
+    const { classes } = props;
     {
         return (
-            <div className={classes.root}>
-                <Paper className={classes.paper} zDepth={3} rounded={false}>
+            <div className={classes.root} >
+                <Paper className={classes.paper} style={{ backgroundColor: "#f7f7f7f" }} zDepth={3} rounded={false}>
                     <Grid container spacing={24}>
                         <Grid item xs={12}>
                             <Grid container spacing={24}>
                                 <Grid item xs>
-                                    <AppFooterColumnBranding/>
+                                    <AppFooterColumnBranding />
                                 </Grid>
                                 <Grid item xs>
-                                    <AppFooterColumnOne/>
+                                    <AppFooterColumnOne />
                                 </Grid>
                                 <Grid item xs>
-                                   <AppFooterColumnTwo/>
+                                    <AppFooterColumnTwo />
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <br/>
+                        <br />
                         <Grid item xs={12}>
-                            <AppFooterColumnThree/>
+                            <AppFooterColumnThree />
                         </Grid>
                     </Grid>
                 </Paper>
