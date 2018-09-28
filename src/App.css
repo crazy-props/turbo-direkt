@@ -241,6 +241,7 @@ a {
 }
 
 input {
+    background: rgb(247, 247, 247);
     font-size: 13px;
     padding: 10px 10px 10px 5px;
     display: block;

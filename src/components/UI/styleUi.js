@@ -21,5 +21,8 @@ export default {
     tableWithPartsName: {
         background: '#757575',
         color: '#fff'
+    },
+    pagination: {
+        background: 'red'
     }
 }

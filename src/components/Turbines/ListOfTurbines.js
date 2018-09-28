@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 /*material UI components*/
 import Pagination from 'material-ui-pagination'
 import Delete from 'material-ui/svg-icons/action/delete'
-import Divider from 'material-ui/Divider'
 import IconButton from 'material-ui/IconButton'
 /*own components*/
 import DeleteDialog from './DeleteDialog'
@@ -81,7 +80,7 @@ class ListOfTurbines extends Component {
 													tooltip={`Usuń ${turbine.turboOEM}`}
 													onClick={() => { this.handleDialogOpen(turbine) } /*this.props.removeTurboFromList(turbine)*/}
 													label={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
-													iconStyle = {style.iconButton}
+													iconStyle={style.iconButton}
 												>
 													<Delete />
 												</IconButton>
