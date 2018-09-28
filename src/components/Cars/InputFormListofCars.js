@@ -14,6 +14,7 @@ import Chip from 'material-ui/Chip';
 import { Row } from "react-flexbox-grid";
 import CreteNewTurbine from "../AddTurbines/CreteNewTurbine";
 import AddPart from "../AddPart";
+import Container from '../UI/Container';
 
 
 
@@ -149,8 +150,8 @@ class HorizontalLinearStepper extends React.Component {
         };
         const { finished, stepIndex } = this.state;
         const contentStyle = { margin: '0 16px' };
-        
-        
+
+
         if (this.state.checked1) {
             return (<div>
                 <CheckBoxes
@@ -162,132 +163,137 @@ class HorizontalLinearStepper extends React.Component {
                     onCheck2={this.updateCheck2.bind(this)}
                     onCheck3={this.updateCheck3.bind(this)}
                 />
-                <Row className={'partsTableDiv'}>
-                    <table className="carsTable">
-                        <TableTop />
-                        <TableBody key={Math.random()}>
-                            <TableRow style={styles.row}>
-                                <CustomTableCell component="th" scope="row">{this.state.mark}</CustomTableCell>
-                                <CustomTableCell>{this.state.model}</CustomTableCell>
-                                <CustomTableCell>{this.state.date}</CustomTableCell>
-                                <CustomTableCell>{this.state.capacity}</CustomTableCell>
-                                <CustomTableCell>{this.state.factoryNo}</CustomTableCell>
-                                <CustomTableCell>{this.state.power}</CustomTableCell>
-                                <CustomTableCell className="turboList">
-                                    {this.state.turbo && this.state.turbo.length ?
-                                        this.state.turbo.filter(function (a, b, c) {
-                                            return c.indexOf(a) === b;
-                                        }).map(el =>
-                                            <Chip
-                                                key={el}
-                                                onRequestDelete={() => {
-                                                    this.removeTurbo(el)
-                                                }}
-                                                style={styles.chip}
-                                            >
-                                                {el}
-                                            </Chip>
-                                        ) :
-                                        this.state.turbo
-                                    }
-                                </CustomTableCell>
-                            </TableRow>
-                        </TableBody>
-                    </table>
-                </Row>
-                <div style={{ width: '80%', maxWidth: 500, margin: 'auto' }}>
-                    <Stepper style={styles.step} activeStep={stepIndex}>
-                        {this.state.stepper.map(el => <Step key={el}><StepLabel>{el}</StepLabel></Step>)}
-                    </Stepper>
-                    <div style={contentStyle}>
-                        {finished ? (
-                            <section>
-                                <RaisedButton
-                                    label="Anuluj"
-                                    disabled={stepIndex === 0}
-                                    style={{ marginRight: 12 }}
-                                    onClick={() => {
+                <Container>
+                    <Row className={'partsTableDiv'}>
+                        <table className="carsTable">
+                            <TableTop />
+                            <TableBody key={Math.random()}>
+                                <TableRow style={styles.row}>
+                                    <CustomTableCell component="th" scope="row">{this.state.mark}</CustomTableCell>
+                                    <CustomTableCell>{this.state.model}</CustomTableCell>
+                                    <CustomTableCell>{this.state.date}</CustomTableCell>
+                                    <CustomTableCell>{this.state.capacity}</CustomTableCell>
+                                    <CustomTableCell>{this.state.factoryNo}</CustomTableCell>
+                                    <CustomTableCell>{this.state.power}</CustomTableCell>
+                                    <CustomTableCell className="turboList">
+                                        {this.state.turbo && this.state.turbo.length ?
+                                            this.state.turbo.filter(function (a, b, c) {
+                                                return c.indexOf(a) === b;
+                                            }).map(el =>
+                                                <Chip
+                                                    key={el}
+                                                    onRequestDelete={() => {
+                                                        this.removeTurbo(el)
+                                                    }}
+                                                    style={styles.chip}
+                                                >
+                                                    {el}
+                                                </Chip>
+                                            ) :
+                                            this.state.turbo
+                                        }
+                                    </CustomTableCell>
+                                </TableRow>
+                            </TableBody>
+                        </table>
+                    </Row>
+                </Container>
+                <Container>
+                    <div style={{ width: '80%', maxWidth: 500, margin: 'auto' }}>
+                        <Stepper style={styles.step} activeStep={stepIndex}>
+                            {this.state.stepper.map(el => <Step key={el}><StepLabel>{el}</StepLabel></Step>)}
+                        </Stepper>
+                        <div style={contentStyle}>
+                            {finished ? (
+                                <section>
+                                    <RaisedButton
+                                        label="Anuluj"
+                                        disabled={stepIndex === 0}
+                                        style={{ marginRight: 12 }}
+                                        onClick={() => {
 
-                                        this.setState({
-                                            stepIndex: 0, finished: false, mark: '', model: '',
-                                            capacity: '', date: "", factoryNo: "", power: "",
-                                            turbo: []
-                                        });
-                                    }}
-                                />
-                                <RaisedButton
-                                    disabled={stepIndex < 6}
-                                    label={'Dodaj pojazd'}
-                                    onClick={addCarToList(objecttodb)}
-                                    style={{ marginRight: 12 }}
-                                />
-                            </section>
-                        ) : (
-                                <div>
-                                    <div>{this.getStepContent(stepIndex)}</div>
-                                    <span style={{ marginTop: 12 }}>{stepIndex !== 6 ?
-                                        <input
-                                            ref="fieldName"
-                                            type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
-                                            onChange={this.handleForm}
-                                        /> : <AutoComplete
-                                            floatingLabelText={"Szukaj"}
-                                            filter={AutoComplete.caseInsensitiveFilter}
-                                            menuStyle={styles.step}
-                                            type={"search"}
-                                            ref="fieldName"
-                                            dataSource={list || ['Problem ze strukturą danych.']}
-                                            maxSearchResults={6}
-                                            onUpdateInput={this.handleUpdateInput}
-                                            onNewRequest={() => {
-                                                this.handleNewRequest()
-                                            }}
-                                        />}
-                                        <section>
-                                            <RaisedButton
-                                                label="Wstecz" disabled={stepIndex === 0}
-                                                onClick={() => {
-                                                    this.handlePrev();
-                                                    this.cancelInput()
+                                            this.setState({
+                                                stepIndex: 0, finished: false, mark: '', model: '',
+                                                capacity: '', date: "", factoryNo: "", power: "",
+                                                turbo: []
+                                            });
+                                        }}
+                                    />
+                                    <RaisedButton
+                                        disabled={stepIndex < 6}
+                                        label={'Dodaj pojazd'}
+                                        onClick={addCarToList(objecttodb)}
+                                        style={{ marginRight: 12 }}
+                                    />
+                                </section>
+                            ) : (
+                                    <div>
+                                        <div>{this.getStepContent(stepIndex)}</div>
+                                        <span style={{ marginTop: 12 }}>{stepIndex !== 6 ?
+                                            <input
+                                                ref="fieldName"
+                                                type={stepIndex === 3 || stepIndex === 5 ? "number" : "text"}
+                                                onChange={this.handleForm}
+                                            /> : <AutoComplete
+                                                floatingLabelText={"Szukaj"}
+                                                filter={AutoComplete.caseInsensitiveFilter}
+                                                menuStyle={styles.step}
+                                                type={"search"}
+                                                ref="fieldName"
+                                                dataSource={list || ['Problem ze strukturą danych.']}
+                                                maxSearchResults={6}
+                                                onUpdateInput={this.handleUpdateInput}
+                                                onNewRequest={() => {
+                                                    this.handleNewRequest()
                                                 }}
-                                                style={{ marginRight: 12 }}
-                                            />
-                                            <RaisedButton
-                                                label={stepIndex === 7 ? 'Zakończ' : 'Dalej'}
-                                                primary={true}
-                                                disabled={(
-                                                    (this.state.mark === '')
-                                                    || (stepIndex === 1 && this.state.model === "")
-                                                    || (stepIndex === 3 && this.state.capacity === '')
-                                                    || (stepIndex === 6 && this.state.turbo.length === 0))}
-                                                onClick={() => {
-                                                    this.handleNext();
-                                                    this.cancelInput()
-                                                }}
-                                                style={{ marginRight: 12 }}
-                                            />
-                                            <RaisedButton
-                                                label="Anuluj"
-                                                disabled={stepIndex === 0}
-                                                style={{ marginRight: 12 }}
-                                                onClick={(event) => {
-                                                    event.preventDefault();
-                                                    this.setState({
-                                                        stepIndex: 0, finished: false, mark: '', model: '',
-                                                        capacity: '', date: "", factoryNo: "", power: "", turbo: []
-                                                    });
-                                                }}
-                                            />
-                                        </section>
-                                        <br />
-                                    </span>
-                                </div>
-                            )}
+                                            />}
+                                            <section>
+                                                <RaisedButton
+                                                    label="Wstecz" disabled={stepIndex === 0}
+                                                    onClick={() => {
+                                                        this.handlePrev();
+                                                        this.cancelInput()
+                                                    }}
+                                                    style={{ marginRight: 12 }}
+                                                />
+                                                <RaisedButton
+                                                    label={stepIndex === 7 ? 'Zakończ' : 'Dalej'}
+                                                    primary={true}
+                                                    disabled={(
+                                                        (this.state.mark === '')
+                                                        || (stepIndex === 1 && this.state.model === "")
+                                                        || (stepIndex === 3 && this.state.capacity === '')
+                                                        || (stepIndex === 6 && this.state.turbo.length === 0))}
+                                                    onClick={() => {
+                                                        this.handleNext();
+                                                        this.cancelInput()
+                                                    }}
+                                                    style={{ marginRight: 12 }}
+                                                />
+                                                <RaisedButton
+                                                    label="Anuluj"
+                                                    disabled={stepIndex === 0}
+                                                    style={{ marginRight: 12 }}
+                                                    onClick={(event) => {
+                                                        event.preventDefault();
+                                                        this.setState({
+                                                            stepIndex: 0, finished: false, mark: '', model: '',
+                                                            capacity: '', date: "", factoryNo: "", power: "", turbo: []
+                                                        });
+                                                    }}
+                                                />
+                                            </section>
+                                            <br />
+                                        </span>
+                                    </div>
+                                )}
+                        </div>
                     </div>
-                </div>
+                </Container>
             </div>)
         } else if (this.state.checked2) {
             return <div>
+                
                 <CheckBoxes
                     stepIndex={this.state.stepIndex}
                     checked1={this.state.checked1}
@@ -297,7 +303,7 @@ class HorizontalLinearStepper extends React.Component {
                     onCheck2={this.updateCheck2.bind(this)}
                     onCheck3={this.updateCheck3.bind(this)}
                 />
-                <AddPart />
+                <Container><AddPart /></Container>
             </div>
 
         } else if (this.state.checked3) {

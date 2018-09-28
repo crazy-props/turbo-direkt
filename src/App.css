@@ -44,7 +44,6 @@
 }
 
 .logintop {
-    background-image: url("./../src/img/turbo.jpg");
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -69,16 +68,22 @@
     font-size: 1rem;
 }
 
-.spinnercontainer {
-    height: 100%;
-    width: 100%;
-}
 
 .spinner {
     background: inherit;
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  
+}
+
+.spinerBackground {
+    width: 60vh;
+    height: 60vh; 
+    display: flex;
+    align-items: center;
+    margin: auto;
 }
 
 .spinnerImage {
@@ -98,9 +103,6 @@
 
 .loading2 {
     background: inherit;
-    position: fixed;
-    top: 50.5%;
-    left: 52.8%;
     -webkit-animation-name: blinker2;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
@@ -354,4 +356,9 @@ input:focus~.bar:after {
 
 .tdShoppingCart {
     width: 10%;
+}
+
+.auth {
+    background: url(./img/turbo-tuning.jpg) center no-repeat;
+    background-size: cover;
 }

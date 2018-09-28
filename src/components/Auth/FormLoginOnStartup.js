@@ -31,8 +31,9 @@ const style = {
         marginRight: "20%"
     },
     button: {
-        color: blue500,
-        borderRadius: 25
+        backgroundColor: "#b10303",
+
+        borderRadius: 5
     },
     logo: {
         height: "5.5rem",
@@ -121,7 +122,7 @@ class FormLoginOnStartup extends Component {
                         <br/>
                         <br/>
                         <div className="insideformdiv">
-                            <RaisedButton label="Zaloguj" fullWidth={true} primary={true} style={style.button}
+                            <RaisedButton label="Zaloguj" fullWidth={true} primary={true} buttonStyle={style.button}
                                           onClick={() => this.props.logInByEmailAndPassword(this.state.logInEmail, this.state.logInPassword)}
 
                             />
