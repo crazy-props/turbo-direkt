@@ -13,6 +13,7 @@ import Delete from "material-ui/svg-icons/action/delete";
 import DeleteDialog from '../Utils/DeleteDialog'
 import Snackbar from 'material-ui/Snackbar';
 import Container from '../UI/Container';
+import style from '../UI/styleUi'
 
 class ListOfCars extends Component {
     state = {
@@ -116,6 +117,8 @@ class ListOfCars extends Component {
                                                     <IconButton key={el}
                                                         tooltip="Usuń"
                                                         onClick={() => this.handleOpen(el)}
+                                                        iconStyle={style.iconButton}
+
                                                     >
                                                         <Delete />
                                                     </IconButton>

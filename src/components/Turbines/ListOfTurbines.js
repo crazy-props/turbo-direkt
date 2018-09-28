@@ -12,6 +12,7 @@ import SearchInput from './SearchInput'
 import { removeTurboFromList } from '../../state/turboState'
 import Spinner from '../Utils/Spinner'
 import Container from '../UI/Container'
+import style from '../UI/styleUi'
 
 class ListOfTurbines extends Component {
 	state = {
@@ -80,6 +81,7 @@ class ListOfTurbines extends Component {
 													tooltip={`Usuń ${turbine.turboOEM}`}
 													onClick={() => { this.handleDialogOpen(turbine) } /*this.props.removeTurboFromList(turbine)*/}
 													label={`Czy na pewno chcesz usunąć turbinę ${turbine.turboOEM} z listy?`}
+													iconStyle = {style.iconButton}
 												>
 													<Delete />
 												</IconButton>
