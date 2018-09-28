@@ -5,7 +5,7 @@ import Subheader from 'material-ui/Subheader';
 const styles = {
     subHeader: {
         fontWeight: "bolder",
-        fontSize: "1.7vh",
+        fontSize: "1rem",
         fontFamily: 'Lato',
         color:"#b10303"
 
@@ -14,7 +14,8 @@ const styles = {
         display: "flex",
         justifyContent: "flex-start",
         marginLeft: "15%",
-        color:"#424242"
+        color:"#424242",
+        fontSize: "0.9rem"
     }
 };
 

@@ -8,8 +8,9 @@ import SelectField from 'material-ui/SelectField'
 import { connect } from 'react-redux'
 import { addTurboToList } from '../../state/turboState'
 import { Tabs, Tab } from 'material-ui/Tabs'
-import Slider from 'material-ui/Slider'
 import TableWithCreatingTurbine from './CreteNewTurbinr_Table'
+import Container from '../UI/Container'
+import style from '../UI/styleUi'
 
 class CreteNewTurbine extends React.Component {
 
@@ -88,9 +89,12 @@ class CreteNewTurbine extends React.Component {
 					</div>);
 			case 1:
 				return (
-					<Tabs >
+					<Tabs tabItemContainerStyle={style.tableWithPartsName}
+					>
 						{this.state._parts.map((singlePart, idx) =>
-							<Tab label={this.state._listOfParts[idx]} style={{ fontSize: 10, whiteSpace: 'pre-line' }}>
+							<Tab label={this.state._listOfParts[idx]}
+								style={{ fontSize: 12, whiteSpace: 'pre-line' }}
+							>
 								<h2>{this.state._listOfParts[idx]}</h2>
 								<SelectField
 									key={singlePart}
@@ -143,57 +147,60 @@ class CreteNewTurbine extends React.Component {
 
 		return (
 			<div>
-				<TableWithCreatingTurbine
-					creatingTurbine={this.state.dataToUpdate}
-					handleRequestPartsDelete={this.handleRequestPartsDelete}
-				/>
-
-				<div style={{ width: '100%', maxWidth: 1240, margin: 'auto' }}>
-					<Stepper activeStep={this.state.stepIndex}>
-						<Step>
-							<StepLabel>Dodaj nazwę turbiny</StepLabel>
-						</Step>
-						<Step>
-							<StepLabel>Dodaj komponenty do turbiny</StepLabel>
-						</Step>
-						<Step>
-							<StepLabel>Zatwierdź</StepLabel>
-						</Step>
-					</Stepper>
-					<div style={contentStyle}>
-						{this.state.finished ? (
-							<p>
-								<a
-									href="#"
-									onClick={(event) => {
-										event.preventDefault();
-										this.setState({ stepIndex: 0, finished: false });
-									}}
-								>
-									Dodaj kolejną turbinę
+				<Container>
+					<TableWithCreatingTurbine
+						creatingTurbine={this.state.dataToUpdate}
+						handleRequestPartsDelete={this.handleRequestPartsDelete}
+					/>
+				</Container>
+				<Container>
+					<div style={{ width: '100%', maxWidth: 1240, margin: 'auto' }}>
+						<Stepper activeStep={this.state.stepIndex}>
+							<Step>
+								<StepLabel>Dodaj nazwę turbiny</StepLabel>
+							</Step>
+							<Step>
+								<StepLabel>Dodaj komponenty do turbiny</StepLabel>
+							</Step>
+							<Step>
+								<StepLabel>Zatwierdź</StepLabel>
+							</Step>
+						</Stepper>
+						<div style={contentStyle}>
+							{this.state.finished ? (
+								<p>
+									<a
+										href="#"
+										onClick={(event) => {
+											event.preventDefault();
+											this.setState({ stepIndex: 0, finished: false });
+										}}
+									>
+										Dodaj kolejną turbinę
               </a> .
             </p>
-						) : (
-								<div>
-									<p>{this.getStepContent(this.state.stepIndex)}</p>
-									<div style={{ marginTop: 12 }}>
-										<FlatButton
-											label="Wstecz"
-											disabled={this.state.stepIndex === 0}
-											onClick={this.handlePrev}
-											style={{ marginRight: 12 }}
-										/>
-										<RaisedButton
-											label={this.state.stepIndex === 2 ? 'Koniec' : 'Dalej'}
-											disabled={this.state.dataToUpdate.turboOEM.length === 0}
-											primary={true}
-											onClick={this.handleNext}
-										/>
+							) : (
+									<div>
+										<p>{this.getStepContent(this.state.stepIndex)}</p>
+										<div style={{ marginTop: 12 }}>
+											<FlatButton
+												label="Wstecz"
+												disabled={this.state.stepIndex === 0}
+												onClick={this.handlePrev}
+												style={{ marginRight: 12 }}
+											/>
+											<RaisedButton
+												label={this.state.stepIndex === 2 ? 'Koniec' : 'Dalej'}
+												disabled={this.state.dataToUpdate.turboOEM.length === 0}
+												primary={true}
+												onClick={this.handleNext}
+											/>
+										</div>
 									</div>
-								</div>
-							)}
+								)}
+						</div>
 					</div>
-				</div>
+				</Container>
 			</div>
 		)
 	}

@@ -6,7 +6,7 @@ import CommunicationEmail from 'material-ui/svg-icons/communication/email';
 const styles={
     subHeader:{
         fontWeight: "bolder",
-        fontSize: "1.7vh",
+        fontSize: "1rem",
         fontFamily: 'Lato',
         color:"#b10303"
     },
@@ -14,7 +14,8 @@ const styles={
         display:"flex",
         justifyContent:"space-around",
         cursor: "help",
-        color:"#424242"
+        color:"#424242",
+        fontSize: "0.9rem",
 
     },
 };

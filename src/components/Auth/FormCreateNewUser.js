@@ -29,8 +29,8 @@ const style = {
         marginRight: "20%"
     },
     button: {
-        color: blue500,
-        borderRadius: 25
+        backgroundColor: "#b10303",
+        borderRadius: 5
     },
     logo: {
         height: "5.5rem",
@@ -74,7 +74,7 @@ const FormCreateNewUser = (props) => (
                     onChange={props.onCreateRetypedPasswordHandler}
                     name={"retypedpassword"}
                     type={'password'}
-                    floatingLabelText="Wpisz hasło ponownie"
+                    floatingLabelText="Potwierdź hasło"
                     floatingLabelStyle={style.floatingLabelStyle}
                     floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                 />
@@ -84,7 +84,7 @@ const FormCreateNewUser = (props) => (
             <br/>
 
             <div className="insideformdiv">
-                <RaisedButton label="Zarejestruj" onClick={()=> (props.sendUser(),props.updateCheck())} fullWidth={true} primary={true} style={style.button}/>
+                <RaisedButton label="Zarejestruj" onClick={()=> (props.sendUser(),props.updateCheck())} fullWidth={true} primary={true} buttonStyle={style.button}/>
             </div>
             <br/>
             <br/>

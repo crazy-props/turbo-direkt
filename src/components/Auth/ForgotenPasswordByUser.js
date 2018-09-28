@@ -30,13 +30,18 @@ const style = {
         marginRight: "20%"
     },
     button: {
-        color: blue500,
-        borderRadius: 25
+        backgroundColor: "#b10303",
+        borderRadius: 5
+      
     },
     logo: {
         height: "5.5rem",
         width: "5.5rem",
     },
+    label:{
+        fontFamily:"Lato",
+    
+    }
 
 }
 
@@ -54,7 +59,7 @@ const ForgotenPasswordByUser = (props) => (
                 <TextField
                     name={"email"}
                     onChange={props.onPassEmailHandler}
-                    floatingLabelText="Type your email"
+                    floatingLabelText="Podaj swój email"
                     floatingLabelStyle={style.floatingLabelStyle}
                     floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                 />
@@ -62,7 +67,7 @@ const ForgotenPasswordByUser = (props) => (
             <Divider className="insideformdivider" style={style.insideformdivider}/>
             <br/>
             <div className="insideformdiv">
-                <RaisedButton label="Wyślij" onClick={()=> (props.sendPass(),props.getPassword())} fullWidth={true} primary={true} style={style.button}/>
+                <RaisedButton label="Wyślij" onClick={()=> (props.sendPass(),props.getPassword())} fullWidth={true} primary={true} buttonStyle={style.button} labelStyle={style.label}/>
             </div>
             <br/>
             <br/>
