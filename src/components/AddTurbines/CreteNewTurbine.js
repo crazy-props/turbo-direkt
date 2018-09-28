@@ -8,9 +8,9 @@ import SelectField from 'material-ui/SelectField'
 import { connect } from 'react-redux'
 import { addTurboToList } from '../../state/turboState'
 import { Tabs, Tab } from 'material-ui/Tabs'
-import Slider from 'material-ui/Slider'
 import TableWithCreatingTurbine from './CreteNewTurbinr_Table'
-import Container from '../UI/Container';
+import Container from '../UI/Container'
+import style from '../UI/styleUi'
 
 class CreteNewTurbine extends React.Component {
 
@@ -89,9 +89,12 @@ class CreteNewTurbine extends React.Component {
 					</div>);
 			case 1:
 				return (
-					<Tabs >
+					<Tabs tabItemContainerStyle={style.tableWithPartsName}
+					>
 						{this.state._parts.map((singlePart, idx) =>
-							<Tab label={this.state._listOfParts[idx]} style={{ fontSize: 10, whiteSpace: 'pre-line' }}>
+							<Tab label={this.state._listOfParts[idx]}
+								style={{ fontSize: 12, whiteSpace: 'pre-line' }}
+							>
 								<h2>{this.state._listOfParts[idx]}</h2>
 								<SelectField
 									key={singlePart}

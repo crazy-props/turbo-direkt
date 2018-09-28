@@ -17,5 +17,9 @@ export default {
         background: '#b88181',
         color: '#000',
         padding: '1px'
+    },
+    tableWithPartsName: {
+        background: '#757575',
+        color: '#fff'
     }
 }
