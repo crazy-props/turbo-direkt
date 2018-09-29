@@ -41,11 +41,27 @@ export const subtractAmount = (objecter) => (dispatch, getState) => {
     let xAmount
     getState().partsState.parts.find(x => {
         if ((x.part === objecter) && (x.amount > 0))
-            return xAmount = x.amount-1
+            return xAmount = x.amount - 1
         else return xAmount = 0
 
     })
-        return db.ref(`/parts/${findKey.key}/amount`).set(xAmount)
+    return db.ref(`/parts/${findKey.key}/amount`).set(xAmount)
+}
+
+export const addToFavorites = (objecter) => (dispatch, getState) => {
+    let findKey = objecter.key
+    let isFavorite = true
+    db.ref(`/parts/${findKey}/isFavorite`).set(isFavorite)
+        .then(console.log(`update success: ${objecter.part} is favorite`))
+        .catch(err => console.log("Delete failed: " + err.message))
+}
+
+export const remToFavorites = (objecter) => (dispatch, getState) => {
+    let findKey = objecter.key
+    let isFavorite = false
+    db.ref(`/parts/${findKey}/isFavorite`).set(isFavorite)
+        .then(console.log(`update success: ${objecter.part} is not favorite`))
+        .catch(err => console.log("Delete failed: " + err.message))
 }
 
 const initialState = {
@@ -55,7 +71,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case GET_PARTS :
+        case GET_PARTS:
             return {
                 ...state,
                 parts: action.parts
