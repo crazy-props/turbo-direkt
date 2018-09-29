@@ -1,7 +1,7 @@
 import { db } from '../firebase'
 import { mapObjectToArray } from "../utils"
 
-const SET_TURBINES = 'exampleState/SET_TURBINES'
+const SET_TURBINES = 'turboState/SET_TURBINES'
 
 export const set = (turboValue) => ({
     type: SET_TURBINES,
