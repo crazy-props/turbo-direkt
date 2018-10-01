@@ -13,7 +13,7 @@ import AutoComplete from "material-ui/AutoComplete";
 import Chip from 'material-ui/Chip';
 import { Row } from "react-flexbox-grid";
 import CreteNewTurbine from "../AddTurbines/CreteNewTurbine";
-import AddPart from "../AddPart";
+import AddPart from "../Parts/AddPart";
 import Container from '../UI/Container';
 
 
