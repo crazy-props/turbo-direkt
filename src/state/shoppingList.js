@@ -84,6 +84,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
 
         case GET_SHOPPING_LIST:
+            console.log(action.productsToBuy)
             let list = action.productsToBuy
             let ordered = list.filter(product => {
                 if (product.ordered === true){
