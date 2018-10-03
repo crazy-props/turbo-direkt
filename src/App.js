@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import ListOfTurbines from './components/Turbines/ListOfTurbines'
 import ListOfCars from './components/Cars/ListOfCars'
-import ListOfParts from './components/ListOfParts'
+import ListOfParts from './components/Parts/ListOfParts'
 import Dashboard from './components/Dashboard'
-import ShoppingList from './components/ShoppingList'
+import ShoppingList from './components/ShoppingList/ShoppingList'
 import AppFooter from "./components/AppFooter/AppFooter";
 import AppBarMini from "./components/AppBar/AppBarMini";
 import InputForm from "./components/Cars/InputFormListofCars";
@@ -42,13 +42,11 @@ class App extends Component {
 
                         <Route
                             path={'/parts'}
-                            component={() => (
-                                <ListOfParts />)}
+                            component={ListOfParts}
                         />
                         <Route
                             path={'/shopping-list'}
-                            component={() => (
-                                <ShoppingList />)}
+                            component={ShoppingList}
                         />
                         <AppFooter />
                     </div>
