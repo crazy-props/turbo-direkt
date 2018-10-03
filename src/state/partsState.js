@@ -53,6 +53,23 @@ export const subtractAmount = (objecter, objectsGroup) => (dispatch, getState) =
     return db.ref(`/parts/${findKey.key}/amount`).set(xAmount)
 }
 
+export const addToFavorites = (objecter ) => (dispatch, getState) => {
+    let findKey = objecter
+    let isFavorite = true
+    db.ref(`/parts/${findKey}/isFavorite`).set(isFavorite)
+        .then(console.log(`update success: ${objecter.part} is favorite`))
+        .catch(err => console.log("Delete failed: " + err.message))
+}
+
+export const remToFavorites = (objecter) => (dispatch, getState) => {
+    let findKey = objecter
+    let isFavorite = false
+    db.ref(`/parts/${findKey}/isFavorite`).set(isFavorite)
+        .then(console.log(`update success: ${objecter.part} is not favorite`))
+        .catch(err => console.log("Delete failed: " + err.message))
+}
+
+
 const initialState = {
     parts: [],
     search: '',

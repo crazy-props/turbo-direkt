@@ -1,14 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {addAmount, subtractAmount, searchParts} from '../../state/partsState';
+import {addAmount, subtractAmount, searchParts, remToFavorites, addToFavorites} from '../../state/partsState';
 import {addProductToShoppingList} from '../../state/shoppingList';
-import IconButton from 'material-ui/IconButton';
 import {Row, Col} from 'react-flexbox-grid';
 import Pagination from "material-ui-pagination";
-import TR from './TR'
-import Partsearch from './PartSearch'
-import Backspace from 'material-ui/svg-icons/content/backspace';
-import SearchInput from "../Turbines/SearchInput";
+import TR from './TR';
+import Partsearch from './PartSearch';
 import Container from "../UI/Container";
 
 
@@ -67,6 +64,8 @@ class ListOfParts extends Component {
                                     addAmount={this.props.addAmount}
                                     subtractAmount={this.props.subtractAmount}
                                     addToShoppingList={this.props.addProductToShoppingList}
+                                    addToFavorites={this.props.addToFavorites}
+                                    remToFavorites={this.props.remToFavorites}
                                 />
                             )
                             : 'szukam części...'
@@ -100,6 +99,8 @@ const mapDispatchToProps = dispatch => ({
     subtractAmount: (objectToSubtract, objectsGroup) => dispatch(subtractAmount(objectToSubtract, objectsGroup)),
     addProductToShoppingList: (part, group) => dispatch(addProductToShoppingList(part, group)),
     searchParts: (value) => dispatch(searchParts(value)),
+    addToFavorites: (objectToAdd) => dispatch(addToFavorites(objectToAdd)),
+    remToFavorites: (objectToRemove) => dispatch(remToFavorites(objectToRemove))
 })
 
 export default connect(

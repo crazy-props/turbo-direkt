@@ -42,13 +42,11 @@ class App extends Component {
 
                         <Route
                             path={'/parts'}
-                            component={() => (
-                                <ListOfParts />)}
+                            component={ListOfParts}
                         />
                         <Route
                             path={'/shopping-list'}
-                            component={() => (
-                                <ShoppingList />)}
+                            component={ShoppingList}
                         />
                         <AppFooter />
                     </div>
