@@ -2,7 +2,7 @@ import React from 'react';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import { addCarToList } from "../../state/carsState";
+import {addCarToList} from "../../state/carsState";
 import { connect } from "react-redux";
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -15,6 +15,8 @@ import { Row } from "react-flexbox-grid";
 import CreteNewTurbine from "../AddTurbines/CreteNewTurbine";
 import AddPart from "../Parts/AddPart";
 import Container from '../UI/Container';
+import {Snackbar} from "material-ui";
+import {clearError} from "../../state/alerts";
 
 
 
@@ -222,7 +224,7 @@ class HorizontalLinearStepper extends React.Component {
                                     <RaisedButton
                                         disabled={stepIndex < 6}
                                         label={'Dodaj pojazd'}
-                                        onClick={addCarToList(objecttodb)}
+                                        onClick={() => this.props.addCarToList(objecttodb)}
                                         style={{ marginRight: 12 }}
                                     />
                                 </section>
@@ -289,6 +291,13 @@ class HorizontalLinearStepper extends React.Component {
                                 )}
                         </div>
                     </div>
+                    <Snackbar
+                        autoHideDuration={4000}
+                        open={this.props.imWithAlert}
+                        message={this.props.alert}
+                        bodyStyle={{textAlign: 'center'}}
+                        onRequestClose={this.props.clearError}
+                    />
                 </Container>
             </div>)
         } else if (this.state.checked2) {
@@ -332,13 +341,19 @@ class HorizontalLinearStepper extends React.Component {
                 />
             </div>
         }
-
     }
 }
 
 const mapStateToProps = state => ({
     turbo: state.turboState.turbo,
+    imWithAlert: state.alerts.imWithAlert,
+    alert: state.alerts.alert,
 });
+const mapDispatchToProps = dispatch => ({
+    addCarToList: (objecttodb) => dispatch(addCarToList(objecttodb)),
+    clearError: () => dispatch(clearError())
+})
 export default connect(
     mapStateToProps,
+    mapDispatchToProps
 )(HorizontalLinearStepper)

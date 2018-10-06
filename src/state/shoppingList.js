@@ -1,6 +1,6 @@
 import {db} from '../firebase'
 import {mapObjectToArray} from "../utils";
-
+import {handleSuccess, handleError} from './alerts'
 
 const GET_SHOPPING_LIST = 'shoppingList/GET_SHOPPING_LIST'
 
@@ -26,12 +26,13 @@ export const addProductToShoppingList = (partsName, partsGroup) => (dispatch, ge
         let checkIfOnTheList = getState().shoppingListState.products.find(x => x.value === partsName)
         if (checkIfOnTheList === undefined) {
             db.ref(`/shoppingList/`).push({value: partsName, group: partsGroup})
+                .then(() => dispatch(handleSuccess(`Dodano: ${partsName} do zakupów`)))
+                .catch(error => dispatch(handleError(error)))
         }
         else {
-            console.log("such product is already on the list")
+            dispatch(handleError(`${partsGroup} ${partsName} jest już na liście zakupów`))
         }
     }
-
 }
 
 export const removeProductFromShoppingList = (partsName) => (dispatch, getState) => {
@@ -41,9 +42,11 @@ export const removeProductFromShoppingList = (partsName) => (dispatch, getState)
     })
     if (findKey !== undefined) {
         db.ref(`/shoppingList/${findKey.key}`).remove()
+            .then(() => dispatch(handleSuccess(`Usunięto: ${partsName} z listy zakupów`)))
+            .catch(error => dispatch(handleError(error)))
     }
     else {
-        console.log("there's no such product on shopping list")
+        dispatch(handleError(`${partsName} nie ma na liście`))
     }
 }
 export const removeMultipleFromShoppingList = (partslist) => (dispatch, getState) => {
@@ -54,9 +57,10 @@ export const removeMultipleFromShoppingList = (partslist) => (dispatch, getState
         })
         if (findKey !== undefined) {
             db.ref(`/shoppingList/${findKey.key}`).remove()
+                .then(() => dispatch(handleSuccess(`Usunięto z listy zakupów`)))
+                .catch(error => dispatch(handleError(error)))
         }
     })
-
 }
 
 
@@ -67,9 +71,11 @@ export const addToOrdered = (partsName, partsGroup) => (dispatch, getState) => {
     })
     if (findKey !== undefined) {
         db.ref(`/shoppingList/${findKey.key}`).set({value: partsName, ordered: true, group: partsGroup})
+            .then(() => dispatch(handleSuccess(`Dodano ${partsGroup} ${partsName}`)))
+            .catch(error => dispatch(handleError(error)))
     }
     else {
-        console.log("there's no such product on shopping list")
+        dispatch(handleError(`${partsName} już jest na liście`))
     }
 }
 
@@ -86,12 +92,12 @@ export default (state = initialState, action) => {
         case GET_SHOPPING_LIST:
             let list = action.productsToBuy
             let ordered = list.filter(product => {
-                if (product.ordered === true){
+                if (product.ordered === true) {
                     return product
                 }
             })
             let toOrder = list.filter(product => {
-                if (product.ordered === undefined){
+                if (product.ordered === undefined) {
                     return product
                 }
             })

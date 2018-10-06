@@ -7,6 +7,7 @@ import authState, {logInByMailAndPass,initAuthUserSync} from './state/authState'
 import createUser from './state/createUser'
 import forgotPassword from './state/forgotPassword'
 import shoppingListState, {initList} from './state/shoppingList'
+import alerts from './state/alerts'
 
 
 export const reducer = combineReducers({
@@ -16,7 +17,8 @@ export const reducer = combineReducers({
     forgotPassword,
     carsState,
     partsState,
-    shoppingListState
+    shoppingListState,
+    alerts
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

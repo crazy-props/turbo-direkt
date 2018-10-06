@@ -36,7 +36,7 @@ class FavoritesParts extends React.Component {
                                 </TableRow>
                             </TableHeader>
                             <TableBody displayRowCheckbox={false} showRowHover={true}>
-                                {this.props.parts.map((part, idx) => part.hasOwnProperty('isFavorite') && part.isFavorite == true ?
+                                {this.props.parts.map((part, idx) => part.hasOwnProperty('isFavorite') && part.isFavorite === true ?
                                     <TableRow key={idx}>
                                         <TableRowColumn>
                                             {part.amount > 1 ? <IconPartOK style={{fill: '#3e8432'}}/>

@@ -45,7 +45,7 @@ class PartSearch extends Component {
                                     onBlur={this.useFilter}
                                 />
                                 <IconButton tooltip="czyść filtr"
-                                            onClick={() => this.props.searchParts('')}
+                                            onClick={() => {this.props.searchParts(''), this.setState({searchValue: ''})}}
                                 >
                                     <Backspace/>
                                 </IconButton>

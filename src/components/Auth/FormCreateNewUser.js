@@ -5,12 +5,12 @@ import Divider from '@material-ui/core/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {red500,blue500} from 'material-ui/styles/colors';
+import {red500, blue500} from 'material-ui/styles/colors';
 import logo from "../../img/logo.png";
 
 const style = {
     height: "75%",
-    borderRadius:"10px",
+    borderRadius: "10px",
     textAlign: 'center',
     opacity: "0.77",
     width: "52%",
@@ -47,7 +47,7 @@ const FormCreateNewUser = (props) => (
         <br/>
         <Paper className="loginpaper" style={style} zDepth={3}>
             <br/>
-            <div><img alt={"user logo"}style={style.logo} src={logo}/></div>
+            <div><img alt={"user logo"} style={style.logo} src={logo}/></div>
             <p className="ptoplogin">Utworz nowe konto</p>
             <br/>
             <br/>
@@ -69,6 +69,11 @@ const FormCreateNewUser = (props) => (
                     floatingLabelText="Podaj hasło"
                     floatingLabelStyle={style.floatingLabelStyle}
                     floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+                    onKeyPress={(ev) => {
+                        if (ev.key === 'Enter') {
+                            props.sendUser(), props.updateCheck()
+                        }
+                    }}
                 />
                 <TextField
                     onChange={props.onCreateRetypedPasswordHandler}
@@ -77,6 +82,11 @@ const FormCreateNewUser = (props) => (
                     floatingLabelText="Potwierdź hasło"
                     floatingLabelStyle={style.floatingLabelStyle}
                     floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+                    onKeyPress={(ev) => {
+                        if (ev.key === 'Enter') {
+                            props.sendUser(), props.updateCheck()
+                        }
+                    }}
                 />
             </div>
 
@@ -84,7 +94,11 @@ const FormCreateNewUser = (props) => (
             <br/>
 
             <div className="insideformdiv">
-                <RaisedButton label="Zarejestruj" onClick={()=> (props.sendUser(),props.updateCheck())} fullWidth={true} primary={true} buttonStyle={style.button}/>
+                <RaisedButton
+                    label="Zarejestruj"
+                    onClick={() => (props.sendUser(), props.updateCheck())}
+                    fullWidth={true} primary={true}
+                    buttonStyle={style.button}/>
             </div>
             <br/>
             <br/>

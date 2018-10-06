@@ -11,9 +11,10 @@ import TableTop from "./TableTop";
 import IconButton from "material-ui/IconButton";
 import Delete from "material-ui/svg-icons/action/delete";
 import DeleteDialog from '../Utils/DeleteDialog'
-import Snackbar from 'material-ui/Snackbar';
+import {Snackbar} from "material-ui";
 import Container from '../UI/Container';
 import style from '../UI/styleUi'
+import {clearError} from "../../state/alerts";
 
 class ListOfCars extends Component {
     state = {
@@ -21,22 +22,11 @@ class ListOfCars extends Component {
         ITEMS_PER_PAGE: 10,
         currentPage: 0,
         open: false,
-        snackopen: false,
         dialogValue: false,
     };
-    handleClick = () => {
-        this.setState({
-            open: true,
-        });
-    };
 
-    handleRequestClose = () => {
-        this.setState({
-            snackopen: false,
-        });
-    };
     handleOpen = (car) => {
-        this.setState({ open: true, dialogValue: car, snackopen: false });
+        this.setState({ open: true, dialogValue: car});
     };
     handleDialogClose = () => {
         this.setState({ open: false })
@@ -49,7 +39,7 @@ class ListOfCars extends Component {
             return this.debouncedEvent(e);
         };
     }
-    handleDialogDelete = (el) => { this.handleDialogClose; this.props.removeCarFromList(el); };
+    handleDialogDelete = (el) => { this.handleDialogClose(); this.props.removeCarFromList(el); };
     handleSearch = (e) => {
         this.setState({ searchTerm: e.target.value, currentPage: 0 });
     };
@@ -139,7 +129,6 @@ class ListOfCars extends Component {
                     </div>
                 </Container>
                 <DeleteDialog
-                    state={this.state.snackopen}
                     title={`Czy na pewno chcesz usunąć samochód ${this.state.dialogValue ? this.state.dialogValue.mark : ''} z listy?`}
                     stateDialog={this.state.open}
                     handleClose={this.handleDialogClose}
@@ -150,19 +139,23 @@ class ListOfCars extends Component {
                     carName={this.state.dialogValue ? this.state.dialogValue.turboOEM : ''}
                 />
                 <Snackbar
-                    open={this.state.snackopen}
-                    message="Usunieto"
-                    autoHideDuration={3000}
-                    onRequestClose={this.handleRequestClose}
+                    autoHideDuration={4000}
+                    open={this.props.imWithAlert}
+                    message={this.props.alert}
+                    bodyStyle={{textAlign: 'center'}}
+                    onRequestClose={this.props.clearError}
                 />
             </div>)
     }
 }
 const mapStateToProps = state => ({
     cars: state.carsState.cars,
+    imWithAlert: state.alerts.imWithAlert,
+    alert: state.alerts.alert,
 });
 const mapDispatchToProps = dispatch => ({
-    removeCarFromList: (el) => dispatch(removeCarFromList(el))
+    removeCarFromList: (el) => dispatch(removeCarFromList(el)),
+    clearError: () => dispatch(clearError())
 })
 export default connect(
     mapStateToProps,

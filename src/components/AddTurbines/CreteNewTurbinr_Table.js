@@ -21,7 +21,7 @@ const TableWithCreatingTurbine = (props) => {
                 <tr className="trOne">
                     <td>{props.creatingTurbine.turboOEM}</td>
                     {_parts.map(part =>
-                        <td> {
+                        <td key={Math.random()}> {
                             props.creatingTurbine[part] && props.creatingTurbine[part].length ?
                                 props.creatingTurbine[part].map((singlePart, idx) =>
                                     < Chip

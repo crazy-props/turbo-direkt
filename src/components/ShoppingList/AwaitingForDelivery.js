@@ -7,6 +7,7 @@ import {ListItem} from "material-ui/List";
 import {removeMultipleFromShoppingList} from "../../state/shoppingList";
 import connect from "react-redux/es/connect/connect";
 import {addAmount, subtractAmount} from "../../state/partsState";
+import Spinner from "../Utils/Spinner";
 
 
 class AwaitingForDelivery extends Component {
@@ -15,7 +16,7 @@ class AwaitingForDelivery extends Component {
         let zmienna = this.props.parts.find(el => {
             if ((el.part === this.props.prod.value) && (el.group === this.props.prod.group)) {
                 return {el}
-            }
+            }else{return null}
         })
         let myArrayForState = ['actuator', 'back_plate', 'bearing_housing', 'compressor_wheel', 'gasket_kit', 'heat_shield', 'KODE_CHRA', 'nozzle', 'repair_kit', 'turbine_wheel']
 
@@ -46,16 +47,16 @@ class AwaitingForDelivery extends Component {
                             <Remove/>
                         </IconButton>
                         <IconButton tooltip="odejmij ilość w magazynie"
-                                    onClick={() => this.props.subtractAmount(zmienna.part, zmienna.group)}>
+                                    onClick={() => this.props.subtractAmount(zmienna.key)}>
                             <SubtractFromStorage/>
                         </IconButton>
                         {zmienna.amount}
                         <IconButton tooltip="zmień ilość w magazynie"
-                                    onClick={() => this.props.addAmount(zmienna.part, zmienna.group)}>
+                                    onClick={() => this.props.addAmount(zmienna.key)}>
                             <AddToStorage/>
                         </IconButton>
                     </div>
-                    : 'ładuję'
+                    : <Spinner/>
                 }
             </ListItem>
         )
