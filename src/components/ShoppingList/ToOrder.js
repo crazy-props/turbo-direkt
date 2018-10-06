@@ -16,13 +16,10 @@ const ToOrder = (props) => {
     return (
         <ListItem key={Math.random()}>
             {partsGroup} {props.product.value}
-
             <IconButton tooltip="usuń z koszyka"
                         onClick={() => props.removeProductFromShoppingList(props.product.value)}>
                 <RemoveFromCart/>
             </IconButton>
-
-
             <IconButton tooltip="przenieś do zamówionych"
                         onClick={() => props.addToOrdered(props.product.value, props.product.group)}>
                 <MoveToOrdered/>

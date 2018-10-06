@@ -24,20 +24,17 @@ class App extends Component {
 
                         <Route
                             exact path={'/'}
-                            component={() => (
-                                <Dashboard />)}
+                            component={Dashboard}
                         />
 
                         <Route
                             path={'/turbines'}
-                            component={() => (
-                                <ListOfTurbines />)}
+                            component={ListOfTurbines}
                         />
 
                         <Route
                             path={'/cars'}
-                            component={() => (
-                                <ListOfCars />)}
+                            component={ListOfCars}
                         />
 
                         <Route

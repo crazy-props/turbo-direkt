@@ -1,5 +1,7 @@
 import { db } from '../firebase'
 import { mapObjectToArray } from '../utils'
+import {handleSuccess, handleError} from './alerts'
+
 
 const SET_CARS = 'exampleState/SET_CARS'
 
@@ -20,44 +22,15 @@ export const initCars = () => (dispatch, getState) => {
 }
 export const addCarToList = (objecttodb) => (dispatch, getState) => {
         db.ref(`/car_model/`).push(objecttodb)
-            .then(()=>
-                console.log("Add succeeded.")
-            )
-            .catch((error)=>
-        console.log(error.message)
-    );
+            .then(() => dispatch(handleSuccess(`Dodano ${objecttodb.mark} ${objecttodb.model}`)))
+            .catch(error => dispatch(handleError(error)));
 }
-export const addProductToShoppingList = (partsName) => (dispatch, getState) => {
-    if (getState().shoppingListState.product === null) {
-        db.ref(`/shoppingList/`).push(partsName)
-    } else {
-        let checkIfOnTheList = getState().shoppingListState.products.find(x => x.value === partsName)
-        if (checkIfOnTheList === undefined) {
-            db.ref(`/shoppingList/`).push({value: partsName})
-        }
-        else {
-            console.log("such product is already on the list")
-        }
-    }
-
-}
-
-
-
-
 
 export const removeCarFromList = (el) => (dispatch, getState) => {
     db.ref(`/car_model/${el.key}`).remove()
-        .then(()=>
-            console.log("Delete succeeded.")
-        )
-        .catch((error)=>
-            console.log("Delete failed: " + error.message)
-        );
+        .then(() => dispatch(handleSuccess(`Usunięto ${el.mark} ${el.model}`)))
+        .catch(error => dispatch(handleError(error)));
 }
-
-
-
 
 const initialState = {
     cars: null

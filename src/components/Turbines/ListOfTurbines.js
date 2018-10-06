@@ -12,6 +12,8 @@ import { removeTurboFromList } from '../../state/turboState'
 import Spinner from '../Utils/Spinner'
 import Container from '../UI/Container'
 import style from '../UI/styleUi'
+import {Snackbar} from "material-ui";
+import {clearError} from "../../state/alerts";
 
 class ListOfTurbines extends Component {
 	state = {
@@ -28,11 +30,11 @@ class ListOfTurbines extends Component {
 	/* neutralise to currentPage is required for reapper to first side of results*/
 	handleTurbineNameChangeChandler = (e, value) => this.setState({ turbineName: value, currentPage: 0 })
 
-	handleDialogOpen = (turbine) => { console.log(turbine); this.setState({ dialogOpen: true, currentDialogElem: turbine }) }
+	handleDialogOpen = (turbine) => { this.setState({ dialogOpen: true, currentDialogElem: turbine }) }
 
 	handleDialogClose = () => this.setState({ dialogOpen: false })
 
-	handleDialogDelete = (el) => { this.handleDialogClose; this.props.removeTurboFromList(el); console.log('Deleted: ', el.turboOEM, el.key) }
+	handleDialogDelete = (el) => { this.handleDialogClose(); this.props.removeTurboFromList(el)}
 	render() {
 		/*filter all turboOEM names, get only alphanumeric and lower case characters on the each single name value*/
 		const listOfTurbines = this.props.turbo && this.props.turbo
@@ -108,6 +110,13 @@ class ListOfTurbines extends Component {
 					handleDelete={() => this.handleDialogDelete(this.state.currentDialogElem)}
 					turbineName={this.state.currentDialogElem ? this.state.currentDialogElem.turboOEM : ''}
 				/>
+                <Snackbar
+                    autoHideDuration={4000}
+                    open={this.props.imWithAlert}
+                    message={this.props.alert}
+                    bodyStyle={{textAlign: 'center'}}
+                    onRequestClose={this.props.clearError}
+                />
 			</div>
 			:
 			<Spinner />
@@ -116,10 +125,13 @@ class ListOfTurbines extends Component {
 const mapStateToProps = state => ({
 	turbo: state.turboState.turbo,
 	part: state.partsState.parts,
+    alert: state.alerts.alert,
+    imWithAlert: state.alerts.imWithAlert
 })
 
 const mapDispatchToProps = dispatch => ({
-	removeTurboFromList: (val) => dispatch(removeTurboFromList(val))
+	removeTurboFromList: (val) => dispatch(removeTurboFromList(val)),
+    clearError: () => dispatch(clearError())
 })
 
 export default connect(

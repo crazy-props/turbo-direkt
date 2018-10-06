@@ -55,11 +55,6 @@ class FormLoginOnStartup extends Component {
 
     }
 
-/*  logInByEmailAndPassword = () => auth.signInWithEmailAndPassword(
-        this.state.logInEmail,
-        this.state.logInPassword
-    ).catch(e => alert('Something went wrong!'))*/
-
     onLogInEmailChange = (event) => {
         this.setState({logInEmail: event.target.value})}
 

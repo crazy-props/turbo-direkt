@@ -3,15 +3,15 @@ import Divider from '@material-ui/core/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import {red500,blue500} from 'material-ui/styles/colors';
+import {red500, blue500} from 'material-ui/styles/colors';
 import logo from "../../img/logo.png";
 import {connect} from 'react-redux'
-import {addEmail,sendRequestForPass} from "../../state/forgotPassword";
+import {addEmail, sendRequestForPass} from "../../state/forgotPassword";
 
 
 const style = {
     height: "75%",
-    borderRadius:"10px",
+    borderRadius: "10px",
     textAlign: 'center',
     opacity: "0.77",
     width: "52%",
@@ -32,17 +32,14 @@ const style = {
     button: {
         backgroundColor: "#b10303",
         borderRadius: 5
-      
     },
     logo: {
         height: "5.5rem",
         width: "5.5rem",
     },
-    label:{
-        fontFamily:"Lato",
-    
+    label: {
+        fontFamily: "Lato",
     }
-
 }
 
 
@@ -52,7 +49,7 @@ const ForgotenPasswordByUser = (props) => (
         <br/>
         <Paper className="loginpaper" style={style} zDepth={3}>
             <br/>
-            <div><img alt ={"user logo"}style={style.logo} src={logo}/></div>
+            <div><img alt={"user logo"} style={style.logo} src={logo}/></div>
             <p className="ptoplogin">Podaj swoj email aby zresetować hasło</p>
             <br/>
             <div className="insideformdiv">
@@ -62,12 +59,23 @@ const ForgotenPasswordByUser = (props) => (
                     floatingLabelText="Podaj swój email"
                     floatingLabelStyle={style.floatingLabelStyle}
                     floatingLabelFocusStyle={style.floatingLabelFocusStyle}
+                    onKeyPress={(ev) => {
+                        if (ev.key === 'Enter') {
+                            props.sendPass(),
+                                props.getPassword()
+                        }
+                    }}
                 />
             </div>
             <Divider className="insideformdivider" style={style.insideformdivider}/>
             <br/>
             <div className="insideformdiv">
-                <RaisedButton label="Wyślij" onClick={()=> (props.sendPass(),props.getPassword())} fullWidth={true} primary={true} buttonStyle={style.button} labelStyle={style.label}/>
+                <RaisedButton label="Wyślij"
+                              onClick={() => (props.sendPass(), props.getPassword())}
+                              fullWidth={true}
+                              primary={true}
+                              buttonStyle={style.button}
+                              labelStyle={style.label}/>
             </div>
             <br/>
             <br/>

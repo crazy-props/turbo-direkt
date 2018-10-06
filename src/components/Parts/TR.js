@@ -12,7 +12,7 @@ const TR = (props) => {
         <td className="partsTd tdSubtract">
             <button
                 className={'partsButton'}
-                onClick={() => props.subtractAmount(props.partInStateArray.part, props.partInStateArray.group)}
+                onClick={() => props.subtractAmount(props.partInStateArray.key)}
             >-
             </button>
         </td>
@@ -20,9 +20,43 @@ const TR = (props) => {
         <td className="partsTd tdAdd">
             <button
                 className={'partsButton'}
-                onClick={() => props.addAmount(props.partInStateArray.part, props.partInStateArray.group)}
+                onClick={() => props.addAmount(props.partInStateArray.key)}
             >+
             </button>
+        </td>
+        <td className="partsTd tdShoppingCart">
+            {props.partInStateArray.isFavorite === true ?
+                <button
+                    onClick={() => props.remToFavorites(props.partInStateArray)}
+                >
+
+                    <svg
+                        className={'partsButton partsAddToShoppingListButton'}
+                        style={{margin: 'auto'}}
+                        height="20"
+                        viewBox="0 0 24 24"
+                    >
+                        <title>dodaj do ulubionych</title>
+                        <path
+                            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                </button>
+                :
+                <button
+                    onClick={() => props.addToFavorites(props.partInStateArray)}
+                >
+                    <svg
+                        className={'partsButton partsAddToShoppingListButton'}
+                        style={{margin: 'auto'}}
+                        height="20"
+                        viewBox="0 0 24 24"
+                    >
+                        <title>usuń z ulubionych</title>
+                        <path
+                            d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"/>
+                    </svg>
+                </button>
+            }
         </td>
         <td className="partsTd tdShoppingCart">
             <button
@@ -40,38 +74,22 @@ const TR = (props) => {
                 </svg>
 
             </button>
-        </td>
-        <td className="partsTd tdShoppingCart">
-            {props.partInStateArray.isFavorite === true ?
-                <button
-                    onClick={() => props.remToFavorites(props.partInStateArray.key)}
+            <button
+                className={'partsButton partsAddToShoppingListButton'}
+                onClick={() => {
+                    props.handleDialogOpen(props.partInStateArray)
+                }}
+            >
+                <svg id="search-icon" className="search-icon"
+                     style={{margin: 'auto'}}
+                     height="20"
+                     viewBox="0 0 24 24"
                 >
+                    <title>usuń z listy</title>
+                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                </svg>
 
-                    <svg
-                        className={'partsButton partsAddToShoppingListButton'}
-                        style={{margin: 'auto'}}
-                        height="20"
-                        viewBox="0 0 24 24"
-                    >
-                        <title>dodaj do ulubionych</title>
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                </button>
-                :
-                <button
-                    onClick={() => props.addToFavorites(props.partInStateArray.key)}
-                >
-                    <svg
-                        className={'partsButton partsAddToShoppingListButton'}
-                        style={{margin: 'auto'}}
-                        height="20"
-                        viewBox="0 0 24 24"
-                    >
-                        <title>usuń z ulubionych</title>
-                        <path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"/>
-                    </svg>
-                </button>
-            }
+            </button>
         </td>
     </tr>)
 }

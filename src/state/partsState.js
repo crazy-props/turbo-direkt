@@ -1,5 +1,7 @@
-import { db } from "../firebase";
-import { mapObjectToArray } from "../utils";
+import {db} from "../firebase";
+import {mapObjectToArray} from "../utils";
+import {handleSuccess, handleError} from './alerts'
+
 
 const GET_PARTS = "partsState/GET_PARTS"
 const SEARCH_PARTS = "partsState/SEARCH_PARTS"
@@ -20,53 +22,48 @@ export const myInit = () => (dispatch, getState) => {
 }
 
 export const newPart = (partsName, partsGroup) => (dispatch, getState) => {
-    const newPart = { amount: 0, group: partsGroup, part: partsName }
+    const newPart = {amount: 0, group: partsGroup, part: partsName}
     db.ref('/parts/').push(newPart)
+        .then(() => dispatch(handleSuccess(`Dodano do magazynu: ${partsName}`)))
+        .catch(error => dispatch(handleError(error)))
+}
+export const deletePart = (partsKey) => (dispatch, getState) => {
+    db.ref(`/parts/${partsKey.key}`).remove()
+        .then(() => dispatch(handleSuccess(`Usunięto z magazynu: ${partsKey.part}`)))
+        .catch(error => dispatch(handleError(error)))
 }
 
-export const addAmount = (objecter, objectsGroup) => (dispatch, getState) => {
-    let findKey = getState().partsState.parts.find(x => {
-        if ((x.part === objecter)&& (x.group === objectsGroup))
-            return x.key
-    })
+export const addAmount = (partKey) => (dispatch, getState) => {
     let xAmount
-
     getState().partsState.parts.find(x => {
-        if ((x.part === objecter) && (x.group === objectsGroup))
+        if (x.key === partKey)
             return xAmount = x.amount
     })
-    db.ref(`/parts/${findKey.key}/amount`).set(xAmount + 1)
+    db.ref(`/parts/${partKey}/amount`).set(xAmount + 1)
+
 }
 
-export const subtractAmount = (objecter, objectsGroup) => (dispatch, getState) => {
-    let findKey = getState().partsState.parts.find(x => {
-        if ((x.part === objecter)&& (x.group === objectsGroup))
-            return x.key
-    })
+export const subtractAmount = (partKey) => (dispatch, getState) => {
     let xAmount
     getState().partsState.parts.find(x => {
-        if ((x.part === objecter) && (x.amount > 0) && (x.group === objectsGroup))
-            return xAmount = x.amount-1
+        if ((x.key === partKey) && (x.amount > 0))
+            return xAmount = x.amount - 1
         else return xAmount = 0
 
     })
-    return db.ref(`/parts/${findKey.key}/amount`).set(xAmount)
+    return db.ref(`/parts/${partKey}/amount`).set(xAmount)
 }
 
-export const addToFavorites = (objecter ) => (dispatch, getState) => {
-    let findKey = objecter
+export const addToFavorites = (part) => (dispatch, getState) => {
+    let findKey = part.key
     let isFavorite = true
     db.ref(`/parts/${findKey}/isFavorite`).set(isFavorite)
-        .then(console.log(`update success: ${objecter.part} is favorite`))
-        .catch(err => console.log("Delete failed: " + err.message))
 }
 
-export const remToFavorites = (objecter) => (dispatch, getState) => {
-    let findKey = objecter
+export const remToFavorites = (part) => (dispatch, getState) => {
+    let findKey = part.key
     let isFavorite = false
     db.ref(`/parts/${findKey}/isFavorite`).set(isFavorite)
-        .then(console.log(`update success: ${objecter.part} is not favorite`))
-        .catch(err => console.log("Delete failed: " + err.message))
 }
 
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Step, Stepper, StepLabel} from 'material-ui/Stepper';
-import RaisedButton from 'material-ui/RaisedButton';
+import {RaisedButton, Snackbar} from 'material-ui'
 import AddPartInputs from './AddPartInputs'
 import {newPart} from '../../state/partsState'
+import {clearError} from '../../state/alerts'
 
 const styles = {
     block: {maxWidth: 250,}, step: {fontSize: "1.4vh"}, chip: {margin: '4'}
@@ -27,6 +28,13 @@ class AddPart extends React.Component {
     componentDidMount() {
         this.setState({groups: arrayForHeadings})
         this.setState({parts: this.props.parts.map(el => el.part)})
+    }
+    cancel(){
+        this.setState({
+            stepIndex: 0, finished: false, group: '', part: ''
+        });
+        const inputsForNoDisplay = Array.from(document.getElementsByClassName('step'))
+        inputsForNoDisplay.map((el, i) => i > 0 ? el.style.display = 'none' : el.style.display = 'block')
     }
 
     handleUpdateGroupInput = (searchText) => {
@@ -88,7 +96,10 @@ class AddPart extends React.Component {
         else {
             const indexOfWrittenPart = arrayForHeadings.indexOf(this.state.group)
             indexOfWrittenPart !== -1 ? this.props.newPart(this.state.part, myArrayForState[indexOfWrittenPart]) :
-                this.props.newPart(this.state.part, this.state.group)
+                (
+                    this.props.newPart(this.state.part, this.state.group),
+                        this.cancel()
+                )
         }
     }
 
@@ -151,7 +162,7 @@ class AddPart extends React.Component {
                                     style={{marginRight: 12}}
                                 />
                                 <RaisedButton
-                                    label={stepIndex === 3 ? 'Zakończ' : 'Dalej'}
+                                    label={stepIndex === 2 ? 'Zakończ' : 'Dalej'}
                                     primary={true}
                                     onClick={() => {
                                         stepIndex === 0 ? (this.handleGroupRequest(), this.handleNext(stepIndex))
@@ -166,27 +177,33 @@ class AddPart extends React.Component {
                                     style={{marginRight: 12}}
                                     onClick={(event) => {
                                         event.preventDefault();
-                                        this.setState({
-                                            stepIndex: 0, finished: false, group: '', part: ''
-                                        });
-                                        const inputsForNoDisplay = Array.from(document.getElementsByClassName('step'))
-                                        inputsForNoDisplay.map((el, i) => i > 0 ? el.style.display = 'none' : el.style.display = 'block')
+                                        this.cancel()
                                     }}
                                 />
                             </section>
                         </div>
                     )}
                 </div>
+                <Snackbar
+                    autoHideDuration={4000}
+                    open={this.props.imWithAlert}
+                    message={this.props.alert}
+                    bodyStyle={{textAlign: 'center'}}
+                    onRequestClose={this.props.clearError}
+                />
             </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    parts: state.partsState.parts
+    parts: state.partsState.parts,
+    alert: state.alerts.alert,
+    imWithAlert: state.alerts.imWithAlert
 })
 const mapDispatchToProps = dispatch => ({
-    newPart: (name, group) => dispatch(newPart(name, group))
+    newPart: (name, group) => dispatch(newPart(name, group)),
+    clearError: () => dispatch(clearError()),
 })
 
 export default connect(

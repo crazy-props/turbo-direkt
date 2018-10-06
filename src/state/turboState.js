@@ -1,5 +1,6 @@
 import { db } from '../firebase'
 import { mapObjectToArray } from "../utils"
+import {handleSuccess, handleError} from './alerts'
 
 const SET_TURBINES = 'exampleState/SET_TURBINES'
 
@@ -19,22 +20,14 @@ export const initTurbo = () => (dispatch, getState) => {
 }
 export const removeTurboFromList = (turbine) => (dispatch, getState) => {
     db.ref(`/turbo/${turbine.key}`).remove()
-        .then(() =>
-            alert(`Delete succeeded. ${turbine.turboOEM}`)
-        )
-        .catch((error) =>
-            console.log("Delete failed: " + error.message)
-        )
+        .then(() => dispatch(handleSuccess(`Usunięto ${turbine.turboOEM}`)))
+        .catch(error => dispatch(handleError(error)))
 }
 
 export const addTurboToList = (objecttodb) => (dispatch, getState) => {
     db.ref(`/turbo/`).push(objecttodb)
-        .then(() =>
-            console.log("Add succeeded.")
-        )
-        .catch((error) =>
-            console.log(error.message)
-        );
+        .then(() => dispatch(handleSuccess(`Dodano ${objecttodb.turboOEM}`)))
+        .catch(error => dispatch(handleError(error)))
 }
 
 const initialState = {

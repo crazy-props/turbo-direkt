@@ -1,12 +1,17 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {addAmount, subtractAmount, searchParts, remToFavorites, addToFavorites} from '../../state/partsState';
+import {addAmount, subtractAmount, searchParts, remToFavorites, addToFavorites, deletePart} from '../../state/partsState';
 import {addProductToShoppingList} from '../../state/shoppingList';
-import {Row, Col} from 'react-flexbox-grid';
+import {Row} from 'react-flexbox-grid';
 import Pagination from "material-ui-pagination";
+import DeleteDialog from '../Turbines/DeleteDialog'
 import TR from './TR';
 import Partsearch from './PartSearch';
+import Spinner from '../Utils/Spinner'
 import Container from "../UI/Container";
+import {Snackbar} from "material-ui";
+import {clearError} from "../../state/alerts";
+
 
 
 class ListOfParts extends Component {
@@ -14,6 +19,8 @@ class ListOfParts extends Component {
         isDialogOpen: false,
         ITEMS_PER_PAGE: 10,
         currentPage: 0,
+        currentDialogElem: '',
+        dialogOpen: false
 
     }
 
@@ -24,6 +31,12 @@ class ListOfParts extends Component {
             return 1;
         return 0;
     }
+    handleDialogOpen = (part) => {this.setState({ dialogOpen: true, currentDialogElem: part }) }
+
+    handleDialogClose = () => this.setState({ dialogOpen: false })
+
+    handleDialogDelete = (el) => { this.handleDialogClose(); this.props.deletePart(el)}
+
 
     render() {
 
@@ -66,9 +79,13 @@ class ListOfParts extends Component {
                                     addToShoppingList={this.props.addProductToShoppingList}
                                     addToFavorites={this.props.addToFavorites}
                                     remToFavorites={this.props.remToFavorites}
+                                    deletePart={this.props.deletePart}
+                                    handleDialogOpen={this.handleDialogOpen}
+                                    handleDialogClose={this.handleDialogClose}
+                                    handleDialogDelete={this.handleDialogDelete}
                                 />
                             )
-                            : 'szukam części...'
+                            : <Spinner/>
                         }
                         </tbody>
 
@@ -82,6 +99,20 @@ class ListOfParts extends Component {
                         onChange={newPage => this.setState({currentPage: newPage - 1})}
                     />
                 </div>
+                <DeleteDialog
+                    title={`Czy na pewno chcesz usunąć część ${this.state.currentDialogElem ? this.state.currentDialogElem.part : ''} z listy?`}
+                    stateDialog={this.state.dialogOpen}
+                    handleClose={this.handleDialogClose}
+                    handleDelete={() => this.handleDialogDelete(this.state.currentDialogElem)}
+                    turbineName={this.state.currentDialogElem ? this.state.currentDialogElem.part : ''}
+                />
+                <Snackbar
+                    autoHideDuration={4000}
+                    open={this.props.imWithAlert}
+                    message={this.props.alert}
+                    bodyStyle={{textAlign: 'center'}}
+                    onRequestClose={this.props.clearError}
+                />
             </div>
         )
     }
@@ -92,15 +123,19 @@ const mapStateToProps = state => ({
     parts: state.partsState.parts,
     products: state.shoppingListState.products,
     searchState: state.partsState.search,
+    alert: state.alerts.alert,
+    imWithAlert: state.alerts.imWithAlert
 })
 
 const mapDispatchToProps = dispatch => ({
-    addAmount: (objectToAdd, groupOfObject) => dispatch(addAmount(objectToAdd, groupOfObject)),
-    subtractAmount: (objectToSubtract, objectsGroup) => dispatch(subtractAmount(objectToSubtract, objectsGroup)),
+    addAmount: (partKey) => dispatch(addAmount(partKey)),
+    subtractAmount: (partKey) => dispatch(subtractAmount(partKey)),
     addProductToShoppingList: (part, group) => dispatch(addProductToShoppingList(part, group)),
     searchParts: (value) => dispatch(searchParts(value)),
-    addToFavorites: (objectToAdd) => dispatch(addToFavorites(objectToAdd)),
-    remToFavorites: (objectToRemove) => dispatch(remToFavorites(objectToRemove))
+    addToFavorites: (partKey) => dispatch(addToFavorites(partKey)),
+    remToFavorites: (partKey) => dispatch(remToFavorites(partKey)),
+    deletePart: (partKey, partName) => dispatch(deletePart(partKey, partName)),
+    clearError: () => dispatch(clearError())
 })
 
 export default connect(
