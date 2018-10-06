@@ -1,4 +1,5 @@
 import {auth} from "../firebase";
+import {handleError} from "./alerts";
 
 const LOGIN = "authState/LOGIN";
 const LOGOUT = "authState/LOGOUT"
@@ -81,10 +82,17 @@ export const initAuthUserSync = () => (dispatch, getState) => {
 export const logInByMailAndPass = (email, password) => (dispatch, getState) => {
     if (!password) {
         dispatch(handleInternalError('Password is required'))
+        dispatch(handleError('Hasło jest wymagane'))
     } else if (!email) {
         dispatch(handleInternalError('Email is required'))
+        dispatch(handleError('Email jest wymagany'))
+
     } else {
         auth.signInWithEmailAndPassword(email, password)
-            .catch(error => dispatch(handleExternalError(error)))
+            .catch(error => {
+                dispatch(handleExternalError(error))
+                dispatch(handleError('Wystąpił błąd, sprawdź poprawność danych'))
+
+            })
     }
 }

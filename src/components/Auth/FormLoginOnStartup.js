@@ -9,6 +9,9 @@ import CreateUser from "./FormCreateNewUser";
 import ForgotPass from "./ForgotenPasswordByUser";
 import {logInByMailAndPass} from '../../state/authState';
 import {connect} from 'react-redux';
+import {Snackbar} from "material-ui";
+import {newPart} from "../../state/partsState";
+import {clearError} from "../../state/alerts";
 
 const style = {
     height: "75%",
@@ -135,6 +138,13 @@ class FormLoginOnStartup extends Component {
                         <br/>
                     </Paper>
                     <br/>
+                    <Snackbar
+                        autoHideDuration={4000}
+                        open={this.props.imWithAlert}
+                        message={this.props.alert}
+                        bodyStyle={{textAlign: 'center'}}
+                        onRequestClose={this.props.clearError}
+                    />
                 </div>
             );
         else if (this.state.adduser === true) {
@@ -157,12 +167,18 @@ class FormLoginOnStartup extends Component {
     }
 }
 
-
+const mapStateToProps = state => ({
+    parts: state.partsState.parts,
+    alert: state.alerts.alert,
+    imWithAlert: state.alerts.imWithAlert
+})
 
 const mapDispatchToProps = dispatch => ({
 
-    logInByEmailAndPassword: (email, password) => dispatch(logInByMailAndPass(email, password))
+    logInByEmailAndPassword: (email, password) => dispatch(logInByMailAndPass(email, password)),
+    clearError: () => dispatch(clearError()),
+
 })
 
-export default connect( null,mapDispatchToProps)(FormLoginOnStartup);
+export default connect(mapStateToProps, mapDispatchToProps)(FormLoginOnStartup);
 
