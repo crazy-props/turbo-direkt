@@ -26,7 +26,7 @@ const AppFooterColumnTwo = () => {
             <List>
                 <Subheader style={styles.subHeader}>POMOC TECHNICZNA</Subheader>
                 <br/>
-                <ListItem style={styles.listItem} primaryText="Email" leftIcon={<CommunicationEmail color={"#b10303"}/>} href="mailto:someone@example.com?Subject=Hello%20again" target="_top" />
+                <ListItem style={styles.listItem} primaryText="Email" leftIcon={<CommunicationEmail color={"#b10303"}/>} href="mailto:wojcicka.ma@gmail.com" target="_top" />
                 <ListItem style={styles.listItem} primaryText="Phone"  leftIcon={<CommunicationCall color={"#b10303"} />} href="tel:+48781004500"/>
             </List>
         </div>

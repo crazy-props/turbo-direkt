@@ -82,10 +82,8 @@ export const initAuthUserSync = () => (dispatch, getState) => {
 export const logInByMailAndPass = (email, password) => (dispatch, getState) => {
     if (!password) {
         dispatch(handleInternalError('Password is required'))
-        dispatch(handleError('Hasło jest wymagane'))
     } else if (!email) {
         dispatch(handleInternalError('Email is required'))
-        dispatch(handleError('Email jest wymagany'))
 
     } else {
         auth.signInWithEmailAndPassword(email, password)

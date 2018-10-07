@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import React, {Component} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import ListOfTurbines from './components/Turbines/ListOfTurbines'
 import ListOfCars from './components/Cars/ListOfCars'
 import ListOfParts from './components/Parts/ListOfParts'
@@ -15,11 +15,11 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Router >
+                <Router>
                     <div className='router'>
-                        <AppBarMini />
+                        <AppBarMini/>
                         <CheckboxContainer>
-                            <InputForm />
+                            <InputForm/>
                         </CheckboxContainer>
 
                         <Route
@@ -45,7 +45,7 @@ class App extends Component {
                             path={'/shopping-list'}
                             component={ShoppingList}
                         />
-                        <AppFooter />
+                        <AppFooter/>
                     </div>
                 </Router>
             </div>

@@ -11,8 +11,8 @@ const PartsColumn = props =>
                         {props.part && props.part.length ?
                             props.part
                                 .filter(turbo => turbo.part === part)
-                                .map(part => <span key={part.part}>{`amount: ${part.amount}`}</span>)
-                            : ` Loading amount...`}
+                                .map(part => <span key={part.part}>{`ilość: ${part.amount}`}</span>)
+                            : `Ładuję ilość...`}
                     </li>)
                 : props.parts}
         </ul>
