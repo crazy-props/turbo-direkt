@@ -102,6 +102,11 @@ class FormLoginOnStartup extends Component {
                                 floatingLabelStyle={style.floatingLabelStyle}
                                 floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                                 onChange={this.onLogInEmailChange}
+                                onKeyPress={(ev) => {
+                                    if (ev.key === 'Enter') {
+                                        this.props.logInByEmailAndPassword(this.state.logInEmail, this.state.logInPassword)
+                                    }
+                                }}
                             />
                         </div>
                         <div className="insideformdiv">
@@ -113,6 +118,11 @@ class FormLoginOnStartup extends Component {
                                 floatingLabelStyle={style.floatingLabelStyle}
                                 floatingLabelFocusStyle={style.floatingLabelFocusStyle}
                                 onChange={this.onLogInPasswordChange}
+                                onKeyPress={(ev) => {
+                                    if (ev.key === 'Enter') {
+                                        this.props.logInByEmailAndPassword(this.state.logInEmail, this.state.logInPassword)
+                                    }
+                                }}
                             />
                         </div>
 
