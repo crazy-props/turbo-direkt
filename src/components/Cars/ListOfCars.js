@@ -67,7 +67,7 @@ class ListOfCars extends Component {
                             <Row>
                                 <Col>
                                     <div className="group2">
-                                        <input placeholder="Szukaj:pojazd,marka,turbina" type="search"
+                                        <input placeholder="Szukaj:pojazd, marka, turbina" type="search"
                                             onChange={this.debounceEvent(this.handleSearch, 700)} />
                                     </div>
                                 </Col>
