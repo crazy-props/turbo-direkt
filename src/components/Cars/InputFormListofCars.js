@@ -201,7 +201,7 @@ class HorizontalLinearStepper extends React.Component {
                     </Row>
                 </Container>
                 <Container>
-                    <div style={{ width: '80%', maxWidth: 500, margin: 'auto' }}>
+                    <div style={{ width: '100%', maxWidth: '100%', margin: 'auto' }}>
                         <Stepper style={styles.step} activeStep={stepIndex}>
                             {this.state.stepper.map(el => <Step key={el}><StepLabel>{el}</StepLabel></Step>)}
                         </Stepper>

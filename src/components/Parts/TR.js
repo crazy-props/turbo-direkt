@@ -43,10 +43,10 @@ const TR = (props) => {
                 </button>
                 :
                 <button
+                    className={'partsButton partsAddToShoppingListButton'}
                     onClick={() => props.addToFavorites(props.partInStateArray)}
                 >
                     <svg
-                        className={'partsButton partsAddToShoppingListButton'}
                         style={{margin: 'auto'}}
                         height="20"
                         viewBox="0 0 24 24"

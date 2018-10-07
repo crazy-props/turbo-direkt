@@ -1,6 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
-import {addAmount, subtractAmount, searchParts, remToFavorites, addToFavorites, deletePart} from '../../state/partsState';
+import {
+    addAmount,
+    subtractAmount,
+    searchParts,
+    remToFavorites,
+    addToFavorites,
+    deletePart
+} from '../../state/partsState';
 import {addProductToShoppingList} from '../../state/shoppingList';
 import {Row} from 'react-flexbox-grid';
 import Pagination from "material-ui-pagination";
@@ -11,7 +18,6 @@ import Spinner from '../Utils/Spinner'
 import Container from "../UI/Container";
 import {Snackbar} from "material-ui";
 import {clearError} from "../../state/alerts";
-
 
 
 class ListOfParts extends Component {
@@ -31,11 +37,17 @@ class ListOfParts extends Component {
             return 1;
         return 0;
     }
-    handleDialogOpen = (part) => {this.setState({ dialogOpen: true, currentDialogElem: part }) }
 
-    handleDialogClose = () => this.setState({ dialogOpen: false })
+    handleDialogOpen = (part) => {
+        this.setState({dialogOpen: true, currentDialogElem: part})
+    }
 
-    handleDialogDelete = (el) => { this.handleDialogClose(); this.props.deletePart(el)}
+    handleDialogClose = () => this.setState({dialogOpen: false})
+
+    handleDialogDelete = (el) => {
+        this.handleDialogClose();
+        this.props.deletePart(el)
+    }
 
 
     render() {
@@ -59,46 +71,48 @@ class ListOfParts extends Component {
                 <Container>
                     <Partsearch/>
                 </Container>
-                <Row className={'partsTableDiv'}>
-                    <table className="partsTable">
-                        <tbody>
-                        {filter && filter.length ?
-                            filter.filter((el, i) => {
-                                return (i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
-                                    &&
-                                    i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1))
-                            }).map((partInStateArray, index) =>
-                                <TR
-                                    key={Math.random()}
-                                    partInStateArray={partInStateArray}
-                                    index={index}
-                                    myArrayForState={myArrayForState}
-                                    arrayForHeadings={arrayForHeadings}
-                                    addAmount={this.props.addAmount}
-                                    subtractAmount={this.props.subtractAmount}
-                                    addToShoppingList={this.props.addProductToShoppingList}
-                                    addToFavorites={this.props.addToFavorites}
-                                    remToFavorites={this.props.remToFavorites}
-                                    deletePart={this.props.deletePart}
-                                    handleDialogOpen={this.handleDialogOpen}
-                                    handleDialogClose={this.handleDialogClose}
-                                    handleDialogDelete={this.handleDialogDelete}
-                                />
-                            )
-                            : <Spinner/>
-                        }
-                        </tbody>
+                <Container>
+                    <Row className={'partsTableDiv'}>
+                        <table className="partsTable">
+                            <tbody>
+                            {filter && filter.length ?
+                                filter.filter((el, i) => {
+                                    return (i >= this.state.ITEMS_PER_PAGE * this.state.currentPage
+                                        &&
+                                        i < this.state.ITEMS_PER_PAGE * (this.state.currentPage + 1))
+                                }).map((partInStateArray, index) =>
+                                    <TR
+                                        key={Math.random()}
+                                        partInStateArray={partInStateArray}
+                                        index={index}
+                                        myArrayForState={myArrayForState}
+                                        arrayForHeadings={arrayForHeadings}
+                                        addAmount={this.props.addAmount}
+                                        subtractAmount={this.props.subtractAmount}
+                                        addToShoppingList={this.props.addProductToShoppingList}
+                                        addToFavorites={this.props.addToFavorites}
+                                        remToFavorites={this.props.remToFavorites}
+                                        deletePart={this.props.deletePart}
+                                        handleDialogOpen={this.handleDialogOpen}
+                                        handleDialogClose={this.handleDialogClose}
+                                        handleDialogDelete={this.handleDialogDelete}
+                                    />
+                                )
+                                : <Spinner/>
+                            }
+                            </tbody>
 
-                    </table>
-                </Row>
-                <div style={{textAlign: 'center'}}>
-                    <Pagination
-                        total={Math.ceil(numberOfParts / this.state.ITEMS_PER_PAGE)}
-                        current={this.state.currentPage + 1}
-                        display={10}
-                        onChange={newPage => this.setState({currentPage: newPage - 1})}
-                    />
-                </div>
+                        </table>
+                    </Row>
+                    <div style={{textAlign: 'center'}}>
+                        <Pagination
+                            total={Math.ceil(numberOfParts / this.state.ITEMS_PER_PAGE)}
+                            current={this.state.currentPage + 1}
+                            display={10}
+                            onChange={newPage => this.setState({currentPage: newPage - 1})}
+                        />
+                    </div>
+                </Container>
                 <DeleteDialog
                     title={`Czy na pewno chcesz usunąć część ${this.state.currentDialogElem ? this.state.currentDialogElem.part : ''} z listy?`}
                     stateDialog={this.state.dialogOpen}
