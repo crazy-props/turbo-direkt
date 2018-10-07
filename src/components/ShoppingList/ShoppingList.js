@@ -13,6 +13,7 @@ import AppBar from 'material-ui/AppBar';
 import Spinner from '../Utils/Spinner'
 import {Snackbar} from "material-ui";
 import {clearError} from "../../state/alerts";
+import Container from "../UI/Container";
 
 
 class ShoppingList extends Component {
@@ -23,70 +24,72 @@ class ShoppingList extends Component {
     render() {
 
         return (
-            <div style={{display: 'flex'}}>
-                <div style={{width: '50%', paddingLeft: '10%'}}>
-                    <AppBar
-                        title="Do zamówienia"
-                        showMenuIconButton={false}
-                        style={{backgroundColor: 'darkgrey'}}
-                    />
-                    {this.props.productsToOrder ?
-                        <div>
-                            <List>
-                                {this.props.productsToOrder.map(prod =>
-                                    <ToOrder
-                                        key={Math.random()}
-                                        product={prod}
-                                        removeProductFromShoppingList={this.props.removeProductFromShoppingList}
-                                        addToOrdered={this.props.addToOrdered}
-                                    />
-                                )}
-                            </List>
-                            <Snackbar
-                                autoHideDuration={4000}
-                                open={this.props.imWithAlert}
-                                message={this.props.alert}
-                                bodyStyle={{textAlign: 'center'}}
-                                onRequestClose={this.props.clearError}
-                            />
-                        </div>
-                        :
-                        <Spinner/>}
-                </div>
-                <div style={{width: '50%', paddingRight: '10%', marginLeft: '10px'}}>
-                    <AppBar
-                        title="Oczekujące na dostawę"
-                        showMenuIconButton={false}
-                        style={{backgroundColor: 'darkgrey'}}
+            <Container>
 
-                    />
-                    {this.props.ordered ?
-                        <div>
-                            <HeadersForOrderedList
-                                removeMultipleFromShoppingList={this.props.removeMultipleFromShoppingList}/>
-                            <List>
-                                {this.props.ordered.map(prod => {
-                                    return <AwaitingForDelivery
-                                        key={Math.random()}
-                                        prod={prod}
-                                        removeProductFromShoppingList={this.props.removeProductFromShoppingList}
-                                    />
-                                })}
-                            </List>
-                            <Snackbar
-                                autoHideDuration={4000}
-                                open={this.props.imWithAlert}
-                                message={this.props.alert}
-                                bodyStyle={{textAlign: 'center'}}
-                                onRequestClose={this.props.clearError}
-                            />
-                        </div>
-                        :
-                        <Spinner/>
-                    }
-                </div>
+                <div style={{display: 'flex'}}>
+                    <div style={{width: '50%', paddingLeft: '10%'}}>
+                        <AppBar
+                            title="Do zamówienia"
+                            showMenuIconButton={false}
+                            style={{backgroundColor: 'darkgrey'}}
+                        />
+                        {this.props.productsToOrder ?
+                            <div>
+                                <List>
+                                    {this.props.productsToOrder.map(prod =>
+                                        <ToOrder
+                                            key={Math.random()}
+                                            product={prod}
+                                            removeProductFromShoppingList={this.props.removeProductFromShoppingList}
+                                            addToOrdered={this.props.addToOrdered}
+                                        />
+                                    )}
+                                </List>
+                                <Snackbar
+                                    autoHideDuration={4000}
+                                    open={this.props.imWithAlert}
+                                    message={this.props.alert}
+                                    bodyStyle={{textAlign: 'center'}}
+                                    onRequestClose={this.props.clearError}
+                                />
+                            </div>
+                            :
+                            <Spinner/>}
+                    </div>
+                    <div style={{width: '50%', paddingRight: '10%', marginLeft: '10px'}}>
+                        <AppBar
+                            title="Oczekujące na dostawę"
+                            showMenuIconButton={false}
+                            style={{backgroundColor: 'darkgrey'}}
 
-            </div>
+                        />
+                        {this.props.ordered ?
+                            <div>
+                                <HeadersForOrderedList
+                                    removeMultipleFromShoppingList={this.props.removeMultipleFromShoppingList}/>
+                                <List>
+                                    {this.props.ordered.map(prod => {
+                                        return <AwaitingForDelivery
+                                            key={Math.random()}
+                                            prod={prod}
+                                            removeProductFromShoppingList={this.props.removeProductFromShoppingList}
+                                        />
+                                    })}
+                                </List>
+                                <Snackbar
+                                    autoHideDuration={4000}
+                                    open={this.props.imWithAlert}
+                                    message={this.props.alert}
+                                    bodyStyle={{textAlign: 'center'}}
+                                    onRequestClose={this.props.clearError}
+                                />
+                            </div>
+                            :
+                            <Spinner/>
+                        }
+                    </div>
+                </div>
+            </Container>
         )
     }
 }
