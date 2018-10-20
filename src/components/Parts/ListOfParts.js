@@ -49,6 +49,10 @@ class ListOfParts extends Component {
         this.props.deletePart(el)
     }
 
+    setFirstPageToState = () => {
+        this.setState({currentPage: 0})
+    }
+
 
     render() {
 
@@ -69,7 +73,9 @@ class ListOfParts extends Component {
         return (
             <div>
                 <Container>
-                    <Partsearch/>
+                    <Partsearch
+                        setFirstPageToState={this.setFirstPageToState}
+                    />
                 </Container>
                 <Container>
                     <Row className={'partsTableDiv'}>
