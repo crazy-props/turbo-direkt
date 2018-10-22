@@ -1,14 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux";
 import {
-    addAmount,
-    subtractAmount,
     searchParts,
-    remToFavorites,
-    addToFavorites,
     deletePart
 } from '../../state/partsState';
-import {addProductToShoppingList} from '../../state/shoppingList';
 import {Row} from 'react-flexbox-grid';
 import Pagination from "material-ui-pagination";
 import DeleteDialog from '../Turbines/DeleteDialog'
@@ -93,11 +88,6 @@ class ListOfParts extends Component {
                                         index={index}
                                         myArrayForState={myArrayForState}
                                         arrayForHeadings={arrayForHeadings}
-                                        addAmount={this.props.addAmount}
-                                        subtractAmount={this.props.subtractAmount}
-                                        addToShoppingList={this.props.addProductToShoppingList}
-                                        addToFavorites={this.props.addToFavorites}
-                                        remToFavorites={this.props.remToFavorites}
                                         deletePart={this.props.deletePart}
                                         handleDialogOpen={this.handleDialogOpen}
                                         handleDialogClose={this.handleDialogClose}
@@ -148,12 +138,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    addAmount: (partKey) => dispatch(addAmount(partKey)),
-    subtractAmount: (partKey) => dispatch(subtractAmount(partKey)),
-    addProductToShoppingList: (part, group) => dispatch(addProductToShoppingList(part, group)),
     searchParts: (value) => dispatch(searchParts(value)),
-    addToFavorites: (partKey) => dispatch(addToFavorites(partKey)),
-    remToFavorites: (partKey) => dispatch(remToFavorites(partKey)),
     deletePart: (partKey, partName) => dispatch(deletePart(partKey, partName)),
     clearError: () => dispatch(clearError())
 })
