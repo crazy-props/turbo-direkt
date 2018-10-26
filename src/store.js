@@ -30,10 +30,5 @@ export const store = createStore(
     )
 )
 
-
-store.dispatch(initTurbo())
-store.dispatch(initCars())
-store.dispatch(initList())
-store.dispatch(myInit())
 store.dispatch(logInByMailAndPass())
 store.dispatch(initAuthUserSync())

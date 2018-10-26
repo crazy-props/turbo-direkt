@@ -1,5 +1,10 @@
 import {auth} from "../firebase";
 import {handleError} from "./alerts";
+import {initTurbo} from "./turboState";
+import {initCars} from "./carsState";
+import {initList} from "./shoppingList";
+import {myInit} from "./partsState";
+import {store} from "../store";
 
 const LOGIN = "authState/LOGIN";
 const LOGOUT = "authState/LOGOUT"
@@ -73,6 +78,10 @@ export const initAuthUserSync = () => (dispatch, getState) => {
         user => {
             if (user) {
                 dispatch(loginUser(user))
+                store.dispatch(initTurbo())
+                store.dispatch(initCars())
+                store.dispatch(initList())
+                store.dispatch(myInit())
             } else {
                 dispatch(logoutUser())
             }
