@@ -17,7 +17,7 @@ import {clearError} from "../../state/alerts";
 
 class ListOfTurbines extends Component {
 	state = {
-		_listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Actuator', 'Noozles', 'Gasket Kit', 'Repair Kit', 'KODE CHRA', 'Delete'],
+		_listOfParts: ['Turbo OEM', 'Compressor Wheel', 'Turbine Wheel', 'Bearing Housing', 'Back Plate', 'Heat Shield', 'Noozles', 'Actuator', 'Gasket Kit', 'Repair Kit', 'KODE CHRA', 'Delete'],
 		_parts: ['compressor_wheel', 'turbine_wheel', 'bearing_housing', 'back_plate', 'heat_shield', 'nozzles', 'actuator', 'gasket_kit', 'repair_kit', 'KODE_CHRA'],
 		turbineName: '',
 		/* Pagination variables start: this variables are required for pagination view*/

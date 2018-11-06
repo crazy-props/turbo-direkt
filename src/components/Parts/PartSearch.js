@@ -22,7 +22,7 @@ class PartSearch extends Component {
 
     useFilter = () => {
         this.props.searchParts(this.state.searchValue)
-
+        this.props.setFirstPageToState()
     }
 
     render() {
